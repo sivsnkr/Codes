@@ -1,0 +1,406 @@
+
+Input----------
+
+['N1', 'N4', 'N8', 'N11', 'N14', 'N17', 'N21', 'N24', 'N27', 'N30', 'N34', 'N37', 'N40', 'N43', 'N47', 'N50', 'N53', 'N56', 'N60', 'N63', 'N66', 'N69', 'N73', 'N76', 'N79', 'N82', 'N86', 'N89', 'N92', 'N95', 'N99', 'N102', 'N105', 'N108', 'N112', 'N115']
+
+Output---------
+
+['N223', 'N329', 'N370', 'N421', 'N430', 'N431', 'N432']
+
+Wire-----------
+
+['N118', 'N119', 'N122', 'N123', 'N126', 'N127', 'N130', 'N131', 'N134', 'N135', 'N138', 'N139', 'N142', 'N143', 'N146', 'N147', 'N150', 'N151', 'N154', 'N157', 'N158', 'N159', 'N162', 'N165', 'N168', 'N171', 'N174', 'N177', 'N180', 'N183', 'N184', 'N185', 'N186', 'N187', 'N188', 'N189', 'N190', 'N191', 'N192', 'N193', 'N194', 'N195', 'N196', 'N197', 'N198', 'N199', 'N203', 'N213', 'N224', 'N227', 'N230', 'N233', 'N236', 'N239', 'N242', 'N243', 'N246', 'N247', 'N250', 'N251', 'N254', 'N255', 'N256', 'N257', 'N258', 'N259', 'N260', 'N263', 'N264', 'N267', 'N270', 'N273', 'N276', 'N279', 'N282', 'N285', 'N288', 'N289', 'N290', 'N291', 'N292', 'N293', 'N294', 'N295', 'N296', 'N300', 'N301', 'N302', 'N303', 'N304', 'N305', 'N306', 'N307', 'N308', 'N309', 'N319', 'N330', 'N331', 'N332', 'N333', 'N334', 'N335', 'N336', 'N337', 'N338', 'N339', 'N340', 'N341', 'N342', 'N343', 'N344', 'N345', 'N346', 'N347', 'N348', 'N349', 'N350', 'N351', 'N352', 'N353', 'N354', 'N355', 'N356', 'N357', 'N360', 'N371', 'N372', 'N373', 'N374', 'N375', 'N376', 'N377', 'N378', 'N379', 'N380', 'N381', 'N386', 'N393', 'N399', 'N404', 'N407', 'N411', 'N414', 'N415', 'N416', 'N417', 'N418', 'N419', 'N420', 'N422', 'N425', 'N428', 'N429']
+Probability:
+Probability of wire N1 is 0.5
+Probability of wire N4 is 0.5
+Probability of wire N8 is 0.5
+Probability of wire N11 is 0.5
+Probability of wire N14 is 0.5
+Probability of wire N17 is 0.5
+Probability of wire N21 is 0.5
+Probability of wire N24 is 0.5
+Probability of wire N27 is 0.5
+Probability of wire N30 is 0.5
+Probability of wire N34 is 0.5
+Probability of wire N37 is 0.5
+Probability of wire N40 is 0.5
+Probability of wire N43 is 0.5
+Probability of wire N47 is 0.5
+Probability of wire N50 is 0.5
+Probability of wire N53 is 0.5
+Probability of wire N56 is 0.5
+Probability of wire N60 is 0.5
+Probability of wire N63 is 0.5
+Probability of wire N66 is 0.5
+Probability of wire N69 is 0.5
+Probability of wire N73 is 0.5
+Probability of wire N76 is 0.5
+Probability of wire N79 is 0.5
+Probability of wire N82 is 0.5
+Probability of wire N86 is 0.5
+Probability of wire N89 is 0.5
+Probability of wire N92 is 0.5
+Probability of wire N95 is 0.5
+Probability of wire N99 is 0.5
+Probability of wire N102 is 0.5
+Probability of wire N105 is 0.5
+Probability of wire N108 is 0.5
+Probability of wire N112 is 0.5
+Probability of wire N115 is 0.5
+Probability of wire N118 is 0.5
+Probability of wire N119 is 0.5
+Probability of wire N122 is 0.5
+Probability of wire N123 is 0.5
+Probability of wire N126 is 0.5
+Probability of wire N127 is 0.5
+Probability of wire N130 is 0.5
+Probability of wire N131 is 0.5
+Probability of wire N134 is 0.5
+Probability of wire N135 is 0.5
+Probability of wire N138 is 0.5
+Probability of wire N139 is 0.5
+Probability of wire N142 is 0.5
+Probability of wire N143 is 0.5
+Probability of wire N146 is 0.5
+Probability of wire N147 is 0.5
+Probability of wire N150 is 0.5
+Probability of wire N151 is 0.5
+Probability of wire N154 is 0.75
+Probability of wire N157 is 0.25
+Probability of wire N158 is 0.25
+Probability of wire N159 is 0.75
+Probability of wire N162 is 0.75
+Probability of wire N165 is 0.75
+Probability of wire N168 is 0.75
+Probability of wire N171 is 0.75
+Probability of wire N174 is 0.75
+Probability of wire N177 is 0.75
+Probability of wire N180 is 0.75
+Probability of wire N183 is 0.25
+Probability of wire N184 is 0.25
+Probability of wire N185 is 0.25
+Probability of wire N186 is 0.25
+Probability of wire N187 is 0.25
+Probability of wire N188 is 0.25
+Probability of wire N189 is 0.25
+Probability of wire N190 is 0.25
+Probability of wire N191 is 0.25
+Probability of wire N192 is 0.25
+Probability of wire N193 is 0.25
+Probability of wire N194 is 0.25
+Probability of wire N195 is 0.25
+Probability of wire N196 is 0.25
+Probability of wire N197 is 0.25
+Probability of wire N198 is 0.25
+Probability of wire N199 is 0.07508468627929688
+Probability of wire N203 is 0.9249153137207031
+Probability of wire N213 is 0.9249153137207031
+Probability of wire N223 is 0.9249153137207031
+Probability of wire N224 is 0.25694697616563644
+Probability of wire N227 is 0.25694697616563644
+Probability of wire N230 is 0.25694697616563644
+Probability of wire N233 is 0.25694697616563644
+Probability of wire N236 is 0.25694697616563644
+Probability of wire N239 is 0.25694697616563644
+Probability of wire N242 is 0.5375423431396484
+Probability of wire N243 is 0.25694697616563644
+Probability of wire N246 is 0.5375423431396484
+Probability of wire N247 is 0.25694697616563644
+Probability of wire N250 is 0.5375423431396484
+Probability of wire N251 is 0.25694697616563644
+Probability of wire N254 is 0.5375423431396484
+Probability of wire N255 is 0.5375423431396484
+Probability of wire N256 is 0.5375423431396484
+Probability of wire N257 is 0.5375423431396484
+Probability of wire N258 is 0.5375423431396484
+Probability of wire N259 is 0.5375423431396484
+Probability of wire N260 is 0.9357632559585909
+Probability of wire N263 is 0.9357632559585909
+Probability of wire N264 is 0.9357632559585909
+Probability of wire N267 is 0.9357632559585909
+Probability of wire N270 is 0.9357632559585909
+Probability of wire N273 is 0.9357632559585909
+Probability of wire N276 is 0.9357632559585909
+Probability of wire N279 is 0.9357632559585909
+Probability of wire N282 is 0.9357632559585909
+Probability of wire N285 is 0.9357632559585909
+Probability of wire N288 is 0.9357632559585909
+Probability of wire N289 is 0.9357632559585909
+Probability of wire N290 is 0.9357632559585909
+Probability of wire N291 is 0.9357632559585909
+Probability of wire N292 is 0.9357632559585909
+Probability of wire N293 is 0.9357632559585909
+Probability of wire N294 is 0.9357632559585909
+Probability of wire N295 is 0.9357632559585909
+Probability of wire N296 is 0.550166182998342
+Probability of wire N300 is 0.06423674404140911
+Probability of wire N301 is 0.06423674404140911
+Probability of wire N302 is 0.06423674404140911
+Probability of wire N303 is 0.06423674404140911
+Probability of wire N304 is 0.06423674404140911
+Probability of wire N305 is 0.06423674404140911
+Probability of wire N306 is 0.06423674404140911
+Probability of wire N307 is 0.06423674404140911
+Probability of wire N308 is 0.06423674404140911
+Probability of wire N309 is 0.44983381700165803
+Probability of wire N319 is 0.44983381700165803
+Probability of wire N329 is 0.44983381700165803
+Probability of wire N330 is 0.3075937388397445
+Probability of wire N331 is 0.3075937388397445
+Probability of wire N332 is 0.3075937388397445
+Probability of wire N333 is 0.3075937388397445
+Probability of wire N334 is 0.775083091499171
+Probability of wire N335 is 0.3075937388397445
+Probability of wire N336 is 0.775083091499171
+Probability of wire N337 is 0.3075937388397445
+Probability of wire N338 is 0.775083091499171
+Probability of wire N339 is 0.3075937388397445
+Probability of wire N340 is 0.775083091499171
+Probability of wire N341 is 0.3075937388397445
+Probability of wire N342 is 0.775083091499171
+Probability of wire N343 is 0.3075937388397445
+Probability of wire N344 is 0.775083091499171
+Probability of wire N345 is 0.775083091499171
+Probability of wire N346 is 0.775083091499171
+Probability of wire N347 is 0.775083091499171
+Probability of wire N348 is 0.9802411797294113
+Probability of wire N349 is 0.9802411797294113
+Probability of wire N350 is 0.9802411797294113
+Probability of wire N351 is 0.9802411797294113
+Probability of wire N352 is 0.9802411797294113
+Probability of wire N353 is 0.9802411797294113
+Probability of wire N354 is 0.9802411797294113
+Probability of wire N355 is 0.9802411797294113
+Probability of wire N356 is 0.9802411797294113
+Probability of wire N357 is 0.8355962622206177
+Probability of wire N360 is 0.16440373777938233
+Probability of wire N370 is 0.16440373777938233
+Probability of wire N371 is 0.9177981311103088
+Probability of wire N372 is 0.9177981311103088
+Probability of wire N373 is 0.9177981311103088
+Probability of wire N374 is 0.9177981311103088
+Probability of wire N375 is 0.9177981311103088
+Probability of wire N376 is 0.9177981311103088
+Probability of wire N377 is 0.9177981311103088
+Probability of wire N378 is 0.9177981311103088
+Probability of wire N379 is 0.9177981311103088
+Probability of wire N380 is 0.8088043019854305
+Probability of wire N381 is 0.8088043019854305
+Probability of wire N386 is 0.8088043019854305
+Probability of wire N393 is 0.8088043019854305
+Probability of wire N399 is 0.8088043019854305
+Probability of wire N404 is 0.8088043019854305
+Probability of wire N407 is 0.8088043019854305
+Probability of wire N411 is 0.8088043019854305
+Probability of wire N414 is 0.8088043019854305
+Probability of wire N415 is 0.19119569801456948
+Probability of wire N416 is 0.18312499279866637
+Probability of wire N417 is 0.19119569801456948
+Probability of wire N418 is 0.19119569801456948
+Probability of wire N419 is 0.19119569801456948
+Probability of wire N420 is 0.19119569801456948
+Probability of wire N421 is 0.6606920200088182
+Probability of wire N422 is 0.8453600969247089
+Probability of wire N425 is 0.89884008075723
+Probability of wire N428 is 0.8749265811340946
+Probability of wire N429 is 0.89884008075723
+Probability of wire N430 is 0.552727597827817
+Probability of wire N431 is 0.48555263599706155
+Probability of wire N432 is 0.4476045954677772
+---------------------
+Activity factor of wire N1 is 0.25
+Activity factor of wire N4 is 0.25
+Activity factor of wire N8 is 0.25
+Activity factor of wire N11 is 0.25
+Activity factor of wire N14 is 0.25
+Activity factor of wire N17 is 0.25
+Activity factor of wire N21 is 0.25
+Activity factor of wire N24 is 0.25
+Activity factor of wire N27 is 0.25
+Activity factor of wire N30 is 0.25
+Activity factor of wire N34 is 0.25
+Activity factor of wire N37 is 0.25
+Activity factor of wire N40 is 0.25
+Activity factor of wire N43 is 0.25
+Activity factor of wire N47 is 0.25
+Activity factor of wire N50 is 0.25
+Activity factor of wire N53 is 0.25
+Activity factor of wire N56 is 0.25
+Activity factor of wire N60 is 0.25
+Activity factor of wire N63 is 0.25
+Activity factor of wire N66 is 0.25
+Activity factor of wire N69 is 0.25
+Activity factor of wire N73 is 0.25
+Activity factor of wire N76 is 0.25
+Activity factor of wire N79 is 0.25
+Activity factor of wire N82 is 0.25
+Activity factor of wire N86 is 0.25
+Activity factor of wire N89 is 0.25
+Activity factor of wire N92 is 0.25
+Activity factor of wire N95 is 0.25
+Activity factor of wire N99 is 0.25
+Activity factor of wire N102 is 0.25
+Activity factor of wire N105 is 0.25
+Activity factor of wire N108 is 0.25
+Activity factor of wire N112 is 0.25
+Activity factor of wire N115 is 0.25
+Activity factor of wire N118 is 0.25
+Activity factor of wire N119 is 0.25
+Activity factor of wire N122 is 0.25
+Activity factor of wire N123 is 0.25
+Activity factor of wire N126 is 0.25
+Activity factor of wire N127 is 0.25
+Activity factor of wire N130 is 0.25
+Activity factor of wire N131 is 0.25
+Activity factor of wire N134 is 0.25
+Activity factor of wire N135 is 0.25
+Activity factor of wire N138 is 0.25
+Activity factor of wire N139 is 0.25
+Activity factor of wire N142 is 0.25
+Activity factor of wire N143 is 0.25
+Activity factor of wire N146 is 0.25
+Activity factor of wire N147 is 0.25
+Activity factor of wire N150 is 0.25
+Activity factor of wire N151 is 0.25
+Activity factor of wire N154 is 0.1875
+Activity factor of wire N157 is 0.1875
+Activity factor of wire N158 is 0.1875
+Activity factor of wire N159 is 0.1875
+Activity factor of wire N162 is 0.1875
+Activity factor of wire N165 is 0.1875
+Activity factor of wire N168 is 0.1875
+Activity factor of wire N171 is 0.1875
+Activity factor of wire N174 is 0.1875
+Activity factor of wire N177 is 0.1875
+Activity factor of wire N180 is 0.1875
+Activity factor of wire N183 is 0.1875
+Activity factor of wire N184 is 0.1875
+Activity factor of wire N185 is 0.1875
+Activity factor of wire N186 is 0.1875
+Activity factor of wire N187 is 0.1875
+Activity factor of wire N188 is 0.1875
+Activity factor of wire N189 is 0.1875
+Activity factor of wire N190 is 0.1875
+Activity factor of wire N191 is 0.1875
+Activity factor of wire N192 is 0.1875
+Activity factor of wire N193 is 0.1875
+Activity factor of wire N194 is 0.1875
+Activity factor of wire N195 is 0.1875
+Activity factor of wire N196 is 0.1875
+Activity factor of wire N197 is 0.1875
+Activity factor of wire N198 is 0.1875
+Activity factor of wire N199 is 0.06944697616563644
+Activity factor of wire N203 is 0.06944697616563644
+Activity factor of wire N213 is 0.06944697616563644
+Activity factor of wire N223 is 0.06944697616563644
+Activity factor of wire N224 is 0.1909252276049723
+Activity factor of wire N227 is 0.1909252276049723
+Activity factor of wire N230 is 0.1909252276049723
+Activity factor of wire N233 is 0.1909252276049723
+Activity factor of wire N236 is 0.1909252276049723
+Activity factor of wire N239 is 0.1909252276049723
+Activity factor of wire N242 is 0.2485905724715849
+Activity factor of wire N243 is 0.1909252276049723
+Activity factor of wire N246 is 0.2485905724715849
+Activity factor of wire N247 is 0.1909252276049723
+Activity factor of wire N250 is 0.2485905724715849
+Activity factor of wire N251 is 0.1909252276049723
+Activity factor of wire N254 is 0.2485905724715849
+Activity factor of wire N255 is 0.2485905724715849
+Activity factor of wire N256 is 0.2485905724715849
+Activity factor of wire N257 is 0.2485905724715849
+Activity factor of wire N258 is 0.2485905724715849
+Activity factor of wire N259 is 0.2485905724715849
+Activity factor of wire N260 is 0.0601103847563676
+Activity factor of wire N263 is 0.0601103847563676
+Activity factor of wire N264 is 0.0601103847563676
+Activity factor of wire N267 is 0.0601103847563676
+Activity factor of wire N270 is 0.0601103847563676
+Activity factor of wire N273 is 0.0601103847563676
+Activity factor of wire N276 is 0.0601103847563676
+Activity factor of wire N279 is 0.0601103847563676
+Activity factor of wire N282 is 0.0601103847563676
+Activity factor of wire N285 is 0.0601103847563676
+Activity factor of wire N288 is 0.0601103847563676
+Activity factor of wire N289 is 0.0601103847563676
+Activity factor of wire N290 is 0.0601103847563676
+Activity factor of wire N291 is 0.0601103847563676
+Activity factor of wire N292 is 0.0601103847563676
+Activity factor of wire N293 is 0.0601103847563676
+Activity factor of wire N294 is 0.0601103847563676
+Activity factor of wire N295 is 0.0601103847563676
+Activity factor of wire N296 is 0.24748335408337688
+Activity factor of wire N300 is 0.0601103847563676
+Activity factor of wire N301 is 0.0601103847563676
+Activity factor of wire N302 is 0.0601103847563676
+Activity factor of wire N303 is 0.0601103847563676
+Activity factor of wire N304 is 0.0601103847563676
+Activity factor of wire N305 is 0.0601103847563676
+Activity factor of wire N306 is 0.0601103847563676
+Activity factor of wire N307 is 0.0601103847563676
+Activity factor of wire N308 is 0.0601103847563676
+Activity factor of wire N309 is 0.24748335408337688
+Activity factor of wire N319 is 0.24748335408337688
+Activity factor of wire N329 is 0.24748335408337688
+Activity factor of wire N330 is 0.21297983066633155
+Activity factor of wire N331 is 0.21297983066633155
+Activity factor of wire N332 is 0.21297983066633155
+Activity factor of wire N333 is 0.21297983066633155
+Activity factor of wire N334 is 0.17432929277125872
+Activity factor of wire N335 is 0.21297983066633155
+Activity factor of wire N336 is 0.17432929277125872
+Activity factor of wire N337 is 0.21297983066633155
+Activity factor of wire N338 is 0.17432929277125872
+Activity factor of wire N339 is 0.21297983066633155
+Activity factor of wire N340 is 0.17432929277125872
+Activity factor of wire N341 is 0.21297983066633155
+Activity factor of wire N342 is 0.17432929277125872
+Activity factor of wire N343 is 0.21297983066633155
+Activity factor of wire N344 is 0.17432929277125872
+Activity factor of wire N345 is 0.17432929277125872
+Activity factor of wire N346 is 0.17432929277125872
+Activity factor of wire N347 is 0.17432929277125872
+Activity factor of wire N348 is 0.0193684092921033
+Activity factor of wire N349 is 0.0193684092921033
+Activity factor of wire N350 is 0.0193684092921033
+Activity factor of wire N351 is 0.0193684092921033
+Activity factor of wire N352 is 0.0193684092921033
+Activity factor of wire N353 is 0.0193684092921033
+Activity factor of wire N354 is 0.0193684092921033
+Activity factor of wire N355 is 0.0193684092921033
+Activity factor of wire N356 is 0.0193684092921033
+Activity factor of wire N357 is 0.13737514878355042
+Activity factor of wire N360 is 0.13737514878355042
+Activity factor of wire N370 is 0.13737514878355042
+Activity factor of wire N371 is 0.0754447216407332
+Activity factor of wire N372 is 0.0754447216407332
+Activity factor of wire N373 is 0.0754447216407332
+Activity factor of wire N374 is 0.0754447216407332
+Activity factor of wire N375 is 0.0754447216407332
+Activity factor of wire N376 is 0.0754447216407332
+Activity factor of wire N377 is 0.0754447216407332
+Activity factor of wire N378 is 0.0754447216407332
+Activity factor of wire N379 is 0.0754447216407332
+Activity factor of wire N380 is 0.15463990307529105
+Activity factor of wire N381 is 0.15463990307529105
+Activity factor of wire N386 is 0.15463990307529105
+Activity factor of wire N393 is 0.15463990307529105
+Activity factor of wire N399 is 0.15463990307529105
+Activity factor of wire N404 is 0.15463990307529105
+Activity factor of wire N407 is 0.15463990307529105
+Activity factor of wire N411 is 0.15463990307529105
+Activity factor of wire N414 is 0.15463990307529105
+Activity factor of wire N415 is 0.15463990307529105
+Activity factor of wire N416 is 0.14959022981115477
+Activity factor of wire N417 is 0.15463990307529105
+Activity factor of wire N418 is 0.15463990307529105
+Activity factor of wire N419 is 0.15463990307529105
+Activity factor of wire N420 is 0.15463990307529105
+Activity factor of wire N421 is 0.22417807470548556
+Activity factor of wire N422 is 0.13072640345215567
+Activity factor of wire N425 is 0.09092658998156626
+Activity factor of wire N428 is 0.10943005875909917
+Activity factor of wire N429 is 0.09092658998156626
+Activity factor of wire N430 is 0.24721980042730798
+Activity factor of wire N431 is 0.2497912736733666
+Activity factor of wire N432 is 0.2472547215839047

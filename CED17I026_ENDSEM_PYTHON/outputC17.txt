@@ -1,0 +1,36 @@
+
+Input----------
+
+['N1', 'N2', 'N3', 'N6', 'N7']
+
+Output---------
+
+['N22', 'N23']
+
+Wire-----------
+
+['N10', 'N11', 'N16', 'N19']
+Probability:
+Probability of wire N1 is 0.5
+Probability of wire N2 is 0.5
+Probability of wire N3 is 0.5
+Probability of wire N6 is 0.5
+Probability of wire N7 is 0.5
+Probability of wire N10 is 0.75
+Probability of wire N11 is 0.75
+Probability of wire N16 is 0.625
+Probability of wire N19 is 0.625
+Probability of wire N22 is 0.53125
+Probability of wire N23 is 0.609375
+---------------------
+Activity factor of wire N1 is 0.25
+Activity factor of wire N2 is 0.25
+Activity factor of wire N3 is 0.25
+Activity factor of wire N6 is 0.25
+Activity factor of wire N7 is 0.25
+Activity factor of wire N10 is 0.1875
+Activity factor of wire N11 is 0.1875
+Activity factor of wire N16 is 0.234375
+Activity factor of wire N19 is 0.234375
+Activity factor of wire N22 is 0.2490234375
+Activity factor of wire N23 is 0.238037109375
