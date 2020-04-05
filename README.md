@@ -1,2 +1,3 @@
 # CommonCoding
-A place for all my code on my pc
+Refreshed directory of CommonCoding
+
