@@ -6,18 +6,21 @@ void getres(int m, int n, string s, string &minv, string &maxv)
     // get the sum of the string
     if (s.length() > m)
         return;
-    int sum = 0;
-    for (char i : s)
+    if(s.length() == m)
     {
-        sum += (int(i) - '0');
-    }
+        int sum = 0;
+        for (char i : s)
+        {
+            sum += (int(i) - '0');
+        }
 
-    if (sum == n)
-    {
-        if (s > maxv)
-            maxv = s;
-        if (s < minv)
-            minv = s;
+        if (sum == n)
+        {
+            if (s > maxv)
+                maxv = s;
+            if (s < minv)
+                minv = s;
+        }
     }
 
     for (int i = 0; i <= 9; i++)
@@ -34,20 +37,28 @@ int main()
     int m, n;
     cin >> m >> n;
 
-    string minv = "9", maxv = "0";
-    for (int i = 0; i <= 9; i++)
-        getres(m, n, to_string(i), minv, maxv);
+    if(n == 0 && m == 1)
+        cout<<0<<" "<<0;
 
-    // sum of minv and maxv
-    int sum1 = 0, sum2 = 0;
-    for (char i : minv)
-        sum1 += (int(i) - '0');
-    for (char i : maxv)
-        sum2 += (int(i) - '0');
-    if (sum1 != sum2)
-        cout << -1 << " " << -1;
     else
-        cout << minv << " " << maxv;
+    {
+        string minv = "9", maxv = "0";
+        for (int i = 1; i <= 9; i++)
+            getres(m, n, to_string(i), minv, maxv);
+
+        // sum of minv and maxv
+        int sum1 = 0, sum2 = 0;
+        for (char i : minv)
+            sum1 += (int(i) - '0');
+        for (char i : maxv)
+            sum2 += (int(i) - '0');
+        if (sum1 != sum2 || maxv.length() != m || minv.length() != m)
+            cout << -1 << " " << -1;
+        else
+        {
+            cout << minv << " " << maxv;
+        }
+    }
     cout << "\n";
     return 0;
 }
