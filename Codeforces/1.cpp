@@ -3,6 +3,8 @@ using namespace std;
 
 int main()
 {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     int n;
     cin>>n;
     int arr[n];
@@ -13,13 +15,14 @@ int main()
         cin>>arr[i];
     }
 
-    int freq[10000000] = {0};
+    unordered_set<int> visited;
     unordered_set<int> slog(n);
 
-    bool print = true;
     int noofdays = 1;
     vector<int> sizearr;
     int size = 0;
+    bool valid = true;
+    
     for(int j : arr)
     {
         size++;
@@ -27,56 +30,38 @@ int main()
         {
             if(slog.find(-j) == slog.end())
             {
-                cout<<-1;
-                print = false;
+                valid = false;
                 break;
             }
-            else
+            slog.erase(-j);
+            if(slog.size() == 0)
             {
-                slog.erase(-j);
-            } 
+                noofdays++;
+                sizearr.push_back(size);
+                size = 0;
+                visited.clear();
+            }
         }
         else
         {
-            freq[j]++;
-            if(freq[j] > 1)
+            if(visited.find(j) != visited.end())
             {
-                if(slog.size() == 0)
-                {   
-                    noofdays++;
-                    sizearr.push_back(size-1);
-                    slog.insert(j);
-                    size = 1;
-                }
-                else
-                {
-                    cout<<-1;
-                    print = false;
-                    break;
-                }
+                valid = false;
+                break;
             }
-            else
-            {
-                slog.insert(j);
-            }
-        } 
+            slog.insert(j);
+            visited.insert(j);
+        }
     }
 
-    if(print)
+    if(!valid || slog.size() > 0)
+        cout<<-1;
+    else
     {
-        if(slog.size() > 0)
-        {
-            cout<<-1;
-        }
-        else
-        {
-            sizearr.push_back(size);
-            cout<<noofdays<<endl;
-            for(int i: sizearr)
-            {
-                cout<<i<<" ";
-            }
-        }
+        cout<<noofdays-1<<"\n";
+        for(int j : sizearr)
+            cout<<j<<" ";
     }
-    cout<<endl;
+    cout<<"\n";
+    return 0;
 }
