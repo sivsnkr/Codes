@@ -1,67 +1,53 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
+
+void getres(int m, int n, string s, string &minv, string &maxv)
+{
+    // get the sum of the string
+    if (s.length() > m)
+        return;
+    int sum = 0;
+    for (char i : s)
+    {
+        sum += (int(i) - '0');
+    }
+
+    if (sum == n)
+    {
+        if (s > maxv)
+            maxv = s;
+        if (s < minv)
+            minv = s;
+    }
+
+    for (int i = 0; i <= 9; i++)
+    {
+        getres(m, n, s + to_string(i), minv, maxv);
+    }
+}
 
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    int n;
-    cin>>n;
-    int arr[n];
 
-    int i;
-    for(i = 0; i < n; i++)
-    {
-        cin>>arr[i];
-    }
+    int m, n;
+    cin >> m >> n;
 
-    unordered_set<int> visited;
-    unordered_set<int> slog(n);
+    string minv = "9", maxv = "0";
+    for (int i = 0; i <= 9; i++)
+        getres(m, n, to_string(i), minv, maxv);
 
-    int noofdays = 1;
-    vector<int> sizearr;
-    int size = 0;
-    bool valid = true;
-    
-    for(int j : arr)
-    {
-        size++;
-        if(j < 0)
-        {
-            if(slog.find(-j) == slog.end())
-            {
-                valid = false;
-                break;
-            }
-            slog.erase(-j);
-            if(slog.size() == 0)
-            {
-                noofdays++;
-                sizearr.push_back(size);
-                size = 0;
-                visited.clear();
-            }
-        }
-        else
-        {
-            if(visited.find(j) != visited.end())
-            {
-                valid = false;
-                break;
-            }
-            slog.insert(j);
-            visited.insert(j);
-        }
-    }
-
-    if(!valid || slog.size() > 0)
-        cout<<-1;
+    // sum of minv and maxv
+    int sum1 = 0, sum2 = 0;
+    for (char i : minv)
+        sum1 += (int(i) - '0');
+    for (char i : maxv)
+        sum2 += (int(i) - '0');
+    if (sum1 != sum2)
+        cout << -1 << " " << -1;
     else
-    {
-        cout<<noofdays-1<<"\n";
-        for(int j : sizearr)
-            cout<<j<<" ";
-    }
-    cout<<"\n";
+        cout << minv << " " << maxv;
+    cout << "\n";
     return 0;
 }
