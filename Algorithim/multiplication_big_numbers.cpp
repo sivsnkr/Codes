@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 // multiply and give modulo of two numbers even if multiplication
@@ -8,29 +8,30 @@ int multiply(int a, int b)
     int modulo = 1000000007;
 
     int p = b;
-    while(a > 1)
+    while (a > 1)
     {
-        if(a&1)
+        if (a & 1)
         {
             // odd number
-            p*=2;
-            p%=modulo;
-            p+=b;
-            p%=modulo;
+            p *= 2;
+            p %= modulo;
+            p += b;
+            p %= modulo;
         }
         else
         {
-            p*=2;
-            p%=modulo;
+            p *= 2;
+            p %= modulo;
         }
-        a = a>>1;
+        a = a >> 1;
     }
     return p;
 }
 int main()
 {
-    int a = 3,b = 2;
+    long long int a = 56456, b = 56456;
 
-    int getres = multiply(a,b);
-    cout<<getres<<"\n";
+    // int getres = multiply(a, b);
+    long long int getres = a * b;
+    cout << getres % 1000000007 << "\n";
 }
