@@ -1,43 +1,29 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 int main()
 {
-    int n;
-    cin>>n;
+    string s;
+    cin >> s;
+    string s1 = s;
+    reverse(s1.begin(), s1.end());
 
-    vector<int> numbers(n);
-
-    int i;
-    for(i = 0; i < n; i++)
+    int a = s.find("AB"), b = s.length() - s1.find("AB") - 1;
+    if ((a > b + 2 || b > a + 2) && (a < s.length() && b < s.length()))
     {
-        cin>>numbers[i];
+        cout << "YES";
     }
-
-    int uniquec = 0;
-
-    vector<bool> processed(100001);
-    vector<int> uniques(n);
-    for(i = n-1; i >= 0; i--)
+    else
     {
-        uniques[i] = uniquec;
-        if(!processed[numbers[i]])
+        a = s.find("BA"), b = s.length() - s1.find("BA") - 1;
+        if ((a > b + 2 || b > a + 2) && (a < s.length() && b < s.length()))
         {
-            uniquec++;
-            processed[numbers[i]] = true;
+            cout << "YES";
+        }
+        else
+        {
+            cout << "NO";
         }
     }
-
-    processed.assign(sizeof(processed),false);
-
-    long long int sum = 0;
-    for(i = 0; i < n; i++)
-    {
-        if(!processed[numbers[i]])
-        {
-            sum+=uniques[i];
-            processed[numbers[i]] = true;
-        }
-    }
-    cout<<sum<<"\n";
+    cout << "\n";
 }

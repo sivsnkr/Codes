@@ -3,6 +3,12 @@ using namespace std;
 
 int main()
 {
-    char a = '4';
-    cout << (int)a - '0' << endl;
+    string s = "shiv shankar";
+    string s1 = "ankit";
+    cout << s.find("blah") << "\n";
+    // if (s.find(s1))
+    //     cout << "false";
+    // else
+    //     cout << "true";
+    // cout << "\n";
 }
