@@ -1,33 +1,43 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
     int n;
     cin>>n;
 
-    vector<int> queue(n);
+    vector<int> numbers(n);
+
     int i;
     for(i = 0; i < n; i++)
     {
-        cin>>queue[i];
+        cin>>numbers[i];
     }
 
-    sort(queue.begin(),queue.end());
+    int uniquec = 0;
+
+    vector<bool> processed(100001);
+    vector<int> uniques(n);
+    for(i = n-1; i >= 0; i--)
+    {
+        uniques[i] = uniquec;
+        if(!processed[numbers[i]])
+        {
+            uniquec++;
+            processed[numbers[i]] = true;
+        }
+    }
+
+    processed.assign(sizeof(processed),false);
 
     long long int sum = 0;
-    int numberofdisp = 0;
-    for(int j : queue)
+    for(i = 0; i < n; i++)
     {
-        if(sum > j)
-            numberofdisp++;
-        else
-            sum+=j;
+        if(!processed[numbers[i]])
+        {
+            sum+=uniques[i];
+            processed[numbers[i]] = true;
+        }
     }
-
-    cout<<n-numberofdisp<<"\n";
-    return 0;
+    cout<<sum<<"\n";
 }
