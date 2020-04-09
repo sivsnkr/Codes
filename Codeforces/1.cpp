@@ -1,52 +1,34 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void dfs(vector<unordered_set<int>> &graph,int src,vector<bool> &havecats,int conscats,int &limitcats,int &noofres,vector<bool> &visited)
-{
-    if(conscats > limitcats)
-        return;
-    if(graph[src].size() == 1 && conscats+havecats[src] <= limitcats && src != 0)
-    {
-        noofres++;
-    }
-    visited[src] = true;
-
-    for(int i : graph[src])
-    {
-        if(havecats[src] && !visited[i])
-            dfs(graph,i,havecats,conscats+1,limitcats,noofres,visited);
-        else if(!visited[i])
-            dfs(graph,i,havecats,0,limitcats,noofres,visited);
-    }
-}
-
 int main()
 {
-    int nodes,cats;
-    cin>>nodes>>cats;
-
-    vector<unordered_set<int>> graph(nodes);
-    vector<bool> havecats(nodes);
-
-    int i;
-    for(i = 0; i < nodes; i++)
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int n,d;cin>>n>>d;
+    vector<pair<int,int>> timetable(n);
+    int mxtime = 0,mmtime=0;
+    for(int i = 0; i < n; i++)
     {
-        bool value;
-        cin>>value;
-        havecats[i] = value;
+        int mt,mxt;cin>>mt>>mxt;
+        timetable[i] = {mt,mxt};
+        mxtime+=mxt;
+        mmtime+=mt;
     }
 
-    for(i = 0; i < nodes-1; i++)
+    if(d > mxtime || d < mmtime)
     {
-        int src,dest;
-        cin>>src>>dest;
-        src--,dest--;
-        graph[src].insert(dest);
-        graph[dest].insert(src);
+        cout<<"NO";
+    }else
+    {
+        cout<<"YES"<<"\n";
+        for(int i = 0; i < n; i++)
+        {
+            cout<<min(timetable[i].second,d-mmtime+timetable[i].first)<<" ";
+            d -= min(timetable[i].second,d-mmtime+timetable[i].first);
+            mmtime-=timetable[i].first;
+        }
     }
-
-    int noofres = 0;
-    vector<bool> visited(nodes,false);
-    dfs(graph,0,havecats,0,cats,noofres,visited);
-    cout<<noofres<<"\n";
+    cout<<"\n";
+    return 0;
 }
