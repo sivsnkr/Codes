@@ -1,52 +1,37 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void dfs(vector<unordered_set<int>> &graph,int src,vector<bool> &havecats,int conscats,int &limitcats,int &noofres,vector<bool> &visited)
-{
-    if(conscats > limitcats)
-        return;
-    if(graph[src].size() == 1 && conscats+havecats[src] <= limitcats && src != 0)
-    {
-        noofres++;
-    }
-    visited[src] = true;
-
-    for(int i : graph[src])
-    {
-        if(havecats[src] && !visited[i])
-            dfs(graph,i,havecats,conscats+1,limitcats,noofres,visited);
-        else if(!visited[i])
-            dfs(graph,i,havecats,0,limitcats,noofres,visited);
-    }
-}
-
 int main()
 {
-    int nodes,cats;
-    cin>>nodes>>cats;
+    unsigned int exams;
+    cin >> exams;
 
-    vector<unordered_set<int>> graph(nodes);
-    vector<bool> havecats(nodes);
+    vector<pair<int, int>> exams_date(exams);
 
     int i;
-    for(i = 0; i < nodes; i++)
+    for (i = 0; i < exams; i++)
     {
-        bool value;
-        cin>>value;
-        havecats[i] = value;
+        int main, pre;
+        cin >> main >> pre;
+        exams_date[i] = {main, pre};
     }
 
-    for(i = 0; i < nodes-1; i++)
+    sort(exams_date.begin(), exams_date.end());
+
+    int prev_exam_date = min(exams_date[0].second, exams_date[0].first);
+    int date_no;
+    for (i = 1; i < exams; i++)
     {
-        int src,dest;
-        cin>>src>>dest;
-        src--,dest--;
-        graph[src].insert(dest);
-        graph[dest].insert(src);
+        if (prev_exam_date > exams_date[i].second)
+        {
+            prev_exam_date = exams_date[i].first;
+        }
+        else
+        {
+            prev_exam_date = max(prev_exam_date, exams_date[i].second);
+        }
     }
 
-    int noofres = 0;
-    vector<bool> visited(nodes,false);
-    dfs(graph,0,havecats,0,cats,noofres,visited);
-    cout<<noofres<<"\n";
+    cout << prev_exam_date;
+    cout << "\n";
 }
