@@ -5,29 +5,34 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    int n,d;cin>>n>>d;
-    vector<pair<int,int>> timetable(n);
-    int mxtime = 0,mmtime=0;
-    for(int i = 0; i < n; i++)
+    int n;
+    cin>>n;
+    vector<int> colors(n+2,1);
+    int i;
+    for(i = 2; i*i <= n+1; i++)
     {
-        int mt,mxt;cin>>mt>>mxt;
-        timetable[i] = {mt,mxt};
-        mxtime+=mxt;
-        mmtime+=mt;
+        if(colors[i] == 1)
+        {
+            for(int j = i*i; j <=n+1; j+=i)
+            {
+                if(colors[j] == 1)
+                    colors[j] = colors[i]+1;
+            }
+        }
     }
 
-    if(d > mxtime || d < mmtime)
+    vector<int> c = colors;
+    sort(c.begin(),c.end());
+    int no = 0;
+    for(int i = 0; i < n+2; i++)
     {
-        cout<<"NO";
-    }else
+        if(c[i] != c[i+1])
+            no++;
+    }
+    cout<<no<<"\n";
+    for(i = 2; i <= n+1; i++)
     {
-        cout<<"YES"<<"\n";
-        for(int i = 0; i < n; i++)
-        {
-            cout<<min(timetable[i].second,d-mmtime+timetable[i].first)<<" ";
-            d -= min(timetable[i].second,d-mmtime+timetable[i].first);
-            mmtime-=timetable[i].first;
-        }
+        cout<<colors[i]<<" ";
     }
     cout<<"\n";
     return 0;
