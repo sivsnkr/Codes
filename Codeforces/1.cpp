@@ -1,39 +1,65 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+void dfs(vector<unordered_set<int>> &graph,int src,long long int &noofedge,bool visited[],int &noofver)
+{
+    if(visited[src])
+        return;
+    visited[src] = true;
+    noofver++;
+    noofedge+=graph[src].size();
+    for(int i : graph[src])
+    {
+        if(!visited[i])
+        {
+            dfs(graph,i,noofedge,visited,noofver);
+        }
+    }
+}
+
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    int n;
-    cin>>n;
-    vector<int> colors(n+2,1);
+    
+    int n,m;
+    cin>>n>>m;
+    vector<unordered_set<int>> graph(n+1);
+
     int i;
-    for(i = 2; i*i <= n+1; i++)
+    for(i = 0; i < m; i++)
     {
-        if(colors[i] == 1)
+        int src,dest;
+        cin>>src>>dest;
+        graph[src].insert(dest);
+        graph[dest].insert(src);
+    }
+
+    bool visited[n+1];
+    memset(visited,0,n+1);
+    bool valid = true;
+    for(i = 1; i <= n; i++)
+    {
+        if(!visited[i])
         {
-            for(int j = i*i; j <=n+1; j+=i)
+            // do the dfs
+            long long int noofedge = 0;
+            int noofver = 0;
+            dfs(graph,i,noofedge,visited,noofver);
+            if(noofedge != (long long)noofver*(noofver-1))
             {
-                if(colors[j] == 1)
-                    colors[j] = colors[i]+1;
+                valid = false;
+                break;
             }
         }
     }
-
-    vector<int> c = colors;
-    sort(c.begin(),c.end());
-    int no = 0;
-    for(int i = 0; i < n+2; i++)
+    if(valid)
+        cout<<"YES";
+    else
     {
-        if(c[i] != c[i+1])
-            no++;
-    }
-    cout<<no<<"\n";
-    for(i = 2; i <= n+1; i++)
-    {
-        cout<<colors[i]<<" ";
+        cout<<"NO";
     }
     cout<<"\n";
+    
     return 0;
 }
