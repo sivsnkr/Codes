@@ -1,65 +1,52 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-void dfs(vector<unordered_set<int>> &graph,int src,long long int &noofedge,bool visited[],int &noofver)
+int n,m;
+char arr[50][50];
+bool visited[50][50];
+
+bool findc(int i, int j, char src)
 {
-    if(visited[src])
-        return;
-    visited[src] = true;
-    noofver++;
-    noofedge+=graph[src].size();
-    for(int i : graph[src])
-    {
-        if(!visited[i])
-        {
-            dfs(graph,i,noofedge,visited,noofver);
-        }
-    }
+    if(i >= n||j>=m||i < 0||j <0 || arr[i][j] != src)
+        return false;
+    if(visited[i][j])
+        return true;
+    visited[i][j] = true;
+    return findc(i+1,j,src)||findc(i,j+1,src);
 }
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    int n,m;
     cin>>n>>m;
-    vector<unordered_set<int>> graph(n+1);
 
-    int i;
-    for(i = 0; i < m; i++)
+    for(int i = 0; i < n; i++)
     {
-        int src,dest;
-        cin>>src>>dest;
-        graph[src].insert(dest);
-        graph[dest].insert(src);
+        for(int j = 0; j < m; j++)
+        {
+            cin>>arr[i][j];
+        }
     }
 
-    bool visited[n+1];
-    memset(visited,0,n+1);
-    bool valid = true;
-    for(i = 1; i <= n; i++)
+    memset(visited,0,sizeof(visited));
+
+    bool hc = false;
+    for(int i = 0; i < n; i++)
     {
-        if(!visited[i])
+        for(int j = 0; j < m; j++)
         {
-            // do the dfs
-            long long int noofedge = 0;
-            int noofver = 0;
-            dfs(graph,i,noofedge,visited,noofver);
-            if(noofedge != (long long)noofver*(noofver-1))
+            if(!visited[i][j])
             {
-                valid = false;
-                break;
+                if(findc(i,j,arr[i][j]))
+                {
+                    hc = true;
+                    break;
+                }
             }
         }
     }
-    if(valid)
-        cout<<"YES";
+    if(hc)
+        cout<<"Yes";
     else
-    {
-        cout<<"NO";
-    }
+        cout<<"No";
     cout<<"\n";
-    
-    return 0;
 }
