@@ -1,52 +1,74 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int n,m;
-char arr[50][50];
-bool visited[50][50];
+long long int p1,p2;
+long long int arr[200001],arr1[200001];
+int ac,bc;
 
-bool findc(int i, int j, char src)
+int is()
 {
-    if(i >= n||j>=m||i < 0||j <0 || arr[i][j] != src)
-        return false;
-    if(visited[i][j])
-        return true;
-    visited[i][j] = true;
-    return findc(i+1,j,src)||findc(i,j+1,src);
+    int size = min(ac,bc);
+    for(int i = 0; i < size; i++)
+    {
+        if(arr[i]>arr1[i])
+            return 0;
+        else if(arr[i]<arr1[i])
+            return 1;
+    }
+
+    if(ac==bc)
+        return 2;
+    else if(size == ac)
+        return 1;
+    return 0;
 }
 
 int main()
 {
-    cin>>n>>m;
-
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int n;cin>>n;
+    bool lm;
     for(int i = 0; i < n; i++)
     {
-        for(int j = 0; j < m; j++)
+        int p;cin>>p;
+        lm = 0;
+        if(p < 0)
         {
-            cin>>arr[i][j];
+            p2+=(-p);
+            arr1[bc++] = -p;
+            lm = 1;
+        }
+        else
+        {
+            p1+=p;
+            arr[ac++] = p;
         }
     }
 
-    memset(visited,0,sizeof(visited));
-
-    bool hc = false;
-    for(int i = 0; i < n; i++)
-    {
-        for(int j = 0; j < m; j++)
-        {
-            if(!visited[i][j])
-            {
-                if(findc(i,j,arr[i][j]))
-                {
-                    hc = true;
-                    break;
-                }
-            }
-        }
-    }
-    if(hc)
-        cout<<"Yes";
+    if(p1 > p2)
+        cout<<"first";
+    else if(p2 > p1)
+        cout<<"second";
     else
-        cout<<"No";
+    {
+        if(is() == 0)
+            cout<<"first";
+        else if(is() == 1)
+            cout<<"second";
+        else
+        {
+            if(lm)
+                cout<<"second";
+            else
+            {
+                cout<<"first";
+            }
+            
+        }
+        
+    }
+
     cout<<"\n";
+    return 0;
 }
