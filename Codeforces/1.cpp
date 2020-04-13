@@ -64,9 +64,7 @@ int main()
             {
                 cout<<"first";
             }
-            
         }
-        
     }
 
     cout<<"\n";
