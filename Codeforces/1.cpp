@@ -1,72 +1,98 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-long long int p1,p2;
-long long int arr[200001],arr1[200001];
-int ac,bc;
-
-int is()
+int index(vector<int> v, int t)
 {
-    int size = min(ac,bc);
-    for(int i = 0; i < size; i++)
+    int first = 0;
+    int last = v.size();
+    while(first <= last)
     {
-        if(arr[i]>arr1[i])
-            return 0;
-        else if(arr[i]<arr1[i])
-            return 1;
+        int middle = (first+last)/2;
+        if(v[middle] == t)
+        {
+            return middle;
+        }
+        else if(v[middle] > t)
+        {
+            last = middle-1;
+        }
+        else
+        {
+            first = middle+1;
+        }
     }
-
-    if(ac==bc)
-        return 2;
-    else if(size == ac)
-        return 1;
-    return 0;
+    return first;
 }
 
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    cin.tie(NULL);cout.tie(NULL);
     int n;cin>>n;
-    bool lm;
+    vector<vector<int>> s(n);
     for(int i = 0; i < n; i++)
     {
-        int p;cin>>p;
-        lm = 0;
-        if(p < 0)
+        int c;cin>>c;
+        for(int j = 0; j < c; j++)
         {
-            p2+=(-p);
-            arr1[bc++] = -p;
-            lm = 1;
-        }
-        else
-        {
-            p1+=p;
-            arr[ac++] = p;
+            int v;cin>>v;s[i].push_back(v);
         }
     }
 
-    if(p1 > p2)
-        cout<<"first";
-    else if(p2 > p1)
-        cout<<"second";
-    else
+    vector<bool> ha(n,false);
+    vector<int> minvs,maxvs;
+    for(int i = 0; i < n; i++)
     {
-        if(is() == 0)
-            cout<<"first";
-        else if(is() == 1)
-            cout<<"second";
-        else
+        // check all the sequence
+        bool h = false;
+        int minv = INT_MAX,maxv = 0;
+        for(int j : s[i])
         {
-            if(lm)
-                cout<<"second";
-            else
+            maxv = max(maxv,j);
+            minv = min(minv,j);
+            if(j > minv)
             {
-                cout<<"first";
+                ha[i] = true;
+                break;
             }
         }
+        if(!ha[i])
+        {
+            minvs.push_back(minv);maxvs.push_back(maxv);
+        }
     }
 
-    cout<<"\n";
+    long long int sum = 0;
+    for(int i = 0; i < n; i++)
+    {
+        if(ha[i])
+        {
+            sum+=(2*n-1);
+        }
+    }
+
+    sort(minvs.begin(),minvs.end());
+    sort(maxvs.begin(),maxvs.end());
+
+    for(int i = 0; i < minvs.size(); i++)
+    {
+        int ind = index(maxvs,minvs[i]);
+        while(ind < maxvs.size()&&maxvs[ind] == minvs[i])
+        {
+            ind++;
+        }
+        sum+=(maxvs.size()-ind);
+    }
+
+    // for(int i = 0; i < maxvs.size(); i++)
+    // {
+    //     int ind = index(minvs,maxvs[i]);
+    //     while(ind < minvs.size()&&minvs[ind] == maxvs[i])
+    //     {
+    //         ind++;
+    //     }
+    //     sum+=(minvs.size()-ind);
+    // }
+    cout<<sum<<"\n";
     return 0;
 }
