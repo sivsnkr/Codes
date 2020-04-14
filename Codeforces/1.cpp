@@ -5,35 +5,69 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+    cout.tie(NULL);
     int n;
     cin >> n;
-    vector<int> colors(n + 2, 1);
-    int i;
-    for (i = 2; i * i <= n + 1; i++)
+    vector<vector<int>> s(n);
+    for (int i = 0; i < n; i++)
     {
-        if (colors[i] == 1)
+        int c;
+        cin >> c;
+        for (int j = 0; j < c; j++)
         {
-            for (int j = i * i; j <= n + 1; j += i)
-            {
-                if (colors[j] == 1)
-                    colors[j] = colors[i] + 1;
-            }
+            int v;
+            cin >> v;
+            s[i].push_back(v);
         }
     }
 
-    vector<int> c = colors;
-    sort(c.begin(), c.end());
-    int no = 0;
-    for (int i = 0; i < n + 2; i++)
+    vector<bool> ha(n, false);
+    vector<int> minvs, maxvs;
+    for (int i = 0; i < n; i++)
     {
-        if (c[i] != c[i + 1])
-            no++;
+        bool h = false;
+        int minv = INT_MAX, maxv = 0;
+        for (int j : s[i])
+        {
+            maxv = max(maxv, j);
+            minv = min(minv, j);
+            if (j > minv)
+            {
+                ha[i] = true;
+                break;
+            }
+        }
+        if (!ha[i])
+        {
+            minvs.push_back(minv);
+            maxvs.push_back(maxv);
+        }
     }
-    cout << no << "\n";
-    for (i = 2; i <= n + 1; i++)
+
+    long long int sum = 0;
+    int p = n;
+    for (int i = 0; i < n; i++)
     {
-        cout << colors[i] << " ";
+        if (ha[i])
+        {
+            sum += (2 * p - 1);
+            p--;
+        }
     }
-    cout << "\n";
+
+    sort(minvs.begin(), minvs.end());
+    sort(maxvs.begin(), maxvs.end());
+
+    int ind = 0;
+    for (int i = 0; i < minvs.size(); i++)
+    {
+        while (ind < maxvs.size() && maxvs[ind] <= minvs[i])
+        {
+            ind++;
+        }
+        sum += (maxvs.size() - ind);
+    }
+
+    cout << sum << "\n";
     return 0;
 }
