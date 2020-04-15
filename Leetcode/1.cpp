@@ -1,40 +1,42 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
-
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-class Solution {
+
+void lshift(string &s, int d)
+{
+    reverse(s.begin(), s.begin() + d);
+    reverse(s.begin() + d, s.end());
+    reverse(s.begin(), s.end());
+}
+
+class Solution
+{
 public:
-    int lastStoneWeight(vector<int>& stones) {
-        priority_queue<int> q;
-        for(int a : stones)
+    string stringShift(string s, vector<vector<int>> &shift)
+    {
+        int ls = 0, rs = 0;
+        for (auto j : shift)
         {
-            q.push(a);
+            j[0] == 0 ? ls += j[1] : rs += j[1];
         }
-        while(q.size() > 1)
+
+        if (ls > rs)
         {
-            int f = q.top();
-            q.pop();
-            int s = q.top();
-            q.pop();
-            if(f != s)
-                q.push(max(f,s)-min(f,s));
+            int v = max(ls, rs);
+            while (v > 0)
+            {
+                lshift(s, min(int(s.length()), v));
+                v -= s.length();
+            }
         }
-        if(q.empty())
-            return 0;
-        return q.top();
+        else
+        {
+            int v = max(ls, rs);
+            while (v > 0)
+            {
+                lshift(s, s.length() - min(int(s.length()), v));
+                v -= s.length();
+            }
+        }
+        return s;
     }
 };
-int main()
-{
-    Solution s;
-    vector<int> v{2,7,4,1,8,1};
-    cout<<s.lastStoneWeight(v)<<"\n";
-}
