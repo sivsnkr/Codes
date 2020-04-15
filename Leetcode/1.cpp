@@ -1,63 +1,40 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+
 #include<bits/stdc++.h>
 using namespace std;
 class Solution {
 public:
-    bool backspaceCompare(string a, string b) {
-        int l1 = -1,l2 = -1;
-        for(int i = 0; i < a.length(); i++)
+    int lastStoneWeight(vector<int>& stones) {
+        priority_queue<int> q;
+        for(int a : stones)
         {
-            if(a[i] != '#')
-            {
-                a[++l1] = a[i];
-            }
-            else
-            {
-                if(l1-1 >= -1)
-                    l1--;
-            }
+            q.push(a);
         }
-
-        for(int i = 0; i < b.length(); i++)
+        while(q.size() > 1)
         {
-            if(b[i] != '#')
-            {
-                b[++l2] = b[i];
-            }
-            else
-            {
-                if(l2-1 >= -1)
-                    l2--;
-            }
+            int f = q.top();
+            q.pop();
+            int s = q.top();
+            q.pop();
+            if(f != s)
+                q.push(max(f,s)-min(f,s));
         }
-
-        // cout<<l1<<" "<<l2<<"\n";
-        bool isvalid = true;
-        if(l1 != l2)
-            isvalid = false;
-        else
-        {
-            for(int i = 0; i <= l1; i++)
-            {
-                if(a[i] != b[i])
-                {
-                    isvalid = false;
-                    break;
-                }
-            }
-        }
-
-        return isvalid;
+        if(q.empty())
+            return 0;
+        return q.top();
     }
 };
-
 int main()
 {
     Solution s;
-    string a,b;
-    cin>>a>>b;
-    cout<<a<<" "<<b<<endl;
-    cout<<s.backspaceCompare(a,b)<<"\n";
+    vector<int> v{2,7,4,1,8,1};
+    cout<<s.lastStoneWeight(v)<<"\n";
 }
-
-// "xywrrmp"
-// "xywrrmu#p"

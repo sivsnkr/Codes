@@ -4,70 +4,31 @@ using namespace std;
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    int n;
-    cin >> n;
-    vector<vector<int>> s(n);
-    for (int i = 0; i < n; i++)
+    cin.tie(NULL);cout.tie(NULL);
+    int n,m;cin>>n>>m;
+    vector<pair<int,int>> q(m);
+    for(int i = 0; i < m; i++)
     {
-        int c;
-        cin >> c;
-        for (int j = 0; j < c; j++)
+        cin>>q[i].first>>q[i].second;
+    }
+    
+    vector<int> s{q[0].first,q[0].second};
+    for(int x : s)
+    {
+        int all = 0;
+        vector<int> val(n+1);
+        for(pair<int,int> a : q)
         {
-            int v;
-            cin >> v;
-            s[i].push_back(v);
+            if(a.first != x&&a.second != x)
+                val[a.first]++,val[a.second]++,all++;
+        }
+
+        if(*max_element(val.begin(),val.end()) == all)
+        {
+            cout<<"YES"<<"\n";
+            return 0;
         }
     }
-
-    vector<bool> ha(n, false);
-    vector<int> minvs, maxvs;
-    for (int i = 0; i < n; i++)
-    {
-        bool h = false;
-        int minv = INT_MAX, maxv = 0;
-        for (int j : s[i])
-        {
-            maxv = max(maxv, j);
-            minv = min(minv, j);
-            if (j > minv)
-            {
-                ha[i] = true;
-                break;
-            }
-        }
-        if (!ha[i])
-        {
-            minvs.push_back(minv);
-            maxvs.push_back(maxv);
-        }
-    }
-
-    long long int sum = 0;
-    int p = n;
-    for (int i = 0; i < n; i++)
-    {
-        if (ha[i])
-        {
-            sum += (2 * p - 1);
-            p--;
-        }
-    }
-
-    sort(minvs.begin(), minvs.end());
-    sort(maxvs.begin(), maxvs.end());
-
-    int ind = 0;
-    for (int i = 0; i < minvs.size(); i++)
-    {
-        while (ind < maxvs.size() && maxvs[ind] <= minvs[i])
-        {
-            ind++;
-        }
-        sum += (maxvs.size() - ind);
-    }
-
-    cout << sum << "\n";
+    cout<<"NO"<<"\n";
     return 0;
 }

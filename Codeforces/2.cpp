@@ -4,43 +4,64 @@ using namespace std;
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    int n, m;
-    cin >> n >> m;
-    vector<set<int>> graph(n + 1);
-    for (int i = 0; i < m; i++)
+    cin.tie(NULL);cout.tie(NULL);
+    int n,k;cin>>n>>k;
+    bool q[n];
+    for(int i = 0; i < n-k+1; i++)
     {
-        int src, dest;
-        cin >> src >> dest;
-        graph[src].insert(dest);
-        graph[dest].insert(src);
+        string c;cin>>c;
+        q[i] = c=="YES"?1:0;
+        
     }
 
-    vector<int> path;
-    set<int> nodes;
-    vector<bool> visited(n + 1, false);
-    nodes.insert(1);
-    while (!nodes.empty())
+    string s = "A";
+    char st = 'A';
+    vector<string> ans(n,"");
+    ans[0] = s;
+    int ls = -1;
+    for(int i = 0; i < n-k+1; i++)
     {
-        int t = *nodes.begin();
-        nodes.erase(nodes.begin());
-        for (int v : graph[t])
+        if(q[i])
         {
-            if (!visited[v])
+            for(int j = 0; j < k; j++)
             {
-                nodes.insert(v);
+                string te = "a";
+                    // cout<<s<<"\n";
+                    if((s+te).length() > 10)
+                    {
+                        st++;
+                        string tle(1,st);
+                        s = tle;
+                    }else
+                    {
+                        s = s+te;
+                    }
+                    
+                    ans[i+j] = s;
+            }
+            ls = i;
+        }
+        else
+        {
+            for(int j = 1; j < k; j++)
+            {
+                if(ans[i+j].length()==0)
+                    ans[i+j] = ans[i+j-1];
             }
         }
-        if (!visited[t])
-            path.push_back(t);
-        visited[t] = true;
     }
 
-    for (int i : path)
-    {
-        cout << i << " ";
+    for(int i = 0; i < ls; i++){
+        if(!q[i])
+        {
+            ans[i] = ans[i+1];
+        }
     }
-    cout << "\n";
+
+    for(string s : ans)
+    {
+        cout<<s<<" ";
+    }
+    cout<<"\n";
     return 0;
 }
