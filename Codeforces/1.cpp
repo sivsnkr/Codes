@@ -5,30 +5,22 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);cout.tie(NULL);
-    int n,m;cin>>n>>m;
-    vector<pair<int,int>> q(m);
-    for(int i = 0; i < m; i++)
-    {
-        cin>>q[i].first>>q[i].second;
-    }
-    
-    vector<int> s{q[0].first,q[0].second};
-    for(int x : s)
-    {
-        int all = 0;
-        vector<int> val(n+1);
-        for(pair<int,int> a : q)
-        {
-            if(a.first != x&&a.second != x)
-                val[a.first]++,val[a.second]++,all++;
-        }
+    int n,k;cin>>n>>k;
+    int con[n+1];
+    iota(con,con+n+1,0);
 
-        if(*max_element(val.begin(),val.end()) == all)
+    for(int i = 0; i < n; i++)
+    {
+        int c;cin>>c;
+        vector<int> te(c);
+        for(int j = 0; j < c; j++)
         {
-            cout<<"YES"<<"\n";
-            return 0;
+            cin>>te[i];
+        }
+        for(int j = 0; j < c; j++)
+        {
+            con[te[j]] = con[te[j+1]];
         }
     }
-    cout<<"NO"<<"\n";
     return 0;
 }
