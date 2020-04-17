@@ -2,7 +2,6 @@
 using namespace std;
 
 int main() {
-	string s = "shiv";
-	s[0] = 'i';
-	cout<<s<<"\n";
+	int m = max({2,4,5,2,3,4,5,6});
+	cout<<m<<"\n";
 }

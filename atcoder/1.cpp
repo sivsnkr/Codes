@@ -1,15 +1,16 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+int c = 0;
 int maxv(vector<pair<int, int>> &items, int w, int n, map<pair<int, int>, int> &me)
 {
+    c++;
     if (w == 0 || n == 0)
         return 0;
-    if (me.find({n, w}) != me.end())
-        return me[{n, w}];
-    if (items[n - 1].first <= w)
+    if (items[n - 1].first <= w && me.find({n, w}) == me.end())
         return me[{n, w}] = max(items[n - 1].second + maxv(items, w - items[n - 1].first, n - 1, me), maxv(items, w, n - 1, me));
-    return me[{n, w}] = maxv(items, w, n - 1, me);
+    else if(me.find({n, w}) == me.end())
+        return me[{n, w}] = maxv(items, w, n - 1, me);
+    return me[{n, w}];
 }
 
 int main()
@@ -25,6 +26,7 @@ int main()
     map<pair<int, int>, int> me;
     maxv(items, w, n, me);
     cout << me[{n, w}] << "\n";
+    cout<<"c "<<c<<"\n";
 
     // int weight = 0;
     // long long int k[n+1][w+1];
