@@ -7,6 +7,6 @@ int main()
     cin.tie(0);cout.tie(0);
 
     // all the code goes here
-
+    
     return 0;
 }
