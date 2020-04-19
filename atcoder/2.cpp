@@ -29,7 +29,7 @@ int main()
         dp[0][1] = 1;
     if (grid[1][0] == '.')
         dp[1][0] = 1;
-    for (int i = 0; i < h; i++)
+    for (int i =     0; i < h; i++)
     {
         for (int j = 0; j < w; j++)
         {
