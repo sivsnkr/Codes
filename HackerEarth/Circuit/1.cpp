@@ -16,24 +16,70 @@ int main()
         cin >> n;
         string s;
         cin >> s;
-        multiset<char> st;
-        for (char a : s)
+        vector<int> a(n,0),b(n,0);
+        int su = 0;
+        for(int i = n-1; i >=0; i--)
         {
-            st.insert(a);
-        }
-        int c1 = st.count('A'), c2 = st.count('B');
-        int c3 = 0;
-        for (int j = 0; j < int(s.length()); j++)
-        {
-            if (s[j] != *st.begin())
-            {
-                c3++;
-            }
-            st.erase(st.begin());
+            if(s[i] == 'A')
+                su++;
+            a[i] = su;
         }
 
-        int mi = min({c1, c2, c3});
-        cout << mi << "\n";
+        int sum = 0;
+        int noofb = 0;
+        int in = 0;
+        for(int i = 0; i < n; i++)
+        {
+            // cout<<noofb<<"\n";
+            // if(s[i] > s[i+1])
+            // {
+                
+            //     if(noofb+1 > a[i])
+            //     {
+            //         s[i+1] = 'B';
+            //     }
+            //     else
+            //     {
+            //         // cout<<noofb<<" "<<a[i]<<"\n";
+            //         s[i] = 'A';
+            //         a[i]++;
+            //         if(i-1 >= 0)
+            //             a[i-1]++;
+            //         if(i-2 >= -1)
+            //             i-=2;
+            //     }
+            //     sum++;
+            // }
+            // if(s[i] == 'B')
+            //     noofb++;
+            // if(noofb+1 != a[i])
+            //     sum = max(sum,min(noofb+1,a[i]));
+            // if(s[i] == 'B')
+            //     noofb++;
+            if(s[i] == 'B')
+            {
+                if(noofb+1 < a[i])
+                {
+                    sum++;
+                    s[i] = 'A';
+                }
+                // sum = min(noofb+1,a[i]);
+                // sum = max(sum,min(noofb+1,a[i]));
+            }
+            else
+            {
+                if(noofb > a[i] || (noofb == a[i] && noofb!=0))
+                {
+                    sum++;
+                    s[i] = 'B';
+                    noofb++;
+                }
+                // sum = min(noofb,a[i]);
+                // sum = max(sum,min(noofb,a[i]));
+            }
+        }
+        cout<<s<<"\n";
+        cout<<sum<<"\n";
     }
 
     return 0;
