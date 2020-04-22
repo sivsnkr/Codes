@@ -1,17 +1,23 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 int main()
 {
-    set<pair<int,int>> test;
-    test.insert({1,2});
-    test.insert({2,3});
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
 
-    if(test.find({1,2}) != test.end())
+    // all the code goes here
+    int t;
+    cin >> t;
+    while (t--)
     {
-        test.erase({1,2});
-        cout<<"Erased"<<endl;
+        long long int n, k;
+        cin >> n >> k;
+        long long int li = (2 + 2 * k) % n;
+        if (li == 0)
+            li = n;
     }
 
-    cout<<test.size()<<endl;
+    return 0;
 }
