@@ -3,6 +3,21 @@ using namespace std;
 typedef long long ll;
 typedef long l;
 
+l mod = 1e9 + 7;
+void add_self(int &a, int b)
+{
+    long long int t = a;
+    t += b;
+    t %= mod;
+    a = t;
+}
+
+void sub_self(int &a, int b)
+{
+    a -= b;
+    if (a < 0)
+        a += mod;
+}
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -10,26 +25,38 @@ int main()
     cout.tie(0);
 
     // all the code goes here
-    int n;
-    cin >> n;
-    int a[n];
-    for (int i = 0; i < n; i++)
-        cin >> a[i];
+    int n, k;
+    cin >> n >> k;
 
-    ll dp[n][n];
+    int dp[k + 1];
+    memset(dp, 0, sizeof(dp));
+    dp[0] = 1;
 
-    for (int l = n - 1; l >= 0; l--)
+    for (int child = 0; child < n; child++)
     {
-        for (int r = l; r < n; r++)
+        int upto;
+        cin >> upto;
+        vector<int> f(k + 1, 0);
+        for (int used = k; used >= 0; used--)
         {
-            if (l == r)
-                dp[l][r] = a[l];
-            else
+            int l = used + 1;
+            int r = used + min(upto, k - used);
+            if (l <= r)
             {
-                dp[l][r] = max(a[l] - dp[l + 1][r], a[r] - dp[l][r - 1]);
+                add_self(f[l], dp[used]);
+                if (r + 1 <= k)
+                    sub_self(f[r + 1], dp[used]);
             }
         }
+
+        int psum = 0;
+        for (int i = 0; i <= k; i++)
+        {
+            add_self(psum, f[i]);
+            add_self(dp[i], psum);
+        }
     }
-    cout << dp[0][n - 1] << "\n";
+
+    cout << dp[k] << "\n";
     return 0;
 }
