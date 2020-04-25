@@ -1,26 +1,51 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
+typedef long long ll;
+typedef long l;
 
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);cout.tie(NULL);
-    int n,k;cin>>n>>k;
-    int con[n+1];
-    iota(con,con+n+1,0);
+    cin.tie(0);cout.tie(0);
 
-    for(int i = 0; i < n; i++)
+    // all the code goes here
+    int n;cin>>n;ll k;cin>>k;
+    n--;
+
+    ll le = 1;
+    unordered_map<ll,int> s;
+    int it  = 2;
+    while(n-- && le < k)
     {
-        int c;cin>>c;
-        vector<int> te(c);
-        for(int j = 0; j < c; j++)
+        s[le+1] = it;
+        it++;
+        le = 2*le+1;
+    }
+
+    while(true)
+    {
+        ll m = 0;
+        for(pair<ll,int> a : s)
         {
-            cin>>te[i];
+            if(k-a.first >= 0)
+            {
+                m = max(m,a.first);
+            }
         }
-        for(int j = 0; j < c; j++)
+
+        if(m == k)
         {
-            con[te[j]] = con[te[j+1]];
+            cout<<s[m]<<"\n";
+            return 0;
+        }
+        k -= m;
+        if(k < 0 || m == 0)
+        {
+            cout<<1<<"\n";
+            return 0;
         }
     }
+    
+
     return 0;
 }
