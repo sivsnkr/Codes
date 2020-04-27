@@ -2,6 +2,7 @@
 using namespace std;
 typedef long long ll;
 typedef long l;
+const char nl = '\n';
 
 int main()
 {

@@ -1,31 +1,33 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-typedef long l;
-
+ 
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-
+    cin.tie(0);cout.tie(0);
+ 
     // all the code goes here
-    int n, k;
-    cin >> n >> k;
-    int a[n];
-    for (int i = 0; i < n; i++)
+    int n,k;cin>>n>>k;
+    vector<int> a(n);
+    for(int &c : a)
     {
-        cin >> a[i];
+        cin>>c;
     }
-    bool dp[k + 1];
-    for (int i = 0; i <= k; i++)
+ 
+    bool arr[k+1];
+    memset(arr,0,sizeof(arr));
+ 
+    for(int i = 0; i <= k; i++)
     {
-        for (int j : a)
+        for(int c : a)
         {
-            if (j <= k && !dp[k - j])
-                dp[i] = true;
+            if(i >= c && !arr[i-c])
+                arr[i] = true;
         }
     }
-    puts(dp[k] ? "First" : "Second");
+ 
+    arr[k]?cout<<"First":cout<<"Second";
+    cout<<"\n";
+ 
     return 0;
 }

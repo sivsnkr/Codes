@@ -2,6 +2,7 @@
 using namespace std;
 typedef long long ll;
 typedef long l;
+const char nl = '\n';
 
 int main()
 {
@@ -9,17 +10,24 @@ int main()
     cin.tie(0);cout.tie(0);
 
     // all the code goes here
-    int n;cin>>n;
-    if(n == 1)
+    int t;cin>>t;
+    while (t--)
     {
-        cout<<-1<<"\n";
-        return 0;
+        int n;cin>>n;
+        int k = 2;
+        int r = pow(2,k)-1;
+        while(r < n+2)
+        {
+            if(n%r == 0)
+            {
+                // cout<<k<<nl;
+                cout<<n/r<<nl;
+                break;
+            }
+            k++;
+            r = pow(2,k)-1;
+        }
     }
-    if(n*(n+1) > 1000000000)
-    {
-        cout<<-1<<"\n";
-        return 0;
-    }
-    cout<<n<<" "<<n+1<<" "<<n*(n+1)<<"\n";
+    
     return 0;
 }
