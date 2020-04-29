@@ -11,6 +11,13 @@ int main()
     cout.tie(0);
 
     // all the code goes here
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        vector<string> s;
+
+    }
 
     return 0;
 }
