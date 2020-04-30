@@ -12,11 +12,19 @@ int main()
 
     // all the code goes here
     int t;
-    scanf("%d",&t);
-    while(t--)
+    scanf("%d", &t);
+    while (t--)
     {
         vector<string> s;
-
+        while (true)
+        {
+            string temp;
+            cin >> temp;
+            if (temp == "\n")
+                break;
+            s.push_back(temp);
+        }
+        cout << s[32] << nl;
     }
 
     return 0;
