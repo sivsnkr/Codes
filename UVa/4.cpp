@@ -11,9 +11,18 @@ int main()
     cout.tie(0);
 
     // all the code goes here
-
-    int mask = 8;
-    printf("%d\n", mask | (1 << 3) - 1);
+    int t;
+    scanf("%d", &t);
+    while(t--)
+    {
+        string s;
+        cin>>s;
+        sort(s.begin(),s.end());
+        do{
+            cout<<s<<nl;
+        }while(next_permutation(s.begin(),s.end()));
+        printf("\n");
+    }
 
     return 0;
 }
