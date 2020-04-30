@@ -11,11 +11,18 @@ int main()
     cout.tie(0);
 
     // all the code goes here
-    vector<int> v = { 20,30,30,30,40 };
-    auto it = lower_bound(v.begin(),v.end(),30);
-    auto it1 = upper_bound(v.begin(),v.end(),30);
-
-    printf("Number of 30 is %d\n",int(it1-it));
+    int t;
+    scanf("%d", &t);
+    while(t--)
+    {
+        string s;
+        cin>>s;
+        sort(s.begin(),s.end());
+        do{
+            cout<<s<<nl;
+        }while(next_permutation(s.begin(),s.end()));
+        printf("\n");
+    }
 
     return 0;
 }

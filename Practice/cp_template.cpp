@@ -3,7 +3,6 @@ using namespace std;
 typedef long long ll;
 typedef long l;
 const char nl = '\n';
-typedef unsigned u;
 
 int main()
 {
