@@ -1,8 +1,10 @@
-# include <assert.h> 
+#include<stdio.h>
   
 int main() 
 { 
-    int x = 7; 
-    assert (x==5); 
-    return 0; 
+    int s;
+    while(scanf("%d\n",&s),true)
+    {
+        printf("fsdfsf\n");
+    }
 }
