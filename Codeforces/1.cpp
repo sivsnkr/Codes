@@ -10,24 +10,23 @@ int main()
     cin.tie(0);cout.tie(0);
 
     // all the code goes here
-    int t;cin>>t;
-    while (t--)
+    int t;
+    scanf("%d",&t);
+    while(t--)
     {
-        int n;cin>>n;
-        int k = 2;
-        int r = pow(2,k)-1;
-        while(r < n+2)
+        int n,a,b,c,d;
+        scanf("%d%d%d%d%d",&n,&a,&b,&c,&d);
+        int maxw = (a+b)*n;
+        int minw = (a-b)*n;
+        if((maxw <= (c+d)&&maxw>=(c-d))|| (minw <= (c+d) && minw >=(c-d))||(c+d >= minw && c+d <= maxw)||((c-d)>=minw&&c-d<=maxw))
         {
-            if(n%r == 0)
-            {
-                // cout<<k<<nl;
-                cout<<n/r<<nl;
-                break;
-            }
-            k++;
-            r = pow(2,k)-1;
+            puts("Yes");
+        }
+        else
+        {
+            puts("No");
         }
     }
-    
+
     return 0;
 }
