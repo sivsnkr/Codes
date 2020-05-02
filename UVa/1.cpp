@@ -13,16 +13,16 @@ int main()
     // all the code goes here
     int t;
     scanf("%d",&t);
+
     while(t--)
     {
-        int a,b;
-        scanf("%d%d",&a,&b);
-        int x = float(a+b)/2;
-        int y = a-x;
-        if(x > 0 && y > 0)
-            printf("%d %d\n",x,y);
-        else
-            puts("impossible");
+        int n,k;
+        scanf("%d%d\n",&n,&k);
+        int c = 0;
+        while(c <=n&&c<=k)
+        {
+            
+        }
     }
     return 0;
 }
