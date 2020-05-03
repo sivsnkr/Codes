@@ -3,7 +3,29 @@ using namespace std;
 typedef long long ll;
 typedef long l;
 const char nl = '\n';
-
+ll give_new_range(ll x, ll y, ll l, ll r)
+{
+    ll m = max(x, y);
+    int nofbits = 0;
+    ll re;
+    while (m >= 2)
+    {
+        re = m % 2;
+        m /= 2;
+        nofbits++;
+    }
+    if (re > 0)
+        nofbits++;
+    printf("bits %d\n", nofbits);
+    ll z = 0;
+    while (z <= r && nofbits > 0)
+    {
+        z |= (1 << nofbits - 1);
+        nofbits--;
+    }
+    printf("z %lld\n", z);
+    return z;
+}
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -12,19 +34,22 @@ int main()
 
     // all the code goes here
     int t;
-    scanf("%d",&t);
-    while(t > 0)
+    scanf("%d", &t);
+    while (t > 0)
     {
-        ll x,y,l,r;
-        scanf("%lld%lld%lld%lld",&x,&y,&l,&r);
-        ll num = (ll(1)<<62)-ll(1);
-        for(int i = 62; i >= 0; i--)
-        {
-            if(num>=l&&num<=r)
-                break;
-            num &= ~(ll(1)<<i);
-        }
-        printf("%lld\n",num);
+        ll x, y, l, r;
+        scanf("%lld%lld%lld%lld", &x, &y, &l, &r);
+        ll z = give_new_range(x, y, l, r);
+        // ll m = 0, z = l;
+        // for (int i = min(r, range.second); i >= max(l, range.first); i--)
+        // {
+        //     if ((x & i) * (y & i) >= m)
+        //     {
+        //         m = (x & i) * (y & i);
+        //         z = i;
+        //     }
+        // }
+        printf("%lld\n", z);
         t--;
     }
     return 0;
