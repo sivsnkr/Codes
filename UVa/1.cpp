@@ -11,18 +11,14 @@ int main()
     cout.tie(0);
 
     // all the code goes here
-    int t;
-    scanf("%d",&t);
+    int tc,n,k;
 
-    while(t--)
+	scanf("%d",&tc);
+
+	while(tc--)
     {
-        int n,k;
-        scanf("%d%d\n",&n,&k);
-        int c = 0;
-        while(c <=n&&c<=k)
-        {
-            
-        }
-    }
+		scanf("%d %d",&n,&k);
+		printf("%d\n", k^(k>>1));
+	}
     return 0;
 }
