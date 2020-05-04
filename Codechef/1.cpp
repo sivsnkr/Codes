@@ -3,29 +3,28 @@ using namespace std;
 typedef long long ll;
 typedef long l;
 const char nl = '\n';
+
 ll give_new_range(ll x, ll y, ll l, ll r)
 {
-    ll m = max(x, y);
-    int nofbits = 0;
-    ll re;
-    while (m >= 2)
+    ll o = x|y;
+    int count = 0;
+    ll zc = o;
+    while(zc != 0)
     {
-        re = m % 2;
-        m /= 2;
-        nofbits++;
+        zc = zc>>1;
+        count++;
     }
-    if (re > 0)
-        nofbits++;
-    printf("bits %d\n", nofbits);
-    ll z = 0;
-    while (z <= r && nofbits > 0)
+
+    while(count > 0)
     {
-        z |= (1 << nofbits - 1);
-        nofbits--;
+        if(o<=r)
+            break;
+        o &=~(ll(1)<<(count-1));
+        count--;
     }
-    printf("z %lld\n", z);
-    return z;
+    return o;
 }
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -40,15 +39,6 @@ int main()
         ll x, y, l, r;
         scanf("%lld%lld%lld%lld", &x, &y, &l, &r);
         ll z = give_new_range(x, y, l, r);
-        // ll m = 0, z = l;
-        // for (int i = min(r, range.second); i >= max(l, range.first); i--)
-        // {
-        //     if ((x & i) * (y & i) >= m)
-        //     {
-        //         m = (x & i) * (y & i);
-        //         z = i;
-        //     }
-        // }
         printf("%lld\n", z);
         t--;
     }
