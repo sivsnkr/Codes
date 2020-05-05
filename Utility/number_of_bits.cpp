@@ -15,6 +15,11 @@ int solve(ll n)
     return count;
 }
 
+int solveanother(ll n)
+{
+    return floor(log2(n))+1;
+}
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -26,5 +31,6 @@ int main()
     ll n = 16;
     int bits = solve(n);
     printf("%d\n",bits);
+    printf("another solution : %d\n",solveanother(n));
     return 0;
 }
