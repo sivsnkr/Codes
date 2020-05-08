@@ -4,23 +4,6 @@ typedef long long ll;
 typedef long l;
 const char nl = '\n';
 
-int nbits(ll n)
-{
-    int count = 0;
-    while(n > 0)
-    {
-        count++;
-        n = n>>1;
-    }
-    return count;
-}
-
-ll fg(int k)
-{
-    ll re = k^(k>>1);
-    return re;
-}
-
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -28,39 +11,30 @@ int main()
     cout.tie(0);
 
     // all the code goes here
-    // given kth gray code, find the k
-
-    ll kth_gray = 13;
-    int bits = nbits(kth_gray);
-    ll k = 0;
-
-    for(int i = bits; i >0; i--)
+    vector<pair<string,string>>lib;
+    string s;
+    getline(cin,s);
+    while(s != "END")
     {
-        if(i == bits)
+        pair<string,string> st;
+        st.first = s.substr(1,find(s.begin()+1,s.end(),'"')-s.begin()-1);
+        s.erase(0,st.first.length()+1);
+        st.second = s.substr(4,s.size()-5);
+        lib.push_back(st);
+        getline(cin,s);
+    }
+    sort(lib.begin(),lib.end(),[](pair<string,string> a, pair<string,string> b)->bool{
+        if(b.second > a.second)
         {
-            if(kth_gray&(ll(1)<<(i-1)))
-            {
-                k|=(ll(1)<<(bits-1));
-            }
+            return true;
         }
-        else
-        {
-            if(!((kth_gray&(ll(1)<<(i-1)))&&(k&(ll(1)<<i))))
-            {
-                k|=(ll(1)<<(i-1));
-            }
-        }    
-    }
-    printf("%lld\n",k);
-    ll gcode = fg(k);
-    if(gcode == kth_gray)
-    {
-        puts("True");
-    }
-    else
-    {
-        puts("False");
-    }
+        else if(b.second == a.second)
+            return b.first > a.first;
+        return false;
+    });
+
+    
+
     
     return 0;
 }
