@@ -6,57 +6,79 @@ const char nl = '\n';
 
 ll give_new_range(ll x, ll y, ll l, ll r)
 {
+    if(min(x,y) == 0)
+        return l;
     ll o = x|y;
-    int count1 = 0;
-    ll rc = r;
-    while(rc!= 0)
-    {
-        count1++;
-        rc = rc>>1;
-    }
+    ll m = 0;
     ll z = 0;
-    ll m = -1;
+    ll zc = z;
+    ll zcc;
+    int c = 0;
+    ll rc = r;
     ll res = z;
-    for(int i = count1-1; i >=0; i--)
+    o|=l;
+    int i = 0;
+    while(i < 63)
     {
         if(o&(ll(1)<<i))
         {
-            ll zc = z;
-            zc |= (ll(1)<<i);
-            if(zc >= l && zc <= r)
+            z = o&(~(ll(1)<<i));
+            if(z < l)
+                break;
+            if((x&z)*(y&z) == x*y)
             {
-                z = zc;
-                if((x&z)*(y&z) >= m)
-                {
-                    m = (x&z)*(y&z);
-                    res = z;
-                }
-            }
-            else if(zc > r)
-            {
-                int c = 0;
-                ll zcc = zc;
-                while(zcc != 0)
-                {
-                    c++;
-                    zcc = zcc>>1;
-                }
-                zc = zc&((ll(1)<<(c-1))-1);
-                if(zc >= l && zc <= r)
-                {
-                    z = zc;
-                    if((x&z)*(y&z) >= m)
-                    {
-                        m = (x&z)*(y&z);
-                        res = z;
-                    }
-                }
+                o = z;
             }
         }
+        i++;
     }
-    if(m == 0)
+
+    for(int i = 62; i >= 0; i--)
+    {
+        if((r&(ll(1)<<i)) == 0)
+        {
+            o = o&((ll(1)<<i)-1);
+        }else
+        {
+            break;
+        }
+    }
+    z = o;
+    while(z > r)
+    {
+        zc = z;
+        for(int i = 0; i < 63; i++)
+        {
+            if(z&(ll(1)<<i))
+            {
+                zcc = z;
+                z = z&(~(ll(1)<<i));
+                if((x&z)*(y&z) == 0)
+                {
+                    z = zcc;
+                }
+                if(z<=r)
+                    break;
+            }
+        }
+        m = (x&z)*(y&z);
+        c = 0;
+        zcc = zc;
+        while(zc != 0)
+        {
+            c++;
+            zc = zc>>1;
+        }
+
+        zcc = zcc&((ll(1)<<(c-1))-1);
+        if((x&zcc)*(y&zcc) >= m || z > r)
+        {
+            z = zcc;
+        }
+    }
+    if((x&z)*(y&z) == 0)
         return l;
-    return res;
+    return z;
 }
 
 int main()
