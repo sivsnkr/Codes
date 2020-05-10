@@ -11,30 +11,40 @@ int main()
     cout.tie(0);
 
     // all the code goes here
-    vector<pair<string,string>>lib;
-    string s;
-    getline(cin,s);
-    while(s != "END")
+    int t;
+    scanf("%d",&t);
+    int j = 0;
+    while(t > 0)
     {
-        pair<string,string> st;
-        st.first = s.substr(1,find(s.begin()+1,s.end(),'"')-s.begin()-1);
-        s.erase(0,st.first.length()+1);
-        st.second = s.substr(4,s.size()-5);
-        lib.push_back(st);
-        getline(cin,s);
-    }
-    sort(lib.begin(),lib.end(),[](pair<string,string> a, pair<string,string> b)->bool{
-        if(b.second > a.second)
+        int n;
+        scanf("%d",&n);
+        vector<int> p(n),q(n);
+        for(int i = 0; i < n; i++)
+            scanf("%d",&p[i]);
+        for(int i = 0; i < n; i++)
+            scanf("%d",&q[i]);
+        ll sum = 0,msum = 0;
+        int index = 0;
+        for(int i = 0; i < n; i++)
         {
-            return true;
+            sum+=(p[i]-q[i]);
+            msum = min(msum,sum);
         }
-        else if(b.second == a.second)
-            return b.first > a.first;
-        return false;
-    });
+        printf("Case %d:",j+1);
+        if(sum >= 0)
+        {
+            while(msum < 0 && index < n)
+                msum-=p[index]-q[index++];
+            printf(" Possible from station %d\n",index+1);
+        }
+        else
+        {
+            puts(" Not possible");
+        }
+        j++;
+        
+        t--;
+    }
 
-    
-
-    
     return 0;
 }
