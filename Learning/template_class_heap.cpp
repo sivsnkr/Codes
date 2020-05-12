@@ -9,9 +9,9 @@ class MinHeap
 
 public:
     MinHeap(int capacity);
-    int get_parent(int i) { return (i - 1) / 2; }
-    int get_l_child(int i) { return 2 * i + 1; }
-    int get_r_child(int i) { return 2 * i + 2; }
+    int get_parent(int i) { return (i - 1)>>1; }
+    int get_l_child(int i) { return (i<<1) + 1; }
+    int get_r_child(int i) { return (i<<1) + 2; }
     T get_min();
     T extract_min();
     void insert(int value);

@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-typedef long l;
+typedef long long LL;
+typedef long L;
 const char nl = '\n';
 
 int main()

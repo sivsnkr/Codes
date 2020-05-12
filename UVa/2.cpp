@@ -11,8 +11,6 @@ int main()
     cout.tie(0);
 
     // all the code goes here
-    int m = 0;
-    m-=2-3;
-    printf("m %d\n",m);
+
     return 0;
 }

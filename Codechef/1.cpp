@@ -4,80 +4,60 @@ typedef long long ll;
 typedef long l;
 const char nl = '\n';
 
-ll give_new_range(ll x, ll y, ll l, ll r)
+ll solve(ll x, ll y, ll L, ll r)
 {
-    if(min(x,y) == 0)
-        return l;
+    // find common sequence
+    int k = 42;
+    while((r&(ll(1)<<k))==(L&(ll(1)<<k)))
+    {
+        k--;
+    }
     ll o = x|y;
-    ll m = 0;
-    ll z = 0;
-    ll zc = z;
-    ll zcc;
-    int c = 0;
-    ll rc = r;
-    ll res = z;
-    o|=l;
-    int i = 0;
-    while(i < 63)
+    ll res = 0;
+    ll z = LLONG_MAX;
+    for(int m = k-1; m >= 0; m--)
     {
-        if(o&(ll(1)<<i))
+        if(r&(ll(1)<<m))
         {
-            z = o&(~(ll(1)<<i));
-            if(z < l)
-                break;
-            if((x&z)*(y&z) == x*y)
+            ll temp = r&(~(ll(1)<<m));
+            for(int j = m-1; j >= 0; j--)
             {
-                o = z;
-            }
-        }
-        i++;
-    }
-
-    for(int i = 62; i >= 0; i--)
-    {
-        if((r&(ll(1)<<i)) == 0)
-        {
-            o = o&((ll(1)<<i)-1);
-        }else
-        {
-            break;
-        }
-    }
-    z = o;
-    while(z > r)
-    {
-        zc = z;
-        for(int i = 0; i < 63; i++)
-        {
-            if(z&(ll(1)<<i))
-            {
-                zcc = z;
-                z = z&(~(ll(1)<<i));
-                if((x&z)*(y&z) == 0)
+                if(o&(ll(1)<<j))
                 {
-                    z = zcc;
+                    temp|=ll(1<<j);
                 }
-                if(z<=r)
-                    break;
+            }
+            if((x&temp)*(y&temp) >= res)
+            {
+                res = (x&temp)*(y&temp);
+                z = min(z,temp);
             }
         }
-        m = (x&z)*(y&z);
-        c = 0;
-        zcc = zc;
-        while(zc != 0)
-        {
-            c++;
-            zc = zc>>1;
-        }
+    }
 
-        zcc = zcc&((ll(1)<<(c-1))-1);
-        if((x&zcc)*(y&zcc) >= m || z > r)
+    for(int m = k-1; m >= 0; m--)
+    {
+        if(!(L&(ll(1)<<m)))
         {
-            z = zcc;
+            ll temp = (ll(1)<<m);
+            for(int j = m-1; j >= 0; j--)
+            {
+                if(o&(ll(1)<<j))
+                {
+                    temp|=(ll(1)<<j);
+                }
+            }
+
+            if((x&temp)*(y&temp) >= res)
+            {
+                res = (x&temp)*(y&temp);
+                z = min(z,temp);
+            }
         }
     }
-    if((x&z)*(y&z) == 0)
-        return l;
+
+    if(z == LLONG_MAX)
+        return L;
     return z;
 }
 
@@ -89,13 +69,13 @@ int main()
 
     // all the code goes here
     int t;
-    scanf("%d", &t);
-    while (t > 0)
+    scanf("%d",&t);
+    while(t > 0)
     {
-        ll x, y, l, r;
-        scanf("%lld%lld%lld%lld", &x, &y, &l, &r);
-        ll z = give_new_range(x, y, l, r);
-        printf("%lld\n", z);
+        ll x,y,l,r;
+        scanf("%lld%lld%lld%lld",&x,&y,&l,&r);
+        ll res = solve(x,y,l,r);
+        printf("%lld\n",res);
         t--;
     }
     return 0;

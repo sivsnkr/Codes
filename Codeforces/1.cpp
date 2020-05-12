@@ -12,20 +12,26 @@ int main()
     // all the code goes here
     int t;
     scanf("%d",&t);
-    while(t--)
+    while(t > 0)
     {
-        int n,a,b,c,d;
-        scanf("%d%d%d%d%d",&n,&a,&b,&c,&d);
-        int maxw = (a+b)*n;
-        int minw = (a-b)*n;
-        if((maxw <= (c+d)&&maxw>=(c-d))|| (minw <= (c+d) && minw >=(c-d))||(c+d >= minw && c+d <= maxw)||((c-d)>=minw&&c-d<=maxw))
+        int n,m;
+        scanf("%d%d",&n,&m);
+        if(n == 1 || m == 1)
         {
-            puts("Yes");
+            puts("YES");
         }
         else
         {
-            puts("No");
+            if((m == 2 && n == 2))
+            {
+                puts("YES");
+            }else
+            {
+                puts("NO");
+            }
         }
+        t--;
+        
     }
 
     return 0;
