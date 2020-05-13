@@ -6,58 +6,78 @@ const char nl = '\n';
 
 ll solve(ll x, ll y, ll L, ll r)
 {
-    // find common sequence
-    int k = 42;
-    while((r&(ll(1)<<k))==(L&(ll(1)<<k)))
-    {
-        k--;
-    }
-    ll o = x|y;
     ll res = 0;
-    ll z = LLONG_MAX;
-    for(int m = k-1; m >= 0; m--)
+    ll z = L;
+    ll o = x|y;
+    int k = 42;
+    ll temp = 0;
+    for(int i = k; i >= 0; i--)
     {
-        if(r&(ll(1)<<m))
+        if((L&(ll(1)<<i)) != (r&(ll(1)<<i)))
         {
-            ll temp = r&(~(ll(1)<<m));
-            for(int j = m-1; j >= 0; j--)
+            k = i;
+            break;
+        }
+        temp|=(L&(ll(1)<<i));
+    }
+
+    for(int m = k; m >= 0; m--)
+    {
+        ll ta = temp;
+        for(int j = k; j >= m+1; j--)
+        {
+            if(r&(ll(1)<<j))
+                ta|=(ll(1)<<j);
+        }
+
+        for(int j = m-1; j >=0; j--)
+        {
+            if(o&(ll(1)<<j))
+                ta|=(ll(1)<<j);
+        }
+        if(ta >= L && ta <= r)
+        {
+            if((x&ta)*(y&ta) > res)
             {
-                if(o&(ll(1)<<j))
-                {
-                    temp|=ll(1<<j);
-                }
+                res = (x&ta)*(y&ta);
+                z = ta;
             }
-            if((x&temp)*(y&temp) >= res)
-            {
-                res = (x&temp)*(y&temp);
-                z = min(z,temp);
-            }
+            else if((x&ta)*(y&ta) == res)
+                z = min(z,ta);
         }
     }
 
-    for(int m = k-1; m >= 0; m--)
+    for(int m = k; m >= 0; m--)
     {
-        if(!(L&(ll(1)<<m)))
+        ll ta = temp;
+        for(int j = k; j >= m+1; j--)
         {
-            ll temp = (ll(1)<<m);
-            for(int j = m-1; j >= 0; j--)
-            {
-                if(o&(ll(1)<<j))
-                {
-                    temp|=(ll(1)<<j);
-                }
-            }
+            if(L&(ll(1)<<j))
+                ta|=(ll(1)<<j);
+        }
 
-            if((x&temp)*(y&temp) >= res)
+        ta|=(ll(1)<<m);
+        for(int j = m-1; j >=0; j--)
+        {
+            if(o&(ll(1)<<j))
+                ta|=(ll(1)<<j);
+        }
+
+        if(ta >= L && ta <= r)
+        {
+            if((x&ta)*(y&ta) > res)
             {
-                res = (x&temp)*(y&temp);
-                z = min(z,temp);
+                res = (x&ta)*(y&ta);
+                z = ta;
             }
+            else if((x&ta)*(y&ta) == res)
+                z = min(z,ta);
         }
     }
 
-    if(z == LLONG_MAX)
-        return L;
+    if((x&r)*(y&r) > res)
+        return r;
+
     return z;
 }
 
