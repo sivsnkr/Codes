@@ -11,9 +11,6 @@ int main()
     cout.tie(0);
 
     // all the code goes here
-
-    int mask = 8;
-    printf("%d\n", mask | (1 << 3) - 1);
-
+    
     return 0;
 }
