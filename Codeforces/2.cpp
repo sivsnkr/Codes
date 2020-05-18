@@ -1,45 +1,38 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-typedef long l;
-const char nl = '\n';
-
-ll isposs(int tc)
-{
-    ll v = 24*ll(tc);
-    v = sqrt(1+v)-1;
-    v/=6;
-    return v;
-}
+typedef long long LL;
+typedef long L;
+const char NL = '\n';
+#define f(i,a,b) for(int i=a;i<b;i++)
+#define fr(i,a,b) for(int i=a;i>=b;i--)
+#define test int t; cin>>t; while(t--)
+#define mod 1000000007
+#define all(a) a.begin(),a.end()
 
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(0);cout.tie(0);
-
+    cin.tie(0);
+    cout.tie(0);
     // all the code goes here
-    int t;
-    scanf("%d",&t);
-    while(t--)
+    int n;
+    scanf("%d",&n);
+    vector<int> pies(n);
+    for(int &it : pies)scanf("%d",&it);
+    vector<int>total(n+1);
+    vector<int>score(n+1);
+    score[n] = pies[n-1];
+    int sum = 0;
+    for(int i = n; i > 0; i--)
     {
-        int tc;
-        scanf("%d",&tc);
-        int c = 0;
-        while(tc > 0)
-        {   
-            ll v = isposs(tc);
-            if(v > 0)
-            {
-                tc -= ((v*(6+(v-1)*3))/2-v);
-                if(tc >= 0)
-                    c++;
-            }
-            else
-            {
-                tc = 0;
-            }
-        }
-        printf("%d\n",c);
+        sum+=pies[i-1];
+        total[i] = sum;
     }
+
+    for(int i = n-1; i > 0; i--)
+    {
+        score[i] = max(pies[i-1]+total[i+1]-score[i+1],score[i+1]);
+    }
+    printf("%d %d\n",total[1]-score[1],score[1]);
     return 0;
 }

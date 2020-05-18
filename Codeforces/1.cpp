@@ -1,63 +1,48 @@
-#include<iostream>
-#include<vector>
- 
+#include <bits/stdc++.h>
 using namespace std;
- 
-const int N = 2e5 + 10;
- 
-vector <int> v1[N],v2[N];
- 
-int vis1[N],vis2[N];
- 
-bool dfs1(int x)
+typedef long long LL;
+typedef long L;
+const char NL = '\n';
+#define f(i,a,b) for(int i=a;i<b;i++)
+#define fr(i,a,b) for(int i=a;i>=b;i--)
+#define test int t; cin>>t; while(t--)
+#define mod 1000000007
+#define all(a) a.begin(),a.end()
+
+void add_self(int &a, int b)
 {
-	vis1[x] = -1;
-	for(auto a : v1[x])
-	{
-		if(vis1[a] < 0) return 0;
-		else if(!vis1[a]&&!dfs1(a)) return 0;
-	}
-	vis1[x] = 1;
-	return 1;
+	a+=b;
+	a%=mod;
 }
- 
-bool dfs2(int x)
-{
-	vis2[x] = -1;
-	for(auto a : v2[x])
-	{
-		if(vis2[a] < 0) return 0;
-		else if(!vis2[a]&&!dfs2(a)) return 0;
-	}
-	vis2[x] = 1;
-	return 1;
-}
- 
+
 int main()
 {
-	int n,m;
-	cin>>n>>m;
-	
-	for(int i=0; i<m; i++)
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    // all the code goes here
+	int n;
+	scanf("%d",&n);
+	vector<vector<int>> places(n,vector<int>(2));
+	f(i,0,n)
 	{
-		int a,b;
-		cin>>a>>b;
-		v1[a].push_back(b);
-		v2[b].push_back(a);
+		scanf("%d%d",&places[i][0],&places[i][1]);
 	}
-	
-	string ans;
-	int cnt=0;
-	for(int i=1; i<=n; i++)
+	vector<vector<int>> dp(n,vector<int>(2));
+	dp[n-1][0] = dp[n-1][1] = 1;
+	fr(i,n-2,0)
 	{
-		if(!vis1[i]&&!vis2[i]) ans += 'A',cnt++;
-		else ans += 'E';
-		if(!dfs1(i) || !dfs2(i))
+		f(j,0,2)
 		{
-			puts("-1");
-			return 0;
+			f(k,0,2)
+			{
+				if(places[i][j] != places[i+1][k])
+					add_self(dp[i][j],dp[i+1][k]);
+			}
+			if(places[i+1][0] == places[i+1][1])
+				dp[i][j]/=2;
 		}
 	}
-	cout<<cnt<<endl<<ans<<endl;
-	return 0;
+	printf("%d\n",dp[0][0]+dp[0][1]);
+    return 0;
 }
