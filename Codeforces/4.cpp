@@ -5,46 +5,34 @@ typedef long L;
 const char NL = '\n';
 #define f(i,a,b) for(int i=a;i<b;i++)
 #define fr(i,a,b) for(int i=a;i>=b;i--)
-#define test int t; scanf("%d",&t); while(t--)
+#define testf int t; scanf("%d",&t); while(t--)
+#define test int t; cin>>t; while(t--)
 #define mod 1000000007
 #define all(a) a.begin(),a.end()
 
+const int mx = 1e6+77;
+LL a[mx];
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
     // all the code goes here
-    test
+    int a1,b,c,d;
+    cin>>a1>>b>>c>>d;
+    for(int i = a1; i <= b; i++)
     {
-        int n;
-        scanf("%d",&n);
-        // int freq[200000+1] = {0};
-        vector<int> ele(n);
-        f(i,0,n)
-        {
-            int t;
-            scanf("%d",&t);
-            // freq[t]++;
-            ele[i] = t;
-        }
-        LL sum = 0;
-        int c = 0;
-        // f(i,1,2*1e5+1)
-        // {
-        //     sum+=freq[i]/i;
-        // }
-        sort(all(ele));
-        f(i,0,n)
-        {
-            c++;
-            if(c >= ele[i])
-            {
-                sum++;
-                c = 0;
-            }
-        }
-        printf("%lld\n",sum);
+        a[i+b]++;
+        a[i+c+1]--;
     }
+    for(int i = 1; i < mx; i++)
+        a[i] += a[i-1];
+    for(int i = 1; i < mx; i++)
+        a[i] += a[i-1];
+
+    LL ans = 0;
+    f(i,c,d+1)
+        ans+=(a[mx-1]-a[i]);
+    cout<<ans<<endl;
     return 0;
 }
