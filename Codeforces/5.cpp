@@ -1,73 +1,40 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-typedef long l;
-const char nl = '\n';
+typedef long long LL;
+typedef long L;
+const char NL = '\n';
+#define f(i,a,b) for(int i=a;i<b;i++)
+#define fr(i,a,b) for(int i=a;i>=b;i--)
+#define test int t; scanf("%d",&t); while(t--)
+#define mod 1000000007
+#define all(a) a.begin(),a.end()
 
-vector<unordered_set<int>> g;
-void dfs(int src,vector<int> &d)
+bool isok(int i, int j, int c, int d)
 {
-    d[src] = 0;
-    queue<int> q;
-    q.push(src);
-    while(!q.empty())
-    {
-        int s = q.front();
-        for(int i : g[s])
-        {
-            if(d[i] == INT_MAX)
-            {
-                d[i] = d[s]+1;
-                q.push(i);
-            }
-        }
-        q.pop();
-    }
+    int sum = i+j;
+    if(sum >= c && sum <= d)
+        return true;
+    return false;
 }
+
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(0);cout.tie(0);
-
+    cin.tie(0);
+    cout.tie(0);
     // all the code goes here
-    int t;
-    scanf("%d", &t);
-    while(t--)
+    int a,b,c,d;
+    scanf("%d%d%d%d",&a,&b,&c,&d);
+    LL sum = 0;
+    f(i,a,b+1)
     {
-        int n,m,a,b,c;
-        scanf("%d%d%d%d%d", &n,&m,&a,&b,&c);
-
-        int prices[m];
-        for(int i = 0; i < m; i++)scanf("%d", &prices[i]);
-        g = vector<unordered_set<int>>(n);
-        for(int i = 0; i < m; i++)
+        f(j,b,c+1)
         {
-            int src,dest;
-            scanf("%d%d", &src,&dest);
-            src--,dest--;
-            g[src].insert(dest);
-            g[dest].insert(src);
+            if(i+j > 5*100000)
+                break;
+            sum+=isok(i,j,c,d);
         }
-
-        vector<int>da(n,INT_MAX),db(n,INT_MAX),dc(n,INT_MAX);
-        dfs(a-1,da);
-        dfs(b-1,db);
-        dfs(c-1,dc);
-
-        sort(prices,prices+m);
-        vector<long long> pref(m + 1);
-		for (int i = 0; i < m; ++i) {
-			pref[i + 1] = pref[i] + prices[i];
-		}
-
-        ll mp = numeric_limits<ll>::max();
-        for(int i = 0; i < n; i++)
-        {
-            if(da[i]+db[i]+dc[i]<=m)
-                mp = min(mp,ll(pref[db[i]]+pref[da[i]+db[i]+dc[i]]));
-        }
-        printf("%lld\n",mp);
     }
-
+    printf("%lld\n",sum);
     return 0;
 }
