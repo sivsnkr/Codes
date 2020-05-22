@@ -8,6 +8,7 @@ const char NL = '\n';
 #define test int t; scanf("%d",&t); while(t--)
 #define mod 1000000007
 #define all(a) a.begin(),a.end()
+#define size(container) (int)container.size()
 
 int main()
 {
@@ -15,6 +16,6 @@ int main()
     cin.tie(0);
     cout.tie(0);
     // all the code goes here
-
+    
     return 0;
 }
