@@ -15,7 +15,6 @@ int main()
     cin.tie(0);
     cout.tie(0);
     // all the code goes here
-    string s = "9223372036854775807";
-    printf("len %d\n",int(s.length()));
+
     return 0;
 }
