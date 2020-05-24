@@ -5,15 +5,11 @@ typedef long L;
 const char NL = '\n';
 #define f(i,a,b) for(int i=a;i<b;i++)
 #define fr(i,a,b) for(int i=a;i>=b;i--)
+#define testf int t; scanf("%d",&t); while(t--)
 #define test int t; cin>>t; while(t--)
 #define mod 1000000007
 #define all(a) a.begin(),a.end()
-
-void add_self(int &a, int b)
-{
-	a+=b;
-	a%=mod;
-}
+#define size(container) (int)container.size()
 
 int main()
 {
@@ -21,28 +17,34 @@ int main()
     cin.tie(0);
     cout.tie(0);
     // all the code goes here
-	int n;
-	scanf("%d",&n);
-	vector<vector<int>> places(n,vector<int>(2));
-	f(i,0,n)
+	int n,a,r,m;
+	cin>>n>>a>>r>>m;
+	int sum = 0;
+	vector<int> arr(n);
+	for(int &it : arr)cin>>it,sum+=it;
+	int mh = *min_element(all(arr));
+	int mxh = *max_element(all(arr));
+	int mincost = INT_MAX;
+	f(height,mh,mxh+1)
 	{
-		scanf("%d%d",&places[i][0],&places[i][1]);
-	}
-	vector<vector<int>> dp(n,vector<int>(2));
-	dp[n-1][0] = dp[n-1][1] = 1;
-	fr(i,n-2,0)
-	{
-		f(j,0,2)
+		int cost = 0;
+		int optotal = height*n;
+		if(optotal > sum)
 		{
-			f(k,0,2)
-			{
-				if(places[i][j] != places[i+1][k])
-					add_self(dp[i][j],dp[i+1][k]);
-			}
-			if(places[i+1][0] == places[i+1][1])
-				dp[i][j]/=2;
+			cost+=(optotal-sum)*a;
+			cost-=(optotal-sum)*m;
 		}
+		else if(sum > optotal)
+		{
+			cost+=(sum-optotal)*r;
+			cost-=(sum-optotal)*m;
+		}
+		f(i,0,n)
+		{
+			cost+=abs(arr[i]-height)*m;
+		}
+		mincost = min(mincost,cost);
 	}
-	printf("%d\n",dp[0][0]+dp[0][1]);
+	cout<<mincost<<endl;
     return 0;
 }

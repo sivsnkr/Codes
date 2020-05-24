@@ -8,7 +8,7 @@ const char NL = '\n';
 #define test int t; cin>>t; while(t--)
 #define mod 1000000007
 #define all(a) a.begin(),a.end()
-
+#define size(container) (int)container.size()
 int main()
 {
     ios_base::sync_with_stdio(false);

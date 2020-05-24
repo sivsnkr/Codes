@@ -5,18 +5,22 @@ typedef long L;
 const char NL = '\n';
 #define f(i,a,b) for(int i=a;i<b;i++)
 #define fr(i,a,b) for(int i=a;i>=b;i--)
-#define testf int t; scanf("%d",&t); while(t--)
 #define test int t; cin>>t; while(t--)
 #define mod 1000000007
 #define all(a) a.begin(),a.end()
 #define size(container) (int)container.size()
-
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
     // all the code goes here
-    
+    set<int> st;
+    st.insert(10);
+    st.insert(20);
+    for(auto it = st.begin(); it != st.end(); it++)
+    {
+        cout<<*it<<endl;
+    }
     return 0;
 }
