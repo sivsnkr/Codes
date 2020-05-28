@@ -1,58 +1,44 @@
-#include <iostream>
-#include <string>
-
+#include <bits/stdc++.h>
 using namespace std;
+typedef long long LL;
+typedef long L;
+const char NL = '\n';
+#define f(i, a, b) for (int i = a; i < b; i++)
+#define fr(i, a, b) for (int i = a; i >= b; i--)
+#define testf        \
+    int t;           \
+    scanf("%d", &t); \
+    while (t--)
+#define test  \
+    int t;    \
+    cin >> t; \
+    while (t--)
+#define mod 1000000007
+#define all(a) a.begin(), a.end()
+#define size(container) (int)container.size()
+#define int long long int
 
-int parent[800],r[800];
-
-void Make_Set(int x){
-    parent[x]=x;
-    r[x]=0;
-}
-
-int Find(int x){
-    if(x!=parent[x]) parent[x]=Find(parent[x]);
-    return parent[x];
-}
-
-void Union(int &x, int &y){
-    int PX=Find(x),PY=Find(y);
-    if(PX==PY) return;
-    
-    if(r[PX]>r[PY])
-        parent[PY]=PX;
-    else{
-        parent[PX]=PY;
-        if(r[PX]==r[PY])
-            r[PY]++;
-    }
-}
-
-int main(){
-    int T,n,x,y,cont1,cont2;
-    char c;
-    string s;
-    
-    scanf("%d",&T);
-    
-    for(int tc=1;tc<=T;tc++){
-        scanf("\n%d\n",&n);
-        
-        for(int i=1;i<=n;i++) Make_Set(i);
-        
-        cont1=cont2=0;
-        
-        while(1){
-            if(!getline(cin,s) || s.empty()) break;
-            sscanf(s.c_str(),"%c %d %d",&c,&x,&y);
-            
-            if(c=='c') Union(x,y);
-            else Find(x)==Find(y)? cont1++:cont2++;
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    // all the code goes here
+    test
+    {
+        int a, b, c;
+        cin >> a >> b >> c;
+        f(i, 0, 101)
+            f(j, 0, 101)
+                f(k, 0, 101)
+        {
+            if (i + j + k == a && i * j * k == b && (i * i + j * j + k * k) == c)
+            {
+                cout << i << " " << j << " " << k << endl;
+                return 0;
+            }
         }
-        
-        if(tc!=1) printf("\n");
-        printf("%d,%d\n",cont1,cont2);
+        cout << -1 << endl;
     }
-    
     return 0;
 }
