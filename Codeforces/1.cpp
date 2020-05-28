@@ -11,63 +11,54 @@ const char NL = '\n';
 #define all(a) a.begin(),a.end()
 #define size(container) (int)container.size()
 
+void solve()
+{
+	int n,m;
+	cin>>n>>m;
+	vector<string> st(n);
+	f(i,0,n)
+		cin>>st[i];
+	string ans = st[0];
+	f(i,0,m)
+	{
+		char save = ans[i];
+		for(char c = 'a'; c <= 'z'; c++)
+		{
+			ans[i] = c;
+			bool isans = true;
+			f(j,0,n)
+			{
+				int error = 0;
+				f(l,0,m)
+				{
+					if(ans[l] != st[j][l])
+						error++;
+				}
+				if(error > 1)
+				{
+					isans = false;
+					break;
+				}
+			}
+			if(isans)
+			{
+				cout<<ans<<endl;
+				return;
+			}
+		}
+		ans[i] = save;
+	}
+	cout<<-1<<endl;
+}
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
     // all the code goes here
-	test{
-		int n;
-		cin>>n;
-		vector<int> m(n);
-		for(int &it : m)cin>>it;
-		sort(all(m));
-		vector<int> dp(n,0);
-		for(int i = 0; i < n; i+=2)
-		{
-			if(m[i+1]-m[i] == 1)
-			{
-				dp[i] = -1;
-				dp[i+1] = -1;
-			}
-		}
-
-		f(i,0,n)
-		{
-			if(dp[i] == 0)
-			{
-				dp[i] = m[i]%2;
-			}
-		}
-
-		int onem = 0;
-		int one = 0;
-		int zero = 0;
-		f(i,0,n)
-		{
-			switch (dp[i])
-			{
-			case -1:
-				onem++;
-				break;
-			case 0:
-				zero++;
-				break;
-			case 1:
-				one++;
-				break;
-			}
-		}
-
-		if(one%2 == 0 && onem%2 == 0 && zero%2 == 0 && one+zero+onem == n)
-			cout<<"YES";
-		else
-		{
-			cout<<"NO";
-		}
-		
-		cout<<endl;
+	test
+	{
+		solve();
 	}
     return 0;
 }
