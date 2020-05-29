@@ -10,45 +10,37 @@ const char NL = '\n';
 #define mod 1000000007
 #define all(a) a.begin(),a.end()
 #define size(container) (int)container.size()
-
+int n,m,a,b;
 void solve()
 {
-	int n,m;
-	cin>>n>>m;
-	vector<string> st(n);
-	f(i,0,n)
-		cin>>st[i];
-	string ans = st[0];
-	f(i,0,m)
+	if(n*a != m*b)
 	{
-		char save = ans[i];
-		for(char c = 'a'; c <= 'z'; c++)
+		cout<<"NO"<<NL;
+		return;
+	}
+	vector<string> st;
+	string s = "";
+	f(i,0,m)
+		s+='1';
+	vector<int> rc(n,m);
+	vector<int> cc(m,n);
+	f(i,0,n)
+	{
+		st.push_back(s);
+	}
+	f(i,0,n)
+		f(j,0,m)
 		{
-			ans[i] = c;
-			bool isans = true;
-			f(j,0,n)
+			cout<<rc[i]<<" "<<cc[j]<<endl;
+			if(rc[i] > a && cc[j] > b)
 			{
-				int error = 0;
-				f(l,0,m)
-				{
-					if(ans[l] != st[j][l])
-						error++;
-				}
-				if(error > 1)
-				{
-					isans = false;
-					break;
-				}
-			}
-			if(isans)
-			{
-				cout<<ans<<endl;
-				return;
+				st[i][j] = '0';
+				rc[i]--,cc[j]--;
 			}
 		}
-		ans[i] = save;
-	}
-	cout<<-1<<endl;
+	cout<<"YES"<<NL;
+	f(i,0,n)
+		cout<<st[i]<<NL;
 }
 int main()
 {
@@ -58,6 +50,7 @@ int main()
     // all the code goes here
 	test
 	{
+		cin>>n>>m>>a>>b;
 		solve();
 	}
     return 0;
