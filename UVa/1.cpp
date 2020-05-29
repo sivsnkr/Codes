@@ -3,20 +3,34 @@ using namespace std;
 typedef long long LL;
 typedef long L;
 const char NL = '\n';
-#define f(i, a, b) for (int i = a; i < b; i++)
-#define fr(i, a, b) for (int i = a; i >= b; i--)
-#define testf        \
-    int t;           \
-    scanf("%d", &t); \
-    while (t--)
-#define test  \
-    int t;    \
-    cin >> t; \
-    while (t--)
+#define f(i,a,b) for(int i=a;i<b;i++)
+#define fr(i,a,b) for(int i=a;i>=b;i--)
+#define testf int t; scanf("%d",&t); while(t--)
+#define test int t; cin>>t; while(t--)
 #define mod 1000000007
-#define all(a) a.begin(), a.end()
+#define all(a) a.begin(),a.end()
 #define size(container) (int)container.size()
 #define int long long int
+vector<int> p(1000),g(1000);
+int parent(int n)
+{
+    if(p[n] == n)
+        return n;
+    return parent(p[n]);
+}
+
+void Union(int x, int y)
+{
+    int p1 = parent(x);
+    int p2 = parent(y);
+
+    if(p1 != p2)
+    {
+        p[p1] = p2;
+        g[p1]+=g[p2];
+    }
+    cout<<g[p1]<<endl;
+}
 
 int32_t main()
 {
@@ -24,21 +38,19 @@ int32_t main()
     cin.tie(0);
     cout.tie(0);
     // all the code goes here
-    test
-    {
-        int a, b, c;
-        cin >> a >> b >> c;
-        f(i, 0, 101)
-            f(j, 0, 101)
-                f(k, 0, 101)
+    test{
+        int n,a=0;
+        cin>>n;
+        map<string,int> st;
+        f(i,0,n)
         {
-            if (i + j + k == a && i * j * k == b && (i * i + j * j + k * k) == c)
+            string s1,s2;
+            cin>>s1>>s2;
+            if(st.find(s) == st.end())
             {
-                cout << i << " " << j << " " << k << endl;
-                return 0;
+                st[a] = a;
             }
         }
-        cout << -1 << endl;
     }
     return 0;
 }
