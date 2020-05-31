@@ -18,10 +18,23 @@ int32_t main()
     cin.tie(0);
     cout.tie(0);
     // all the code goes here
-    int t;
-    scanf("\n%lld",&t);
-    printf("t %lld\n",t);
-    scanf("\n%lld",&t);
-    printf("t %lld\n",t);
+    vector<int> t{1,2,3,4,5,6};
+    int reqsum = 21;
+    int n = size(t);
+    vector<vector<bool>> dp(n+1,vector<bool>(reqsum+1,0));
+    f(i,0,n+1)
+        dp[i][0] = 1;
+    f(i,1,n+1)
+    {
+        f(sum,1,reqsum+1)
+        {
+            if(sum >= t[i-1])
+                dp[i][sum] = dp[i-1][sum]||dp[i-1][sum-t[i-1]];
+            else
+                dp[i][sum] = dp[i-1][sum];
+        }
+    }
+
+    cout<<dp[n][reqsum]<<endl;
     return 0;
 }
