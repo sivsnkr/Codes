@@ -12,23 +12,22 @@ const char NL = '\n';
 #define size(container) (int)container.size()
 #define int long long
 
-int decimalToBinary(int N) 
-{ 
-  
-    // To store the binary number 
-    int B_Number = 0; 
-    int cnt = 0; 
-    while (N != 0) { 
-        int rem = N % 2; 
-        int c = pow(10, cnt); 
-        B_Number += rem * c; 
-        N /= 2; 
-  
-        // Count used to store exponent value 
-        cnt++; 
-    } 
-  
-    return B_Number; 
+string decimalToBinary(int N,int m) 
+{
+	// cout<<"N "<<N<<endl;
+	string res = "";
+	while(N != 0)
+	{
+		res+=(char(N%2)+48);
+		// cout<<"res "<<res<<endl;
+		N = N>>1;
+	}
+	while(res.length() < m)
+	{
+		res = res+'0';
+	}
+	reverse(all(res));
+	return res;
 }
 
 void solve()
@@ -45,21 +44,18 @@ void solve()
 	sort(all(st));
 	int ls = pow(2,m)-1;
 	int length = ls+1;
-	int mid = ls/2;
+	int mid = (length-n-1)/2;
 	f(i,0,n)
 	{
-		if(length%2 == 0)
+		if(st[i] <= mid)
+			mid++;
+		else
 		{
-			if(st[i] <= mid)
-				mid++;
-		}else
-		{
-			if(st[i] >= mid)
-				mid--;
+			break;
 		}
-		length--;
+		
 	}
-	cout<<decimalToBinary(mid)<<endl;
+	cout<<decimalToBinary(mid,m)<<endl;
 }
 
 int32_t main()

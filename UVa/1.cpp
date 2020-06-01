@@ -11,25 +11,43 @@ const char NL = '\n';
 #define all(a) a.begin(),a.end()
 #define size(container) (int)container.size()
 #define int long long int
-vector<int> p(1000),g(1000);
-int parent(int n)
+vector<int> st;
+vector<int> ar;
+map<int,int> fr;
+
+int left(int p){return p<<1;}
+int right(int p){return (p<<1)+1;}
+
+void form_sg(int p, int i, int j)
 {
-    if(p[n] == n)
-        return n;
-    return parent(p[n]);
+    if(i == j)
+    {
+        st[p] = i;
+        return;
+    }
+    form_sg(left(p),i,(i+j)/2);
+    form_sg(right(p),(i+j)/2+1,j);
+    int l = st[left(p)],r = st[right(p)];
+    st[p] = fr[ar[l]] >= fr[ar[r]]?l:r;
 }
 
-void Union(int x, int y)
+int access(int p, int i, int j,int l, int r)
 {
-    int p1 = parent(x);
-    int p2 = parent(y);
-
-    if(p1 != p2)
+    if(i > r || j < l)
     {
-        p[p1] = p2;
-        g[p1]+=g[p2];
+        return -1;
     }
-    cout<<g[p1]<<endl;
+    if(i>=l&&j<=r)
+    {
+        return st[p];
+    }
+    int le = access(left(p),i,(i+j)/2,l,r);
+    int re = access(right(p),(i+j)/2+1,j,l,r);
+    if(le == -1)
+        return re;
+    if(re == -1)
+        return le;
+    return fr[ar[le]]>=fr[ar[re]]?le:re;
 }
 
 int32_t main()
@@ -38,19 +56,22 @@ int32_t main()
     cin.tie(0);
     cout.tie(0);
     // all the code goes here
-    test{
-        int n,a=0;
-        cin>>n;
-        map<string,int> st;
-        f(i,0,n)
-        {
-            string s1,s2;
-            cin>>s1>>s2;
-            if(st.find(s) == st.end())
-            {
-                st[a] = a;
-            }
-        }
+    int n,m;
+    cin>>n>>m;
+    ar.assign(n,0);
+    for(int &it : ar)
+    {
+        cin>>it;
+        fr[it]++;
+    }
+    st.assign(4*n,0);
+    form_sg(1,0,n-1);
+    f(i,0,m)
+    {
+        int l,r;
+        cin>>l>>r;
+        l--,r--;
+        cout<<fr[ar[access(1,0,n-1,l,r)]]<<endl;
     }
     return 0;
 }
