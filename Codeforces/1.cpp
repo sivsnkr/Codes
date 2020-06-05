@@ -18,24 +18,26 @@ int32_t main()
     cin.tie(0);
     cout.tie(0);
     // all the code goes here
-    int n;
-    cin>>n;
-    vector<int> a(n);
-    for(int &it : a)cin>>it;
-    int mx = 0;
-    int mxe = 0;
-    int sum = 0;
-    f(i,0,n)
+    test
     {
-        sum+=a[i];
-        mxe = max(mxe,a[i]);
-        if(sum < a[i])
+        int n;
+        cin>>n;
+        int sum = 0;
+        int i = 1;
+        sum+=(n/2)*3+1;
+        while(((int)1<<i) <= n)
         {
-            mxe = a[i];
-            sum = a[i];
+            sum+=(i+1);
+            sum-=2;
+            i++;
         }
-        mx = max(mx,sum-mxe);
+        if(n%2 == 0)
+        {
+            sum-=1;
+        }
+        cout<<sum<<NL;
     }
-    cout<<mx<<endl;
+    fflush(stdin);
+    fflush(stdout);
     return 0;
 }

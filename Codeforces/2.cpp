@@ -1,40 +1,68 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-typedef long long LL;
-typedef long L;
-const char NL = '\n';
-#define f(i,a,b) for(int i=a;i<b;i++)
-#define fr(i,a,b) for(int i=a;i>=b;i--)
-#define testf int t; scanf("%d",&t); while(t--)
-#define test int t; cin>>t; while(t--)
-#define mod 1000000007
-#define all(a) a.begin(),a.end()
-#define size(container) (int)container.size()
-#define int long long int
+const int N = 500043;
+const int MOD = 998244353;
+int fact[N];
 
-int h,c,ti;
-int32_t main()
+int add(int x, int y)
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    // all the code goes here
-    test{
-        cin>>h>>c>>ti;
-        if(ti <= (h+c)/2)
-        {
-            cout<<2<<NL;
-        }
-        else
-        {
-            int k = (h-ti)/(2*ti-h-c);
-            float v = abs(((float)(h*k+c*k+h)/(2*k+1))-ti);
-            k++;
-            float av = abs(((float)(h*k+c*k+h)/(2*k+1))-ti);
-            (av >= v)?cout<<2*k-1<<NL:cout<<2*k+1<<NL;
-        }
-    }
-    fflush(stdin);
-    fflush(stdout);
-    return 0;
+	x += y;
+	while(x >= MOD) x -= MOD;
+	while(x < 0) x += MOD;
+	return x;
+}
+
+int mul(int x, int y)
+{
+	return (x * 1ll * y) % MOD;
+}
+
+int binpow(int x, int y)
+{
+	int z = 1;
+	while(y > 0)
+	{
+		if(y&1)
+			z = mul(z, x);
+		x = mul(x, x);
+		y /= 2;
+	}
+	return z;
+}
+
+int inv(int x)
+{
+	return binpow(x, MOD - 2);
+}
+
+int divide(int x, int y)
+{
+	return mul(x, inv(y));
+}
+
+void precalc()
+{
+	fact[0] = 1;
+	for(int i = 1; i < N; i++)
+		fact[i] = mul(i, fact[i - 1]);
+}
+
+int C(int n, int k)
+{
+	if(k > n) return 0;
+	return divide(fact[n], mul(fact[n - k], fact[k]));
+}
+
+int main()
+{
+	int n, k;
+	cin >> n >> k;
+	int ans = 0;
+	precalc();
+	for(int i = 1; i <= n; i++)
+	{
+		int d = n / i;
+		ans = add(ans, C(d - 1, k - 1));
+	}
+	cout << ans << endl;
 }
