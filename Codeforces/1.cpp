@@ -3,12 +3,18 @@ using namespace std;
 typedef long long LL;
 typedef long L;
 const char NL = '\n';
-#define f(i,a,b) for(int i=a;i<b;i++)
-#define fr(i,a,b) for(int i=a;i>=b;i--)
-#define testf int t; scanf("%d",&t); while(t--)
-#define test int t; cin>>t; while(t--)
+#define f(i, a, b) for (int i = a; i < b; i++)
+#define fr(i, a, b) for (int i = a; i >= b; i--)
+#define testf        \
+    int t;           \
+    scanf("%d", &t); \
+    while (t--)
+#define test  \
+    int t;    \
+    cin >> t; \
+    while (t--)
 #define mod 1000000007
-#define all(a) a.begin(),a.end()
+#define all(a) a.begin(), a.end()
 #define size(container) (int)container.size()
 #define int long long int
 
@@ -21,21 +27,21 @@ int32_t main()
     test
     {
         int n;
-        cin>>n;
+        cin >> n;
         int sum = 0;
         int i = 1;
-        sum+=(n/2)*3+1;
-        while(((int)1<<i) <= n)
+        sum += (n / 2) * 3 + 1;
+        while (((int)1 << i) <= n)
         {
-            sum+=(i+1);
-            sum-=2;
+            sum += (i + 1);
+            sum -= 2;
             i++;
         }
-        if(n%2 == 0)
+        if (n % 2 == 0)
         {
-            sum-=1;
+            sum -= 1;
         }
-        cout<<sum<<NL;
+        cout << sum << NL;
     }
     fflush(stdin);
     fflush(stdout);
