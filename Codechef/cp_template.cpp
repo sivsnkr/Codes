@@ -10,13 +10,16 @@ const char NL = '\n';
 #define mod 1000000007
 #define all(a) a.begin(),a.end()
 #define size(container) (int)container.size()
+#define int long long int
 
-int main()
+int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
     // all the code goes here
-
+    
+    fflush(stdin);
+    fflush(stdout);
     return 0;
 }

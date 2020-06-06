@@ -1,102 +1,66 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-typedef long l;
-const char nl = '\n';
-
-ll solve(ll x, ll y, ll L, ll r)
+typedef long long LL;
+typedef long L;
+const char NL = '\n';
+#define f(i,a,b) for(int i=a;i<b;i++)
+#define fr(i,a,b) for(int i=a;i>=b;i--)
+#define testf int t; scanf("%d",&t); while(t--)
+#define test int t; cin>>t; while(t--)
+#define mod 1000000007
+#define all(a) a.begin(),a.end()
+#define size(container) (int)container.size()
+#define int long long int
+bool hc(int coin,map<int,int> coins)
 {
-    ll res = 0;
-    ll z = L;
-    ll o = x|y;
-    int k = 42;
-    ll temp = 0;
-    for(int i = k; i >= 0; i--)
+    if(coin == 0)
+        return true;
+    if(coin == 10 && coins[10] >= coin/10)
     {
-        if((L&(ll(1)<<i)) != (r&(ll(1)<<i)))
-        {
-            k = i;
-            break;
-        }
-        temp|=(L&(ll(1)<<i));
+        coins[10]-=coin/10;
+        return true;
     }
-
-    for(int m = k; m >= 0; m--)
+    if(coin >= 5 && coins[5] >= coin/5)
     {
-        ll ta = temp;
-        for(int j = k; j >= m+1; j--)
-        {
-            if(r&(ll(1)<<j))
-                ta|=(ll(1)<<j);
-        }
-
-        for(int j = m-1; j >=0; j--)
-        {
-            if(o&(ll(1)<<j))
-                ta|=(ll(1)<<j);
-        }
-        if(ta >= L && ta <= r)
-        {
-            if((x&ta)*(y&ta) > res)
-            {
-                res = (x&ta)*(y&ta);
-                z = ta;
-            }
-            else if((x&ta)*(y&ta) == res)
-                z = min(z,ta);
-        }
+        coins[5]-=coin/5;
+        return true;
     }
-
-    for(int m = k; m >= 0; m--)
-    {
-        ll ta = temp;
-        for(int j = k; j >= m+1; j--)
-        {
-            if(L&(ll(1)<<j))
-                ta|=(ll(1)<<j);
-        }
-
-        ta|=(ll(1)<<m);
-        for(int j = m-1; j >=0; j--)
-        {
-            if(o&(ll(1)<<j))
-                ta|=(ll(1)<<j);
-        }
-
-        if(ta >= L && ta <= r)
-        {
-            if((x&ta)*(y&ta) > res)
-            {
-                res = (x&ta)*(y&ta);
-                z = ta;
-            }
-            else if((x&ta)*(y&ta) == res)
-                z = min(z,ta);
-        }
-    }
-
-    if((x&r)*(y&r) > res)
-        return r;
-
-    return z;
+    return false;
 }
-
-int main()
+int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-
     // all the code goes here
-    int t;
-    scanf("%d",&t);
-    while(t > 0)
+    test
     {
-        ll x,y,l,r;
-        scanf("%lld%lld%lld%lld",&x,&y,&l,&r);
-        ll res = solve(x,y,l,r);
-        printf("%lld\n",res);
-        t--;
+        map<int,int> coins;
+        coins[5] = 0,coins[10] = 0,coins[15] = 0;
+        int n;
+        cin>>n;
+        bool isvalid = true;
+        f(i,0,n)
+        {
+            int c;
+            cin>>c;
+            if(hc(c-5,coins))
+            {
+                coins[c]++;
+            }
+            else
+            {
+                cout<<"NO"<<NL;
+                isvalid = false;
+                break;
+            }
+        }
+        if(isvalid)
+        {
+            cout<<"YES"<<NL;
+        }
     }
+    fflush(stdin);
+    fflush(stdout);
     return 0;
 }
