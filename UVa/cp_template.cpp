@@ -18,6 +18,8 @@ int32_t main()
     cin.tie(0);
     cout.tie(0);
     // all the code goes here
-
+    
+    fflush(stdin);
+    fflush(stdout);
     return 0;
 }
