@@ -11,37 +11,68 @@ const char NL = '\n';
 #define all(a) a.begin(),a.end()
 #define size(container) (int)container.size()
 #define int long long int
-int n;
-vector<pair<int,int>> ar(510);
+const int MX = 55;
+int n,m;
+char mat[MX][MX];
+bool visited[MX][MX];
+bool good[MX][MX];
+
+void dfs(int i, int j)
+{
+    if(i >= n || i < 0 || j >= m || j < 0 || mat[i][j] == '#' || visited[i][j])
+        return;
+    visited[i][j] = 1;
+    if(mat[i][j] == '.')
+    {
+        mat[i][j] = '#';
+        return;
+    }
+    dfs(i-1,j);
+    dfs(i+1,j);
+    dfs(i,j-1);
+    dfs(i,j+1);
+}
+
+bool gdfs(int i, int j)
+{
+    if(i >= n || i < 0 || j >= m || j < 0 || mat[i][j] == '#' || mat[i][j] == 'B')
+        return false;
+    if(good[i][j] || (i == n-1 && j == m-1))
+        return true;
+    good[i][j] = 1;
+    return good[i][j] = gdfs(i-1,j) || gdfs(i+1,j) || gdfs(i,j-1) || gdfs(i,j+1);
+}
+
 void solve()
 {
+    memset(visited,0,sizeof(visited));
     f(i,0,n)
     {
-        f(j,0,n)
+        f(j,0,m)
         {
-            if(i > j)
+            if(mat[i][j] == 'B')
             {
-                if(ar[i].first < ar[j].second && ar[i].second != ar[j].second)
-                swap(ar[i],ar[j]);
-            }
-            else if(i < j)
-            {
-                if(ar[i].first > ar[j].first && ar[i].second != ar[j].second)
-                swap(ar[i],ar[j]);
+                dfs(i,j);
             }
         }
     }
-    f(i,0,n-1)
+    memset(good,0,sizeof(good));
+    f(i,0,n)
     {
-        if(ar[i].first > ar[i+1].first)
+        f(j,0,m)
         {
-            cout<<"No"<<endl;
-            return;
+            if(mat[i][j] == 'G')
+            {
+                if(!gdfs(i,j))
+                {
+                    cout<<"No"<<NL;
+                    return;
+                }
+                good[i][j] = 1;
+            }
         }
-        // cout<<ar[i].first<<" ";
     }
-    // cout<<endl;
-    cout<<"Yes"<<endl;
+    cout<<"Yes"<<NL;
     return;
 }
 int32_t main()
@@ -50,15 +81,15 @@ int32_t main()
     cin.tie(0);
     cout.tie(0);
     // all the code goes here
-    test
-    {
-        cin>>n;
+    test{
+        cin>>n>>m;
         f(i,0,n)
         {
-            cin>>ar[i].first;
+            f(j,0,m)
+            {
+                cin>>mat[i][j];
+            }
         }
-        f(i,0,n)
-            cin>>ar[i].second;
         solve();
     }
     fflush(stdin);
