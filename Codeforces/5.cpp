@@ -5,28 +5,25 @@ typedef long L;
 const char NL = '\n';
 #define f(i,a,b) for(int i=a;i<b;i++)
 #define fr(i,a,b) for(int i=a;i>=b;i--)
-#define test int t; scanf("%d",&t); while(t--)
+#define testf int t; scanf("%d",&t); while(t--)
+#define test int t; cin>>t; while(t--)
 #define mod 1000000007
 #define all(a) a.begin(),a.end()
+#define size(container) (int)container.size()
+// #define int long long int
 
-int main()
+int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
     // all the code goes here
-    int n,s;
-    cin>>n>>s;
-    if(n>s/2)
-    {
-        puts("NO");
-        return 0;
-    }
-    cout<<"YES"<<endl;
-    f(i,0,n-1)
-        cout<<1<<" ";
-    cout<<s-(1*n-1)<<endl;
-    cout<<s/2<<endl;
-    
+    pair<int,int> a;
+    a.first = 1;a.second = 2;
+    // pair<int,int> b = make_pair(1,2);
+    bool res = (make_pair(1,2) == a);
+    cout<<res<<endl;
+    fflush(stdin);
+    fflush(stdout);
     return 0;
 }

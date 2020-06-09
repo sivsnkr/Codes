@@ -1,66 +1,43 @@
-#include <bits/stdc++.h>
+/* 8 Queens Chess Problem */
+#include <iostream>
+#include <string.h>
+#include <math.h>
 using namespace std;
-typedef long long LL;
-typedef long L;
-const char NL = '\n';
-#define f(i,a,b) for(int i=a;i<b;i++)
-#define fr(i,a,b) for(int i=a;i>=b;i--)
-#define testf int t; scanf("%d",&t); while(t--)
-#define test int t; cin>>t; while(t--)
-#define mod 1000000007
-#define all(a) a.begin(),a.end()
-#define size(container) (int)container.size()
-#define int long long int
-int row[9],soln,a,b;
 
-bool place(int r, int c)
-{
-    f(pc,1,c)
-    {
-        if(row[pc] == r || abs(row[pc]-r) == abs(pc-c))
-            return false;
+int row[9], TC, a, b, lineCounter; // it is ok to use global variables in competitive programming
+
+bitset<30> rw, ld, rd;
+int n,ans;
+char board[15][15];
+void backtrack(int c) {
+    if (c == n) {
+        for(int i = 0; i < n; i++)
+            cout<<row[i]<<" ";
+        cout<<endl;
+        ans++; 
+        return; 
     }
-    return true;
-}
-
-void backtrack(int col)
-{
-    f(tryrow,1,9)
-    {
-        if(place(tryrow,col))
-        {
-            row[col] = tryrow;
-            if(col == 8 && row[b] == a)
-            {
-                printf("%2lld      %lld", ++soln, row[1]);
-                for (int j = 2; j <= 8; j++) printf(" %lld", row[j]);
-                printf("\n");
-            }
-            else
-            {
-                backtrack(col+1);
-            }
+    // a solution for (int r = 0; r < n; r++) // try all possible row
+    for (int r = 0; r < n; r++)
+        if (board[r][c] != '*' && !rw[r] && !ld[r - c + n - 1] && !rd[r + c]) 
+        { 
+            row[c] = r;
+            rw[r] = ld[r - c + n - 1] = rd[r + c] = true; // flag off backtrack(c + 1);
+            backtrack(c + 1);
+            rw[r] = ld[r - c + n - 1] = rd[r + c] = false; // restore
         }
-    }
 }
 
-int32_t main()
-{
-    // ios_base::sync_with_stdio(false);
-    // cin.tie(0);
-    // cout.tie(0);
-    // all the code goes here
-    test
-    {
-        soln = 0;
-        cin>>a>>b;
-        printf("SOLN       COLUMN\n");
-        printf(" #      1 2 3 4 5 6 7 8\n\n");
-        backtrack(1);
-        if(t > 0)
-            cout<<NL;
-    }
-    fflush(stdin);
-    fflush(stdout);
-    return 0;
+int main() {
+  cin>>n;
+  for(int i = 0; i < n; i++)
+  {
+      for(int j = 0; j < n; j++)
+      {
+          cin>>board[i][j];
+      }
+  }
+  backtrack(0);
+  cout<<ans<<endl;
+  return 0;
 }

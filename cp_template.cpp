@@ -17,8 +17,10 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
+    clock_t st = clock();
     // all the code goes here
     
+    cout<<"Time taken "<<clock()-st<<endl;
     fflush(stdin);
     fflush(stdout);
     return 0;
