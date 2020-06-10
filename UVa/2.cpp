@@ -2,20 +2,15 @@
 #include <iostream>
 #include <string.h>
 #include <math.h>
+#include<bitset>
 using namespace std;
 
 int row[9], TC, a, b, lineCounter; // it is ok to use global variables in competitive programming
-
-bool place(int col, int tryrow) {
-  for (int prev = 1; prev < col; prev++) // check previously placed queens
-    if (row[prev] == tryrow || (abs(row[prev] - tryrow) == abs(prev - col)))
-      return false; // an infeasible solution if share same row or same diagonal
-  return true;
-}
+bitset<30> rowb,ld,rd;
 
 void backtrack(int col) {
   for (int tryrow = 1; tryrow <= 8; tryrow++) // try all possible row
-    if (place(col, tryrow)) { // if can place a queen at this col and row...
+    if (!rowb[tryrow] && !ld[a-1+tryrow-col] && !rd[tryrow+col]) { // if can place a queen at this col and row...
       row[col] = tryrow; // put this queen in this col and row
       if (col == 8 && row[b] == a) { // a candidate solution & (a, b) has 1 queen
         printf("%2d      %d", ++lineCounter, row[1]);
@@ -23,7 +18,11 @@ void backtrack(int col) {
         printf("\n");
       }
       else
+      {
+        rowb[tryrow] = ld[a-1+tryrow-col] = rd[tryrow+col] = 1;
         backtrack(col + 1); // recursively try next column
+        rowb[tryrow] = ld[a-1+tryrow-col] = rd[tryrow+col] = 0;
+      }
     }  
     return; 
 }

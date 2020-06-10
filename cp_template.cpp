@@ -20,7 +20,7 @@ int32_t main()
     clock_t st = clock();
     // all the code goes here
     
-    cout<<"Time taken "<<clock()-st<<endl;
+    cout<<"Time taken "<<((float)clock()-st)/CLOCKS_PER_SEC<<endl;
     fflush(stdin);
     fflush(stdout);
     return 0;
