@@ -11,47 +11,72 @@ const char NL = '\n';
 #define all(a) a.begin(),a.end()
 #define size(container) (int)container.size()
 #define int long long int
-int n;
-vector<int> b;
-int MX = 4e5;
+int n,p,k;
+vector<int> prices;
 
 void solve()
 {
-    vector<int> dp(n);
-    f(i,0,n)
-        dp[i] = b[i];
-    set<pair<int,int>> psab;
-    f(i,0,n)
+    sort(all(prices));
+    int sum1 = 0, sum2 = 0;
+    int m = p;
+    int i;
+    vector<bool> inc(n,0);
+    for(i = 0; i < n; i+=k)
     {
-        for(int l = bn(b[i]-i); l < psab.size(); l++)
-        {
-            pair<int,int> be = psab[l];
-            int index = i-b[i]+be.first;
-            if(index < i && index >= 0 && index == be.second)
-                dp[i]= max(dp[i],dp[index]+b[i]);
-            else if(index >= i)
-            {
-                break;
-            }
-        }
-        psab.insert({b[i],i});
+        if(prices[i] > m)
+            break;
+        if(i == 0)
+            sum1+=1;
+        else
+            sum1+=k;
+        m-=prices[i];
+        inc[i] = 1;
     }
-    cout<<*max_element(all(dp))<<endl;
+    if(i >= n && i - k < n-1)
+    {
+        int j = n-1;
+        while(j > 0 && prices[j] > m && j > i-k)
+            j--;
+        if(prices[j] <= m && !inc[j])
+            sum1+=(j-i+k);
+    }
+    m = p;
+    inc.assign(n,0);
+    for(i = k-1; i < n; i+=k)
+    {
+        if(prices[i] > m)
+            break;
+        sum2+=k;
+        m-=prices[i];
+        inc[i] = 1;
+    }
+    if(i >= n && i - k < n-1)
+    {
+        int j = n-1;
+        while(j > 0 && prices[j] > m && j > i-k)
+            j--;
+        if(prices[j] <= m && !inc[j])
+            sum2+=(j-i+k);
+    }
+    // cout<<sum1<<" "<<sum2<<endl;
+    
+    cout<<max(sum1,sum2)<<NL;
     return;
 }
-
 int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    clock_t st = clock();
+    // clock_t st = clock();
     // all the code goes here
-    cin>>n;
-    b.assign(n,0);
-    for(int &it : b)cin>>it;
-    solve();
-    cout<<"Time taken "<<((float)clock()-st)/CLOCKS_PER_SEC<<endl;
+    test{
+        cin>>n>>p>>k;
+        prices.assign(n,0);
+        for(int &it : prices)cin>>it;
+        solve();
+    }
+    // cout<<"Time taken "<<((float)clock()-st)/CLOCKS_PER_SEC<<endl;
     fflush(stdin);
     fflush(stdout);
     return 0;

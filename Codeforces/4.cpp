@@ -9,30 +9,59 @@ const char NL = '\n';
 #define test int t; cin>>t; while(t--)
 #define mod 1000000007
 #define all(a) a.begin(),a.end()
+#define size(container) (int)container.size()
+#define int long long int
+int n;
+const int MX = 2e5+1;
+int a[MX],l[MX],r[MX];
 
-const int mx = 1e6+77;
-LL a[mx];
-int main()
+void solve()
+{
+    l[0] = 1;
+    r[n-1] = 1;
+    int ans = 0;
+    f(i,1,n)
+    {
+        if(a[i] > a[i-1])
+            l[i]+=l[i-1]+1;
+        else
+        {
+            l[i] = 1;
+        }
+        ans = max(ans,l[i]);
+    }
+
+    fr(i,n-2,0)
+    {
+        if(a[i] < a[i+1])
+            r[i]+=r[i+1]+1;
+        else
+        {
+            r[i] = 1;
+        }
+    }
+
+    f(i,1,n-1)
+    {
+        if(a[i+1] > a[i-1])
+            ans = max(ans,l[i-1]+r[i+1]);
+    }
+    cout<<ans<<NL;
+    return;
+}
+int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
+    // clock_t st = clock();
     // all the code goes here
-    int a1,b,c,d;
-    cin>>a1>>b>>c>>d;
-    for(int i = a1; i <= b; i++)
-    {
-        a[i+b]++;
-        a[i+c+1]--;
-    }
-    for(int i = 1; i < mx; i++)
-        a[i] += a[i-1];
-    for(int i = 1; i < mx; i++)
-        a[i] += a[i-1];
-
-    LL ans = 0;
-    f(i,c,d+1)
-        ans+=(a[mx-1]-a[i]);
-    cout<<ans<<endl;
+    cin>>n;
+    f(i,0,n)
+        cin>>a[i];
+    solve();
+    // cout<<"Time taken "<<((float)clock()-st)/CLOCKS_PER_SEC<<endl;
+    fflush(stdin);
+    fflush(stdout);
     return 0;
 }
