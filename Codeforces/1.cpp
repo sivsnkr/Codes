@@ -11,57 +11,22 @@ const char NL = '\n';
 #define all(a) a.begin(),a.end()
 #define size(container) (int)container.size()
 #define int long long int
-int n,p,k;
-vector<int> prices;
+int n,m,x;
 
 void solve()
 {
-    sort(all(prices));
-    int sum1 = 0, sum2 = 0;
-    int m = p;
-    int i;
-    vector<bool> inc(n,0);
-    for(i = 0; i < n; i+=k)
+    int mi = x,mx = x;
+    while(m--)
     {
-        if(prices[i] > m)
-            break;
-        if(i == 0)
-            sum1+=1;
-        else
-            sum1+=k;
-        m-=prices[i];
-        inc[i] = 1;
+        int a,b;
+        cin>>a>>b;
+        if(b < mi || a > mx)
+            continue;
+        mi = min(mi,a);
+        mx = max(mx,b);
     }
-    if(i >= n && i - k < n-1)
-    {
-        int j = n-1;
-        while(j > 0 && prices[j] > m && j > i-k)
-            j--;
-        if(prices[j] <= m && !inc[j])
-            sum1+=(j-i+k);
-    }
-    m = p;
-    inc.assign(n,0);
-    for(i = k-1; i < n; i+=k)
-    {
-        if(prices[i] > m)
-            break;
-        sum2+=k;
-        m-=prices[i];
-        inc[i] = 1;
-    }
-    if(i >= n && i - k < n-1)
-    {
-        int j = n-1;
-        while(j > 0 && prices[j] > m && j > i-k)
-            j--;
-        if(prices[j] <= m && !inc[j])
-            sum2+=(j-i+k);
-    }
-    // cout<<sum1<<" "<<sum2<<endl;
-    
-    cout<<max(sum1,sum2)<<NL;
-    return;
+
+    cout<<mx-mi+1<<NL;
 }
 int32_t main()
 {
@@ -70,10 +35,9 @@ int32_t main()
     cout.tie(0);
     // clock_t st = clock();
     // all the code goes here
-    test{
-        cin>>n>>p>>k;
-        prices.assign(n,0);
-        for(int &it : prices)cin>>it;
+    test
+    {
+        cin>>n>>x>>m;
         solve();
     }
     // cout<<"Time taken "<<((float)clock()-st)/CLOCKS_PER_SEC<<endl;

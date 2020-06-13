@@ -11,11 +11,7 @@ const char NL = '\n';
 #define all(a) a.begin(),a.end()
 #define size(container) (int)container.size()
 #define int long long int
-string s;
 
-void solve()
-{
-}
 int32_t main()
 {
     ios_base::sync_with_stdio(false);
@@ -23,10 +19,10 @@ int32_t main()
     cout.tie(0);
     // clock_t st = clock();
     // all the code goes here
-    test
+    string s = "shiv loves akanksha";
+    for(size_t pos = 0; (pos = s.find("shiv",pos))!=string::npos;)
     {
-        cin>>s;
-        solve();
+        cout<<pos<<NL;
     }
     // cout<<"Time taken "<<((float)clock()-st)/CLOCKS_PER_SEC<<endl;
     fflush(stdin);
