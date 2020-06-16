@@ -11,38 +11,68 @@ const char NL = '\n';
 #define all(a) a.begin(),a.end()
 #define size(container) (int)container.size()
 #define int long long int
-int n,x;
+int n;
 int a[100001];
+bool in = 1,d = 1;
+int start = 0;
+vector<int> res;
+set<int> r;
+
+void ins(int i)
+{
+    if(a[i] >= a[i-1])
+    {
+        if(!in)
+        {
+            if(r.find(a[start]) == r.end())
+                res.push_back(a[start]);
+            r.insert(a[start]);
+            if(r.find(a[i-1]) == r.end())
+                res.push_back(a[i-1]);
+            r.insert(a[i-1]);
+            start = i-1;
+        }
+        in = 1;
+        d = 0;
+    }
+    else
+    {
+        if(!d)
+        {
+            if(r.find(a[start]) == r.end())
+                res.push_back(a[start]);
+            r.insert(a[start]);
+            if(r.find(a[i-1]) == r.end())
+                res.push_back(a[i-1]);
+            r.insert(a[i-1]);
+            start = i-1;
+        }
+        d = 1;
+        in = 0;
+    }
+}
 void solve()
 {
-    test
-    {
-        cin>>n>>x;
-        int l=-1,r=n-1;
-        int sum = 0;
+    test{
+        cin>>n;
+        start = 0;
+        in = 1,d = 1;
+        res.clear(),r.clear();
         f(i,0,n)
-        {
             cin>>a[i];
-            sum+=a[i];
-            if(a[i]%x)
-            {
-                if(l == -1)
-                    l = i;
-                r = i;
-            }
-        }
-        if(sum%x)
+        
+        f(i,1,n)
         {
-            cout<<n;
+            ins(i);
         }
-        else if(l == -1)
-        {
-            cout<<-1;
-        }
-        else
-        {
-            cout<<n-min(l+1,n-r);
-        }
+        if(r.find(a[start]) == r.end())
+            res.push_back(a[start]);
+        r.insert(a[start]);
+        if(r.find(a[n-1]) == r.end())
+            res.push_back(a[n-1]);
+        cout<<size(res)<<NL;
+        for(int it : res)
+            cout<<it<<" ";
         cout<<NL;
     }
 }
