@@ -11,23 +11,42 @@ const char NL = '\n';
 #define all(a) a.begin(),a.end()
 #define size(container) (int)container.size()
 #define int long long int
-int n,m,x;
-
+int n,x;
+int a[100001];
 void solve()
 {
-    int mi = x,mx = x;
-    while(m--)
+    test
     {
-        int a,b;
-        cin>>a>>b;
-        if(b < mi || a > mx)
-            continue;
-        mi = min(mi,a);
-        mx = max(mx,b);
+        cin>>n>>x;
+        int l=-1,r=n-1;
+        int sum = 0;
+        f(i,0,n)
+        {
+            cin>>a[i];
+            sum+=a[i];
+            if(a[i]%x)
+            {
+                if(l == -1)
+                    l = i;
+                r = i;
+            }
+        }
+        if(sum%x)
+        {
+            cout<<n;
+        }
+        else if(l == -1)
+        {
+            cout<<-1;
+        }
+        else
+        {
+            cout<<n-min(l+1,n-r);
+        }
+        cout<<NL;
     }
-
-    cout<<mx-mi+1<<NL;
 }
+
 int32_t main()
 {
     ios_base::sync_with_stdio(false);
@@ -35,11 +54,7 @@ int32_t main()
     cout.tie(0);
     // clock_t st = clock();
     // all the code goes here
-    test
-    {
-        cin>>n>>x>>m;
-        solve();
-    }
+    solve();
     // cout<<"Time taken "<<((float)clock()-st)/CLOCKS_PER_SEC<<endl;
     fflush(stdin);
     fflush(stdout);
