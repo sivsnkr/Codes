@@ -19,17 +19,38 @@ const char NL = '\n';
 #define size(container) (int)container.size()
 #define int long long int
 int n;
+int a[100001];
 void solve()
 {
-    test
+    cin>>n;
+    set<int> r;
+    f(i,0,n+1)
+        r.insert(i);
+    f(i,0,n)
     {
-        cin >> n;
-        float angle = (PI / 180) * ((float)90 / n);
-        float area = (float)n / (2 * tan(angle));
-        float sides = (float)sqrt(area);
-        cout << area << " " << sides * sides << NL;
-        cout << sides << NL;
+        cin>>a[i];
+        if(r.find(a[i]) != r.end())
+            r.erase(a[i]);
     }
+    vector<int> res(n,-1);
+    f(i,1,n)
+    {
+        if(a[i] != a[i-1])
+        {
+            res[i] = a[i-1];
+            if(r.find(a[i-1]) != r.end())
+                r.erase(res[i]);
+        }
+    }
+    f(i,0,n)
+        if(res[i] == -1)
+        {
+            res[i] = *r.begin();
+            r.erase(r.begin());
+        }
+    for(int it : res)
+        cout<<it<<" ";
+    cout<<NL;
 }
 
 int32_t main()
