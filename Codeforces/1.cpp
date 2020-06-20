@@ -19,38 +19,58 @@ const char NL = '\n';
 #define size(container) (int)container.size()
 #define int long long int
 int n;
-int a[100001];
+string a[200005];
+bool visited[200005];
+bool vc[27];
+vector<set<int>> graph(26);
+
+void dfs(char c)
+{
+    for(int i : graph[c-'a'])
+    {
+        if(!visited[i])
+        {
+            visited[i] = 1;
+            for(char c1 : a[i])
+            {
+                if(!vc[c1-'a'])
+                {
+                    vc[c1-'a'] = 1;
+                    dfs(c1);
+                }
+            }
+        }
+    }
+}
 void solve()
 {
     cin>>n;
-    set<int> r;
-    f(i,0,n+1)
-        r.insert(i);
     f(i,0,n)
     {
         cin>>a[i];
-        if(r.find(a[i]) != r.end())
-            r.erase(a[i]);
-    }
-    vector<int> res(n,-1);
-    f(i,1,n)
-    {
-        if(a[i] != a[i-1])
+        for(char c : a[i])
         {
-            res[i] = a[i-1];
-            if(r.find(a[i-1]) != r.end())
-                r.erase(res[i]);
+            graph[c-'a'].insert(i);
         }
     }
+    int count = 0;
     f(i,0,n)
-        if(res[i] == -1)
+    {
+        if(!visited[i])
         {
-            res[i] = *r.begin();
-            r.erase(r.begin());
+            count++;
+            visited[i] = 1;
+            for(char c : a[i])
+            {
+                if(!vc[c-'a'])
+                {
+                    vc[c-'a'] = 1;
+                    dfs(c);
+                }
+            }
         }
-    for(int it : res)
-        cout<<it<<" ";
-    cout<<NL;
+    }
+    cout<<count<<NL;
 }
 
 int32_t main()
