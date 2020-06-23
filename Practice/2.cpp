@@ -15,12 +15,6 @@ int main()
     cin.tie(0);
     cout.tie(0);
     // all the code goes here
-    set<int> st;
-    st.insert(10);
-    st.insert(20);
-    for(auto it = st.begin(); it != st.end(); it++)
-    {
-        cout<<*it<<endl;
-    }
+    cout<<abs(-6)<<endl;
     return 0;
 }

@@ -19,58 +19,45 @@ const char NL = '\n';
 #define size(container) (int)container.size()
 #define int long long int
 int n;
-string a[200005];
-bool visited[200005];
-bool vc[27];
-vector<set<int>> graph(26);
-
-void dfs(char c)
-{
-    for(int i : graph[c-'a'])
-    {
-        if(!visited[i])
-        {
-            visited[i] = 1;
-            for(char c1 : a[i])
-            {
-                if(!vc[c1-'a'])
-                {
-                    vc[c1-'a'] = 1;
-                    dfs(c1);
-                }
-            }
-        }
-    }
-}
+int a[100001];
 void solve()
 {
-    cin>>n;
-    f(i,0,n)
+    test
     {
-        cin>>a[i];
-        for(char c : a[i])
+        cin>>n;
+        f(i,0,n)cin>>a[i];
+        int s = 0;
+        int sum = 0;
+        f(i,1,n)
         {
-            graph[c-'a'].insert(i);
-        }
-    }
-    int count = 0;
-    f(i,0,n)
-    {
-        if(!visited[i])
-        {
-            count++;
-            visited[i] = 1;
-            for(char c : a[i])
+            if(a[i] < a[i-1])
             {
-                if(!vc[c-'a'])
+                if(s > 0)
                 {
-                    vc[c-'a'] = 1;
-                    dfs(c);
+                    if(a[i]+sum > a[i-1])
+                    {
+                        int j = 0;
+                        while(a[i] < a[i-1])
+                        {
+                            a[i]+=pow(2,++j-1);
+                        }
+                    }
+                    else
+                    {
+                        a[i]+=sum;
+                    }
+                    
+                }
+                while(a[i] < a[i-1])
+                {
+                    int p = pow(2,++s-1);
+                    a[i]+=p;
+                    sum+=p;
                 }
             }
         }
+        cout<<s<<NL;
     }
-    cout<<count<<NL;
 }
 
 int32_t main()
