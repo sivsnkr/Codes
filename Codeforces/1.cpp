@@ -18,45 +18,38 @@ const char NL = '\n';
 #define all(a) a.begin(), a.end()
 #define size(container) (int)container.size()
 #define int long long int
-int n;
-int a[100001];
+int n,k;
+string s;
 void solve()
 {
     test
     {
-        cin>>n;
-        f(i,0,n)cin>>a[i];
-        int s = 0;
-        int sum = 0;
-        f(i,1,n)
+        cin>>n>>k;
+        cin>>s;
+        int c = 0;
+        vector<int> pos(n);
+        int p = INT_MAX;
+        fr(i,n-1,0)
         {
-            if(a[i] < a[i-1])
+            if(s[i] == '1')
+                p = i;
+            pos[i] = p;
+        }
+        int l = -INT_MAX;
+        f(i,0,n)
+        {
+            if(s[i] == '1')
+                l = i;
+            else
             {
-                if(s > 0)
+                if(i-l > k && pos[i]-i > k)
                 {
-                    if(a[i]+sum > a[i-1])
-                    {
-                        int j = 0;
-                        while(a[i] < a[i-1])
-                        {
-                            a[i]+=pow(2,++j-1);
-                        }
-                    }
-                    else
-                    {
-                        a[i]+=sum;
-                    }
-                    
-                }
-                while(a[i] < a[i-1])
-                {
-                    int p = pow(2,++s-1);
-                    a[i]+=p;
-                    sum+=p;
+                    l = i;
+                    c++;
                 }
             }
         }
-        cout<<s<<NL;
+        cout<<c<<NL;
     }
 }
 
