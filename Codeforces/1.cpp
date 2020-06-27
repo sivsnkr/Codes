@@ -18,41 +18,25 @@ const char NL = '\n';
 #define all(a) a.begin(), a.end()
 #define size(container) (int)container.size()
 #define int long long int
-bool is_prime(int n)
-{
-    for(int i = 2; i*i <= n; i++)
-        if(n%i == 0)
-            return false;
-    return true;
-}
-
 int n;
+int a[100001];
 void solve()
 {
-    test
+    cin >> n;
+    f(i, 0, n) cin >> a[i];
+    int mx = 0;
+    f(i, 0, n)
     {
-        cin>>n;
-        bool win = n==1;
-        if(n > 2 && n%2 == 0)
+        int mxv = a[i];
+        int sum = a[i];
+        f(j, i + 1, n)
         {
-            if((n&(n-1)) == 0)
-            {
-                win = 1;
-            }
-            else if(n%4 != 0 && is_prime(n/2))
-            {
-                win = 1;
-            }
+            sum += a[j];
+            mxv = max(mxv, a[j]);
+            mx = max(mx, sum - mxv);
         }
-        if(win)
-            cout<<"FastestFinger";
-        else
-        {
-            cout<<"Ashishgup";
-        }
-        cout<<NL;
-        
     }
+    cout << mx << NL;
 }
 
 int32_t main()
