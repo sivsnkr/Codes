@@ -18,28 +18,40 @@ const char NL = '\n';
 #define all(a) a.begin(), a.end()
 #define size(container) (int)container.size()
 #define int long long int
+bool is_prime(int n)
+{
+    for(int i = 2; i*i <= n; i++)
+        if(n%i == 0)
+            return false;
+    return true;
+}
 
+int n;
 void solve()
 {
     test
     {
-        string s;
-        cin>>s;
-        set<pair<int,int>> st;
-        int p = 0,h = 0;
-        int ti = 0;
-        for(char a : s)
+        cin>>n;
+        bool win = n==1;
+        if(n > 2 && n%2 == 0)
         {
-            int hc = h,vc = p;
-            if(a == 'N')p++;
-            else if(a == 'S')p--;
-            else if(a == 'W')h--;
-            else h++;
-            if(st.find({hc+h,vc+p}) == st.end())
-                ti+=5,st.insert({hc+h,vc+p});
-            else ti++;
+            if((n&(n-1)) == 0)
+            {
+                win = 1;
+            }
+            else if(n%4 != 0 && is_prime(n/2))
+            {
+                win = 1;
+            }
         }
-        cout<<ti<<NL;
+        if(win)
+            cout<<"FastestFinger";
+        else
+        {
+            cout<<"Ashishgup";
+        }
+        cout<<NL;
+        
     }
 }
 
