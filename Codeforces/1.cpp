@@ -18,25 +18,73 @@ const char NL = '\n';
 #define all(a) a.begin(), a.end()
 #define size(container) (int)container.size()
 #define int long long int
-int n;
-int a[100001];
+// int n;
+// int a[2][200001];
 void solve()
 {
-    cin >> n;
-    f(i, 0, n) cin >> a[i];
-    int mx = 0;
-    f(i, 0, n)
+    test
     {
-        int mxv = a[i];
-        int sum = a[i];
-        f(j, i + 1, n)
+        int n;
+        cin>>n;
+        string a[2];
+        cin>>a[0];
+        cin>>a[1];
+        int i = 0,j = 0;
+        bool valid = true;
+        bool tr = 0;
+        int pr,pc;
+        while(true)
         {
-            sum += a[j];
-            mxv = max(mxv, a[j]);
-            mx = max(mx, sum - mxv);
+            pr = i,pc = j;
+            if(a[i][j] == '1' || a[i][j] == '2')
+            {
+                j++;
+                tr = 0;
+            }
+            else
+            {
+                if(i == 0)
+                {
+                    if(!tr)
+                        i++;
+                    else 
+                        j++;
+                    tr = 1-tr;
+                }
+                else
+                {
+                    if(!tr)
+                        i--;
+                    else 
+                        j++;
+                    tr = 1-tr;
+                } 
+            }
+            if(abs(pr-i) == 1)
+            {
+                // cout<<i<<" "<<j<<NL;
+                if(a[i][j] == '1' || a[i][j] == '2')
+                {
+                    valid = false;
+                    break;
+                }
+            }
+            if(i == 1 && j == n)
+                break;
+            if(i < 0 || j >= n || i >= 2 || j < 0)
+            {
+                valid = false;
+                break;
+            }
         }
+        if(valid)
+            cout<<"YES";
+        else
+        {
+            cout<<"NO";
+        }
+        cout<<NL;
     }
-    cout << mx << NL;
 }
 
 int32_t main()
