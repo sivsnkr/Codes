@@ -18,73 +18,36 @@ const char NL = '\n';
 #define all(a) a.begin(), a.end()
 #define size(container) (int)container.size()
 #define int long long int
-// int n;
-// int a[2][200001];
+int n;
 void solve()
 {
-    test
+    cin>>n;
+    int bal = 0;
+    int cnt1 = 0,cnt2 = 0;
+    int ans = 0;
+    int temp;
+    f(i,0,n)
     {
-        int n;
-        cin>>n;
-        string a[2];
-        cin>>a[0];
-        cin>>a[1];
-        int i = 0,j = 0;
-        bool valid = true;
-        bool tr = 0;
-        int pr,pc;
-        while(true)
+        cin>>temp;
+        if(bal %2 == 0)
         {
-            pr = i,pc = j;
-            if(a[i][j] == '1' || a[i][j] == '2')
-            {
-                j++;
-                tr = 0;
-            }
-            else
-            {
-                if(i == 0)
-                {
-                    if(!tr)
-                        i++;
-                    else 
-                        j++;
-                    tr = 1-tr;
-                }
-                else
-                {
-                    if(!tr)
-                        i--;
-                    else 
-                        j++;
-                    tr = 1-tr;
-                } 
-            }
-            if(abs(pr-i) == 1)
-            {
-                // cout<<i<<" "<<j<<NL;
-                if(a[i][j] == '1' || a[i][j] == '2')
-                {
-                    valid = false;
-                    break;
-                }
-            }
-            if(i == 1 && j == n)
-                break;
-            if(i < 0 || j >= n || i >= 2 || j < 0)
-            {
-                valid = false;
-                break;
-            }
+            cnt1++;
         }
-        if(valid)
-            cout<<"YES";
         else
         {
-            cout<<"NO";
+            cnt2++;
         }
-        cout<<NL;
+        if(temp < 0)
+            bal++;
+        if(bal % 2 == 0)
+            ans+=cnt1;
+        else
+        {
+            ans+=cnt2;
+        }
     }
+    int neg = (n*(n+1))/2-ans;
+    cout<<neg<<" "<<ans<<NL;
 }
 
 int32_t main()
