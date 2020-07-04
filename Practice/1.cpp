@@ -19,8 +19,6 @@ const char NL = '\n';
 #define size(container) (int)container.size()
 #define int long long int
 
-map<int,int> st;
-
 int32_t main()
 {
     ios_base::sync_with_stdio(false);
@@ -29,8 +27,16 @@ int32_t main()
     // clock_t st = clock();
     // all the code goes here
     // solve();
-    st.insert({0,1});
-    st[0] = 2;
+    vector<vector<int>> st;
+    vector<int> a{1,2,3};
+    st.push_back(a);
+    a[0] = 2;
+    for(int i = 0; i < size(st); i++)
+    {
+        for(int j = 0; j < size(st[i]); j++)
+            cout<<st[i][j]<<" ";
+        cout<<NL;
+    }
     // cout<<"Time taken "<<((float)clock()-st)/CLOCKS_PER_SEC<<endl;
     fflush(stdin);
     fflush(stdout);
