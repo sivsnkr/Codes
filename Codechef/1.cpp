@@ -19,55 +19,28 @@ const char NL = '\n';
 #define size(container) (int)container.size()
 #define int long long int
 int n;
-map<int,int> a;
-int prices[1001];
-
-bool hc(int price)
+vector<pair<string, string>> st(101);
+int getp(string st)
 {
-    if(price == 0)
-        return true;
-    if(price >= 10)
+    int sum = 0;
+    for (char c : st)
     {
-        if(a[10] > 0)
-        {
-            a[10]--;
-            return true;
-        }
-        if(a[5] > 1)
-        {
-            a[5]-=2;
-            return true;
-        }
+        sum += (c - 48);
     }
-    if(a[5] > 0)
-    {
-        a[5]--;
-        return true;
-    }
-    return false;
+    return sum;
 }
-
 void solve()
 {
     test
     {
-        a.clear();
-        cin>>n;
-        bool valid = true;
-        f(i,0,n)
+        cin >> n;
+        f(i, 0, n) cin >> st[i].first >> st[i].second;
+        int c = 0, m = 0;
+        f(i, 0, n)
         {
-            cin>>prices[i];
-            if(!hc(prices[i]-5))
-            {
-                cout<<"NO";
-                valid = false;
-                break;
-            }
-            a[prices[i]]++;
+            int p = getp(st[i].first);
+            int p1 = getp(st[i].second);
         }
-        if(valid)
-            cout<<"YES";
-        cout<<NL;
     }
 }
 
