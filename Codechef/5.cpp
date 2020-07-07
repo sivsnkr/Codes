@@ -1,78 +1,41 @@
-// #include <bits/stdc++.h>
-#include<iostream>
-#include<vector>
-#include<set>
+#include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-typedef long l;
-const char nl = '\n';
+typedef long long LL;
+typedef long L;
+const char NL = '\n';
+#define PI 3.14159265
+#define f(i, a, b) for (int i = a; i < b; i++)
+#define fr(i, a, b) for (int i = a; i >= b; i--)
+#define testf        \
+    int t;           \
+    scanf("%d", &t); \
+    while (t--)
+#define test  \
+    int t;    \
+    cin >> t; \
+    while (t--)
+#define mod 1000000007
+#define all(a) a.begin(), a.end()
+#define size(container) (int)container.size()
+#define int long long int
 
-void dfs(vector<set<int>> &g,int src,vector<bool> &v)
+void solve()
 {
-    v[src] = 1;
-    for(auto it = g[src].begin(); it != g[src].end(); it++)
-        if(v[*it] == 0)
-            dfs(g,*it,v);
+    vector<int> a{1,2,3,4,4};
+    
+    cout<<"in "<<in<<endl;
 }
 
-int main()
+int32_t main()
 {
-    int t;
-    scanf("%d",&t);
-    while(t > 0)
-    {
-        int n,m;
-        scanf("%d%d",&n,&m);
-        vector<int> ma(n);
-        set<pair<int,int>> mp;
-        for(int i = 0; i < n; i++)
-        {
-            scanf("%d",&ma[i]);
-        }
-        vector<set<int>> g(n);
-        for(int i = 0; i < m; i++)
-        {
-            int a,b;
-            scanf("%d%d",&a,&b);
-            a--,b--;
-            g[a].insert(b);
-            g[b].insert(a);
-            mp.insert({a,b});
-        }
-        vector<bool> v(n);
-        int count = 0;
-        for(int i = 0; i < n; i++)
-        {
-            for(auto it = mp.begin(); it != mp.end(); it++)
-            {
-                int a = min(it->first,it->second);
-                int b = max(it->first,it->second);
-                if(ma[a] > ma[b])
-                    swap(ma[it->first],ma[it->second]);
-            }
-            int maxv = 0;
-            int mxin = 0;
-            for(int j = 0; j < n-i; j++)
-            {
-                if(ma[j] > maxv)
-                {
-                    maxv = ma[j];
-                    mxin = j;
-                }
-            }
-            if(mxin != n-i-1)
-            {
-                v.assign(n,0);
-                dfs(g,mxin,v);
-                swap(ma[mxin],ma[n-i-1]);
-                if(v[n-i-1] == 0)
-                {
-                    count++;
-                }
-            }
-        }
-        printf("%d\n",count);
-        t--;
-    }
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    // clock_t st = clock();
+    // all the code goes here
+    solve();
+    // cout<<"Time taken "<<((float)clock()-st)/CLOCKS_PER_SEC<<endl;
+    fflush(stdin);
+    fflush(stdout);
     return 0;
 }

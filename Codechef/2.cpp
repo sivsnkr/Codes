@@ -1,132 +1,73 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-typedef long l;
-const char nl = '\n';
+typedef long long LL;
+typedef long L;
+const char NL = '\n';
+#define PI 3.14159265
+#define f(i, a, b) for (int i = a; i < b; i++)
+#define fr(i, a, b) for (int i = a; i >= b; i--)
+#define testf int t;scanf("%d", &t);while (t--)
+#define test int t;cin >> t;while (t--)
+#define mod 1000000007
+#define all(a) a.begin(), a.end()
+#define size(container) (int)container.size()
+#define int long long int
+const int MX = 1e15;
+int n,x;
+void solve()
+{
+    test
+    {
+        cin>>n>>x;
+        vector<int> a(n);
+        f(i,0,n)cin>>a[i];
+        sort(all(a));
+        int md = 0;
+        vector<int> dp(n,MX);
+        dp[n-1] = 0;
+        f(i,0,n-1)
+        {
+            int pmd = md;
+            int cx = a[i];
+            if(cx >= a[i+1])
+                md++;
+            while(cx < a[i+1])
+            {
+                cx*=2;
+                md++;
+            }
+            dp[i] = md-pmd;
+        }
+        fr(i,n-2,0)
+            dp[i]+=dp[i+1];
+        int supplies = x;
+        int mind = LLONG_MAX;
+        int ds = 1;
+        while(supplies < a[n-1])
+        {
+            int in = lower_bound(all(a),supplies)-a.begin();
+            if(supplies >= a[in])
+                mind = min(mind,ds+dp[in]+in);
+            else if(in > 0)
+                mind = min(mind,ds+dp[in-1]+in-1);
+            supplies*=2;
+            ds++;
+        }
+        mind = min(mind,ds+n-1);
+        cout<<mind<<NL;
+    }
+}
 
-int main()
+int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-
+    // clock_t st = clock();
     // all the code goes here
-    int t;
-    scanf("%d",&t);
-    while(t > 0)
-    {
-        int n,k;
-        scanf("%d%d",&n,&k);
-
-        vector<tuple<int,int,int>> ma(n);
-        for(int i = 0; i < n; i++)
-        {
-            scanf("%d",&get<0>(ma[i]));
-            get<1>(ma[i]) = i;
-        }
-        vector<int> sma(n);
-        transform(ma.begin(),ma.end(),sma.begin(),[](tuple<int,int,int> a)->int{
-            return get<0>(a);
-        });
-        sort(sma.begin(),sma.end());
-        unordered_map<int,int> in,ns;
-        for(int i = 0; i < n; i++)
-        {
-            in[sma[i]] = i;
-            ns[get<0>(ma[i])] = i;
-        }
-        vector<tuple<int,int,int>> prt;
-        set<int> na;
-        for(int i = 0; i < n; i++)
-        {
-            get<2>(ma[i]) = in[get<0>(ma[i])];
-            if(get<2>(ma[i]) != get<1>(ma[i]))
-            {
-                na.insert(get<1>(ma[i]));
-            }
-        }
-        int i;
-        
-        for(i = 0; i < n && k >= 0; i++)
-        {
-            if(get<1>(ma[i]) != get<2>(ma[i]))
-            {
-                na.erase(ns[sma[i]]);
-                tuple<int,int,int> temp;
-                while(!na.empty()&&get<1>(ma[*na.begin()])==get<2>(ma[*na.begin()]))
-                {
-                    na.erase(na.begin());
-                }
-                if(na.empty())
-                {
-                    // printf("i %d\n",i);
-                    // puts("1st check");
-                    puts("-1");
-                    return 0;
-                }
-                get<0>(temp) = *na.begin();
-                na.erase(na.begin());
-                while(!na.empty()&&get<1>(ma[*na.begin()])==get<2>(ma[*na.begin()]))
-                {
-                    na.erase(na.begin());
-                }
-                if(na.empty())
-                {
-                    // printf("i %d\n",i);
-                    // puts("2nd check");
-                    puts("-1");
-                    return 0;
-                }
-                get<1>(temp) = *na.begin();
-                na.erase(na.begin());
-                get<2>(temp) = ns[sma[i]];
-                // printf("formed tuple = (%d %d %d)",get<0>(temp),get<1>(temp),get<2>(temp));
-                // rotate
-                ma[get<2>(temp)] = ma[get<1>(temp)];
-                get<1>(ma[get<2>(temp)]) = get<2>(temp);
-                ma[get<1>(temp)] = ma[get<0>(temp)];
-                get<1>(ma[get<1>(temp)]) = get<1>(temp);
-
-                if(get<1>(ma[get<2>(temp)]) != get<2>(ma[get<2>(temp)]))
-                {
-                    // printf("inserting %d\n",get<1>(ma[get<2>(temp)]));
-                    na.insert(get<1>(ma[get<2>(temp)]));
-                }
-                if(get<1>(ma[get<1>(temp)]) != get<2>(ma[get<1>(temp)]))
-                {
-                    // printf("inserting %d\n",get<1>(ma[get<1>(temp)]));
-                    na.insert(get<1>(ma[get<1>(temp)]));
-                }
-                get<0>(temp)++;
-                get<1>(temp)++;
-                get<2>(temp)++;
-                prt.push_back(temp);
-                k--;
-                // printf("unsorted indexm\n");
-                // for(int a : na)
-                // {
-                //     printf("%d ",a);
-                // }
-                // printf("\n");
-            }
-            ns.erase(i);
-        }
-        if(i != n)
-        {
-            // printf("i %d\n",i);
-            // puts("3rd check");
-            puts("-1");
-        }
-        else
-        {
-            printf("%d\n",int(prt.size()));
-            int size = prt.size();
-            for(int i = 0; i < size; i++)
-            {
-                printf("%d %d %d\n",get<0>(prt[i]),get<1>(prt[i]),get<2>(prt[i]));
-            }
-        }
-        t--;
-    }
+    solve();
+    // cout<<"Time taken "<<((float)clock()-st)/CLOCKS_PER_SEC<<endl;
+    fflush(stdin);
+    fflush(stdout);
     return 0;
 }

@@ -1,141 +1,98 @@
-//   ^_HAR HAR MAHADEV_^
-//   |Om Namah shivaya|
-
-// AUTHOR: Harshil Mehta
-
 #include <bits/stdc++.h>
-//For ordered_set
-// #include <ext/pb_ds/assoc_container.hpp>
-// #include <ext/pb_ds/tree_policy.hpp>
-//#include<boost/multiprecision/cpp_int.hpp>
-#define mod 1000000007
-#define test int t; cin>>t; while(t--)
-#define init(arr,val) memset(arr,val,sizeof(arr))
-#define f(i,a,b) for(int i=a;i<b;i++)
-#define fr(i,a,b) for(int i=a;i>=b;i--)
-#define ll long long int
-#define fast ios_base::sync_with_stdio(false);cin.tie();cout.tie();
-#define all(a) a.begin(),a.end()
-#define br "\n"
-//using namespace boost::multiprecision;
 using namespace std;
-// For ordered_set
-// using namespace __gnu_pbds;
-// template <typename T>
-// using ord_set = tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>;
-const int maxn = 1e5;
+typedef long long LL;
+typedef long L;
+const char NL = '\n';
+#define PI 3.14159265
+#define f(i, a, b) for (int i = a; i < b; i++)
+#define fr(i, a, b) for (int i = a; i >= b; i--)
+#define testf int t;scanf("%d", &t);while (t--)
+#define test int t;cin >> t;while (t--)
+#define mod 1000000007
+#define all(a) a.begin(), a.end()
+#define size(container) (int)container.size()
+#define int long long int
+const int MX = 1e15;
+int n,x;
+void solve()
+{
+    test
+    {
+        cin>>n>>x;
+        vector<int> a(n);
+        vector<int> acp;
+        f(i,0,n)cin>>a[i];
+        acp = a;
+        sort(all(a));
+        int md = 0;
+        int in = upper_bound(all(a),x)-a.begin();
+        md+=(in);
+        int cx = x;
+        if(cx < a[in])
+            md++;
+        while(cx < a[in])
+        {
+            cx*=2;
+            md++;
+        }
+        vector<int> dp(n,MX);
+        dp[n-1] = 0;
+        f(i,in,n-1)
+        {
+            int pmd = md;
+            cx = a[i];
+            if(cx >= a[i+1])
+                md++;
+            while(cx < a[i+1])
+            {
+                cx*=2;
+                md++;
+            }
+            dp[i] = md-pmd;
+        }
+        fr(i,n-2,0)
+            dp[i]+=dp[i+1];
+        int days = 1;
+        int supplies = x;
+        int mind = LLONG_MAX;
+        while(supplies < acp[n-1])
+        {
+            int in = lower_bound(all(acp),supplies)-acp.begin();
+            if(acp[in] == supplies)
+            {
+                acp.erase(acp.begin()+in);
+            }
+            supplies*=2;
+            days++;
+        }
+        int ds = 1;
+        supplies = x;
+        while(supplies < a[n-1])
+        {
+            int in = lower_bound(all(a),supplies)-a.begin();
+            if(supplies >= a[in])
+                mind = min(mind,ds+dp[in]+in);
+            else if(in > 0)
+                mind = min(mind,ds+dp[in-1]+in-1);
+            supplies*=2;
+            ds++;
+        }
+        days+=(size(a)-1);
+        mind = min(mind,ds+n-1);
+        cout<<mind<<NL;
+    }
+}
 
-ll x , y , l , r ;
-ll sol = LLONG_MAX , tmp_sol = 0;
-// Product Function
-ll func(ll z) {
-	return ((x & z) * (y & z)) ;
-}
-ll brute_force() {
-	ll mx = -1 ;
-	ll z = 0;
-	f(i,l,r+1) {
-		if(mx < func(i)) {
-			mx = func(i) ;
-			z = i ;
-		}
-	}
-	return z ;
-}
-// Auxillary function for obtaining prefix bits which are common
-int get_pre() {
-	tmp_sol = 0 ;
-	int k = 0;
-	for(int i = 42 ; i >= 0; i--) {
-		if((r & (1LL << i)) == (l & (1LL << i))) {
-			if((r & (1LL << i))) {
-				tmp_sol |= (1LL << i) ;
-			}
-		} else {
-			k = i ;
-			break ;
-		}
-	}
-	return k;
-}
-void solve() {
-	cin >> x >> y >> l >> r ;
-	ll _or = (x|y) ;
-	//ll ans_bf = brute_force();
-	ll mx = func(l) ,t_sol = tmp_sol ;
-	sol = l ;
-	int k = get_pre() ;
-	for(int i = k ; i >= 0 ; i --) {
-		// intialising container with prefixed value
-		t_sol = tmp_sol ;
-		// taking all possible prefix of R
-		for(int j = k ; j >= i; j--) {
-			if(r & (1LL<<j)) {
-				t_sol |= (1LL << j) ;
-			}
-		}
-		// switching i th bit as Z should be smaller than R (not needed as it is already OFF)
-		t_sol &= (~(1LL << i));
-		// Copying next bits of X OR Y for maximizing F
-		for(int j = i - 1; j >= 0 ; j--) {
-			if(_or & (1LL << j)) {
-				t_sol |= (1LL << j) ;
-			}
-		}
-		// checking for validations
-		if(t_sol <= r && t_sol >= l) {
-			// selecting optimal solution
-			if(mx < func(t_sol)) {
-				mx = func(t_sol) ;
-				sol = t_sol ;
-			}
-			// taking minimal possible Z
-			if(mx == func(t_sol))sol = min(t_sol , sol) ;
-		}
-	}
-	for(int i = k ; i >= 0 ; i --) {
-		// intialising container with prefixed value
-		t_sol = tmp_sol ;
-		// taking all possible prefix of R
-		for(int j = k ; j >= i; j--) {
-			if(l & (1LL<<j)) {
-				t_sol |= (1LL << j) ;
-			}
-		}
-		// turning i th bit as Z should be greater than L
-		t_sol |= (1LL << i);
-		// Copying next bits of X OR Y for maximizing F
-		for(int j = i - 1; j >= 0 ; j--) {
-			if(_or & (1LL << j)) {
-				t_sol |= (1LL << j) ;
-			}
-		}
-		// checking for validations
-		if(t_sol <= r && t_sol >=l) {
-			// selecting optimal solution
-			if(mx < func(t_sol)) {
-				mx = func(t_sol) ;
-				sol = t_sol ;
-			}
-			// taking minimal possible Z
-			if(mx == func(t_sol))sol = min(t_sol , sol) ;
-		}
-	}
-	// Checking for upper bound and lower bound
-	if(func(r) > mx) {
-		sol = r ;
-	}
-	cout << sol << br ;
-	sol = LLONG_MAX;
-}
-int main() {
-	//FILE_READ_IN ;
-	//FILE_READ_OUT;
-	fast ;
-	int t = 1;
-	cin >> t;
-	while(t--) {
-		solve();
-	}
-	return 0;
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    // clock_t st = clock();
+    // all the code goes here
+    solve();
+    // cout<<"Time taken "<<((float)clock()-st)/CLOCKS_PER_SEC<<endl;
+    fflush(stdin);
+    fflush(stdout);
+    return 0;
 }
