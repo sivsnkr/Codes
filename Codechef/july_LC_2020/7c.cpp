@@ -21,11 +21,9 @@ void solve()
     cin>>n>>q;
     f(i,0,n)cin>>h[i];
     f(i,0,n)cin>>te[i];
-    vector<int> mb(n),mbr(n),mbs(n),mbrs(n);
+    vector<int> mb(n),mbr(n);
     mb[n-1] = LLONG_MAX;
-    mbs[n-1] = LLONG_MAX;
     mbr[0] = LLONG_MIN;
-    mbrs[0] = LLONG_MIN;
     stack<int> st;
     f(i,0,n)
     {
@@ -41,22 +39,6 @@ void solve()
         mb[st.top()] = LLONG_MAX;
         st.pop();
     }
-
-    f(i,0,n)
-    {
-        while(!st.empty() && h[st.top()] < h[i])
-        {
-            mbs[st.top()] = i;
-            st.pop();
-        }
-        st.push(i);
-    }
-    while(!st.empty())
-    {
-        mbs[st.top()] = LLONG_MAX;
-        st.pop();
-    }
-
     fr(i,n-1,0)
     {
         while(!st.empty() && h[st.top()] <= h[i])
@@ -72,42 +54,39 @@ void solve()
         st.pop();
     }
 
-    fr(i,n-1,0)
-    {
-        while(!st.empty() && h[st.top()] < h[i])
-        {
-            mbrs[st.top()] = i;
-            st.pop();
-        }
-        st.push(i);
-    }
-    while(!st.empty())
-    {
-        mbrs[st.top()] = LLONG_MIN;
-        st.pop();
-    }
-
     vector<int> cf(n,0),cb(n,0);
     f(i,0,n)
     {
         cf[i] = te[i];
-        cb[i] = te[i];
     }
     fr(i,n-1,0)
     {
-        if(mbs[i] < n)
+        if(mb[i] < n)
         {
-            cf[i]+=cf[mbs[i]];
+            cf[i]+=cf[mb[i]];
         }
     }
 
+    fr(i,n-1,0)
+    {
+        cb[i] += te[i];
+    }
     f(i,0,n)
     {
-        if(mbrs[i] > -1)
+        if(mbr[i] > -1)
         {
-            cb[i]+=cb[mbrs[i]];
+            cb[i]+=cb[mbr[i]];
         }
     }
+
+    cout<<"fd"<<NL;
+    for(int i : cf)
+        cout<<i<<" ";
+    cout<<NL;
+    cout<<"bd"<<NL;
+    for(int i : cb)
+        cout<<i<<" ";
+    cout<<NL;
 
     while(q--)
     {
@@ -116,7 +95,7 @@ void solve()
         a--,b--;
         if(qt == 1)
         {
-            // update
+            te[a] = b+1;
         }
         else
         {
