@@ -15,7 +15,91 @@ const char NL = '\n';
 int n,q;
 const int MX = 2e5+1;
 vector<int> h(MX),te(MX);
+class Segment_tree
+{
+    private:
+    vector<int> A,st;
+    int n;
+    int left(int p){return p<<1;}
+    int right(int p){return (p<<1)+1;}
+    void build(int p, int L, int R);
+    int Access(int p,int i, int j, int L , int R);
+    void Update(int p,int i,int L, int R);
+    public:
+    Segment_tree(vector<int> a)
+    {
+        n = size(a);
+        A = a;
+        st.assign(8*n,0);
+        build(1,0,n-1);
+    }
+    int access(int i, int j){return Access(1,i,j,0,n-1);}
+    void update(int i, int value){A[i] = value;Update(1,i,0,n-1);}
+};
 
+void Segment_tree::Update(int p,int i, int L, int R)
+{
+    if(L==R || (i<L || i > R))
+        return;
+    Update(left(p),i,L,(L+R)/2);
+    Update(right(p),i,(L+R)/2+1,R);
+    int p1 = st[left(p)];
+    int p2 = st[right(p)];
+    st[p] = (A[p1]>=A[p2])?p2:p1;
+}
+
+void Segment_tree::build(int p, int L, int R)
+{
+    // cout<<L<<" "<<R<<NL;
+    if(R == L)
+    {
+        st[p] = A[L];
+        return;
+    }
+    if(R - L == 1)
+    {
+        build(left(p),L,(L+R)/2);
+        build(right(p),(L+R)/2+1,R);
+    }
+    else
+    {
+        build(left(p),L,(L+R)/2);
+        build(right(p),(L+R)/2,R);
+    }
+    // int p1 = right(p),p2 = left(p);
+    cout<<L<<" "<<R<<NL;
+    st[p] = A[L]-A[R];
+    cout<<"val "<<st[p]<<NL;
+}
+
+int Segment_tree::Access(int p,int i, int j, int L, int R)
+{
+    if(i > R || j < L)
+        return -1;
+    if(L>=i && R <= j)
+    {
+        cout<<"L R"<<NL;
+        cout<<L<<" "<<R<<NL;
+        cout<<"st val "<<st[p]<<NL;
+        if(st[p] <= 0)
+            return 0;
+        else
+            return st[p];
+    }
+    int p1 = 0,p2 = 0;
+    if(R - L == 1)
+    {
+        p1 = Access(left(p),i,j,L,(L+R)/2);
+        p2 = Access(right(p),i,j,(L+R)/2+1,R);
+    }
+    else
+    {
+        p1 = Access(left(p),i,j,L,(L+R)/2);
+        p2 = Access(right(p),i,j,(L+R)/2,R);
+    }
+    cout<<"p1 p2 "<<p1<<" "<<p2<<NL;
+    return p1+p2;
+}
 void solve()
 {
     cin>>n>>q;
@@ -108,7 +192,7 @@ void solve()
             cb[i]+=cb[mbrs[i]];
         }
     }
-
+    Segment_tree cft(cf);
     while(q--)
     {
         int qt,a,b;
@@ -116,7 +200,7 @@ void solve()
         a--,b--;
         if(qt == 1)
         {
-            // update
+            
         }
         else
         {
@@ -124,7 +208,9 @@ void solve()
             {
                 if(mbr[a] < b)
                 {
-                    int res = cf[b]-cf[a]+te[a];
+                    // int res = cf[b]-cf[a]+te[a];
+                    // cout<<"heee"<<NL;
+                    int res = cft.access(b,a)+te[a];
                     cout<<res<<NL;
                 }
                 else
