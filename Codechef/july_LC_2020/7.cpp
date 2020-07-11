@@ -15,215 +15,7 @@ const char NL = '\n';
 int n,q;
 const int MX = 2e5+1;
 vector<int> h(MX),te(MX);
-class Segment_tree
-{
-    private:
-    vector<int> A,st;
-    int n;
-    int left(int p){return p<<1;}
-    int right(int p){return (p<<1)+1;}
-    void build(int p, int L, int R);
-    int Access(int p,int i, int j, int L , int R);
-    void Update(int p,int i,int L, int R);
-    public:
-    Segment_tree(vector<int> a)
-    {
-        n = size(a);
-        A = a;
-        st.assign(8*n,0);
-        build(1,0,n-1);
-    }
-    int access(int i, int j){return Access(1,i,j,0,n-1);}
-    void update(int i, int value){A[i] = value;Update(1,i,0,n-1);}
-};
 
-class Segment_treer
-{
-    private:
-    vector<int> A,st;
-    int n;
-    int left(int p){return p<<1;}
-    int right(int p){return (p<<1)+1;}
-    void build(int p, int L, int R);
-    int Access(int p,int i, int j, int L , int R);
-    void Update(int p,int i,int L, int R);
-    public:
-    Segment_treer(vector<int> a)
-    {
-        n = size(a);
-        A = a;
-        st.assign(8*n,0);
-        build(1,0,n-1);
-    }
-    int access(int i, int j){return Access(1,i,j,0,n-1);}
-    void update(int i, int value){A[i] = value;Update(1,i,0,n-1);}
-};
-
-void Segment_tree::Update(int p,int i, int L, int R)
-{
-    // cout<<L<<" "<<R<<NL;
-    if(i < L || i > R)
-        return;
-    if(L == R)
-    {
-        st[p]+=(A[i]-te[i]);
-        return;
-    }
-    if(L<=i && R>=i)
-        st[p]+=(A[i]-te[i]);
-    if(R - L == 1)
-    {
-        Update(left(p),i,L,(L+R)/2);
-        Update(right(p),i,(L+R)/2+1,R);
-    }
-    else
-    {
-        Update(left(p),i,L,(L+R)/2);
-        Update(right(p),i,(L+R)/2,R);
-    }
-}
-
-void Segment_treer::Update(int p,int i, int L, int R)
-{
-    // cout<<L<<" "<<R<<NL;
-    if(i < L || i > R)
-        return;
-    if(L == R)
-    {
-        st[p]+=(A[i]-te[i]);
-        return;
-    }
-    if(L<=i && R>=i)
-        st[p]+=(A[i]-te[i]);
-    if(R - L == 1)
-    {
-        Update(left(p),i,L,(L+R)/2);
-        Update(right(p),i,(L+R)/2+1,R);
-    }
-    else
-    {
-        Update(left(p),i,L,(L+R)/2);
-        Update(right(p),i,(L+R)/2,R);
-    }
-}
-
-void Segment_tree::build(int p, int L, int R)
-{
-    // cout<<L<<" "<<R<<NL;
-    if(R == L)
-    {
-        st[p] = A[L];
-        return;
-    }
-    if(R - L == 1)
-    {
-        build(left(p),L,(L+R)/2);
-        build(right(p),(L+R)/2+1,R);
-    }
-    else
-    {
-        build(left(p),L,(L+R)/2);
-        build(right(p),(L+R)/2,R);
-    }
-    // int p1 = right(p),p2 = left(p);
-    // cout<<L<<" "<<R<<NL;
-    st[p] = A[L]-A[R];
-    // cout<<"val "<<st[p]<<NL;
-}
-
-void Segment_treer::build(int p, int L, int R)
-{
-    // cout<<L<<" "<<R<<NL;
-    if(R == L)
-    {
-        st[p] = A[L];
-        return;
-    }
-    if(R - L == 1)
-    {
-        build(left(p),L,(L+R)/2);
-        build(right(p),(L+R)/2+1,R);
-    }
-    else
-    {
-        build(left(p),L,(L+R)/2);
-        build(right(p),(L+R)/2,R);
-    }
-    // int p1 = right(p),p2 = left(p);
-    // cout<<L<<" "<<R<<NL;
-    st[p] = A[R]-A[L];
-    // cout<<"val "<<st[p]<<NL;
-}
-
-int Segment_tree::Access(int p,int i, int j, int L, int R)
-{
-    if(i > R || j < L)
-        return -1;
-    if(L == R)
-        return 0;
-    if(L>=i && R <= j)
-    {
-        // cout<<"L R"<<NL;
-        // cout<<L<<" "<<R<<NL;
-        // cout<<"st val "<<st[p]<<NL;
-        if(st[p] <= 0)
-            return 0;
-        else
-            return st[p];
-    }
-    int p1 = 0,p2 = 0;
-    if(R - L == 1)
-    {
-        p1 = Access(left(p),i,j,L,(L+R)/2);
-        p2 = Access(right(p),i,j,(L+R)/2+1,R);
-    }
-    else
-    {
-        p1 = Access(left(p),i,j,L,(L+R)/2);
-        p2 = Access(right(p),i,j,(L+R)/2,R);
-    }
-    if(p1 < 0)
-        p1= 0;
-    if(p2 < 0)
-        p2 = 0;
-    // cout<<"p1 p2 "<<p1<<" "<<p2<<NL;
-    return p1+p2;
-}
-
-int Segment_treer::Access(int p,int i, int j, int L, int R)
-{
-    if(i > R || j < L)
-        return -1;
-    if(L == R)
-        return 0;
-    if(L>=i && R <= j)
-    {
-        // cout<<"L R"<<NL;
-        // cout<<L<<" "<<R<<NL;
-        // cout<<"st val "<<st[p]<<NL;
-        if(st[p] <= 0)
-            return 0;
-        else
-            return st[p];
-    }
-    int p1 = 0,p2 = 0;
-    if(R - L == 1)
-    {
-        p1 = Access(left(p),i,j,L,(L+R)/2);
-        p2 = Access(right(p),i,j,(L+R)/2+1,R);
-    }
-    else
-    {
-        p1 = Access(left(p),i,j,L,(L+R)/2);
-        p2 = Access(right(p),i,j,(L+R)/2,R);
-    }
-    if(p1 < 0)
-        p1= 0;
-    if(p2 < 0)
-        p2 = 0;
-    // cout<<"p1 p2 "<<p1<<" "<<p2<<NL;
-    return p1+p2;
-}
 void solve()
 {
     cin>>n>>q;
@@ -316,23 +108,16 @@ void solve()
             cb[i]+=cb[mbrs[i]];
         }
     }
-    vector<int> dup(n,0);
-    f(i,0,n-1)
-    {
-        if(h[i] == h[i+1])
-            dup[i] = dup[i+1] = 1;
-    }
-    f(i,1,n)
-        dup[i]+=dup[i-1];
-    
-    for(int i : cb)
-        cout<<i<<" ";
-    cout<<NL;
-    for(int i : cf)
-        cout<<i<<" ";
-    cout<<NL;
-    Segment_tree cft(cf);
-    Segment_treer cfb(cb);
+
+    // cout<<"fd"<<NL;
+    // for(int i : cf)
+    //     cout<<i<<" ";
+    // cout<<NL;
+    // cout<<"bd"<<NL;
+    // for(int i : cb)
+    //     cout<<i<<" ";
+    // cout<<NL;
+
     while(q--)
     {
         int qt,a,b;
@@ -340,9 +125,35 @@ void solve()
         a--,b--;
         if(qt == 1)
         {
-            cft.update(a,b+1);
-            cfb.update(a,b+1);
             te[a] = b+1;
+            f(i,0,n)
+            {
+                cf[i] = te[i];
+                cb[i] = te[i];
+            }
+            fr(i,n-1,0)
+            {
+                if(mbs[i] < n)
+                {
+                    cf[i]+=cf[mbs[i]];
+                }
+            }
+
+            f(i,0,n)
+            {
+                if(mbrs[i] > -1)
+                {
+                    cb[i]+=cb[mbrs[i]];
+                }
+            }
+            // cout<<"fd"<<NL;
+            // for(int i : cf)
+            //     cout<<i<<" ";
+            // cout<<NL;
+            // cout<<"bd"<<NL;
+            // for(int i : cb)
+            //     cout<<i<<" ";
+            // cout<<NL;
         }
         else
         {
@@ -350,12 +161,7 @@ void solve()
             {
                 if(mbr[a] < b)
                 {
-                    // for(int i : mbr)
-                    //     cout<<i<<" ";
-                    // cout<<NL;
-                    // int res = cf[b]-cf[a]+te[a];
-                    // cout<<"heee"<<NL;
-                    int res = cft.access(b,a)+te[a];
+                    int res = cf[b]-cf[a]+te[a];
                     cout<<res<<NL;
                 }
                 else
@@ -366,8 +172,7 @@ void solve()
             {
                 if(mb[a] > b)
                 {
-                    // int res = cb[b]-cb[a]+te[a];
-                    int res = cfb.access(a,b)+te[b];
+                    int res = cb[b]-cb[a]+te[a];
                     cout<<res<<NL;
                 }
                 else
