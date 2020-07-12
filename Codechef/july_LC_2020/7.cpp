@@ -117,7 +117,7 @@ void solve()
     // for(int i : cb)
     //     cout<<i<<" ";
     // cout<<NL;
-
+    bool updated = false;
     while(q--)
     {
         int qt,a,b;
@@ -126,26 +126,28 @@ void solve()
         if(qt == 1)
         {
             te[a] = b+1;
-            f(i,0,n)
-            {
-                cf[i] = te[i];
-                cb[i] = te[i];
-            }
-            fr(i,n-1,0)
-            {
-                if(mbs[i] < n)
-                {
-                    cf[i]+=cf[mbs[i]];
-                }
-            }
+            updated = true;
+            // f(i,0,n)
+            // {
+            //     cf[i] = te[i];
+            //     cb[i] = te[i];
+            // }
+            // fr(i,n-1,0)
+            // {
+            //     if(mbs[i] < n)
+            //     {
+            //         cf[i]+=cf[mbs[i]];
+            //     }
+            // }
 
-            f(i,0,n)
-            {
-                if(mbrs[i] > -1)
-                {
-                    cb[i]+=cb[mbrs[i]];
-                }
-            }
+            // f(i,0,n)
+            // {
+            //     if(mbrs[i] > -1)
+            //     {
+            //         cb[i]+=cb[mbrs[i]];
+            //     }
+            // }
+            
             // cout<<"fd"<<NL;
             // for(int i : cf)
             //     cout<<i<<" ";
@@ -157,6 +159,30 @@ void solve()
         }
         else
         {
+            if(updated)
+            {
+                f(i,0,n)
+                {
+                    cf[i] = te[i];
+                    cb[i] = te[i];
+                }
+                fr(i,n-1,0)
+                {
+                    if(mbs[i] < n)
+                    {
+                        cf[i]+=cf[mbs[i]];
+                    }
+                }
+
+                f(i,0,n)
+                {
+                    if(mbrs[i] > -1)
+                    {
+                        cb[i]+=cb[mbrs[i]];
+                    }
+                }
+                updated = false;
+            }
             if(a > b)
             {
                 if(mbr[a] < b)
