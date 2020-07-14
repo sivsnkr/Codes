@@ -13,6 +13,19 @@ const char NL = '\n';
 #define size(container) (int)container.size()
 #define int long long int
 
+vector<int> trial_division1(int n) {
+    vector<int> factorization;
+    for (int d = 2; d * d <= n; d++) {
+        while (n % d == 0) {
+            factorization.push_back(d);
+            n /= d;
+        }
+    }
+    if (n > 1)
+        factorization.push_back(n);
+    return factorization;
+}
+
 void solve()
 {
 }
@@ -29,4 +42,8 @@ int32_t main()
     fflush(stdin);
     fflush(stdout);
     return 0;
+}
+int main()
+{
+
 }

@@ -1,26 +1,53 @@
-#include <iostream>
-#include <set>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
+typedef long long LL;
+typedef long L;
+const char NL = '\n';
+#define PI 3.14159265
+#define f(i, a, b) for (int i = a; i < b; i++)
+#define fr(i, a, b) for (int i = a; i >= b; i--)
+#define testf int t;scanf("%d", &t);while (t--)
+#define test int t;cin >> t;while (t--)
+#define mod 1000000007
+#define all(a) a.begin(), a.end()
+#define size(container) (int)container.size()
+#define int long long int
 
-int main(){
-  int T; cin>>T;
-  while (T--){
-    int N,X;
-    cin>>N>>X;
-    int far=0; //largest favorite number
-    bool print = 1;
-    for (int i=0;i<N;i++){
-      int A;
-      cin>>A;
-      if(A == X)
+void solve()
+{
+    int k;cin>>k;
+    string s = "codeforces";
+    string res = "";
+    int start = 0;
+    int st = 0;
+    vector<bool> v(size(fac),0);
+    vector<int> fc;
+    vector<int> times(10,0);
+    
+    
+    for(int i : fc)
+    {
+        while(i--)
         {
-            cout<<1<<endl;
-            print = 0;
+            res+=s[start];
         }
-      far=max(far,A);
+        start++;
     }
-    if(print)
-      cout<<max(2,(X+far-1)/far)<<endl; //expression as explained in tutorial
-  }
+    f(i,start,s.length())
+        res+=s[i];
+    cout<<res<<NL;
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    // clock_t st = clock();
+    // all the code goes here
+    solve();
+    // cout<<"Time taken "<<((float)clock()-st)/CLOCKS_PER_SEC<<endl;
+    fflush(stdin);
+    fflush(stdout);
+    return 0;
 }
