@@ -17,12 +17,10 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    // all the code goes here
-    pair<int,int> a;
-    a.first = 1;a.second = 2;
-    // pair<int,int> b = make_pair(1,2);
-    bool res = (make_pair(1,2) == a);
-    cout<<res<<endl;
+    int t = 0;
+    int r = t<<1;
+    cout<<t<<NL;
+    cout<<r<<NL;
     fflush(stdin);
     fflush(stdout);
     return 0;

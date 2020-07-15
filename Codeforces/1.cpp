@@ -15,27 +15,41 @@ const char NL = '\n';
 
 void solve()
 {
-    int k;cin>>k;
-    string s = "codeforces";
-    string res = "";
-    int start = 0;
-    int st = 0;
-    vector<bool> v(size(fac),0);
-    vector<int> fc;
-    vector<int> times(10,0);
-    
-    
-    for(int i : fc)
+    test
     {
-        while(i--)
+        int n,a,b;cin>>n>>a>>b;
+        int s = 0;
+        string res = "";
+        int l = a;
+        int d = b;
+        int c = -1;
+        while(n > 0)
         {
-            res+=s[start];
+            while(l > 0 && n > 0)
+            {
+                if(s > 0 && res[s] != res[s-1])
+                    d = 1;
+                else if(s > 0)
+                    d = 0;
+                // cout<<s<<" "<<d<<NL;
+                while(d > 0 && l > 0 && n > 0)
+                {
+                    c = (c+1)%26;
+                    res+=(char)(c+97);
+                    d--,l--,n--;
+                }
+                if(l > 0)
+                {
+                    res+=(char)(c+97);
+                    l--,n--;
+                }
+            }
+            // cout<<"l "<<n<<NL;
+            l = 1;
+            s++;
         }
-        start++;
+        cout<<res<<NL;
     }
-    f(i,start,s.length())
-        res+=s[i];
-    cout<<res<<NL;
 }
 
 int32_t main()
