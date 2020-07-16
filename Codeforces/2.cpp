@@ -13,19 +13,8 @@ const char NL = '\n';
 #define size(container) (int)container.size()
 #define int long long int
 
-struct ele
+void solve()
 {
-    int seg,pref,suf,sum;
-};
-
-ele merge(ele a, ele b)
-{
-    return {max({a.seg,b.seg,a.suf+b.pref}),max(a.pref,a.sum),max(b.suf,b.sum),a.sum+b.sum};
-}
-
-void solve(vector<int> a)
-{
-    
 }
 
 int32_t main()

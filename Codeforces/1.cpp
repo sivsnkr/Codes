@@ -13,42 +13,60 @@ const char NL = '\n';
 #define size(container) (int)container.size()
 #define int long long int
 
+vector<int> trial_division1(int n) {
+    vector<int> factorization;
+    for (int d = 2; d * d <= n; d++) {
+        while (n % d == 0) {
+            factorization.push_back(d);
+            n /= d;
+        }
+    }
+    if (n > 1)
+        factorization.push_back(n);
+    return factorization;
+}
+
 void solve()
 {
     test
     {
-        int n,a,b;cin>>n>>a>>b;
-        int s = 0;
-        string res = "";
-        int l = a;
-        int d = b;
-        int c = -1;
-        while(n > 0)
+        int n;cin>>n;
+        vector<int> fa = trial_division1(n);
+        if(size(fa) < 3)
+            cout<<"NO";
+        else
         {
-            while(l > 0 && n > 0)
+            sort(all(fa));
+            set<int> a;
+            a.insert(fa[0]);
+            int p = 1;
+            int i;
+            for(i = 1; i < size(fa); i++)
             {
-                if(s > 0 && res[s] != res[s-1])
-                    d = 1;
-                else if(s > 0)
-                    d = 0;
-                // cout<<s<<" "<<d<<NL;
-                while(d > 0 && l > 0 && n > 0)
+                p*=fa[i];
+                if(a.find(p) == a.end())
                 {
-                    c = (c+1)%26;
-                    res+=(char)(c+97);
-                    d--,l--,n--;
-                }
-                if(l > 0)
-                {
-                    res+=(char)(c+97);
-                    l--,n--;
+                    a.insert(p);
+                    break;
                 }
             }
-            // cout<<"l "<<n<<NL;
-            l = 1;
-            s++;
+            p = 1;
+            for(i = i+1; i < size(fa); i++)
+            {
+                p*=fa[i];
+            }
+            if(p != 1)
+                a.insert(p);
+            if(size(a) == 3)
+            {
+                cout<<"YES"<<NL;
+                for(int i : a)
+                    cout<<i<<" ";
+            }
+            else
+                cout<<"NO";
         }
-        cout<<res<<NL;
+        cout<<NL;
     }
 }
 
