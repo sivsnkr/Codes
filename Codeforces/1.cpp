@@ -13,61 +13,8 @@ const char NL = '\n';
 #define size(container) (int)container.size()
 #define int long long int
 
-vector<int> trial_division1(int n) {
-    vector<int> factorization;
-    for (int d = 2; d * d <= n; d++) {
-        while (n % d == 0) {
-            factorization.push_back(d);
-            n /= d;
-        }
-    }
-    if (n > 1)
-        factorization.push_back(n);
-    return factorization;
-}
-
 void solve()
 {
-    test
-    {
-        int n;cin>>n;
-        vector<int> fa = trial_division1(n);
-        if(size(fa) < 3)
-            cout<<"NO";
-        else
-        {
-            sort(all(fa));
-            set<int> a;
-            a.insert(fa[0]);
-            int p = 1;
-            int i;
-            for(i = 1; i < size(fa); i++)
-            {
-                p*=fa[i];
-                if(a.find(p) == a.end())
-                {
-                    a.insert(p);
-                    break;
-                }
-            }
-            p = 1;
-            for(i = i+1; i < size(fa); i++)
-            {
-                p*=fa[i];
-            }
-            if(p != 1)
-                a.insert(p);
-            if(size(a) == 3)
-            {
-                cout<<"YES"<<NL;
-                for(int i : a)
-                    cout<<i<<" ";
-            }
-            else
-                cout<<"NO";
-        }
-        cout<<NL;
-    }
 }
 
 int32_t main()
