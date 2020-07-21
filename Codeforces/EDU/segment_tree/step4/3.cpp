@@ -31,25 +31,17 @@ int single(int v)
     return v;
 }
 
-void update(int p, int l, int r, int v, int i)
+void update(int p, int l, int r, int i)
 {
     if(r < i || l > i)
         return;
     if(l == r)
     {
-        if(l%2 == 0)
-        {
-            stree[p] = v;
-        }
-        else
-        {
-            stree[p] = -v;
-        }
-        return;
+        stree[p] = a[i];
     }
     int left = (p<<1)+1,right = (p<<1)+2;
-    update(left,l,(l+r)/2,v,i);
-    update(right,(l+r)/2+1,r,v,i);
+    update(left,l,(l+r)/2,i);
+    update(right,(l+r)/2+1,r,i);
     stree[p] = merge(stree[left],stree[right]);
 }
 
@@ -75,7 +67,7 @@ void solve()
 {
     int n;cin>>n;
     f(i,0,n)cin>>a[i];
-    f(i,0,n)update(0,0,n-1,a[i],i);
+    f(i,0,n)update(0,0,n-1,i);
     int m;cin>>m;
     while(m--)
     {
@@ -83,7 +75,8 @@ void solve()
         cin>>q>>l>>r;
         if(q == 0)
         {
-            update(0,0,n-1,r,l-1);
+            a[l-1] = r;
+            update(0,0,n-1,l-1);
         }
         else
         {
