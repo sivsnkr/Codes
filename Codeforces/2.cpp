@@ -15,6 +15,8 @@ const char NL = '\n';
 
 void solve()
 {
+    int a = 'a';
+    cout<<a<<NL;
 }
 
 int32_t main()

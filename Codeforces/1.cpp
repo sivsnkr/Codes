@@ -15,50 +15,38 @@ const char NL = '\n';
 
 void solve()
 {
-    test
+    string s;cin>>s;
+    string a = "";
+    int n = s.length();
+    f(i,0,n)
     {
-        map<int,int> st;
-        int n;cin>>n;
-        string s;cin>>s;
-        vector<int> a(n);
-        f(i,0,n)
-        {
-            switch (s[i])
-            {
-            case 'L':
-            a[i] = -1;break;
-            case 'R':
-            a[i] = 1;break;
-            case 'U':
-            a[i] = 4e5;break;
-            case 'D':
-            a[i] = -4e5;
-            }
-        }
-        int sum = 0;
-        int m = LLONG_MAX;
-        pair<int,int> res = {-4e5,4e5};
-        st.insert({0,0});
-        f(i,0,n)
-        {
-            sum+=a[i];
-            if(st.find(sum) == st.end())
-            {
-                st[sum] = i+1;
-            }
-            else
-            {
-                m = min(m,i-st[sum]);
-                if(abs(i-st[sum]) < abs(res.second - res.first))
-                    res = {st[sum]+1,i+1};
-            }
-        }
-        if(m == LLONG_MAX)
-            cout<<-1;
-        else
-            cout<<res.first<<" "<<res.second;
-        cout<<NL;
+        if(s[i] == 'a' || s[i] == 'b')
+            a+=s[i];
     }
+    int r = 1;
+    int k = 0;
+    n = a.length();
+    f(i,0,n)
+    {
+        if(a[i] == 'a')
+        {
+            k++;
+        }
+        else
+        {
+            r*=(k+1);
+            r%=mod;
+            k = 0;
+        }
+    }
+    if(k > 0)
+    {
+        r*=(k+1);
+            r%=mod;
+            k = 0;
+    }
+    r-=1;
+    cout<<r<<NL;
 }
 
 int32_t main()
