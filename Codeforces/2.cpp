@@ -1,4 +1,23 @@
-#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <algorithm>
+#include <cmath>
+#include <vector>
+#include <set>
+#include <map>
+#include <unordered_set>
+#include <unordered_map>
+#include <queue>
+#include <ctime>
+#include <cassert>
+#include <complex>
+#include <string>
+#include <cstring>
+#include <chrono>
+#include <random>
+#include <bitset>
 using namespace std;
 typedef long long LL;
 typedef long L;
@@ -12,22 +31,29 @@ const char NL = '\n';
 #define all(a) a.begin(), a.end()
 #define size(container) (int)container.size()
 #define int long long int
+#define pb push_back
+#define fh freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
+clock_t startTime;
+double getCurrentTime() {
+	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
+}
 
 void solve()
 {
+    int n;cin>>n;
+    cout<<n<<NL;
 }
+
 
 int32_t main()
 {
-    freopen("input.txt","r",stdin);
-    freopen("output.txt","w",stdout);
+    fh;
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    // clock_t st = clock();
     // all the code goes here
+    startTime = clock();
     solve();
-    // cout<<"Time taken "<<((float)clock()-st)/CLOCKS_PER_SEC<<endl;
     fflush(stdin);
     fflush(stdout);
     return 0;

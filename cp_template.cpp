@@ -12,6 +12,12 @@ const char NL = '\n';
 #define all(a) a.begin(), a.end()
 #define size(container) (int)container.size()
 #define int long long int
+#define pb push_back
+#define fh freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
+clock_t startTime;
+double getCurrentTime() {
+	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
+}
 
 void solve()
 {
@@ -19,15 +25,13 @@ void solve()
 
 int32_t main()
 {
-    freopen("input.txt","r",stdin);
-    freopen("output.txt","w",stdout);
+    fh;
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    // clock_t st = clock();
     // all the code goes here
+    startTime = clock();
     solve();
-    // cout<<"Time taken "<<((float)clock()-st)/CLOCKS_PER_SEC<<endl;
     fflush(stdin);
     fflush(stdout);
     return 0;
