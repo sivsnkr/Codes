@@ -15,38 +15,22 @@ const char NL = '\n';
 
 void solve()
 {
-    string s;cin>>s;
-    string a = "";
-    int n = s.length();
-    f(i,0,n)
+    test
     {
-        if(s[i] == 'a' || s[i] == 'b')
-            a+=s[i];
-    }
-    int r = 1;
-    int k = 0;
-    n = a.length();
-    f(i,0,n)
-    {
-        if(a[i] == 'a')
+        int n;cin>>n;
+        int p = 0;
+        int res = (pow(3,p)-1)*3;
+        res/=2;
+        while(res < n)
         {
-            k++;
+            p++;
+            res = (pow(3,p)-1)*1;
+            res/=2;
         }
-        else
-        {
-            r*=(k+1);
-            r%=mod;
-            k = 0;
-        }
+        int r = (pow(3,p)-1)*3;
+        r/=2;
+        cout<<res<<NL;
     }
-    if(k > 0)
-    {
-        r*=(k+1);
-            r%=mod;
-            k = 0;
-    }
-    r-=1;
-    cout<<r<<NL;
 }
 
 int32_t main()
