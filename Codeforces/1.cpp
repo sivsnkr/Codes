@@ -12,24 +12,33 @@ const char NL = '\n';
 #define all(a) a.begin(), a.end()
 #define size(container) (int)container.size()
 #define int long long int
+#define pb push_back
+#define fh freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
+clock_t startTime;
+double getCurrentTime() {
+	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
+}
 
 void solve()
 {
+    fh;
     test
     {
-        int n;cin>>n;
-        int p = 0;
-        int res = (pow(3,p)-1)*3;
-        res/=2;
-        while(res < n)
+        int a,b,c;cin>>a>>b>>c;
+        int n = a+b+c;
+        int m = LLONG_MAX;
+        f(A,1,a+b+1)
         {
-            p++;
-            res = (pow(3,p)-1)*1;
-            res/=2;
+            f(C,1,c+b+1)
+            {
+                int B = n-(A+C);
+                if(C > 0 && A+B+C == n && !(B > b && A < a && C < c))
+                {
+                    m = min(m,max({A,B,C}));
+                }
+            }
         }
-        int r = (pow(3,p)-1)*3;
-        r/=2;
-        cout<<res<<NL;
+        cout<<m<<NL;
     }
 }
 
@@ -38,10 +47,9 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    // clock_t st = clock();
     // all the code goes here
+    startTime = clock();
     solve();
-    // cout<<"Time taken "<<((float)clock()-st)/CLOCKS_PER_SEC<<endl;
     fflush(stdin);
     fflush(stdout);
     return 0;

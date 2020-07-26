@@ -21,15 +21,15 @@ double getCurrentTime() {
 
 void solve()
 {
+    fh;// comment this line before submitting to online judge
+    // all the code goes here
 }
 
 int32_t main()
 {
-    fh;
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    // all the code goes here
     startTime = clock();
     solve();
     fflush(stdin);
