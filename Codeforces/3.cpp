@@ -1,15 +1,55 @@
-#include<bits/stdc++.h>
-int n,ans=0,a[200005],f[200005][2];
-int main(){
-	int i;
-	scanf("%d",&n);
-	for (i=1;i<=n;i++){
-		scanf("%d",&a[i]);
-		f[i][0]=f[i][1]=1;
-		if (a[i]>a[i-1]) f[i][0]+=f[i-1][0],f[i][1]+=f[i-1][1];
-		if (i>1&&a[i]>a[i-2]&&f[i-2][0]+1>f[i][1]) f[i][1]=f[i-2][0]+1;
-		if (f[i][1]>ans) ans=f[i][1];
-	}
-	printf("%d",ans);
-	return 0;
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long LL;
+typedef long L;
+const char NL = '\n';
+#define PI 3.14159265
+#define f(i, a, b) for (int i = a; i < b; i++)
+#define fr(i, a, b) for (int i = a; i >= b; i--)
+#define testf int t;scanf("%d", &t);while (t--)
+#define test int t;cin >> t;while (t--)
+#define mod 1000000007
+#define all(a) a.begin(), a.end()
+#define size(container) (int)container.size()
+#define int long long int
+#define pb push_back
+#define fh freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
+clock_t startTime;
+double getCurrentTime() {
+	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
+}
+void readarray(vector<int> &a)
+{
+    for(auto &it : a)cin>>it;
+}
+
+void solve()
+{
+    fh;// comment this line before submitting to online judge
+    // all the code goes here
+    test
+    {
+        int n;cin>>n;
+        vector<int> a(n);
+        readarray(a);
+        if(a[size(a)-1] > a[0])
+            cout<<"YES";
+        else
+        {
+            cout<<"NO";
+        }
+        cout<<NL;
+    }
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    startTime = clock();
+    solve();
+    fflush(stdin);
+    fflush(stdout);
+    return 0;
 }

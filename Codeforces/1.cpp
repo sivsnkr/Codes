@@ -21,24 +21,29 @@ double getCurrentTime() {
 
 void solve()
 {
-    fh;
+    fh;// comment this line before submitting to online judge
+    // all the code goes here
     test
     {
-        int a,b,c;cin>>a>>b>>c;
-        int n = a+b+c;
-        int m = LLONG_MAX;
-        f(A,1,a+b+1)
-        {
-            f(C,1,c+b+1)
-            {
-                int B = n-(A+C);
-                if(C > 0 && A+B+C == n && !(B > b && A < a && C < c))
-                {
-                    m = min(m,max({A,B,C}));
-                }
-            }
-        }
-        cout<<m<<NL;
+        int n,k;cin>>n>>k;
+        vector<int> a(n);
+        f(i,0,n)cin>>a[i];
+        // int sum = 0;
+        // f(i,0,n)sum+=a[i];
+        // int x = 0;
+        // f(i,0,n-1)
+        // {
+        //     sum+=x;
+        //     x++;
+        // }
+        // while(sum % k != 0)
+        // {
+        //     x++;
+        //     sum+=x;
+        //     cout<<"sum "<<sum<<NL;
+        // }
+        // cout<<x+1<<NL;
+        vector<int> re
     }
 }
 
@@ -47,7 +52,6 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    // all the code goes here
     startTime = clock();
     solve();
     fflush(stdin);

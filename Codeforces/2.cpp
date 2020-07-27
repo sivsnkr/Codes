@@ -1,23 +1,4 @@
-// #include <bits/stdc++.h>
-#include <iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <algorithm>
-#include <cmath>
-#include <vector>
-#include <set>
-#include <map>
-#include <unordered_set>
-#include <unordered_map>
-#include <queue>
-#include <ctime>
-#include <cassert>
-#include <complex>
-#include <string>
-#include <cstring>
-#include <chrono>
-#include <random>
-#include <bitset>
+#include <bits/stdc++.h>
 using namespace std;
 typedef long long LL;
 typedef long L;
@@ -40,18 +21,43 @@ double getCurrentTime() {
 
 void solve()
 {
-    int n;cin>>n;
-    cout<<n<<NL;
+    fh;// comment this line before submitting to online judge
+    // all the code goes here
+    test
+    {
+        int n;cin>>n;
+        vector<int> a(n);
+        f(i,0,n)cin>>a[i];
+        vector<int> b;
+        b.push_back(a[0]);
+        f(i,0,n-1)
+        {
+            if(a[i] > a[i+1])
+                b.push_back(a[i]);
+        }
+        b.push_back(a[size(a)-1]);
+        bool valid = true;
+        f(i,0,size(b)-1)
+            if(b[i] > b[i+1])
+            {
+                valid = false;
+                break;
+            }
+        if(!valid)
+            cout<<"NO";
+        else
+        {
+            cout<<"YES";
+        }
+        cout<<NL;
+    }
 }
-
 
 int32_t main()
 {
-    fh;
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    // all the code goes here
     startTime = clock();
     solve();
     fflush(stdin);
