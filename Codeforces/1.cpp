@@ -18,33 +18,23 @@ clock_t startTime;
 double getCurrentTime() {
 	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
 }
+void readarray(vector<int> &a)
+{
+    for(auto &it : a)cin>>it;
+}
 
 void solve()
 {
-    fh;// comment this line before submitting to online judge
+    // fh;// comment this line before submitting to online judges
     // all the code goes here
-    test
-    {
-        int n,k;cin>>n>>k;
-        vector<int> a(n);
-        f(i,0,n)cin>>a[i];
-        // int sum = 0;
-        // f(i,0,n)sum+=a[i];
-        // int x = 0;
-        // f(i,0,n-1)
-        // {
-        //     sum+=x;
-        //     x++;
-        // }
-        // while(sum % k != 0)
-        // {
-        //     x++;
-        //     sum+=x;
-        //     cout<<"sum "<<sum<<NL;
-        // }
-        // cout<<x+1<<NL;
-        vector<int> re
-    }
+    int n;cin>>n;
+    vector<int> a(n);readarray(a);
+    int x,f;cin>>x>>f;
+    int c = 0;
+    f(i,0,n)
+        if(a[i] > x)
+            c++;
+    cout<<(int)f*c<<NL;
 }
 
 int32_t main()
