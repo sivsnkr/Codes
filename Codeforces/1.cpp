@@ -23,45 +23,58 @@ void readarray(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-vector<set<int>> g(100002);
-vector<bool> vis(100002,0);
-long double dfs(int root, int p)
-{
-    vis[root] = 1;
-    long double sum = 0;
-    for(int i : g[root])
-        if(!vis[i])
-            sum += dfs(i,root)+1;
-    if(sum == 0)
-        return 0;
-    return sum/(size(g[root]) - (p >= 1));
-}
-
 void solve()
 {
     // fh;// comment this line before submitting to online judge
     // all the code goes here
-    int n;
-    scanf("%lld",&n);
-    f(i,0,n-1)
+    test
     {
-        int x,y;
-        scanf("%lld%lld",&x,&y);
-        g[x].insert(y);
-        g[y].insert(x);
+        int n;cin>>n;
+        string s;cin>>s;
+        char c = 'z';
+        int mi = -1;
+        f(i,0,n)
+            if(s[i] < c)
+            {
+                c = s[i];
+                mi = i;
+            }
+        set<string> st;
+        string te1 = "";
+        f(i,0,n)
+        {
+            if(s[i] == c)
+            {
+                string te = s.substr(0,i+1);
+                reverse(all(te));
+                int j = 0;
+                for(j = 0; j < min(te.length(),te1.length()); j++)
+                {
+
+                }
+            }
+        }
+        te1 = *st.begin();
+        int k = 0;
+        f(i,0,n-k+1)
+        {
+            string st = s.substr(i,k);
+            reverse(all(st));
+            s = s.substr(0,i)+st+s.substr(i+k,n-i-k);
+        }
+        cout<<s<<NL;
+        cout<<k<<NL;
     }
-    long double rs = dfs(1,0);
-    printf("%.18LF\n",rs);
 }
 
 int32_t main()
 {
-    // ios_base::sync_with_stdio(false);
-    // cin.tie(0);
-    // cout.tie(0);
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
     startTime = clock();
     solve();
-    // fflush(stdin);
-    // fflush(stdout);
+    fflush(stdin);
+    fflush(stdout);
     return 0;
 }
