@@ -23,74 +23,32 @@ void readarray(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
+int smn(int n)
+{
+    for(int i = 2; i*i <= n; i++)
+    {
+        if(n%i == 0)
+            return i;
+    }
+    return n;
+}
+
 void solve()
 {
     // fh;// comment this line before submitting to online judge
     // all the code goes here
-    test
+    int n;cin>>n;
+    int num = smn(n);
+    int ans = 0;
+    while(num <= n)
     {
-        int n;cin>>n;
-        string s;cin>>s;
-        int co = 1;
-        vector<int> a(n);
-        stack<pair<char,int>> st;
-        st.push({s[0],1});
-        a[0] = 1;
-        int z = 0,o = 0;
-        f(i,1,n)
+        if(n%num == 0)
         {
-            if(!st.empty())
-            {
-                pair<int,int> b = st.top();
-                if(b.first != s[i])
-                {
-                    a[i] = b.second;
-                    st.pop();
-                }
-                else
-                {
-                    a[i] = b.second+1;
-                    st.push({s[i],a[i]});
-                }
-            }
-            else
-            {
-                if(s[i] == '0')
-                {
-                    if(o == 0)
-                    {
-                        a[i] = o+1;
-                    }
-                    else
-                    {
-                        a[i] = o;
-                    }
-                }
-                else
-                {
-                    if(z == 0)
-                    {
-                        a[i] = z+1;
-                    }
-                    else
-                    {
-                        a[i] = z;
-                    }
-                }
-                st.push({s[i],a[i]});
-            }
-            if(s[i] == '1')
-                o = a[i];
-            else 
-                z = a[i];
+            ans = n/num;
         }
-        set<int> sc;
-        f(i,0,n)
-            sc.insert(a[i]);
-        cout<<size(sc)<<NL;
-        f(i,0,n)
-            cout<<a[i]<<" \n"[i == n-1];
+        num*=num;
     }
+    cout<<ans<<NL;
 }
 
 int32_t main()

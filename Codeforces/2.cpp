@@ -30,24 +30,47 @@ void solve()
     test
     {
         int n;cin>>n;
-        vector<int> a(n);readarray(a);
+        string s;cin>>s;
+        vector<pair<int,int>> a(n);
+        f(i,0,n)
+            a[i] = {s[i]-48,i};
         sort(all(a));
-        bool valid = 1;
-        f(i,0,n-1)
+        set<int> fi,se;
+        int in = -1;
+        int val = LLONG_MAX;
+        f(i,0,n)
         {
-            if(a[i+1] - a[i] > 1)
+            if(a[i].second > in && a[i].first <= val)
             {
-                valid = 0;
-                break;
+                fi.insert(a[i].second);
+                in = a[i].second;
+                // val = a[i].first;
+                a[i].first = LLONG_MAX;
+            }
+            else
+                val = min(a[i].first,val);
+        }
+        in = -1;
+        f(i,0,n)
+        {
+            if(a[i].first != LLONG_MAX && a[i].second > in)
+            {
+                se.insert(a[i].second);
+                in = a[i].second;
             }
         }
-        // cout<<size(a)<<NL;
-        if(valid)
+        if(size(fi) + size(se) != n)
         {
-            cout<<"YES";
+            cout<<"-"<<NL;
+            continue;
         }
-        else
-            cout<<"NO";
+        vector<int> res(n);
+        for(int i : fi)
+            res[i] = 1;
+        for(int i : se)
+            res[i] = 2;
+        for(int i : res)
+            cout<<i;
         cout<<NL;
     }
 }
