@@ -31,39 +31,65 @@ void solve()
     {
         int n;cin>>n;
         string s;cin>>s;
-        char c = 'z';
-        int mi = -1;
-        f(i,0,n)
-            if(s[i] < c)
-            {
-                c = s[i];
-                mi = i;
-            }
-        set<string> st;
-        string te1 = "";
-        f(i,0,n)
+        int co = 1;
+        vector<int> a(n);
+        stack<pair<char,int>> st;
+        st.push({s[0],1});
+        a[0] = 1;
+        int z = 0,o = 0;
+        f(i,1,n)
         {
-            if(s[i] == c)
+            if(!st.empty())
             {
-                string te = s.substr(0,i+1);
-                reverse(all(te));
-                int j = 0;
-                for(j = 0; j < min(te.length(),te1.length()); j++)
+                pair<int,int> b = st.top();
+                if(b.first != s[i])
                 {
-
+                    a[i] = b.second;
+                    st.pop();
+                }
+                else
+                {
+                    a[i] = b.second+1;
+                    st.push({s[i],a[i]});
                 }
             }
+            else
+            {
+                if(s[i] == '0')
+                {
+                    if(o == 0)
+                    {
+                        a[i] = o+1;
+                    }
+                    else
+                    {
+                        a[i] = o;
+                    }
+                }
+                else
+                {
+                    if(z == 0)
+                    {
+                        a[i] = z+1;
+                    }
+                    else
+                    {
+                        a[i] = z;
+                    }
+                }
+                st.push({s[i],a[i]});
+            }
+            if(s[i] == '1')
+                o = a[i];
+            else 
+                z = a[i];
         }
-        te1 = *st.begin();
-        int k = 0;
-        f(i,0,n-k+1)
-        {
-            string st = s.substr(i,k);
-            reverse(all(st));
-            s = s.substr(0,i)+st+s.substr(i+k,n-i-k);
-        }
-        cout<<s<<NL;
-        cout<<k<<NL;
+        set<int> sc;
+        f(i,0,n)
+            sc.insert(a[i]);
+        cout<<size(sc)<<NL;
+        f(i,0,n)
+            cout<<a[i]<<" \n"[i == n-1];
     }
 }
 

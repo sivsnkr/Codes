@@ -27,8 +27,29 @@ void solve()
 {
     // fh;// comment this line before submitting to online judge
     // all the code goes here
-    char c;cin>>c;
-    cout<<(int)c<<NL;
+    test
+    {
+        int n;cin>>n;
+        vector<int> a(n);readarray(a);
+        sort(all(a));
+        bool valid = 1;
+        f(i,0,n-1)
+        {
+            if(a[i+1] - a[i] > 1)
+            {
+                valid = 0;
+                break;
+            }
+        }
+        // cout<<size(a)<<NL;
+        if(valid)
+        {
+            cout<<"YES";
+        }
+        else
+            cout<<"NO";
+        cout<<NL;
+    }
 }
 
 int32_t main()
