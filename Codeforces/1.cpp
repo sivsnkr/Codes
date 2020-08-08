@@ -23,32 +23,71 @@ void readarray(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-int smn(int n)
-{
-    for(int i = 2; i*i <= n; i++)
-    {
-        if(n%i == 0)
-            return i;
-    }
-    return n;
-}
-
 void solve()
 {
     // fh;// comment this line before submitting to online judge
     // all the code goes here
-    int n;cin>>n;
-    int num = smn(n);
-    int ans = 0;
-    while(num <= n)
+    int n,q;cin>>n>>q;
+    int err = 0;
+    set<int> a1,a2;
+    f(i,0,q)
     {
-        if(n%num == 0)
+        int a,b;cin>>a>>b;
+        b--;
+        if(a == 1)
         {
-            ans = n/num;
+            if(a1.find(b) != a1.end())
+            {
+                a1.erase(b);
+                if(b+1 < n && a2.find(b+1) != a2.end())
+                    err--;
+                if(b-1 >= 0 && a2.find(b-1) != a2.end())
+                    err--;
+                if(a2.find(b) != a2.end())
+                    err--;
+            }
+            else
+            {
+                a1.insert(b);
+                if(b+1 < n && a2.find(b+1) != a2.end())
+                    err++;
+                if(b-1 >= 0 && a2.find(b-1) != a2.end())
+                    err++;
+                if(a2.find(b) != a2.end())
+                    err++;  
+            }
+            
         }
-        num*=num;
+        else
+        {
+            if(a2.find(b) != a2.end())
+            {
+                a2.erase(b);
+                if(b+1 < n && a1.find(b+1) != a1.end())
+                    err--;
+                if(b-1 >= 0 && a1.find(b-1) != a1.end())
+                    err--;
+                if(a1.find(b) != a1.end())
+                    err--;
+            }
+            else
+            {
+                a2.insert(b);
+                if(b+1 < n && a1.find(b+1) != a1.end())
+                    err++;
+                if(b-1 >= 0 && a1.find(b-1) != a1.end())
+                    err++;
+                if(a1.find(b) != a1.end())
+                    err++;  
+            }
+        }
+        
+        if(err > 0)
+            cout<<"NO";
+        else
+            cout<<"YES";
+        cout<<NL;
     }
-    cout<<ans<<NL;
 }
 
 int32_t main()
