@@ -23,70 +23,61 @@ void readarray(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
+bool cbp(string s)
+{
+    int z = 0,o = 0;
+    for(char a : s)
+        if(a == '0')
+            z++;
+        else    
+            o++;
+    int le = s.length();
+    if(le2 == 0)
+    {
+        if(o%2 == 0 && z%2 == 0)
+            return true;
+    }
+    else
+    {
+        int co = 0;
+        if(o%2)
+            co++;
+        if(z%2)
+            co++;
+        if(co != 2)
+            return true;
+    }
+    return false;
+}
+
+bool isplain(std::string s)
+{
+    int st = 0,e = s.length()-1;
+    while(st < e)
+    {
+        if(s[st] != s[e])
+            return false;
+        st++,e--;
+    }
+    return true;
+}
+
 void solve()
 {
     // fh;// comment this line before submitting to online judge
     // all the code goes here
-    int n,q;cin>>n>>q;
-    int err = 0;
-    set<int> a1,a2;
-    f(i,0,q)
+    test
     {
-        int a,b;cin>>a>>b;
-        b--;
-        if(a == 1)
+        int n;cin>>s;
+        vector<string> str(n);
+        int c = 0;
+        int p = 0;
+        f(i,0,n)
         {
-            if(a1.find(b) != a1.end())
-            {
-                a1.erase(b);
-                if(b+1 < n && a2.find(b+1) != a2.end())
-                    err--;
-                if(b-1 >= 0 && a2.find(b-1) != a2.end())
-                    err--;
-                if(a2.find(b) != a2.end())
-                    err--;
-            }
-            else
-            {
-                a1.insert(b);
-                if(b+1 < n && a2.find(b+1) != a2.end())
-                    err++;
-                if(b-1 >= 0 && a2.find(b-1) != a2.end())
-                    err++;
-                if(a2.find(b) != a2.end())
-                    err++;  
-            }
-            
+            cin>>str[i];
+            if(isplain(str[i]))
+                p++;
         }
-        else
-        {
-            if(a2.find(b) != a2.end())
-            {
-                a2.erase(b);
-                if(b+1 < n && a1.find(b+1) != a1.end())
-                    err--;
-                if(b-1 >= 0 && a1.find(b-1) != a1.end())
-                    err--;
-                if(a1.find(b) != a1.end())
-                    err--;
-            }
-            else
-            {
-                a2.insert(b);
-                if(b+1 < n && a1.find(b+1) != a1.end())
-                    err++;
-                if(b-1 >= 0 && a1.find(b-1) != a1.end())
-                    err++;
-                if(a1.find(b) != a1.end())
-                    err++;  
-            }
-        }
-        
-        if(err > 0)
-            cout<<"NO";
-        else
-            cout<<"YES";
-        cout<<NL;
     }
 }
 
