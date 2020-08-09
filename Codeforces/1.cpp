@@ -23,62 +23,38 @@ void readarray(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-bool cbp(string s)
-{
-    int z = 0,o = 0;
-    for(char a : s)
-        if(a == '0')
-            z++;
-        else    
-            o++;
-    int le = s.length();
-    if(le2 == 0)
-    {
-        if(o%2 == 0 && z%2 == 0)
-            return true;
-    }
-    else
-    {
-        int co = 0;
-        if(o%2)
-            co++;
-        if(z%2)
-            co++;
-        if(co != 2)
-            return true;
-    }
-    return false;
-}
-
-bool isplain(std::string s)
-{
-    int st = 0,e = s.length()-1;
-    while(st < e)
-    {
-        if(s[st] != s[e])
-            return false;
-        st++,e--;
-    }
-    return true;
-}
-
 void solve()
 {
     // fh;// comment this line before submitting to online judge
     // all the code goes here
-    test
-    {
-        int n;cin>>s;
-        vector<string> str(n);
-        int c = 0;
-        int p = 0;
-        f(i,0,n)
+    string s;cin>>s;
+    char mc = s[0];
+    int in = 0;
+    int n = s.length();
+    f(i,0,n)
+        if(s[i] <= mc)
         {
-            cin>>str[i];
-            if(isplain(str[i]))
-                p++;
+            mc = s[i];
+            in = i;
         }
+    f(i,0,n)
+    {
+        if(s[i] == mc)
+        {
+            cout<<1<<" ";
+            swap(s[i],s[0]);
+            continue;
+        }
+
+        if(s[i] > s[0] && i < in)
+        {
+            cout<<1<<" ";
+            swap(s[i],s[0]);
+        }
+        else 
+            cout<<0<<" ";
     }
+    cout<<NL;
 }
 
 int32_t main()
