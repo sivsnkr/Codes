@@ -23,38 +23,33 @@ void readarray(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
+int fac(int n)
+{
+    int p = 1;
+    f(i,1,n+1)
+    {
+        p*=i;
+        p%=mod;
+    }
+    return p;
+}
+
 void solve()
 {
     // fh;// comment this line before submitting to online judge
     // all the code goes here
-    string s;cin>>s;
-    char mc = s[0];
-    int in = 0;
-    int n = s.length();
-    f(i,0,n)
-        if(s[i] <= mc)
-        {
-            mc = s[i];
-            in = i;
-        }
-    f(i,0,n)
-    {
-        if(s[i] == mc)
-        {
-            cout<<1<<" ";
-            swap(s[i],s[0]);
-            continue;
-        }
-
-        if(s[i] > s[0] && i < in)
-        {
-            cout<<1<<" ";
-            swap(s[i],s[0]);
-        }
-        else 
-            cout<<0<<" ";
-    }
-    cout<<NL;
+    int n;cin>>n;
+    int res = n*(n-1);
+    res%=mod;
+    res*=(n-2);;
+    res/=6;
+    res%=mod;
+    res*=2;
+    res*=fac(n-2);
+    res%=mod;
+    res*=fac(n-3);
+    res%=mod;
+    cout<<res<<NL;
 }
 
 int32_t main()
