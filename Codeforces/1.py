@@ -1,3 +1,4 @@
+
 import math
 n = int(input())
 res = math.factorial(n)/(math.factorial(3)*math.factorial(n-3))

@@ -25,54 +25,26 @@ void readarray(vector<int> &a)
 
 void solve()
 {
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt","r",stdin);
+        freopen("output.txt","w",stdout);
+    #endif
+    long long n,l,r;
+	cin>>n>>l>>r;
+	// long long a[n][3];
+    vector<vector<int>> a(n,vector<int>(3,0));
+	a[0][0]=r/3-(l-1)/3;
+	a[0][1]=(r+2)/3-(l+1)/3;
+	a[0][2]=(r+1)/3-l/3;
+	
+	for (int i=1;i<n;i++)
+		for (int j1=0;j1<3;j1++)
+			for (int j2=0;j2<3;j2++)
+				a[i][(j1+j2)%3]=(a[i][(j1+j2)%3] + a[i-1][j1]*a[0][j2]) % 1000000007;
+		
+	cout<<a[n-1][0];
     // fh;// comment this line before submitting to online judge
     // all the code goes here
-    test
-    {
-        int n;cin>>n;
-        string s;cin>>s;
-        vector<pair<int,int>> a(n);
-        f(i,0,n)
-            a[i] = {s[i]-48,i};
-        sort(all(a));
-        set<int> fi,se;
-        int in = -1;
-        int val = LLONG_MAX;
-        f(i,0,n)
-        {
-            if(a[i].second > in && a[i].first <= val)
-            {
-                fi.insert(a[i].second);
-                in = a[i].second;
-                // val = a[i].first;
-                a[i].first = LLONG_MAX;
-            }
-            else
-                val = min(a[i].first,val);
-        }
-        in = -1;
-        f(i,0,n)
-        {
-            if(a[i].first != LLONG_MAX && a[i].second > in)
-            {
-                se.insert(a[i].second);
-                in = a[i].second;
-            }
-        }
-        if(size(fi) + size(se) != n)
-        {
-            cout<<"-"<<NL;
-            continue;
-        }
-        vector<int> res(n);
-        for(int i : fi)
-            res[i] = 1;
-        for(int i : se)
-            res[i] = 2;
-        for(int i : res)
-            cout<<i;
-        cout<<NL;
-    }
 }
 
 int32_t main()

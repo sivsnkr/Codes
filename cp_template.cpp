@@ -25,7 +25,9 @@ void readarray(vector<int> &a)
 
 void solve()
 {
-    // fh;// comment this line before submitting to online judge
+    #ifndef ONLINE_JUDGE
+        fh;
+    #endif
     // all the code goes here
 }
 
