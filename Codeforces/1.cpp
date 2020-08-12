@@ -23,91 +23,26 @@ void readarray(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-string adds(string a,string b)
-{
-    // cout<<a<<" "<<b<<NL;
-    string s = "";
-    int i = 0;
-    reverse(all(a)),reverse(all(b));
-    int c = 0;
-    for(i = 0; i < min(a.length(),b.length()); i++)
-    {
-        int su = (a[i]-48)+(b[i]-48)+c;
-        s+=to_string(su-(su/10)*10);
-        c = su/10;
-    }
-    while(c > 0 && i < a.length())
-    {
-        int su = (a[i]-48)+c;
-        s+=to_string(su-(su/10)*10);
-        c = su/10;
-        i++;
-    }
-    while(c > 0 && i < b.length())
-    {
-        int su = (b[i]-48)+c;
-        s+=to_string(su-(su/10)*10);
-        c = su/10;
-        i++;
-    }
-    // cout<<c<<NL;
-    while(i < b.length())
-        s+=b[i],i++;
-    while(i < a.length())
-        s+=a[i],i++;
-    if(c > 0)
-        s+=to_string(c);
-    reverse(all(s));
-    // cout<<"str "<<s<<NL;
-    return s;
-}
-
 void solve()
 {
     #ifndef ONLINE_JUDGE
         fh;
     #endif
     // all the code goes here
-    int n;cin>>n;
-    string s;cin>>s;
-    string ms = s;
-    set<int> st;
-    int co = 0;
-    f(i,n/2,n)
+    int n;
+    long double m;
+    cin>>n>>m;
+    vector<long double> a(n),b(n);
+    f(i,0,n)cin>>a[i];
+    f(i,0,n)cin>>b[i];
+    long double sum = m/(1+b[0]);
+    fr(i,n-1,1)
     {
-        if(s[i] != '0')
-        {
-            co++;
-            st.insert(i);
-        }
-        if(co >= 4)
-            break;
+        sum+=((m+sum)/(1+a[i]));
+        sum+=((m+sum)/(1+b[i]));
     }
-
-    co = 0;
-    fr(i,n/2-1,0)
-    {
-        if(s[i] != '0')
-        {
-            co++;
-            st.insert(i);
-        }
-        if(co >= 4)
-            break;
-    }    
-    for(int i : st)
-    {
-        if(i <= 0 || i >= n || s[i] == '0')
-            continue;
-        string te = adds(s.substr(0,i),s.substr(i,n-i));
-        if(te.length() < ms.length())
-            ms = te;
-        else if(te.length() == ms.length())
-        {
-            ms = min(te,ms);
-        }
-    }
-    cout<<ms<<NL;
+    sum+=(m+sum)/(1+a[0]);
+    cout<<sum<<NL;
 }
 
 int32_t main()
