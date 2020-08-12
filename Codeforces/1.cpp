@@ -71,7 +71,31 @@ void solve()
     int n;cin>>n;
     string s;cin>>s;
     string ms = s;
-    f(i,n/2-4,n/2+5)
+    set<int> st;
+    int co = 0;
+    f(i,n/2,n)
+    {
+        if(s[i] != '0')
+        {
+            co++;
+            st.insert(i);
+        }
+        if(co >= 4)
+            break;
+    }
+
+    co = 0;
+    fr(i,n/2-1,0)
+    {
+        if(s[i] != '0')
+        {
+            co++;
+            st.insert(i);
+        }
+        if(co >= 4)
+            break;
+    }    
+    for(int i : st)
     {
         if(i <= 0 || i >= n || s[i] == '0')
             continue;
