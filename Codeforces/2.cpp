@@ -22,29 +22,58 @@ void readarray(vector<int> &a)
 {
     for(auto &it : a)cin>>it;
 }
+multiset<int,greater<int>> fi,se;
+int calc()
+{
+    int sum = 0;
+    while(size(se) > 0 && size(fi) > 0)
+    {
+        sum+=(*se.begin()*(*fi.begin()));
+        se.erase(se.begin());
+        fi.erase(fi.begin());
+    }
+    return sum;
+}
 
 void solve()
 {
     #ifndef ONLINE_JUDGE
-        freopen("input.txt","r",stdin);
-        freopen("output.txt","w",stdout);
+        fh;
     #endif
-    long long n,l,r;
-	cin>>n>>l>>r;
-	// long long a[n][3];
-    vector<vector<int>> a(n,vector<int>(3,0));
-	a[0][0]=r/3-(l-1)/3;
-	a[0][1]=(r+2)/3-(l+1)/3;
-	a[0][2]=(r+1)/3-l/3;
-	
-	for (int i=1;i<n;i++)
-		for (int j1=0;j1<3;j1++)
-			for (int j2=0;j2<3;j2++)
-				a[i][(j1+j2)%3]=(a[i][(j1+j2)%3] + a[i-1][j1]*a[0][j2]) % 1000000007;
-		
-	cout<<a[n-1][0];
-    // fh;// comment this line before submitting to online judge
     // all the code goes here
+    int r,g,b;cin>>r>>g>>b;
+    multiset<int,greater<int>>rv,gv,bv;
+    f(i,0,r)
+    {
+        int x;cin>>x;
+        rv.insert(x);
+    }
+    f(i,0,g)
+    {
+        int x;cin>>x;
+        gv.insert(x);
+    }
+    f(i,0,b)
+    {
+        int x;cin>>x;
+        bv.insert(x);
+    }
+    int sum = 0;
+    fi.clear(),se.clear();
+    fi = rv;
+    merge(all(gv),all(bv),inserter(se,se.begin()));
+    sum = max(sum,calc());
+    // cout<<sum<<NL;
+    fi.clear(),se.clear();
+    fi = gv;
+    merge(all(rv),all(bv),inserter(se,se.begin()));
+    sum = max(sum,calc());
+    // cout<<sum<<NL;
+    fi.clear(),se.clear();
+    fi = bv;
+    merge(all(rv),all(gv),inserter(se,se.begin()));
+    sum = max(sum,calc());
+    cout<<sum<<NL;
 }
 
 int32_t main()

@@ -7,3 +7,4 @@ res = res*2;
 res = res%1000000007;
 print(int(res))
 
+

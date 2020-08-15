@@ -29,19 +29,57 @@ void solve()
         fh;
     #endif
     // all the code goes here
-    int n;
-    long double m;
-    cin>>n>>m;
-    vector<long double> a(n),b(n);
-    f(i,0,n)cin>>a[i];
-    f(i,0,n)cin>>b[i];
-    long double sum = m/(1+b[0]);
-    fr(i,n-1,1)
+    int r,g,b;cin>>r>>g>>b;
+    vector<multiset<int,greater<int>>> ar(3);
+    f(i,0,r)
     {
-        sum+=((m+sum)/(1+a[i]));
-        sum+=((m+sum)/(1+b[i]));
+        int x;cin>>x;
+        ar[0].insert(x);
     }
-    sum+=(m+sum)/(1+a[0]);
+    f(i,0,g)
+    {
+        int x;cin>>x;
+        ar[1].insert(x);
+    }
+    f(i,0,b)
+    {
+        int x;cin>>x;
+        ar[2].insert(x);
+    }
+    int sum = 0;
+    while (true)
+    {
+        int mx = -3;
+        int sum1 = -1;
+        if(size(ar[0]) > 0 && size(ar[1]) > 0)
+            sum1 = *ar[0].begin()*(*ar[1].begin());
+        int sum2 = -1;
+        if(size(ar[0]) > 0 && size(ar[2]) > 0)
+            sum2 = *ar[0].begin()*(*ar[2].begin());
+        int sum3 = -1;
+        if(size(ar[2]) > 0 && size(ar[1]) > 0)
+            sum3 = *ar[2].begin()*(*ar[1].begin());
+        mx = max({sum1,sum2,sum3});
+        // cout<<mx<<NL;
+        if(mx == -1)
+            break;
+        sum+=mx;
+        if(mx == sum1)
+        {
+            ar[0].erase(ar[0].begin());
+            ar[1].erase(ar[1].begin());
+        }
+        else if(mx == sum2)
+        {
+            ar[0].erase(ar[0].begin());
+            ar[2].erase(ar[2].begin());
+        }
+        else
+        {
+            ar[2].erase(ar[2].begin());
+            ar[1].erase(ar[1].begin());
+        }
+    }
     cout<<sum<<NL;
 }
 
