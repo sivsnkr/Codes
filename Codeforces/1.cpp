@@ -23,64 +23,34 @@ void readarray(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-void solve()
+int n,m,arr[300000];
+int k,x,z;
+
+inline void solve()
 {
-    #ifndef ONLINE_JUDGE
-        fh;
-    #endif
     // all the code goes here
-    int r,g,b;cin>>r>>g>>b;
-    vector<multiset<int,greater<int>>> ar(3);
-    f(i,0,r)
-    {
-        int x;cin>>x;
-        ar[0].insert(x);
-    }
-    f(i,0,g)
-    {
-        int x;cin>>x;
-        ar[1].insert(x);
-    }
-    f(i,0,b)
-    {
-        int x;cin>>x;
-        ar[2].insert(x);
-    }
-    int sum = 0;
-    while (true)
-    {
-        int mx = -3;
-        int sum1 = -1;
-        if(size(ar[0]) > 0 && size(ar[1]) > 0)
-            sum1 = *ar[0].begin()*(*ar[1].begin());
-        int sum2 = -1;
-        if(size(ar[0]) > 0 && size(ar[2]) > 0)
-            sum2 = *ar[0].begin()*(*ar[2].begin());
-        int sum3 = -1;
-        if(size(ar[2]) > 0 && size(ar[1]) > 0)
-            sum3 = *ar[2].begin()*(*ar[1].begin());
-        mx = max({sum1,sum2,sum3});
-        // cout<<mx<<NL;
-        if(mx == -1)
-            break;
-        sum+=mx;
-        if(mx == sum1)
+    cin>>n>>m>>k;
+    f(i,0,m)cin>>arr[i];
+    int ans=0;
+    z=k;
+    int rem=0;
+    int cur=-1;
+    while(cur<m-1){
+        int ind=upper_bound(arr,arr+m,z+rem)-arr;
+        ind--;
+        if (ind!=cur)
         {
-            ar[0].erase(ar[0].begin());
-            ar[1].erase(ar[1].begin());
+            rem+=ind-cur;
+            cur=ind;
+            ans++;
         }
-        else if(mx == sum2)
-        {
-            ar[0].erase(ar[0].begin());
-            ar[2].erase(ar[2].begin());
-        }
-        else
-        {
-            ar[2].erase(ar[2].begin());
-            ar[1].erase(ar[1].begin());
+        else {
+            x=arr[cur+1]-z-rem;
+            x=ceil(1.0*x/k);
+            z+=k*x;
         }
     }
-    cout<<sum<<NL;
+    cout<<ans;
 }
 
 int32_t main()
@@ -88,6 +58,9 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
+    #ifndef ONLINE_JUDGE
+        fh;
+    #endif
     startTime = clock();
     solve();
     fflush(stdin);
