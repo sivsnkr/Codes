@@ -26,42 +26,31 @@ void readarray(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
-    test
+    string s;cin>>s;
+    int n = s.length();
+    int sum = 0;
+    int w = 0,o = 0;
+    vector<int> dp(n);
+    f(i,0,n-1)
     {
-        int n;cin>>n;
-        vector<int> a(n);readarray(a);
-        map<int,int> st;
-        f(i,0,n)
-            st[a[i]]++;
-        multiset<int,greater<int>> ste;
-        for(pair<int,int> a : st)
-            ste.insert(a.second);
-        set<int> st1;
-        int sum = 0;
-        for(int i : ste)
+        if(s[i] == 'o')
         {
-            if(st1.empty())
-            {
-                sum+=i;
-                st1.insert(i);
-            }
-            else if(i >= *st1.begin())
-            {
-                int v = *st1.begin();
-                if(v-1 > 0)
-                {
-                    sum += v-1;
-                    st1.insert(v-1);
-                }
-            }
-            else
-            {
-                sum+=i;
-                st1.insert(i);
-            }
+            dp[i] = w;
         }
-        cout<<sum<<NL;
+        if(s[i] == s[i+1] && s[i] == 'v')
+        {
+            w++;
+        }
     }
+    w = 0;
+    fr(i,n-1,1)
+    {
+        if(s[i] == s[i-1] && s[i] == 'v')
+            w++;
+        if(s[i] == 'o' && w > 0)
+            sum+=dp[i];
+    }
+    cout<<sum<<NL;
 }
 
 int32_t main()
