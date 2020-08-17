@@ -23,34 +23,45 @@ void readarray(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-int n,m,arr[300000];
-int k,x,z;
-
 inline void solve()
 {
     // all the code goes here
-    cin>>n>>m>>k;
-    f(i,0,m)cin>>arr[i];
-    int ans=0;
-    z=k;
-    int rem=0;
-    int cur=-1;
-    while(cur<m-1){
-        int ind=upper_bound(arr,arr+m,z+rem)-arr;
-        ind--;
-        if (ind!=cur)
+    test
+    {
+        int n;cin>>n;
+        vector<int> a(n);readarray(a);
+        map<int,int> st;
+        f(i,0,n)
+            st[a[i]]++;
+        multiset<int,greater<int>> ste;
+        for(pair<int,int> a : st)
+            ste.insert(a.second);
+        set<int> st1;
+        int sum = 0;
+        for(int i : ste)
         {
-            rem+=ind-cur;
-            cur=ind;
-            ans++;
+            if(st1.empty())
+            {
+                sum+=i;
+                st1.insert(i);
+            }
+            else if(i >= *st1.begin())
+            {
+                int v = *st1.begin();
+                if(v-1 > 0)
+                {
+                    sum += v-1;
+                    st1.insert(v-1);
+                }
+            }
+            else
+            {
+                sum+=i;
+                st1.insert(i);
+            }
         }
-        else {
-            x=arr[cur+1]-z-rem;
-            x=ceil(1.0*x/k);
-            z+=k*x;
-        }
+        cout<<sum<<NL;
     }
-    cout<<ans;
 }
 
 int32_t main()

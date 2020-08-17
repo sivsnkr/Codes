@@ -23,13 +23,25 @@ void readarray(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-void solve()
+vector<int> a(100001);
+int n;
+
+inline void solve()
 {
     // all the code goes here
-    set<int> st;
-    st.insert(1);
-    auto it = st.lower_bound(1);
-    cout<<it<<NL;
+    cin>>n;
+    f(i,0,n)
+        cin>>a[i];
+    int q;cin>>q;
+    vector<int> ac = a;
+    f(i,1,n)
+        ac[i]+=ac[i-1];
+    while (q--)
+    {
+        int l,r;cin>>l>>r;
+        l--,r--;
+        cout<<(ac[r]-ac[l]+a[l])/10<<NL;
+    }
 }
 
 int32_t main()
