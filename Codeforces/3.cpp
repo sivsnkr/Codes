@@ -23,23 +23,48 @@ void readarray(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-void solve()
+int n,m;
+bool checkV(vector<vector<int>> a)
 {
-    fh;// comment this line before submitting to online judge
-    // all the code goes here
-    test
+    bool valid = 1;
+    f(i,0,n)
     {
-        int n;cin>>n;
-        vector<int> a(n);
-        readarray(a);
-        if(a[size(a)-1] > a[0])
-            cout<<"YES";
-        else
-        {
-            cout<<"NO";
-        }
-        cout<<NL;
+        f(j,0,m-1)
+            if(a[i][j] >= a[i][j+1])
+                valid = 0;
     }
+    f(i,0,m)
+        f(j,0,n-1)
+            if(a[j][i] >= a[j+1][i])
+                valid = 0;
+    return valid;
+}
+
+inline void solve()
+{
+    // all the code goes here
+    cin>>n>>m;
+    vector<vector<int>> a(n,vector<int>(m)),b(n,vector<int>(m));
+    f(i,0,n)
+        f(j,0,m)
+            cin>>a[i][j];
+    f(i,0,n)
+        f(j,0,m)
+            cin>>b[i][j];
+    f(i,0,n)
+        f(j,0,m)
+        {
+            int mi = min(a[i][j],b[i][j]);
+            int mx = max(a[i][j],b[i][j]);
+            a[i][j] = mi;
+            b[i][j] = mx;
+        }
+    bool valid = checkV(a);
+    valid = valid&&checkV(b);
+    if(valid)
+        cout<<"Possible";
+    else 
+        cout<<"Impossible";
 }
 
 int32_t main()
@@ -47,6 +72,9 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
+    #ifndef ONLINE_JUDGE
+        fh;
+    #endif
     startTime = clock();
     solve();
     fflush(stdin);

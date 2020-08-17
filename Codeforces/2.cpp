@@ -23,25 +23,63 @@ void readarray(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-vector<int> a(100001);
-int n;
-
+int n,m;
+bool checkV(vector<vector<int>> a)
+{
+    bool valid = 1;
+    f(i,0,n)
+    {
+        f(j,0,m-1)
+            if(a[i][j] >= a[i][j+1])
+                valid = 0;
+    }
+    f(i,0,m)
+        f(j,0,n-1)
+            if(a[j][i] >= a[j+1][i])
+                valid = 0;
+    return valid;
+}
 inline void solve()
 {
     // all the code goes here
-    cin>>n;
+    cin>>n>>m;
+    vector<vector<int>> a(n,vector<int>(m)),b(n,vector<int>(m));
     f(i,0,n)
-        cin>>a[i];
-    int q;cin>>q;
-    vector<int> ac = a;
-    f(i,1,n)
-        ac[i]+=ac[i-1];
-    while (q--)
+        f(j,0,m)
+            cin>>a[i][j];
+    f(i,0,n)
+        f(j,0,m)
+            cin>>b[i][j];
+    
+    f(i,0,n)
     {
-        int l,r;cin>>l>>r;
-        l--,r--;
-        cout<<(ac[r]-ac[l]+a[l])/10<<NL;
+        f(j,0,m-1)
+            if(a[i][j] >= a[i][j+1])
+                swap(a[i][j+1],b[i][j+1]);
     }
+    f(i,0,m)
+        f(j,0,n-1)
+            if(a[j][i] >= a[j+1][i])
+                swap(a[j+1][i],b[j+1][i]);
+
+    f(i,0,n)
+    {
+        f(j,0,m-1)
+            if(b[i][j] >= b[i][j+1])
+                swap(a[i][j+1],b[i][j+1]);
+    }
+    f(i,0,m)
+        f(j,0,n-1)
+            if(b[j][i] >= b[j+1][i])
+                swap(a[j+1][i],b[j+1][i]);
+    
+    bool valid = checkV(a);
+    valid = valid&&checkV(b);
+    if(valid)
+        cout<<"Possible";
+    else 
+        cout<<"Impossible";
+    cout<<NL;
 }
 
 int32_t main()
