@@ -26,30 +26,22 @@ void readarray(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
-    string s;cin>>s;
-    int n = s.length();
+    int n;cin>>n;
+    vector<int> a(n);readarray(a);
+    map<int,int> st;
+    int mi = LLONG_MAX;
+    f(i,0,n)
+    {
+        st[a[i]]++;
+    }
+    for(int i : {4,8,15,16,23,42})
+    {
+        mi = min(mi,st[i]);
+        cout<<i<<" "<<st[i]<<NL;
+    }
     int sum = 0;
-    int w = 0,o = 0;
-    vector<int> dp(n);
-    f(i,0,n-1)
-    {
-        if(s[i] == 'o')
-        {
-            dp[i] = w;
-        }
-        if(s[i] == s[i+1] && s[i] == 'v')
-        {
-            w++;
-        }
-    }
-    w = 0;
-    fr(i,n-1,1)
-    {
-        if(s[i] == s[i-1] && s[i] == 'v')
-            w++;
-        if(s[i] == 'o' && w > 0)
-            sum+=dp[i];
-    }
+    for(pair<int,int> a : st)
+        sum+=(a.second-mi);
     cout<<sum<<NL;
 }
 
