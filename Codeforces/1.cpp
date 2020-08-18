@@ -29,20 +29,26 @@ inline void solve()
     int n;cin>>n;
     vector<int> a(n);readarray(a);
     map<int,int> st;
-    int mi = LLONG_MAX;
-    f(i,0,n)
+    fr(i,n-1,0)
     {
         st[a[i]]++;
+        int mi = LLONG_MAX;
+        for(int k : {4,8,15,16,23,42})
+        {
+            if(k > a[i])
+                break;
+            st[k] = min(st[a[i]],st[k]);
+        }
     }
-    for(int i : {4,8,15,16,23,42})
+    int mi = LLONG_MAX;
+    for(int k : {4,8,15,16,23,42})
     {
-        mi = min(mi,st[i]);
-        cout<<i<<" "<<st[i]<<NL;
+        cout<<k<<" "<<st[k]<<NL;
+        mi = min(mi,st[k]);
     }
-    int sum = 0;
-    for(pair<int,int> a : st)
-        sum+=(a.second-mi);
-    cout<<sum<<NL;
+    int sum = n-mi*6;
+    cout<<sum;
+    
 }
 
 int32_t main()
