@@ -28,35 +28,18 @@ inline void solve()
     // all the code goes here
     test
     {
-        int n;cin>>n;
-        vector<int> a(n);readarray(a);
-        int in = 0;
-        int mx = a[0];
-        f(i,0,n)
-            if(mx < a[i])
-            {
-                mx = a[i];
-                in = i;
-            }
-        int cmx = mx;
-        fr(i,in-1,0)
+        int k,n,a,b;cin>>k>>n>>a>>b;
+        int n1 = (k-1-n*b)/(a-b);
+        if(n1 > 0)
         {
-            a[i]=min(a[i],cmx-1);
-            cmx = min(cmx,a[i]);
-        }
-        cmx = mx;
-        f(i,in+1,n)
-        {
-            a[i]=min(a[i],cmx-1);
-            cmx = min(cmx,a[i]);
-        }
-        if(*min_element(all(a)) >= 0)
-        {
-            cout<<"Yes";
+            cout<<min(n,n1);
         }
         else
         {
-            cout<<"No";
+            if(k-b*n > 0)
+                cout<<0;
+            else
+                cout<<-1;
         }
         cout<<NL;
     }

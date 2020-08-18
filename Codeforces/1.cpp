@@ -26,28 +26,32 @@ void readarray(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
-    int n;cin>>n;
-    vector<int> a(n);readarray(a);
-    map<int,int> st;
-    fr(i,n-1,0)
-    {
-        st[a[i]]++;
-        int mi = LLONG_MAX;
-        for(int k : {4,8,15,16,23,42})
-        {
-            if(k > a[i])
-                break;
-            st[k] = min(st[a[i]],st[k]);
-        }
-    }
-    int mi = LLONG_MAX;
-    for(int k : {4,8,15,16,23,42})
-    {
-        cout<<k<<" "<<st[k]<<NL;
-        mi = min(mi,st[k]);
-    }
-    int sum = n-mi*6;
-    cout<<sum;
+    int a,b,c,d;
+    cout<<"? 1 2"<<NL;
+    fflush(stdout);
+    cin>>a;
+    cout<<"? 2 3"<<NL;
+    fflush(stdout);
+    cin>>b;
+    cout<<"? 3 4"<<NL;
+    fflush(stdout);
+    cin>>c;
+    cout<<"? 4 5"<<NL;
+    fflush(stdout);
+    cin>>d;
+    vector<int> res(6);
+    if(a%23 == 0 && b%23 == 0)
+        res[1] = 23;
+    else if(b%23 == 0 && c%23 == 0)
+        res[2] = 23;
+    else if(c%23 == 0 && d%23 == 0)
+        res[3] = 23;
+    else if(a%23 == 0)
+        res[0] = 23;
+    else if(d%23 == 0)
+        res[4]= 23;
+    else
+        res[5] = 23;
     
 }
 
