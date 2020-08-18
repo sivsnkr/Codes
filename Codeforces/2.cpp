@@ -30,34 +30,27 @@ inline void solve()
     {
         int n;cin>>n;
         vector<int> a(n);readarray(a);
-        int in = 0;
-        int mx = a[0];
+        int l1{},l2{};
         f(i,0,n)
-            if(mx < a[i])
+        {
+            if(a[i] >= i)
+                l1++;
+            else
             {
-                mx = a[i];
-                in = i;
+                break;
             }
-        int cmx = mx;
-        fr(i,in-1,0)
+        }   
+        fr(i,n-1,0)
         {
-            a[i]=min(a[i],cmx-1);
-            cmx = min(cmx,a[i]);
+            if(a[i] >= n-1-i)
+                l2++;
+            else 
+                break;
         }
-        cmx = mx;
-        f(i,in+1,n)
-        {
-            a[i]=min(a[i],cmx-1);
-            cmx = min(cmx,a[i]);
-        }
-        if(*min_element(all(a)) >= 0)
-        {
+        if(l1+l2 > n)
             cout<<"Yes";
-        }
-        else
-        {
+        else 
             cout<<"No";
-        }
         cout<<NL;
     }
 }

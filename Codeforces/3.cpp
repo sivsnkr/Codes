@@ -23,48 +23,40 @@ void readarray(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-int n,m;
-bool checkV(vector<vector<int>> a)
+int n;
+vector<int> a(2e6);
+bool check(int mid)
 {
     bool valid = 1;
     f(i,0,n)
     {
-        f(j,0,m-1)
-            if(a[i][j] >= a[i][j+1])
+        if(i > mid)
+        {
+            if(a[i] < n-1-i)
                 valid = 0;
+            continue;
+        }
+        if(a[i] < i)
+            valid = 0;
     }
-    f(i,0,m)
-        f(j,0,n-1)
-            if(a[j][i] >= a[j+1][i])
-                valid = 0;
     return valid;
 }
 
 inline void solve()
 {
     // all the code goes here
-    cin>>n>>m;
-    vector<vector<int>> a(n,vector<int>(m)),b(n,vector<int>(m));
-    f(i,0,n)
-        f(j,0,m)
-            cin>>a[i][j];
-    f(i,0,n)
-        f(j,0,m)
-            cin>>b[i][j];
-    f(i,0,n)
-        f(j,0,m)
-        {
-            int mi = min(a[i][j],b[i][j]);
-            int mx = max(a[i][j],b[i][j]);
-            a[i][j] = mi;
-            b[i][j] = mx;
-        }
-    bool valid = checkV(a);
-    valid = valid&&checkV(b);
-    if(valid)
-        cout<<"Possible";
-    else 
-        cout<<"Impossible";
+    test
+    {
+        cin>>n;
+        f(i,0,n)cin>>a[i];
+        bool valid = check((n-1)/2);
+        valid = valid || check(n/2);
+        if(!valid)
+            cout<<"No";
+        else 
+            cout<<"Yes";
+        cout<<NL;
+    }
 }
 
 int32_t main()
