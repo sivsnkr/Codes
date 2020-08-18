@@ -23,63 +23,43 @@ void readarray(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-int n,m;
-bool checkV(vector<vector<int>> a)
-{
-    bool valid = 1;
-    f(i,0,n)
-    {
-        f(j,0,m-1)
-            if(a[i][j] >= a[i][j+1])
-                valid = 0;
-    }
-    f(i,0,m)
-        f(j,0,n-1)
-            if(a[j][i] >= a[j+1][i])
-                valid = 0;
-    return valid;
-}
 inline void solve()
 {
     // all the code goes here
-    cin>>n>>m;
-    vector<vector<int>> a(n,vector<int>(m)),b(n,vector<int>(m));
-    f(i,0,n)
-        f(j,0,m)
-            cin>>a[i][j];
-    f(i,0,n)
-        f(j,0,m)
-            cin>>b[i][j];
-    
-    f(i,0,n)
+    test
     {
-        f(j,0,m-1)
-            if(a[i][j] >= a[i][j+1])
-                swap(a[i][j+1],b[i][j+1]);
+        int n;cin>>n;
+        vector<int> a(n);readarray(a);
+        int in = 0;
+        int mx = a[0];
+        f(i,0,n)
+            if(mx < a[i])
+            {
+                mx = a[i];
+                in = i;
+            }
+        int cmx = mx;
+        fr(i,in-1,0)
+        {
+            a[i]=min(a[i],cmx-1);
+            cmx = min(cmx,a[i]);
+        }
+        cmx = mx;
+        f(i,in+1,n)
+        {
+            a[i]=min(a[i],cmx-1);
+            cmx = min(cmx,a[i]);
+        }
+        if(*min_element(all(a)) >= 0)
+        {
+            cout<<"Yes";
+        }
+        else
+        {
+            cout<<"No";
+        }
+        cout<<NL;
     }
-    f(i,0,m)
-        f(j,0,n-1)
-            if(a[j][i] >= a[j+1][i])
-                swap(a[j+1][i],b[j+1][i]);
-
-    f(i,0,n)
-    {
-        f(j,0,m-1)
-            if(b[i][j] >= b[i][j+1])
-                swap(a[i][j+1],b[i][j+1]);
-    }
-    f(i,0,m)
-        f(j,0,n-1)
-            if(b[j][i] >= b[j+1][i])
-                swap(a[j+1][i],b[j+1][i]);
-    
-    bool valid = checkV(a);
-    valid = valid&&checkV(b);
-    if(valid)
-        cout<<"Possible";
-    else 
-        cout<<"Impossible";
-    cout<<NL;
 }
 
 int32_t main()
