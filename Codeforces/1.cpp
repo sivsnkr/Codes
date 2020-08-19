@@ -26,33 +26,42 @@ void readarray(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
-    int a,b,c,d;
-    cout<<"? 1 2"<<NL;
-    fflush(stdout);
-    cin>>a;
-    cout<<"? 2 3"<<NL;
-    fflush(stdout);
-    cin>>b;
-    cout<<"? 3 4"<<NL;
-    fflush(stdout);
-    cin>>c;
-    cout<<"? 4 5"<<NL;
-    fflush(stdout);
-    cin>>d;
-    vector<int> res(6);
-    if(a%23 == 0 && b%23 == 0)
-        res[1] = 23;
-    else if(b%23 == 0 && c%23 == 0)
-        res[2] = 23;
-    else if(c%23 == 0 && d%23 == 0)
-        res[3] = 23;
-    else if(a%23 == 0)
-        res[0] = 23;
-    else if(d%23 == 0)
-        res[4]= 23;
-    else
-        res[5] = 23;
-    
+    test
+    {
+        int n,k;cin>>n>>k;
+        vector<int> a(n);readarray(a);
+        multiset<int> st;
+        f(i,0,n)
+            if(a[i]%k)
+                st.insert((a[i]/k+1)*k-a[i]);
+        int sum = 0;
+        int x = 1;
+        while(!st.empty())
+        {
+            int te = *st.begin();
+            if(te == x)
+            {
+                st.erase(st.begin());
+                x++;
+            }
+            else if(te < x)
+            {
+                st.erase(st.begin());
+                st.insert(((te+x)/k+1)*k-(te+x));
+                x++;
+            }
+            else
+            {
+                x = te;
+                st.erase(st.begin());
+            }
+
+        for(int i : st)
+            cout<<i<<" ";
+        cout<<NL;
+        }
+        cout<<x+1<<NL;
+    }
 }
 
 int32_t main()
