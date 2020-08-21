@@ -8,7 +8,7 @@ const char NL = '\n';
 #define fr(i, a, b) for (int i = a; i >= b; i--)
 #define testf int t;scanf("%d", &t);while (t--)
 #define test int t;cin >> t;while (t--)
-#define mod 1000000007
+// #define mod 1000000007
 #define all(a) a.begin(), a.end()
 #define size(container) (int)container.size()
 #define int long long int
@@ -18,6 +18,7 @@ clock_t startTime;
 double getCurrentTime() {
 	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
 }
+
 void readarray(vector<int> &a)
 {
     for(auto &it : a)cin>>it;
@@ -26,42 +27,22 @@ void readarray(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
-    test
+    int mod = 998244353;
+    int n;cin>>n;
+    vector<int> a(n),b(n);
+    readarray(a),readarray(b);
+    sort(all(b),greater<int>());
+    vector<int> dp(n);
+    f(i,0,n)
+        dp[i] = ((n-i)*(i+1)*a[i])%mod;
+    sort(all(dp));
+    int sum = 0;
+    f(i,0,n)
     {
-        int n,k;cin>>n>>k;
-        vector<int> a(n);readarray(a);
-        multiset<int> st;
-        f(i,0,n)
-            if(a[i]%k)
-                st.insert((a[i]/k+1)*k-a[i]);
-        int sum = 0;
-        int x = 1;
-        while(!st.empty())
-        {
-            int te = *st.begin();
-            if(te == x)
-            {
-                st.erase(st.begin());
-                x++;
-            }
-            else if(te < x)
-            {
-                st.erase(st.begin());
-                st.insert(((te+x)/k+1)*k-(te+x));
-                x++;
-            }
-            else
-            {
-                x = te;
-                st.erase(st.begin());
-            }
-
-        for(int i : st)
-            cout<<i<<" ";
-        cout<<NL;
-        }
-        cout<<x+1<<NL;
+        sum += b[i]*dp[i];
+        sum%=mod;
     }
+    cout<<sum<<NL;
 }
 
 int32_t main()
