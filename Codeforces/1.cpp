@@ -26,32 +26,27 @@ void readarray(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
-    test
+    string s;cin>>s;
+    int n = s.length();
+    vector<int> dp(n,0);
+    int q;cin>>q;
+    while(q--)
     {
-        int n,k;cin>>n>>k;
-        vector<int> a(n);
-        readarray(a);
-        map<int,int> st;
-        int mx = 0;
-        f(i,0,n)
-        {
-            if(a[i]%k)
-            {
-                int el = k-a[i]%k;
-                st[el]++;
-                mx = max(mx,st[el]);
-            }
-        }
-        int sum = 0;
-        for(auto [key,value] : st)
-        {
-            if(value == mx)
-            {
-                sum = k*(value-1)+key+1;
-            }
-        }
-        cout<<sum<<NL;
+        int x;cin>>x;
+        x--;
+        dp[x]++;
+        dp[n-x-1]--;
     }
+    f(i,1,n)
+        dp[i]+=dp[i-1];
+    // f(i,0,n)
+    //     cout<<dp[i]<<" \n"[i==n-1];
+    f(i,0,n)
+        if(dp[i]%2 && i < n-i-1)
+        {
+            swap(s[i],s[n-i-1]);
+        }
+    cout<<s<<NL;
 }
 
 int32_t main()
