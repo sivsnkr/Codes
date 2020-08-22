@@ -8,7 +8,7 @@ const char NL = '\n';
 #define fr(i, a, b) for (int i = a; i >= b; i--)
 #define testf int t;scanf("%d", &t);while (t--)
 #define test int t;cin >> t;while (t--)
-// #define mod 1000000007
+#define mod 1000000007
 #define all(a) a.begin(), a.end()
 #define size(container) (int)container.size()
 #define int long long int
@@ -18,7 +18,6 @@ clock_t startTime;
 double getCurrentTime() {
 	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
 }
-
 void readarray(vector<int> &a)
 {
     for(auto &it : a)cin>>it;
@@ -27,22 +26,32 @@ void readarray(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
-    int mod = 998244353;
-    int n;cin>>n;
-    vector<int> a(n),b(n);
-    readarray(a),readarray(b);
-    sort(all(b),greater<int>());
-    vector<int> dp(n);
-    f(i,0,n)
-        dp[i] = ((n-i)*(i+1)*a[i])%mod;
-    sort(all(dp));
-    int sum = 0;
-    f(i,0,n)
+    test
     {
-        sum += b[i]*dp[i];
-        sum%=mod;
+        int n,k;cin>>n>>k;
+        vector<int> a(n);
+        readarray(a);
+        map<int,int> st;
+        int mx = 0;
+        f(i,0,n)
+        {
+            if(a[i]%k)
+            {
+                int el = k-a[i]%k;
+                st[el]++;
+                mx = max(mx,st[el]);
+            }
+        }
+        int sum = 0;
+        for(auto [key,value] : st)
+        {
+            if(value == mx)
+            {
+                sum = k*(value-1)+key+1;
+            }
+        }
+        cout<<sum<<NL;
     }
-    cout<<sum<<NL;
 }
 
 int32_t main()
