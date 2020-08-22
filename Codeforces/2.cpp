@@ -26,23 +26,39 @@ void readarray(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
-    test
+    int n,k;cin>>n>>k;
+    vector<set<int,greater<int>>> dp(26);
+    vector<int> po(n);
+    readarray(po);
+    string s;cin>>s;
+    int sum = 0;
+    char p = s[0];
+    multiset<int,greater<int>> st;
+    st.insert(po[0]);
+    f(i,1,n)
     {
-        int k,n,a,b;cin>>k>>n>>a>>b;
-        int n1 = (k-1-n*b)/(a-b);
-        if(n1 > 0)
+        if(s[i] != p)
         {
-            cout<<min(n,n1);
+            int co = k;
+            while(co && !st.empty())
+            {
+                sum+=*st.begin();
+                st.erase(st.begin());
+                co--;
+            }
+            st.clear();
         }
-        else
-        {
-            if(k-b*n > 0)
-                cout<<0;
-            else
-                cout<<-1;
-        }
-        cout<<NL;
+        st.insert(po[i]);
+        p = s[i];
     }
+    int co = k;
+    while(co && !st.empty())
+    {
+        sum+=*st.begin();
+        st.erase(st.begin());
+        co--;
+    }
+    cout<<sum<<NL;
 }
 
 int32_t main()
