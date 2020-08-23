@@ -26,6 +26,32 @@ void readarray(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
+    int te = 1;
+    test
+    {
+        int n;cin>>n;
+        vector<int> a(n);
+        readarray(a);
+        int le = 1;
+        int ml = 0;
+        int pdiff = a[1]-a[0];
+        f(i,2,n)
+        {
+            if(a[i]-a[i-1] == pdiff)
+            {
+                le++;
+            }
+            else
+            {
+                ml = max(ml,le+1);
+                le = 1;
+            }
+            pdiff = a[i]-a[i-1];
+        }
+        ml = max(le+1,ml);
+        cout<<"Case #"<<te<<": "<<ml<<NL;
+        te++;
+    }
 }
 
 int32_t main()
@@ -33,9 +59,9 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    #ifndef ONLINE_JUDGE
-        fh;
-    #endif
+    // #ifndef ONLINE_JUDGE
+    //     fh;
+    // #endif
     startTime = clock();
     solve();
     fflush(stdin);
