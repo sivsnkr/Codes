@@ -80,7 +80,8 @@ inline void solve()
             f(i,0,n)
                 if(resc[i] == -1)
                     resc[i] = n-2; 
-            if(valid(resc,a,b,n))
+            bool validate = valid(resc,a,b,n);
+            if(validate)
             {
                 res = resc;
                 break;
@@ -92,12 +93,7 @@ inline void solve()
         {
             printf("Case #%d: ",te);
             f(i,0,n)
-            {
-                if(i == n-1)
-                    printf("%d",res[i]);
-                else
-                    printf("%d ",res[i]);
-            }
+                printf("%d ",res[i]);
             printf("\n");
         }
         te++;
