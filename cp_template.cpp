@@ -18,7 +18,7 @@ clock_t startTime;
 double getCurrentTime() {
 	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
 }
-void readarray(vector<int> &a)
+void read(vector<int> &a)
 {
     for(auto &it : a)cin>>it;
 }
