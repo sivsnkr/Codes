@@ -26,17 +26,25 @@ void read(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
-    int n,m,k;cin>>n>>m>>k;
+    int n;cin>>n;
     vector<int> a(n);
     read(a);
-    vector<int> st;
+    int co = 0;
+    int mx = a[0];
+    vector<tuple<int,int,int>> res;
     f(i,1,n)
-        st.pb(a[i]-a[i-1]);
-    sort(all(st));
-    int ans = k;
-    f(i,0,n-k)
-        ans+=st[i];
-    cout<<ans<<NL;
+    {
+        if(a[i] <= mx)
+        {
+            co++;
+            res.pb({1,i+1,mx+1-a[i]});
+            a[i] = mx+1;
+        }
+        mx = max(a[i],mx);
+    }
+    cout<<size(res)<<NL;
+    f(i,0,size(res))
+        cout<<get<0>(res[i])<<" "<<get<1>(res[i])<<" "<<get<2>(res[i])<<NL;
 }
 
 int32_t main()
