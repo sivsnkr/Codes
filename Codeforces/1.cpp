@@ -18,7 +18,7 @@ clock_t startTime;
 double getCurrentTime() {
 	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
 }
-void readarray(vector<int> &a)
+void read(vector<int> &a)
 {
     for(auto &it : a)cin>>it;
 }
@@ -26,6 +26,17 @@ void readarray(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
+    int n,m,k;cin>>n>>m>>k;
+    vector<int> a(n);
+    read(a);
+    vector<int> st;
+    f(i,1,n)
+        st.pb(a[i]-a[i-1]);
+    sort(all(st));
+    int ans = k;
+    f(i,0,n-k)
+        ans+=st[i];
+    cout<<ans<<NL;
 }
 
 int32_t main()
