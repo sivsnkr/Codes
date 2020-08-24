@@ -27,7 +27,6 @@ inline void solve()
 {
     // all the code goes here
 }
-
 int32_t main()
 {
     ios_base::sync_with_stdio(false);
