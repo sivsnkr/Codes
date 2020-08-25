@@ -18,47 +18,22 @@ clock_t startTime;
 double getCurrentTime() {
 	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
 }
-void readarray(vector<int> &a)
+void read(vector<int> &a)
 {
     for(auto &it : a)cin>>it;
 }
 
+int s,w;
+int p,f;
 inline void solve()
 {
     // all the code goes here
-    int n,k;cin>>n>>k;
-    vector<set<int,greater<int>>> dp(26);
-    vector<int> po(n);
-    readarray(po);
-    string s;cin>>s;
-    int sum = 0;
-    char p = s[0];
-    multiset<int,greater<int>> st;
-    st.insert(po[0]);
-    f(i,1,n)
+    test
     {
-        if(s[i] != p)
-        {
-            int co = k;
-            while(co && !st.empty())
-            {
-                sum+=*st.begin();
-                st.erase(st.begin());
-                co--;
-            }
-            st.clear();
-        }
-        st.insert(po[i]);
-        p = s[i];
+        cin>>p>>f;
+        int cnts,cntw;cin>>cnts>>cntw;
+        cin>>s>>w;
     }
-    int co = k;
-    while(co && !st.empty())
-    {
-        sum+=*st.begin();
-        st.erase(st.begin());
-        co--;
-    }
-    cout<<sum<<NL;
 }
 
 int32_t main()
