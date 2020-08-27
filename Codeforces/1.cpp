@@ -23,25 +23,26 @@ void read(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-int s,w;
-int p,f;
-
 inline void solve()
 {
     // all the code goes here
-    test
+    int n;cin>>n;
+    vector<int> a(n);
+    read(a);
+    int l = 0;
+    f(i,0,n)
     {
-		int p,f,cnt_s,cnt_w,s,w;
-		cin>>p>>f>>cnt_s>>cnt_w>>s>>w;
-		if(s>w)swap(s,w),swap(cnt_s,cnt_w);
-		int ans=0;
-		for(int i=0;i<=cnt_s;i++){
-			if(i*s>p)break;
-			int k=min(cnt_s-i,f/s);
-			ans=max(ans,i+k+min((p-i*s)/w+(f-k*s)/w,cnt_w));
-		}
-		cout<<ans<<NL;
+        int sum = 0;
+        f(j,i,n)
+        {
+            sum+=a[j];
+            if(sum > (j-i+1)*100)
+            {
+                l = max(l,j-i+1);
+            }
+        }
     }
+    cout<<l<<NL;
 }
 
 int32_t main()
