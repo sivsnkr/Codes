@@ -26,23 +26,36 @@ void read(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
-    int n;cin>>n;
-    vector<int> a(n);
-    read(a);
-    int l = 0;
-    f(i,0,n)
+    int q;cin>>q;
+    int l = 0,r = 0;
+    map<int,pair<int,char>> st;
+    while(q--)
     {
-        int sum = 0;
-        f(j,i,n)
+        char c;cin>>c;
+        int v;cin>>v;
+        if(c == 'L')
         {
-            sum+=a[j];
-            if(sum > (j-i+1)*100)
+            l++;
+            st[v] = {l,'L'};
+        }
+        else if(c == 'R')
+        {
+            r++;
+            st[v] = {r,'R'};
+        }
+        else
+        {
+            if(st[v].second == 'L')
             {
-                l = max(l,j-i+1);
+                cout<<(l-st[v].first);
             }
+            else
+            {
+                cout<<(r-st[v].first);
+            }
+            cout<<NL;
         }
     }
-    cout<<l<<NL;
 }
 
 int32_t main()

@@ -23,16 +23,31 @@ void read(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-int s,w;
-int p,f;
 inline void solve()
 {
     // all the code goes here
-    test
+    int n,k;cin>>n>>k;
+    vector<int> a(n);
+    read(a);
+    sort(all(a));
+    int gr = 0;
+    int l = 0;
+    int s = 0;
+    int e = 0;
+    f(i,0,n)
     {
-        cin>>p>>f;
-        int cnts,cntw;cin>>cnts>>cntw;
-        cin>>s>>w;
+        int s = size(a);
+        f(k,0,s)
+        {
+            int up = a[i]+5;
+            int j = upper_bound(all(a),up);
+            if(j-1-i > l)
+            {
+                l = j-1-i;
+                s = i;
+                e = j-1;
+            }
+        }
     }
 }
 
