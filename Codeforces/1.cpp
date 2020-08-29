@@ -26,36 +26,6 @@ void read(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
-    int q;cin>>q;
-    int l = 0,r = 0;
-    map<int,pair<int,char>> st;
-    while(q--)
-    {
-        char c;cin>>c;
-        int v;cin>>v;
-        if(c == 'L')
-        {
-            l++;
-            st[v] = {l,'L'};
-        }
-        else if(c == 'R')
-        {
-            r++;
-            st[v] = {r,'R'};
-        }
-        else
-        {
-            if(st[v].second == 'L')
-            {
-                cout<<(l-st[v].first);
-            }
-            else
-            {
-                cout<<(r-st[v].first);
-            }
-            cout<<NL;
-        }
-    }
 }
 
 int32_t main()
