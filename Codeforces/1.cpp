@@ -23,9 +23,41 @@ void read(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
+const int mx = 2e5+2;
+vector<int> fsum(mx,0);
 inline void solve()
 {
     // all the code goes here
+    int n,k,q;cin>>n>>k>>q;
+    f(i,0,n)
+    {
+        int x,y;cin>>x>>y;
+        fsum[x]++,fsum[y+1]--;
+    }
+    f(i,1,mx)
+    {
+        fsum[i]+=fsum[i-1];
+    }
+    vector<int> fcsum = fsum;
+    f(i,1,mx)
+    {
+        if(fsum[i] >= k)
+        {
+            fsum[i] = 1;
+        }
+        else
+        {
+            fsum[i] = 0;
+        }
+    }
+    f(i,1,mx)
+        fsum[i]+=fsum[i-1];
+    
+    while(q--)
+    {
+        int x,y;cin>>x>>y;
+        cout<<fsum[y]-fsum[x]+(fcsum[x]>=k)<<NL;
+    }
 }
 
 int32_t main()
