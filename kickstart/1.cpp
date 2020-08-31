@@ -23,9 +23,45 @@ void read(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
+const int MX = 1e4+2;
+int a[MX];
+
+int penalty(int i,int j,int k)
+{
+    if(a[i] > a[i-1] && j <= k)
+        return 1;
+    if(a[i] < a[i-1] && j >= k)
+        return 1;
+    return 0;
+}
+
 inline void solve()
 {
     // all the code goes here
+    int te = 1;
+    test
+    {
+        int n;cin>>n;
+        f(i,0,n)
+            cin>>a[i];
+        int dp[n][4];
+        memset(dp,0,sizeof(dp));
+        f(i,1,n)
+        {
+            f(j,0,4)
+            {
+                int mx = LLONG_MAX;
+                f(k,0,4)
+                {
+                    int p = penalty(i,j,k);
+                    mx = min(mx,dp[i-1][k]+p);
+                }
+                dp[i][j] = mx;
+            }
+        }
+        int ans = *min_element(dp[n-1],dp[n-1]+4);
+        cout<<"Case #"<<te++<<": "<<ans<<NL;
+    }
 }
 
 int32_t main()

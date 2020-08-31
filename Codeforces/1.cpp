@@ -8,12 +8,12 @@ const char NL = '\n';
 #define fr(i, a, b) for (int i = a; i >= b; i--)
 #define testf int t;scanf("%d", &t);while (t--)
 #define test int t;cin >> t;while (t--)
-#define mod 1000000007
 #define all(a) a.begin(), a.end()
 #define size(container) (int)container.size()
 #define int long long int
 #define pb push_back
 #define fh freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
+int mod = 1000000007;
 clock_t startTime;
 double getCurrentTime() {
 	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
@@ -23,40 +23,30 @@ void read(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-const int mx = 2e5+2;
-vector<int> fsum(mx,0);
 inline void solve()
 {
     // all the code goes here
-    int n,k,q;cin>>n>>k>>q;
-    f(i,0,n)
+    test
     {
-        int x,y;cin>>x>>y;
-        fsum[x]++,fsum[y+1]--;
-    }
-    f(i,1,mx)
-    {
-        fsum[i]+=fsum[i-1];
-    }
-    vector<int> fcsum = fsum;
-    f(i,1,mx)
-    {
-        if(fsum[i] >= k)
+        int n;cin>>n;
+        vector<int> a(n);
+        read(a);
+        sort(all(a));
+        bool tw = 0;
+        for(int j = 0; j <= 1; j++)
         {
-            fsum[i] = 1;
+            int t = 0,hl = 0;
+            for(int i = j; i < n; i+=2)
+                hl+=a[i];
+            for(int i = (j+1)%2; i < n; i+=2)
+                t+=a[i];
+            tw = (t > hl);
         }
+        if(tw)
+            cout<<"T";
         else
-        {
-            fsum[i] = 0;
-        }
-    }
-    f(i,1,mx)
-        fsum[i]+=fsum[i-1];
-    
-    while(q--)
-    {
-        int x,y;cin>>x>>y;
-        cout<<fsum[y]-fsum[x]+(fcsum[x]>=k)<<NL;
+            cout<<"HL";
+        cout<<NL;
     }
 }
 
