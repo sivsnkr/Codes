@@ -8,12 +8,12 @@ const char NL = '\n';
 #define fr(i, a, b) for (int i = a; i >= b; i--)
 #define testf int t;scanf("%d", &t);while (t--)
 #define test int t;cin >> t;while (t--)
-#define mod 1000000007
 #define all(a) a.begin(), a.end()
 #define size(container) (int)container.size()
 #define int long long int
 #define pb push_back
 #define fh freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
+int mod = 1000000007;
 clock_t startTime;
 double getCurrentTime() {
 	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
@@ -26,28 +26,41 @@ void read(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
-    int n,k;cin>>n>>k;
-    vector<int> a(n);
-    read(a);
-    sort(all(a));
-    int gr = 0;
-    int l = 0;
-    int s = 0;
-    int e = 0;
-    f(i,0,n)
+    test
     {
-        int s = size(a);
-        f(k,0,s)
+        int n;cin>>n;
+        vector<int> a(n);
+        multiset<int,greater<int>> st;
+        f(i,0,n)
         {
-            int up = a[i]+5;
-            int j = upper_bound(all(a),up);
-            if(j-1-i > l)
+            int x;cin>>x;
+            st.insert(x);
+        }
+        vector<int> res;
+        res.pb(*st.begin());
+        st.erase(st.begin());
+        int mv = res[0];
+        for(int i = 2; i*i <= mv; i++)
+        {
+            if(mv%i == 0)
             {
-                l = j-1-i;
-                s = i;
-                e = j-1;
+                if(st.find(i) != st.end())
+                {
+                    res.pb(i);
+                    st.erase(st.find(i));
+                }
+                if(st.find(mv/i) != st.end())
+                {
+                    res.pb(mv/i);
+                    st.erase(st.find(mv/i));
+                }
             }
         }
+        for(int i : st)
+            res.pb(i);
+        f(i,0,size(res))
+            cout<<res[i]<<" ";
+        cout<<NL;
     }
 }
 

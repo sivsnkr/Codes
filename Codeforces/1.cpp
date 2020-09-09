@@ -26,28 +26,27 @@ void read(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
-    test
+    string s;cin>>s;
+    set<pair<int,int>> st;
+    int x = 0,y = 0;
+    st.insert({0,0});
+    for(char c : s)
     {
-        int n;cin>>n;
-        vector<int> a(n);
-        read(a);
-        sort(all(a));
-        bool tw = 0;
-        for(int j = 0; j <= 1; j++)
-        {
-            int t = 0,hl = 0;
-            for(int i = j; i < n; i+=2)
-                hl+=a[i];
-            for(int i = (j+1)%2; i < n; i+=2)
-                t+=a[i];
-            tw = (t > hl);
-        }
-        if(tw)
-            cout<<"T";
+        if(c == 'L')
+            x--;
+        else if(c == 'R')
+            x++;
+        else if(c == 'U')
+            y++;
         else
-            cout<<"HL";
-        cout<<NL;
+            y--;
+        if(st.find({x,y}) != st.end())
+        {
+            cout<<"BUG"<<NL;
+            return;
+        }
     }
+    cout<<"OK"<<NL;
 }
 
 int32_t main()
