@@ -23,25 +23,73 @@ void read(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
+vector<vector<int>> g(100005);
+vector<bool> vis(100005);
+vector<int> colour(100005);
+
+bool check(int root,int color)
+{
+    if(vis[root])
+        return true;
+    if(colour[root] != color && color != -1)   
+        return false;
+    bool res = true;
+    vis[root] = 1;
+    for(int i : g[root])
+    {
+        bool rest = 1;
+        if(color == -1)
+            rest = check(i,colour[i]);
+        else
+            rest = check(i,color);
+        res = res&&rest;
+    }
+    return res;
+}
+
 inline void solve()
 {
     // all the code goes here
-    int n,k;cin>>n>>k;
-    if(n < 2*k+1)
+    int n;cin>>n;
+    f(i,0,n-1)
     {
-        cout<<-1<<NL;
-        return;
+        int x,y;cin>>x>>y;
+        g[x].pb(y);
+        g[y].pb(x);
     }
-    cout<<n*k<<NL;
+    f(i,1,n+1)
+        cin>>colour[i];
+    int r1 = 1,r2 = 1;
+    bool found = 0;
     f(i,0,n)
     {
-        int kc = k;
-        while(kc)
+        for(int j : g[i])
         {
-            cout<<i+1<<" "<<(kc+i)%n+1<<NL;
-            kc--;
+            if(colour[i] != colour[j])
+            {
+                r1 = i;r2 = j;
+                found = 1;
+                break;
+            }
         }
+        if(found)
+            break;
     }
+    
+    if(check(r1,-1))
+    {
+        cout<<"YES"<<NL;
+        cout<<r1<<NL;
+        return;
+    }
+    vis.assign(n+1,0);
+    if(check(r2,-1))
+    {
+        cout<<"YES"<<NL;
+        cout<<r2<<NL;
+        return;
+    }
+    cout<<"NO"<<NL;
 }
 
 int32_t main()
