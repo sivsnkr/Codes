@@ -22,6 +22,19 @@ void read(vector<int> &a)
 {
     for(auto &it : a)cin>>it;
 }
+const int maxn=200007;
+vector<vector<int>> dp(maxn,vector<int>(26,0));
+
+int cnt(int u, int v)
+{
+    int ret = 0,mx = 0;
+    f(i,0,26)
+    {
+        ret+=dp[u][i]+dp[v][i];
+        mx = max(mx,dp[u][i]+dp[v][i]);
+    }
+    return ret-mx;
+}
 
 inline void solve()
 {
@@ -30,31 +43,13 @@ inline void solve()
     {
         int n,k;cin>>n>>k;
         string s;cin>>s;
-        int co = 0;
-        vector<bool> vis(n,0);
-        f(i,0,n/2)
-        {
-            if(!vis[i])
-            {
-                char c = s[i],c1 = s[n-1-i];
-                int co1 = 0,co2 = 0;
-                for(int j = i; j < n; j+=k)
-                {
-                    if(s[j] != c)
-                        co1++;
-                    if(s[j] != c1)
-                        co2++;
-                    vis[j] = 1;
-                }
-                c = co1>co2?c1:c;
-                for(int j = i; j < n; j+=k)
-                {
-                    s[j] = c;
-                }
-                co+=min(co1,co2);
-            }
-        }
-        cout<<co<<NL;
+        dp.assign(n,vector<int>(26,0));
+        f(i,0,n)
+            dp[i%k][s[i]-'a']++;
+        int count = 0;
+        f(i,0,k)
+            count += cnt(i,k-1-i);
+        cout<<count/2<<NL;
     }
 }
 
