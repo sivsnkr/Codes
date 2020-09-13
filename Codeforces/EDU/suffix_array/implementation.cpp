@@ -23,37 +23,52 @@ void read(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-int mins(int n,int s)
-{
-    string res = "";
-    while(s >= 9)
-    {
-        res+='9';
-        s-=9;
-    }
-    if(s > 0)
-        res+=to_string(s);
-    int nu = stoll(res);
-    while(nu < n)
-        nu*=10;
-    return nu-n;
-}
-
 inline void solve()
 {
     // all the code goes here
-    test
+    string s;cin>>s;
+    s+='$';
+    int n = size(s);
+    vector<int> p(n),c(n);
     {
-        int n,s;cin>>n>>s;
-        int val = 1;
-        int ms = LLONG_MAX;
-        while(val <= s)
+        // for k = 0
+        vector<pair<char,int>> a(n);
+        f(i,0,n)a[i] = {s[i],i};
+        sort(all(a));
+        f(i,0,n)p[i] = a[i].second;
+        c[p[0]] = 0;
+        f(i,1,n)
         {
-            ms = min(ms,mins(n,val));
-            val++;
+            if(a[i].first == a[i-1].first)
+                c[p[i]] = c[p[i-1]];
+            else 
+                c[p[i]] = c[p[i-1]]+1;
         }
-        cout<<ms<<NL;
     }
+    
+    int k = 0;
+    while(((int)1<<k) < n)
+    {
+        vector<pair<pair<int,int>,int>> a(n);
+        f(i,0,n)
+        {
+            a[i] = {{c[i],c[(i+((int)1<<k))%n]},i};
+        }
+        sort(all(a));
+        f(i,0,n)p[i] = a[i].second;
+        c[p[0]] = 0;
+        f(i,1,n)
+        {
+            if(a[i].first == a[i-1].first)
+                c[p[i]] = c[p[i-1]];
+            else 
+                c[p[i]] = c[p[i-1]]+1;
+        }
+        k++;
+    }
+    f(i,0,n)
+        cout<<p[i]<<" ";
+    cout<<NL;
 }
 
 int32_t main()
@@ -61,9 +76,6 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    #ifndef ONLINE_JUDGE
-        fh;
-    #endif
     startTime = clock();
     solve();
     fflush(stdin);
