@@ -26,42 +26,6 @@ void read(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
-    test
-    {
-        int n;cin>>n;
-        vector<int> a(n);
-        multiset<int,greater<int>> st;
-        f(i,0,n)
-        {
-            int x;cin>>x;
-            st.insert(x);
-        }
-        vector<int> res;
-        res.pb(*st.begin());
-        st.erase(st.begin());
-        int mv = res[0];
-        for(int i = 2; i*i <= mv; i++)
-        {
-            if(mv%i == 0)
-            {
-                if(st.find(i) != st.end())
-                {
-                    res.pb(i);
-                    st.erase(st.find(i));
-                }
-                if(st.find(mv/i) != st.end())
-                {
-                    res.pb(mv/i);
-                    st.erase(st.find(mv/i));
-                }
-            }
-        }
-        for(int i : st)
-            res.pb(i);
-        f(i,0,size(res))
-            cout<<res[i]<<" ";
-        cout<<NL;
-    }
 }
 
 int32_t main()

@@ -1,5 +1,9 @@
 4
-1 2
-2 3
-3 4
-1 2 1 1
+6 2
+abaaba
+6 3
+abaaba
+36 9
+hippopotomonstrosesquippedaliophobia
+21 7
+wudixiaoxingxingheclp

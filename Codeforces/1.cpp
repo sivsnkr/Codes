@@ -23,73 +23,39 @@ void read(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-vector<vector<int>> g(100005);
-vector<bool> vis(100005);
-vector<int> colour(100005);
-
-bool check(int root,int color)
-{
-    if(vis[root])
-        return true;
-    if(colour[root] != color && color != -1)   
-        return false;
-    bool res = true;
-    vis[root] = 1;
-    for(int i : g[root])
-    {
-        bool rest = 1;
-        if(color == -1)
-            rest = check(i,colour[i]);
-        else
-            rest = check(i,color);
-        res = res&&rest;
-    }
-    return res;
-}
-
 inline void solve()
 {
     // all the code goes here
-    int n;cin>>n;
-    f(i,0,n-1)
+    test
     {
-        int x,y;cin>>x>>y;
-        g[x].pb(y);
-        g[y].pb(x);
-    }
-    f(i,1,n+1)
-        cin>>colour[i];
-    int r1 = 1,r2 = 1;
-    bool found = 0;
-    f(i,0,n)
-    {
-        for(int j : g[i])
+        int n,k;cin>>n>>k;
+        string s;cin>>s;
+        int co = 0;
+        vector<bool> vis(n,0);
+        f(i,0,n/2)
         {
-            if(colour[i] != colour[j])
+            if(!vis[i])
             {
-                r1 = i;r2 = j;
-                found = 1;
-                break;
+                char c = s[i],c1 = s[n-1-i];
+                int co1 = 0,co2 = 0;
+                for(int j = i; j < n; j+=k)
+                {
+                    if(s[j] != c)
+                        co1++;
+                    if(s[j] != c1)
+                        co2++;
+                    vis[j] = 1;
+                }
+                c = co1>co2?c1:c;
+                for(int j = i; j < n; j+=k)
+                {
+                    s[j] = c;
+                }
+                co+=min(co1,co2);
             }
         }
-        if(found)
-            break;
+        cout<<co<<NL;
     }
-    
-    if(check(r1,-1))
-    {
-        cout<<"YES"<<NL;
-        cout<<r1<<NL;
-        return;
-    }
-    vis.assign(n+1,0);
-    if(check(r2,-1))
-    {
-        cout<<"YES"<<NL;
-        cout<<r2<<NL;
-        return;
-    }
-    cout<<"NO"<<NL;
 }
 
 int32_t main()
