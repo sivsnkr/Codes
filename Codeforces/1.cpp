@@ -23,37 +23,31 @@ void read(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-int mins(int n,int s)
+int fact(int n)
 {
-    string res = "";
-    while(s >= 9)
+    int res = 1;
+    while(n > 1)
     {
-        res+='9';
-        s-=9;
+        res*=(n);
+        res%=mod;
+        n--;
     }
-    if(s > 0)
-        res+=to_string(s);
-    int nu = stoll(res);
-    while(nu < n)
-        nu*=10;
-    return nu-n;
+    return res%mod;
 }
 
 inline void solve()
 {
     // all the code goes here
-    test
+    int n;cin>>n;
+    int res = fact(n-3)*(n-2);
+    res%=mod;
+    int res1 = 0;
+    f(i,1,n+1)
     {
-        int n,s;cin>>n>>s;
-        int val = 1;
-        int ms = LLONG_MAX;
-        while(val <= s)
-        {
-            ms = min(ms,mins(n,val));
-            val++;
-        }
-        cout<<ms<<NL;
+        res1+=(n-i)*(n-1-i);
+        res1%=mod;
     }
+    cout<<(res+res1)%mod<<NL;
 }
 
 int32_t main()

@@ -1,51 +1,53 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-#define ll long long
-#define max 300005
-vector<int>v[max];
-int red[max],blu[max],color[max];
-int tred=0,tblu=0;
-int ans=0;
-
-void dfs_color(int u, int prev)
+typedef long long LL;
+typedef long L;
+const char NL = '\n';
+#define PI 3.14159265
+#define f(i, a, b) for (int i = a; i < b; i++)
+#define fr(i, a, b) for (int i = a; i >= b; i--)
+#define testf int t;scanf("%d", &t);while (t--)
+#define test int t;cin >> t;while (t--)
+#define all(a) a.begin(), a.end()
+#define size(container) (int)container.size()
+#define int long long int
+#define pb push_back
+#define fh freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
+int mod = 1000000007;
+clock_t startTime;
+double getCurrentTime() {
+	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
+}
+void read(vector<int> &a)
 {
-		if(color[u]==1) { red[u]=1; tred++; }
-		if(color[u]==2) { blu[u]=1; tblu++; }
-		
-		
-		for(int i=0; i<v[u].size(); i++)
-		{
-			int nei=v[u][i];
-			if(nei==prev) continue;
-			dfs_color(nei,u);
-			red[u]+=red[nei]; blu[u]+=blu[nei];
-		}
+    for(auto &it : a)cin>>it;
 }
 
-void dfs_edge(int u, int prev)
+int gcd(int a, int b)
 {
-	for(int i=0; i<v[u].size(); i++)
-	{
-		int nei=v[u][i];
-		if(nei==prev) continue;
-		if((red[nei]==tred and blu[nei]==0) or (red[nei]==0 and blu[nei]==tblu) )  ans++;
-		dfs_edge(nei,u);
-	}
+	if(a%b == 0)
+		return b;
+	return gcd(b,a%b);
 }
 
-int main()
+inline void solve()
 {
-	int n; cin>>n; 
-	for(int i=1; i<=n; i++) cin>>color[i];
-	
-	int l,r;
-	for(int i=1; i<n; i++)
-	{
-		cin>>l>>r;
-		v[l].push_back(r); v[r].push_back(l);
-	}
-	
-	dfs_color(1,0); dfs_edge(1,0);
-	cout<<ans<<"\n";  
-	
+    // all the code goes here
+	int a = gcd(3,9);
+	cout<<"gcd "<<a<<NL;
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    #ifndef ONLINE_JUDGE
+        fh;
+    #endif
+    startTime = clock();
+    solve();
+    fflush(stdin);
+    fflush(stdout);
+    return 0;
 }

@@ -1,25 +1,65 @@
 #include <bits/stdc++.h>
 using namespace std;
-int k,a,b;
-string s;
-int main()
+typedef long long LL;
+typedef long L;
+const char NL = '\n';
+#define PI 3.14159265
+#define f(i, a, b) for (int i = a; i < b; i++)
+#define fr(i, a, b) for (int i = a; i >= b; i--)
+#define testf int t;scanf("%d", &t);while (t--)
+#define test int t;cin >> t;while (t--)
+#define all(a) a.begin(), a.end()
+#define size(container) (int)container.size()
+#define int long long int
+#define pb push_back
+#define fh freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
+int mod = 1000000007;
+clock_t startTime;
+double getCurrentTime() {
+	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
+}
+void read(vector<int> &a)
 {
-	int n;
-	cin>>k>>a>>b;
-	cin>>s;
-	n = s.length();
- 
-	int c,d;
-	c = n/k;
-	d = n%k;
-	if(c < a) cout<<"No solution";
-	else if(c > b || (c == b && d > 0)) cout<<"No solution";
-	else 
-	{
-		for(int i=0;i<n;i++)
-		{
-			cout<<s[i];
-			if((i+1) % c == 0 && (i+1) != k*c ) cout<<endl;
-		}
-	}
+    for(auto &it : a)cin>>it;
+}
+
+inline void solve()
+{
+    // all the code goes here
+    int n;cin>>n;
+    vector<int>res(n+1);
+    for(int i = 1; i <= n; i+=2)
+    {
+        int a,b;
+        cout<<i<<" "<<i+1<<NL;
+        cout.flush();
+        cin>>a;
+        cout<<i+1<<" "<<i<<NL;
+        cout.flush();
+        cin>>b;
+        if(a > b)
+        {
+            res[i] = a;
+        }
+        else
+        {
+            res[i+1] = b;
+        }
+    }
+    
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    #ifndef ONLINE_JUDGE
+        fh;
+    #endif
+    startTime = clock();
+    solve();
+    fflush(stdin);
+    fflush(stdout);
+    return 0;
 }
