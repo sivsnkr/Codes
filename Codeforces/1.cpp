@@ -23,31 +23,13 @@ void read(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-int fact(int n)
-{
-    int res = 1;
-    while(n > 1)
-    {
-        res*=(n);
-        res%=mod;
-        n--;
-    }
-    return res%mod;
-}
-
 inline void solve()
 {
     // all the code goes here
-    int n;cin>>n;
-    int res = fact(n-3)*(n-2);
-    res%=mod;
-    int res1 = 0;
-    f(i,1,n+1)
-    {
-        res1+=(n-i)*(n-1-i);
-        res1%=mod;
-    }
-    cout<<(res+res1)%mod<<NL;
+    int n,m,k;cin>>n>>m>>k;
+    vector<int> a(n),b(m);
+    read(a),read(b);
+    vector<vector<int>> dp(n,vector<int>(m,0));
 }
 
 int32_t main()
