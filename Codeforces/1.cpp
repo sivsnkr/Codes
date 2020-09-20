@@ -26,10 +26,38 @@ void read(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
-    int n,m,k;cin>>n>>m>>k;
-    vector<int> a(n),b(m);
-    read(a),read(b);
-    vector<vector<int>> dp(n,vector<int>(m,0));
+    int n;cin>>n;
+    vector<int> a(n);
+    read(a);
+    // sort(all(a),greater<int>());
+    multiset<int> st;
+    f(i,0,n)
+        st.insert(a[i]);
+    int i = 0,j = n-2;
+    vector<int> res(n,-1);
+    for(int i = 0; i < n; i+=2)
+    {
+        int it = *st.begin();
+        st.erase(st.begin());
+        res[i] = it;
+    }
+
+    f(i,0,n)
+    {
+        if(res[i] == -1)
+        {
+            int it = *st.begin();
+            st.erase(st.begin());
+            res[i] = it;
+        }
+    }
+    int co = 0;
+    f(i,1,n-1)
+        if(res[i] < res[i-1] && res[i] < res[i+1])
+            co++;
+    cout<<co<<NL;
+    f(i,0,n)
+        cout<<res[i]<<" \n"[i==n-1];
 }
 
 int32_t main()
