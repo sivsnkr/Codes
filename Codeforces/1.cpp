@@ -29,35 +29,65 @@ inline void solve()
     int n;cin>>n;
     vector<int> a(n);
     read(a);
-    // sort(all(a),greater<int>());
-    multiset<int> st;
-    f(i,0,n)
-        st.insert(a[i]);
-    int i = 0,j = n-2;
-    vector<int> res(n,-1);
-    for(int i = 0; i < n; i+=2)
+    sort(all(a));
+    int l = 0,r = n+1;
+    while(r-l > 1)
     {
-        int it = *st.begin();
-        st.erase(st.begin());
-        res[i] = it;
-    }
-
-    f(i,0,n)
-    {
-        if(res[i] == -1)
+        int m = (l+r)/2;
+        bool valid = 1;
+        if(2*m+1 > n)
+            valid = 0;
+        else
         {
-            int it = *st.begin();
-            st.erase(st.begin());
-            res[i] = it;
+            vector<int> res;
+            int a_pos = 0,b_pos = n-1-m;
+            f(i,0,2*m+1)
+            {
+                if(i%2)
+                {
+                    res.pb(a[a_pos]);
+                    a_pos++;
+                }
+                else
+                {
+                    res.pb(a[b_pos]);
+                    b_pos++;
+                }
+            }
+            for(int i = 1; i < 2*m+1; i+=2)
+            {
+                if(res[i] >= res[i-1] || res[i] >= res[i+1])
+                {
+                    valid = 0;
+                    break;
+                }
+            }
+        }
+        if(!valid)
+            r = m;
+        else
+            l = m;
+    }
+    cout<<l<<NL;
+    vector<int> res;
+    int a_pos = 0,b_pos = n-1-l;
+    f(i,0,2*l+1)
+    {
+        if(i%2)
+        {
+            res.pb(a[a_pos]);
+            a_pos++;
+        }
+        else
+        {
+            res.pb(a[b_pos]);
+            b_pos++;
         }
     }
-    int co = 0;
-    f(i,1,n-1)
-        if(res[i] < res[i-1] && res[i] < res[i+1])
-            co++;
-    cout<<co<<NL;
-    f(i,0,n)
-        cout<<res[i]<<" \n"[i==n-1];
+    f(i,a_pos,n-l-1)
+        res.pb(a[i]);
+    f(i,0,size(res))
+        cout<<res[i]<<" \n"[i==size(res)-1];
 }
 
 int32_t main()

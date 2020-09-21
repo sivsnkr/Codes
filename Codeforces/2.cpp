@@ -22,45 +22,27 @@ void read(vector<int> &a)
 {
     for(auto &it : a)cin>>it;
 }
+int n,x,y;
+
+bool good(int t)
+{
+    return 1+((t-min(x,y))/x)+((t-min(x,y))/y) >= n;
+}
 
 inline void solve()
 {
     // all the code goes here
-    test
+    cin>>n>>x>>y;
+    int l = 0,r = 2e9;
+    while(r > l+1)
     {
-        int n;cin>>n;
-        string s;cin>>s;
-        if(n%2)
-        {
-            // ra
-            bool is = 0;
-            for(int i = 0; i < n; i+=2)
-            {
-                int te = s[i]-48;
-                if(te%2)
-                    is = 1;
-            }
-            if(is)
-                cout<<1;
-            else
-                cout<<2;
-        }
+        int m = (l+r)/2;
+        if(good(m))
+            r = m;
         else
-        {
-            bool is = 0;
-            for(int i = 1; i < n; i+=2)
-            {
-                int te = s[i]-48;
-                if(te%2 == 0)
-                    is = 1;
-            }
-            if(is)
-                cout<<2;
-            else
-                cout<<1;
-        }
-        cout<<NL;
+            l = m;
     }
+    cout<<max(r,min(x,y))<<NL;
 }
 
 int32_t main()
