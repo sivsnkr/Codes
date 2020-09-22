@@ -2,27 +2,19 @@
 using namespace std;
 
 // calculate a to power b in log(b)+1 time
-long long int binary_exponent(int a, int b)
-{
-    if(b == 0)
-        return 1;
-    int p = 1;
-    long long int po = a;
-    while (p<b)
-    {
-        po*=po;
-        p*=2;
+long long bin_exp(long long a, long long b) {
+    long long res = 1;
+    while (b > 0) {
+        if (b & 1)
+            res = res * a;
+        a = a * a;
+        b >>= 1;
     }
-
-    if(b > p)
-    {
-        po*=a;
-    }
-
-    return po;
+    return res;
 }
+
 int main()
 {
-    long long int p = binary_exponent(3,0);
+    long long int p = bin_exp(2,6);
     cout<<p<<"\n";
 }

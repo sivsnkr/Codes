@@ -23,71 +23,24 @@ void read(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
+int bin_exp(long long a, long long b) {
+    long long res = 1;
+    while (b > 0) {
+        if (b & 1)
+            res = res * a;
+        a = a * a;
+        b >>= 1;
+    }
+    return res;
+}
+
 inline void solve()
 {
     // all the code goes here
-    int n;cin>>n;
-    vector<int> a(n);
-    read(a);
-    sort(all(a));
-    int l = 0,r = n+1;
-    while(r-l > 1)
-    {
-        int m = (l+r)/2;
-        bool valid = 1;
-        if(2*m+1 > n)
-            valid = 0;
-        else
-        {
-            vector<int> res;
-            int a_pos = 0,b_pos = n-1-m;
-            f(i,0,2*m+1)
-            {
-                if(i%2)
-                {
-                    res.pb(a[a_pos]);
-                    a_pos++;
-                }
-                else
-                {
-                    res.pb(a[b_pos]);
-                    b_pos++;
-                }
-            }
-            for(int i = 1; i < 2*m+1; i+=2)
-            {
-                if(res[i] >= res[i-1] || res[i] >= res[i+1])
-                {
-                    valid = 0;
-                    break;
-                }
-            }
-        }
-        if(!valid)
-            r = m;
-        else
-            l = m;
-    }
-    cout<<l<<NL;
-    vector<int> res;
-    int a_pos = 0,b_pos = n-1-l;
-    f(i,0,2*l+1)
-    {
-        if(i%2)
-        {
-            res.pb(a[a_pos]);
-            a_pos++;
-        }
-        else
-        {
-            res.pb(a[b_pos]);
-            b_pos++;
-        }
-    }
-    f(i,a_pos,n-l-1)
-        res.pb(a[i]);
-    f(i,0,size(res))
-        cout<<res[i]<<" \n"[i==size(res)-1];
+    int n,m;cin>>n>>m;
+    int res = bin_exp(2,m)-1;
+    res = bin_exp(res,n);
+    cout<<res<<NL;
 }
 
 int32_t main()
