@@ -23,24 +23,15 @@ void read(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-int bin_exp(long long a, long long b) {
-    long long res = 1;
-    while (b > 0) {
-        if (b & 1)
-            res = res * a;
-        a = a * a;
-        b >>= 1;
-    }
-    return res;
-}
-
 inline void solve()
 {
     // all the code goes here
-    int n,m;cin>>n>>m;
-    int res = bin_exp(2,m)-1;
-    res = bin_exp(res,n);
-    cout<<res<<NL;
+    int n;cin>>n;
+    vector<int> a(n);
+    read(a);
+    sort(all(a),greater<int>());
+    f(i,0,n)
+        cout<<a[i]<<" \n"[i==n-1];
 }
 
 int32_t main()

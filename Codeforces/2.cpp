@@ -26,6 +26,35 @@ void read(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
+    int n,m;cin>>n>>m;
+    vector<int> a(n),b(m);
+    read(a),read(b);
+    int mans = 0;
+    f(ans,0,512)
+    {
+        bool ok = 1;
+        f(i,0,n)
+        {
+            bool okm = 0;
+            f(j,0,m)
+            {
+                if((ans|(a[i]&b[j])) == ans)
+                {
+                    okm = 1;
+                    break;
+                }
+            }
+            ok = ok&&okm;
+            if(!ok)
+                break;
+        }
+        if(ok)
+        {
+            mans = ans;
+            break;
+        }
+    }
+    cout<<mans<<NL;
 }
 
 int32_t main()
