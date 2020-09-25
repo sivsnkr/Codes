@@ -26,12 +26,6 @@ void read(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
-    int n;cin>>n;
-    vector<int> a(n);
-    read(a);
-    sort(all(a),greater<int>());
-    f(i,0,n)
-        cout<<a[i]<<" \n"[i==n-1];
 }
 
 int32_t main()
