@@ -1,93 +1,42 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <cstdio>
+
 using namespace std;
-typedef long long LL;
-typedef long L;
-const char NL = '\n';
-#define PI 3.14159265
-#define f(i, a, b) for (int i = a; i < b; i++)
-#define fr(i, a, b) for (int i = a; i >= b; i--)
-#define testf int t;scanf("%d", &t);while (t--)
-#define test int t;cin >> t;while (t--)
-#define all(a) a.begin(), a.end()
-#define size(container) (int)container.size()
-#define int long long int
-// #define pb push_back
-#define fh freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-int mod = 1000000007;
-clock_t startTime;
-double getCurrentTime() {
-	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
-}
-void read(vector<int> &a)
+typedef long long ll;
+
+const int maxn=100005;
+
+int n;
+ll a[maxn];
+ 
+ll pre[maxn],suf[maxn];
+
+ll gcd(ll x, ll y)
 {
-    for(auto &it : a)cin>>it;
+	if(y==0) return x;
+	else return gcd(y,x%y);
 }
 
-#define pb insert
-inline void solve()
-{
-    // all the code goes here
-    test
-    {
-        int n;cin>>n;
-        set<int> xl,xu,yl,yu;
-        bool ok = 1;
-        f(i,0,n)
-        {
-            int x,y;cin>>x>>y;
-            int f1,f2,f3,f4;
-            cin>>f1>>f2>>f3>>f4;
-            if(f1 == 0)
-            {
-                if(size(xl) > 0 && x < *xl.rbegin())
-                    ok = 0;
-                xl.pb(x);
-            }
-            if(f2 == 0)
-            {
-                if(size(yu) > 0 && y > *yu.rbegin())
-                    ok = 0;
-                yu.pb(y);
-            }
-            if(f3 == 0)
-            {
-                if(size(xu) > 0 && x > *xu.rbegin())
-                    ok = 0;
-                xu.pb(x);
-            }
-            if(f4 == 0)
-            {
-                if(size(yl) > 0 && y < *yl.rbegin())
-                    ok = 0;
-                yl.pb(y);
-            }
-        }
-        cout<<"ok "<<ok<<NL;
-        cout<< *yu.begin()<<" "<<*yl.rbegin()<<NL;
-        cout<< *xu.begin()<<" "<<*xl.rbegin()<<NL;
-        if(!ok || (size(yu) > 0 && size(yl) > 0 && *yu.begin() < *yl.rbegin()) || (size(xu) > 0 && size(xl) > 0 && *xu.begin() < *xl.rbegin()))
-            cout<<0;
-        else
-        {
-            int x = size(xu) != 0 ? *xu.begin():size(xl) != 0 ?*xl.begin():0;
-            int y = size(yu) != 0 ? *yu.begin():size(yl) != 0 ?*yl.begin():0;
-            cout<<1<<" "<<x<<" "<<y;
-        }
-        cout<<NL;
-    }
-}
+ll ga,ans;
 
-int32_t main()
+int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    #ifndef ONLINE_JUDGE
-        fh;
-    #endif
-    startTime = clock();
-    solve();
-    fflush(stdin);
-    fflush(stdout);
-    return 0;
+	scanf("%d",&n);
+	for(int i=1;i<=n;i++) scanf("%lld",&a[i]);
+	pre[1]=a[1]; suf[n]=a[n];
+	for(int i=2;i<=n;i++)
+		pre[i]=gcd(pre[i-1],a[i]);
+	for(int i=n-1;i>=1;i--)
+		suf[i]=gcd(suf[i+1],a[i]);
+	for(int i=0;i<=n-1;i++)
+	{
+		if(i==0)
+			ans=suf[2];
+		else if(i==n-1)
+			ans=ans*pre[n-1]/gcd(pre[n-1],ans);
+		else
+			ans=ans*gcd(pre[i],suf[i+2])/gcd(gcd(pre[i],suf[i+2]),ans);
+	}
+	printf("%lld\n",ans);
+	return 0;
 }
