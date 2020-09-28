@@ -1,42 +1,80 @@
-#include <iostream>
-#include <cstdio>
-
+#include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-
-const int maxn=100005;
-
-int n;
-ll a[maxn];
- 
-ll pre[maxn],suf[maxn];
-
-ll gcd(ll x, ll y)
+typedef long long LL;
+typedef long L;
+const char NL = '\n';
+#define PI 3.14159265
+#define f(i, a, b) for (int i = a; i < b; i++)
+#define fr(i, a, b) for (int i = a; i >= b; i--)
+#define testf int t;scanf("%d", &t);while (t--)
+#define test int t;cin >> t;while (t--)
+#define all(a) a.begin(), a.end()
+#define size(container) (int)container.size()
+#define int long long int
+#define pb push_back
+#define fh freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
+int mod = 1000000007;
+clock_t startTime;
+double getCurrentTime() {
+	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
+}
+void read(vector<int> &a)
 {
-	if(y==0) return x;
-	else return gcd(y,x%y);
+    for(auto &it : a)cin>>it;
 }
 
-ll ga,ans;
-
-int main()
+const int N = 3e5+5;
+vector<int> dp[N],ans(N),a(N);
+inline void solve()
 {
-	scanf("%d",&n);
-	for(int i=1;i<=n;i++) scanf("%lld",&a[i]);
-	pre[1]=a[1]; suf[n]=a[n];
-	for(int i=2;i<=n;i++)
-		pre[i]=gcd(pre[i-1],a[i]);
-	for(int i=n-1;i>=1;i--)
-		suf[i]=gcd(suf[i+1],a[i]);
-	for(int i=0;i<=n-1;i++)
-	{
-		if(i==0)
-			ans=suf[2];
-		else if(i==n-1)
-			ans=ans*pre[n-1]/gcd(pre[n-1],ans);
-		else
-			ans=ans*gcd(pre[i],suf[i+2])/gcd(gcd(pre[i],suf[i+2]),ans);
-	}
-	printf("%lld\n",ans);
-	return 0;
+    // all the code goes here
+    test
+    {
+        int n;cin>>n;
+        f(i,1,n+1)
+            dp[i].clear();
+        f(i,1,n+1)
+        {
+            int x;cin>>x;
+            ans[i] = 1e9;
+            dp[x].pb(i);
+        }
+        f(i,1,n+1)
+        {
+            if(size(dp[i]) == 0)
+                continue;
+            int diff = max(dp[i][0],n+1-dp[i].back());
+            f(j,0,size(dp[i])-1)
+                diff = max(diff,dp[i][j+1]-dp[i][j]);
+            ans[diff] = min(ans[diff],i);
+        }
+
+        f(i,1,n+1)
+        {
+            if(i >= 2)
+                ans[i] = min(ans[i],ans[i-1]);
+            if(ans[i] == 1e9)
+                cout<<-1<<" ";
+            else
+            {
+                cout<<ans[i]<<" ";
+            }
+        }
+        cout<<NL;
+    }
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    #ifndef ONLINE_JUDGE
+        fh;
+    #endif
+    startTime = clock();
+    solve();
+    fflush(stdin);
+    fflush(stdout);
+    return 0;
 }

@@ -26,20 +26,21 @@ void read(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
-    int n,m;cin>>n>>m;
-    vector<int> a(n),b(m);
-    read(a),read(b);
-    int res = 0;
-    f(i,0,n)
+    test
     {
-        int mx = LLONG_MAX;
-        f(j,0,m)
+        int n;cin>>n;
+        vector<int> a(n);
+        read(a);
+        vector<vector<int>> dp(n+1,vector<int>(3,0));
+        f(i,0,n)
         {
-            mx = min(mx,(res|(a[i]&b[j])));
+            dp[i+1][0] = max(dp[i+1][0],dp[i][0]+i%2 == 0?a[i]:0);
+            if(i+2 < n)
+                dp[i+2][1] = max(dp[i+2][1],max(dp[i][0],dp[i][1])+i%2 == 0?a[i]:a[i+1]);
+            dp[i+1][2] = max(dp[i+1][2],max({dp[i][0],dp[i][1],dp[i][2]})+i%2 == 0 ? a[i]:0);
         }
-        res=mx;
+        cout<<max({dp[n][0],dp[n][1],dp[n][2]})<<NL;
     }
-    cout<<res<<NL;
 }
 
 int32_t main()
