@@ -23,45 +23,9 @@ void read(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-const int N = 3e5+5;
-vector<int> dp[N],ans(N),a(N);
 inline void solve()
 {
     // all the code goes here
-    test
-    {
-        int n;cin>>n;
-        f(i,1,n+1)
-            dp[i].clear();
-        f(i,1,n+1)
-        {
-            int x;cin>>x;
-            ans[i] = 1e9;
-            dp[x].pb(i);
-        }
-        f(i,1,n+1)
-        {
-            if(size(dp[i]) == 0)
-                continue;
-            int diff = max(dp[i][0],n+1-dp[i].back());
-            f(j,0,size(dp[i])-1)
-                diff = max(diff,dp[i][j+1]-dp[i][j]);
-            ans[diff] = min(ans[diff],i);
-        }
-
-        f(i,1,n+1)
-        {
-            if(i >= 2)
-                ans[i] = min(ans[i],ans[i-1]);
-            if(ans[i] == 1e9)
-                cout<<-1<<" ";
-            else
-            {
-                cout<<ans[i]<<" ";
-            }
-        }
-        cout<<NL;
-    }
 }
 
 int32_t main()

@@ -10,7 +10,6 @@ const char NL = '\n';
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
 #define size(container) (int)container.size()
-#define int long long int
 #define pb push_back
 #define fh freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 int mod = 1000000007;
