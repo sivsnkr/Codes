@@ -10,7 +10,6 @@ const char NL = '\n';
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
 #define size(container) (int)container.size()
-#define int long long int
 #define pb push_back
 #define fh freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 int mod = 1000000007;
@@ -26,35 +25,9 @@ void read(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
-    int n,m;cin>>n>>m;
-    vector<int> a(n),b(m);
-    read(a),read(b);
-    int mans = 0;
-    f(ans,0,512)
-    {
-        bool ok = 1;
-        f(i,0,n)
-        {
-            bool okm = 0;
-            f(j,0,m)
-            {
-                if((ans|(a[i]&b[j])) == ans)
-                {
-                    okm = 1;
-                    break;
-                }
-            }
-            ok = ok&&okm;
-            if(!ok)
-                break;
-        }
-        if(ok)
-        {
-            mans = ans;
-            break;
-        }
-    }
-    cout<<mans<<NL;
+    int a,b;cin>>a>>b;
+    int g = gcd(a,b);
+    cout<<g<<NL;
 }
 
 int32_t main()

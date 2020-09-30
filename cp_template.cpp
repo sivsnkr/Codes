@@ -11,6 +11,7 @@ const char NL = '\n';
 #define all(a) a.begin(), a.end()
 #define size(container) (int)container.size()
 #define pb push_back
+#define int LL
 #define fh freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 int mod = 1000000007;
 clock_t startTime;
