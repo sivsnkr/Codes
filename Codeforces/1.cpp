@@ -22,38 +22,10 @@ void read(vector<int> &a)
 {
     for(auto &it : a)cin>>it;
 }
-int n,k;
-vector<int> a;
-
-bool good(int m)
-{
-    int total = m*k;
-    f(i,0,n)
-        total-=min(m,a[i]);
-    return total<=0;
-}
 
 inline void solve()
 {
     // all the code goes here
-    cin>>k>>n;
-    a.resize(n);
-    read(a);
-    int ans = 0,l = 0,r = 1e11;
-    while(l <= r)
-    {
-        int m = (l+r)/2;
-        if(good(m))
-        {
-            ans = m;
-            l = m+1;
-        }
-        else
-        {
-            r = m-1;
-        }
-    }
-    cout<<ans<<NL;
 }
 
 int32_t main()
