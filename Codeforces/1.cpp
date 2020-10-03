@@ -32,18 +32,15 @@ int num;
 vector<int> re;
 bool dfs(int root, bool print,int plength,int cnum)
 {
-    // if(plength > 0)
-    //     cout<<"val "<<(cnum/plength)<<NL;
-    if(plength > 0 && cnum/plength > num)
-        return false;
-    
-    // cout<<"root size "<<root<<" "<<size(g[root])<<NL;
     if(root == n)
     {
+        if(plength > 0 && cnum/plength > num)
+            return false;
         if(print)
             re.pb(root);
         return true;
     }
+    
     bool res = false;
     for(auto[child,num] : g[root])
     {
