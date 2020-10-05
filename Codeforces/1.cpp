@@ -23,57 +23,9 @@ void read(vector<int> &a)
     for(auto &it : a)cin>>it;
 }
 
-const int MX = 1e5+5;
-vector<vector<int>> g(MX);
-vector<bool> vis(MX,0);
-
-int pow(int n,int k)
-{
-    int ans = 1;
-    while(k)
-    {
-        if(k&1)
-            ans = (ans*n)%mod;
-        k/=2;
-        n = (n*n)%mod;
-    }
-    return ans;
-}
-
-int sz;
-
-void dfs(int root)
-{
-    if(vis[root])
-        return;
-    sz++;
-    vis[root] = 1;
-    for(int i : g[root])
-        dfs(i);
-}
-
 inline void solve()
 {
     // all the code goes here
-    int n,k;cin>>n>>k;
-    f(i,0,n)
-    {
-        int x,y,c;cin>>x>>y>>c;
-        if(c == 0)
-            g[x].pb(y),g[y].pb(x);
-    }
-    int ans = pow(n,k);
-    f(i,1,n+1)
-    {
-        if(vis[i])
-            continue;
-        sz = 0;
-        dfs(i);
-        ans-=pow(sz,k);
-        ans+=mod;
-        ans%=mod;
-    }
-    cout<<ans<<NL;
 }
 
 int32_t main()

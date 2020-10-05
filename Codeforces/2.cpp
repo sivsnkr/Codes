@@ -11,24 +11,75 @@ const char NL = '\n';
 #define all(a) a.begin(), a.end()
 #define size(container) (int)container.size()
 #define pb push_back
-#define int LL
+// #define int LL
 #define fh freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
 int mod = 1000000007;
 clock_t startTime;
 double getCurrentTime() {
 	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
 }
+
+#define int long double
 void read(vector<int> &a)
 {
     for(auto &it : a)cin>>it;
 }
 
+const int MX = 1e5+5;
+int n,m,d;
+vector<vector<pair<int,int>>> g(MX);
+vector<bool> vis(MX);
+int num;
+vector<pair<int,int>> dp(MX);
+vector<int> re;
+
+int mi = 1e8;
+bool dfs(int root, bool print,int plength,int cnum)
+{
+    if(vis[root])
+        return false;
+    vis[root] = 1;
+    if(root == n)
+    {
+        mi = min(mi,cnum/plength);
+        vis[root] = 0;
+        if(plength > 0 && cnum/plength > num)
+            return false;
+        if(print)
+            re.pb(root);
+        return true;
+    }
+    
+    bool res = false;
+    for(auto[child,num] : g[root])
+    {
+        res  = dfs(child,print,plength+1,cnum+num);
+        if(res)
+            break;
+    }
+    if(res && print)
+        re.pb(root);
+    vis[root] = 0;
+    return res;
+}
+
 inline void solve()
 {
     // all the code goes here
-    vector<int> a(3,10);
-    int  in = lower_bound(all(a),11)-a.begin();
-    cout<<"in "<<in<<NL;
+    cin>>n>>m;
+    f(i,0,m)
+    {
+        int x,y,c;cin>>x>>y>>c;
+        g[x].pb({y,c});
+    }
+    dfs(1,0,0,0);
+    num = mi;
+    dfs(1,1,0,0);
+    // cout<<"mi "<<mi<<NL;
+    cout<<size(re)-1<<NL;
+    reverse(all(re));
+    f(i,0,size(re))
+        cout<<re[i]<<" \n"[i==size(re)-1];
 }
 
 int32_t main()
