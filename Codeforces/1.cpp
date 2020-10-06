@@ -26,6 +26,29 @@ void read(vector<int> &a)
 inline void solve()
 {
     // all the code goes here
+    int n;cin>>n;
+    vector<int> a(n);
+    read(a);
+    int neg = 0,mx = 0,pos = 0;
+    f(i,0,n)
+    {
+        if(a[i] >= 0)
+            a[i] = -a[i]-1;
+        if(a[i] < 0)
+            neg++;
+        if(abs(a[i]) > mx)
+        {
+            mx = abs(a[i]);
+            pos = i;
+        }
+    }
+
+    if(neg%2)
+    {
+        a[pos] = -a[pos]-1;
+    }
+    f(i,0,n)
+        cout<<a[i]<<" \n"[i==n-1];
 }
 
 int32_t main()
