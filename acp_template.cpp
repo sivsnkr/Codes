@@ -3,7 +3,7 @@ const char NL = '\n';
 #define PI 3.14159265
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
-#define int LL
+#define int long long
 int mod = 1000000007;
 clock_t startTime;
 double getCurrentTime() {
