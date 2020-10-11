@@ -1,18 +1,12 @@
 #include <bits/stdc++.h>
+using namespace std;
 const char NL = '\n';
 #define PI 3.14159265
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
 #define int long long
 int mod = 1000000007;
-clock_t startTime;
-double getCurrentTime() {
-	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
-}
-void read(vector<int> &a)
-{
-    for(auto &it : a)cin>>it;
-}
+void read(vector<int> &a);
 
 inline void solve()
 {
@@ -28,9 +22,13 @@ int32_t main()
         freopen("input.txt","r",stdin);
         freopen("output.txt","w",stdout);
     #endif
-    startTime = clock();
     solve();
     fflush(stdin);
     fflush(stdout);
     return 0;
+}
+
+void read(vector<int> &a)
+{
+    for(auto &it : a)cin>>it;
 }
