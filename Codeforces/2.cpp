@@ -11,39 +11,10 @@ void read(vector<int> &a);
 inline void solve()
 {
     // all the code goes here
-    int n,k;cin>>n>>k;
-    set<int> st;
-    for(int i = 0; i < n; i++)
-    {
-        int val = 0;
-        for(int j = k-1; j >= 0; j--)
-        {
-            int x;cin>>x;
-            val+=(x << j);
-        }
-        st.insert(val);
-    }
-
-    bool valid = 0;
-    for(int i : st)
-    {
-        for(int j : st)
-            if((i&j) == 0)
-            {
-                valid = 1;
-                break;
-            }
-        if(valid)
-            break;
-    }
-
-    if(valid)
-        cout<<"YES";
-    else 
-        cout<<"NO";
-    cout<<NL;
+    int n,m;cin>>n>>m;
+    vector<int> a(n),b(n);
+    read(a),read(b);
 }
-
 
 int32_t main()
 {
