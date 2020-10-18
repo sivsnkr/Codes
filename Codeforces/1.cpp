@@ -8,62 +8,16 @@ const char NL = '\n';
 int mod = 1000000007;
 void read(vector<int> &a);
 
-const int MX = 3e5+5;
-vector<int> p(MX);
-vector<int> ranks(MX);
-vector<int> depth(MX);
-int sum;
-int get(int c)
-{
-    sum+=depth[c];
-    return p[c] = p[c] == c ? c : get(p[c]);
-}
-
-void join(int a, int b)
-{
-    int pa = get(a);
-    depth[a] = sum+1;
-    sum = 0;
-    int pb = get(b);
-    depth[b] = sum+1;
-    if(pa != pb)
-    {
-        // sum = 0;
-        if(ranks[pa] >= ranks[pb])
-            ranks[pb] = ranks[pa]+1;
-        p[pa] = pb;
-        depth[pa] = depth[pb]+1;
-    }
-}
-
 inline void solve()
 {
     // all the code goes here
-    iota(all(p),0);
-    int n,m;cin>>n>>m;
-    while(m--)
-    {
-        int q;cin>>q;
-        if(q == 1)
-        {
-            int a,b;cin>>a>>b;
-            join(a,b);
-        }
-        else
-        {
-            int a;cin>>a;
-            sum = 0;
-            // int pa = a;
-            get(a);
-            // while(true)
-            // {
-            //     int par = get(pa);
-            //     if(pa == par)
-            //         break;
-            // }
-            cout<<sum<<NL;
-        }
-    }
+    int n;cin>>n;
+    vector<int> a(n);
+    read(a);
+
+    bool valid = 1;
+    if(a[n-1] > 1)
+        valid = 0;
 }
 
 int32_t main()

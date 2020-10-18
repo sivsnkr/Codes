@@ -11,16 +11,25 @@ void read(vector<int> &a);
 inline void solve()
 {
     // all the code goes here
-    int n;cin>>n;
-    vector<int> x(n);
-    read(x);
-    sort(all(x));
-    int j = 0;
-    vector<int> m(n,0);
-    for(int i=1;i<n;i++)
-        x[i]==x[i-1]?m[j]++:j++;
-	int a=m[0]+1,b=m[1]+1;
-	cout<<(a>=3?a*(a-1)*(a-2)/6:a==2?b:b>=2?b*(b-1)/2:m[2]+1);
+    int n,k;cin>>n>>k;
+    int sum = 0;
+    for(int i = 0; i < n; i++)
+    {
+        int x;cin>>x;
+        sum+=x;
+    }
+
+    int l = (sum+(k-1))/k;
+    int num = l*k-sum;
+
+    int res = 0;
+    for(int i = 0; i < num; i++)
+    {
+        res+=pow(sum/k,2);
+    }
+    for(int i = 0; i < k-num; i++)
+        res+=pow(l,2);
+    cout<<res<<NL;
 }
 
 int32_t main()
