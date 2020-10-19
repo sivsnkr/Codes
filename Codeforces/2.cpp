@@ -1,35 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 const char NL = '\n';
-#define PI 3.14159265
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
-#define int long long
-int mod = 1000000007;
 void read(vector<int> &a);
 
 inline void solve()
 {
     // all the code goes here
-    int n,k;cin>>n>>k;
-    int sum = 0;
-    for(int i = 0; i < n; i++)
-    {
-        int x;cin>>x;
-        sum+=x;
-    }
-
-    int l = (sum+(k-1))/k;
-    int num = l*k-sum;
-
-    int res = 0;
-    for(int i = 0; i < num; i++)
-    {
-        res+=pow(sum/k,2);
-    }
-    for(int i = 0; i < k-num; i++)
-        res+=pow(l,2);
-    cout<<res<<NL;
 }
 
 int32_t main()
