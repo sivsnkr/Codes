@@ -8,74 +8,47 @@ void read(vector<int> &a);
 inline void solve()
 {
     // all the code goes here
-    int n;cin>>n;
-    vector<int> a(n);
-    read(a);
-    vector<int> ones,others;
-    vector<pair<int,int>> ans;
-    int nxt = n;
-    bool valid = 1;
-    vector<int> h(n);
-    for(int i = n-1; i >= 0; i--)
+    string a,b;cin>>a>>b;
+    int ones = 0,zeros = 0;
+    int n = a.length(),m = b.length();
+    vector<int> z(n),o(n);
+    for(int i = 0; i < n; i++)
     {
-        int pair = -1;
-        if(a[i] == 2)
-        {
-            if(ones.empty())
-            {
-                valid = 0;
-                break;
-            }
-            pair = ones.back();
-            ones.pop_back();
-            others.push_back(i);
-        }
-        else if(a[i] == 3)
-        {
-            if(!others.empty())
-            {
-                pair = others.back();
-                others.pop_back();
-            }
-            else 
-            {
-                if(ones.empty())
-                {
-                    valid = 0;
-                    break;
-                }
-                pair = ones.back();
-                ones.pop_back();
-            }
-            others.push_back(i);
-        }
+        if(a[i] == '1')
+            ones++;
+        else
+            zeros++;
+        z[i] = zeros;
+        o[i] = ones;
+    }
 
-        if(a[i] == 1)
-        {
-            h[i] = nxt--;
-            ans.emplace_back(h[i],i+1);
-            ones.push_back(i);
-        }
-        else if(a[i] == 2)
-        {
-            h[i] = h[pair];
-            ans.emplace_back(h[i],i+1);
-        }
-        else if(a[i] == 3)
-        {
-            nxt--;
-            ans.emplace_back(nxt+1,i+1);
-            ans.emplace_back(nxt+1,pair+1);
-        }
-    }
-    if(!valid)
+    int count = 0;
+    for(int i = 0; i < n-1; i++)
     {
-        cout<<-1<<NL;
-        return;
+        if(b[i] == '1')
+        {
+            count+=z[i];
+        }
+        else
+        {
+            count+=o[i];
+        }
     }
-    cout<<ans.size()<<NL;
-    for(auto [x,y] : ans)
-        cout<<x<<" "<<y<<NL;
+    for(int i = m-1; i+n > m; i--)
+    {
+        if(b[i] == '0')
+            count+=(ones-o[m-1-i]);
+        else
+            count+=(zeros-z[m-1-i]);
+    }
+    for(int i = n-1; i+n <= m; i++)
+    {
+        if(b[i] == '1')
+            count+=zeros;
+        else
+            count+=ones;
+    }
+    cout<<count<<NL;
 }
 
 int32_t main()
