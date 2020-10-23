@@ -9,18 +9,29 @@ void read(vector<int> &a);
 inline void solve()
 {
     // all the code goes here
-    int n,p,q,r;cin>>n>>p>>q>>r;
+    int n;cin>>n;
     vector<int> a(n);
     read(a);
-    vector<vector<int>> dp(n+1,vector<int>(3,LLONG_MIN));
-
-    for(int i = 1; i <= n; i++)
+    string s;cin>>s;
+    int l = -1e10,r = 1e10;
+    for(int i = 4; i < n; i++)
     {
-        dp[i][0] = max(dp[i-1][0],p*a[i-1]);
-        dp[i][1] = max(dp[i-1][1],dp[i][0]+q*a[i-1]);
-        dp[i][2] = max(dp[i-1][2],dp[i][1]+r*a[i-1]);
+        if(s[i] == '1')
+        {
+            int mi = 1e10,mx = -1e10;
+            for(int j = min((int)0,i-3); j < min(n,i+4); j++)
+            {
+                if(j <= i)
+                    mi = min(mi,a[j]);
+                if(j >= i)
+                    mx = max(mx,a[j]);
+            }
+
+            r = min(r,mi-1);
+            l = max(l,mx+1);
+        }
     }
-    cout<<dp[n][2]<<NL;
+    cout<<l<<" "<<max(r,l+1)<<NL;
 }
 
 int32_t main()
