@@ -4,47 +4,10 @@ const char NL = '\n';
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
 void read(vector<int> &a);
-const int MX = 1e5+5;
-vector<int> p(MX),ranks(MX);
-int get(int c)
-{
-    return p[c] = p[c] == c ? c : get(p[c]);
-}
-
-void join(int a, int b)
-{
-    int pa = get(a),pb = get(b);
-    if(pa != pb)
-    {
-        if(ranks[pa] == ranks[pb])
-            ranks[pa]++;
-        if(ranks[pa] > ranks[pb])
-            p[pb] = pa;
-        else
-            p[pa] = pb;
-    }
-}
 
 inline void solve()
 {
     // all the code goes here
-    iota(all(p),0);
-    int n;cin>>n;
-    string s,s1;cin>>s>>s1;
-    vector<pair<char,char>> res;
-    for(int i = 0; i < n; i++)
-    {
-        int a = s[i]-'0',b = s1[i]-'0';
-        int pa = get(a),pb = get(b);
-        if(pa != pb)
-        {
-            join(pa,pb);
-            res.emplace_back(s[i],s1[i]);
-        }
-    }
-    cout<<res.size()<<NL;
-    for(auto [x,y] : res)
-        cout<<x<<" "<<y<<NL;
 }
 
 int32_t main()

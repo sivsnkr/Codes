@@ -1,8 +1,1 @@
-7
-d c
-r o
-p c
-e a
-p o
-e l
-r a
+-5 5

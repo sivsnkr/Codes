@@ -8,47 +8,6 @@ void read(vector<int> &a);
 inline void solve()
 {
     // all the code goes here
-    string a,b;cin>>a>>b;
-    int ones = 0,zeros = 0;
-    int n = a.length(),m = b.length();
-    vector<int> z(n),o(n);
-    for(int i = 0; i < n; i++)
-    {
-        if(a[i] == '1')
-            ones++;
-        else
-            zeros++;
-        z[i] = zeros;
-        o[i] = ones;
-    }
-
-    int count = 0;
-    for(int i = 0; i < n-1; i++)
-    {
-        if(b[i] == '1')
-        {
-            count+=z[i];
-        }
-        else
-        {
-            count+=o[i];
-        }
-    }
-    for(int i = m-1; i+n > m; i--)
-    {
-        if(b[i] == '0')
-            count+=(ones-o[m-1-i]);
-        else
-            count+=(zeros-z[m-1-i]);
-    }
-    for(int i = n-1; i+n <= m; i++)
-    {
-        if(b[i] == '1')
-            count+=zeros;
-        else
-            count+=ones;
-    }
-    cout<<count<<NL;
 }
 
 int32_t main()
