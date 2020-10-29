@@ -3,40 +3,58 @@ using namespace std;
 const char NL = '\n';
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
-#define int long long
 void read(vector<int> &a);
+
+
+int n,k;
+const int MX = 2e5+5;
+vector<vector<int>> g(MX);
+vector<bool> vis(MX);
+int sum;
+void dfs(int root,int len,int par)
+{
+    if(vis[root])
+        sum+=len;
+    for(int i : g[root])
+        if(i != par)
+            dfs(i,len+(vis[i]?0:1),root);
+}
 
 inline void solve()
 {
     // all the code goes here
-    test
+    cin>>n>>k;
+    for(int i = 0; i < n-1; i++)
     {
-        int n;cin>>n;
-        vector<int> a(n+4,0);
-        for(int i = 2; i < n+2; i++)
-        {
-            cin>>a[i];
-        }
-        vector<int> dp(n+5,0);
-        int sum = 0;
-        int mx = 0;
-        for(int i = 2; i < n+2; i++)
-        {
-            if(i%2)
-            {
-                dp[i] = max(dp[i],dp[i-2]+a[i]-a[i-1]);
-            }
-            else
-            {
-                dp[i] = max(dp[i],dp[i-2]+a[i-1]-a[i]);
-                sum+=a[i];
-            }
-            mx = max(mx,dp[i]);
-        }
-        for(int i = 0; i < n+2; i++)
-            cout<<dp[i]<<" \n"[i==n+1];
-        cout<<sum+mx<<NL;
+        int x,y;cin>>x>>y;
+        g[x].push_back(y),g[y].push_back(x);
     }
+
+    queue<pair<int,int>> st;
+    st.push({1,1});
+    vector<int> res;
+    while(!st.empty())
+    {
+        auto [top,par] = st.front();
+        st.pop();
+        for(auto c : g[top])
+            if(c != par)
+                st.push({c,top});
+        // if()
+        res.push_back(top);
+    }
+
+    int i = res.size()-1;
+    while(k--)
+    {
+        vis[res[i]] = 1;
+        i--;
+    }
+    for(int i = 1; i <= n; i++)
+        if(vis[i])
+            cout<<"r "<<i<<NL;
+    dfs(1,1,1);
+    cout<<sum<<NL;
 }
 
 int32_t main()

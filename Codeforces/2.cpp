@@ -1,73 +1,94 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <algorithm>
+#include <cmath>
+#include <vector>
+#include <set>
+#include <map>
+#include <unordered_set>
+#include <unordered_map>
+#include <queue>
+#include <ctime>
+#include <cassert>
+#include <complex>
+#include <string>
+#include <cstring>
+#include <chrono>
+#include <random>
+#include <bitset>
 using namespace std;
-const char NL = '\n';
-#define test int t;cin >> t;while (t--)
-#define all(a) a.begin(), a.end()
-void read(vector<int> &a);
-map<int,int> freq;
-int mxf;
-bool good(int m)
-{
-	if(m <= freq.size()-1)
-	{
-		for(auto [val,count] : freq)
-		{
-			if(count < )
-		}
-	}
-	return false;
-}
-inline void solve()
-{
-    // all the code goes here
-	test
-	{
-		int n;cin>>n;
-		vector<int> a(n);
-		read(a);
-		int mx = 0;
-		for(int i = 0; i < n; i++)
-		{
-			freq[a[i]]++;
-			if(freq[a[i]] > mx)
-			{
-				mx = freq[a[i]];
-				mxf = a[i];
-			}
-		}
-		int l = 0,r = n-2;
-		int ans = 0;
-		while(l <= r)
-		{
-			int m = (l+r)/2;
-			if(good(m))
-			{
-				ans = m;
-				l = m+1;
-			}
-			else
-				r = m-1;
-		}
-		cout<<ans<<NL;
-	}
+
+#ifdef LOCAL
+	#define eprintf(...) fprintf(stderr, __VA_ARGS__);fflush(stderr);
+#else
+	#define eprintf(...) 42
+#endif
+
+using ll = long long;
+using ld = long double;
+using uint = unsigned int;
+using ull = unsigned long long;
+template<typename T>
+using pair2 = pair<T, T>;
+using pii = pair<int, int>;
+using pli = pair<ll, int>;
+using pll = pair<ll, ll>;
+mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
+ll myRand(ll B) {
+	return (ull)rng() % B;
 }
 
-int32_t main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt","r",stdin);
-        freopen("output.txt","w",stdout);
-    #endif
-    solve();
-    fflush(stdin);
-    fflush(stdout);
-    return 0;
+#define pb push_back
+#define mp make_pair
+#define all(x) (x).begin(),(x).end()
+#define fi first
+#define se second
+
+clock_t startTime;
+double getCurrentTime() {
+	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
 }
 
-void read(vector<int> &a)
+const int N = 200200;
+int n;
+int a[N];
+int b[N];
+
+void solve() {
+	scanf("%d", &n);
+	for (int i = 0; i < n; i++)
+		scanf("%d", &a[i]);
+	b[0] = 1;
+	int m = 1;
+	int l = 1;
+	while(l < n) {
+		int k = b[m - 1];
+		b[m] = 0;
+		while(k > 0) {
+			k--;
+			if (l == n) continue;
+			l++;
+			b[m]++;
+			while(l < n && a[l] > a[l - 1]) {
+				l++;
+				b[m]++;
+			}
+		}
+		m++;
+	}
+	printf("%d\n", m - 1);
+}
+
+int main()
 {
-    for(auto &it : a)cin>>it;
+	startTime = clock();
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
+
+	int t;
+	scanf("%d", &t);
+	while(t--) solve();
+
+	return 0;
 }

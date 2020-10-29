@@ -1,28 +1,53 @@
 #include <bits/stdc++.h>
-
 using namespace std;
+const char NL = '\n';
+#define test int t;cin >> t;while (t--)
+#define all(a) a.begin(), a.end()
+void read(vector<int> &a);
 
-int main() {
+inline void solve()
+{
+    // all the code goes here
+    test
+    {
+        int n;cin>>n;
+        vector<int> a(n);
+        read(a);
+        int sum = 0;
+        int cnt = 0;
+        for(int i = 1; i < n; i++)
+        {
+            if(a[i] < a[i-1])
+                cnt++;
+            else
+            {
+                sum+=cnt;
+                cnt = 0;
+            }
+        }
+        sum+=cnt;
+        // if(mx == 0)
+            // mx = 1;
+        cout<<sum+1<<NL;
+    }
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
     #ifndef ONLINE_JUDGE
         freopen("input.txt","r",stdin);
         freopen("output.txt","w",stdout);
-    #endif  
-	
-	int t;
-	cin >> t;
-	while (t--) {
-		int n;
-		cin >> n;
-		vector<int> a(n);
-		for (auto &it : a) cin >> it;
-		vector<vector<long long>> dp(n + 1, vector<long long>(3));
-		for (int i = 0; i < n; ++i) {
-			dp[i + 1][0] = max(dp[i + 1][0], dp[i][0] + (i & 1 ? 0 : a[i]));
-			if (i + 2 <= n) dp[i + 2][1] = max(dp[i + 2][1], max(dp[i][0], dp[i][1]) + (i & 1 ? a[i] : a[i + 1]));
-			dp[i + 1][2] = max(dp[i + 1][2], max({dp[i][0], dp[i][1], dp[i][2]}) + (i & 1 ? 0 : a[i]));
-		}
-		cout << max({dp[n][0], dp[n][1], dp[n][2]}) << endl;
-	}
-	
-	return 0;
+    #endif
+    solve();
+    fflush(stdin);
+    fflush(stdout);
+    return 0;
+}
+
+void read(vector<int> &a)
+{
+    for(auto &it : a)cin>>it;
 }
