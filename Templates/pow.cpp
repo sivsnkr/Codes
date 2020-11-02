@@ -15,6 +15,6 @@ long long bin_exp(long long a, long long b) {
 
 int main()
 {
-    long long int p = bin_exp(3,6);
+    long long int p = bin_exp(3,2);
     cout<<p<<"\n";
 }
