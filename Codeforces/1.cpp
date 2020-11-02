@@ -11,35 +11,11 @@ inline void solve()
     test
 	{
 		int n;cin>>n;
-		int res = 4*n;
-		vector<int> val;
-		vector<int> is_prime(res+1,0);
-		vector<int> primelist;
-		for(int i = 2; i <= res; i++)
-		{
-			if(is_prime[i] == 0)
-			{
-				is_prime[i] = i;
-				primelist.push_back(i);
-			}
-			for(int j = 0; j < primelist.size()&&i*primelist[j]<=res&&primelist[j]<=is_prime[i]; j++)
-			{
-				is_prime[i*primelist[j]] = primelist[j];
-			}
-		}
-
-		for(int i = 2; i <= res; i++)
-		{
-			if(is_prime[i] == i)
-			{
-				val.push_back(i);
-			}
-		}
-		int i = 0;
+		int res = 2*n+2;
 		while(n--)
 		{
-			cout<<val[i]<<" ";
-			i++;
+			cout<<res<<" ";
+			res+=2;
 		}
 		cout<<NL;
 	}
