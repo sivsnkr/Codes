@@ -5,14 +5,8 @@ using namespace std;
 
 class Prime
 {
-    int n;
     public:
-    Prime(int num)
-    {
-        n = num;
-    }
-
-    bool is_prime()
+    bool is_prime(int n)
     {
         if(n == 1)
             return false;
@@ -23,7 +17,7 @@ class Prime
         return true;
     }
 
-    vector<int> all_primes()
+    vector<int> all_primes(int n)
     {
         vector<int> is_prime(n+1,0);
         vector<int> primelist;
@@ -42,7 +36,7 @@ class Prime
         return primelist;
     }
 
-    vector<int> primeFactors()
+    vector<int> primeFactors(int n)
     {
         vector<int> factorization;
         for (int d = 2; d * d <= n; d++) {
@@ -60,6 +54,6 @@ class Prime
 int main()
 {
     int n = 13;
-    class Prime ps(n);
-    cout<<ps.is_prime()<<endl;
+    class Prime ps;
+    cout<<ps.is_prime(n)<<endl;
 }
