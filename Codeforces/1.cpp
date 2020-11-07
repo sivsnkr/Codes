@@ -3,22 +3,17 @@ using namespace std;
 const char NL = '\n';
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
+#define int long long
 void read(vector<int> &a);
 
 inline void solve()
 {
     // all the code goes here
     test
-	{
-		int n;cin>>n;
-		int res = 2*n+2;
-		while(n--)
-		{
-			cout<<res<<" ";
-			res+=2;
-		}
-		cout<<NL;
-	}
+    {
+        int a,b,c,d;cin>>a>>b>>c>>d;
+        cout<<(c-a)*(d-b)+1<<NL;
+    }
 }
 
 int32_t main()

@@ -3,6 +3,7 @@ using namespace std;
 const char NL = '\n';
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
+#define int long long
 void read(vector<int> &a);
 
 inline void solve()
