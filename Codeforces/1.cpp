@@ -11,9 +11,27 @@ inline void solve()
     // all the code goes here
     test
     {
-        int a,b,c,d;cin>>a>>b>>c>>d;
-        cout<<(c-a)*(d-b)+1<<NL;
-    }
+        int n;cin>>n;
+        string s,t;cin>>s>>t;
+        int pt = 0;
+        bool flip = 0;
+        vector<int> res;
+        for(int i = n-1; i >= 0; i--)
+        {
+            if(flip ^ (s[pt] == t[i]))
+                res.push_back(1);
+            res.push_back(i+1);
+            if(flip)
+                pt-=i;
+            else
+                pt+=i;
+            flip = !flip;
+        }
+        cout<<res.size()<<" ";
+        for(int x : res)
+            cout<<x<<" ";
+        cout<<NL;
+    }    
 }
 
 int32_t main()
