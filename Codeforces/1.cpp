@@ -10,56 +10,35 @@ inline void solve()
 {
     // all the code goes here
     int n;cin>>n;
-    const int MX = 1e5+5;
-    int ma = MX,mb = MX,mc = MX;
-    int total = 3*MX;
-    vector<pair<int,string>> vec;
+    const int INF = 1e10;
+    vector<vector<int>> dp(n+1,vector<int>(8,INF));
+    dp[0][0] = 0;
+
     for(int i = 0; i < n; i++)
     {
         int c;cin>>c;
         string s;cin>>s;
-        vec.emplace_back(c,s);
-        bool A = 0,B = 0,C = 0;
-        for(int i = 0; i < s.length(); i++)
-            if(s[i] == 'A')
-                A = 1;
-            else if(s[i] == 'B')
-                B = 1;
-            else
-                C = 1;
-        if(A)
-            ma = min(ma,c);
-        if(B)
-            mb = min(mb,c);
-        if(C)
-            mc = min(mc,c);
+        int smask = 0;
+        for(int j = 0; j < 3; j++)
+        {
+            char c = 'C'-j;
+            bool have = 0;
+            for(char ci : s)
+                if(ci == c)
+                    have = 1;
+            if(have)
+                smask+=((int)1<<j);
+        }
+
+        for(int mask = 0; mask < 8; mask++)
+        {
+            dp[i+1][mask] = min(dp[i+1][mask],dp[i][mask]);
+            dp[i+1][mask|smask] = min(dp[i+1][mask|smask],dp[i][mask]+c);
+        }
     }
-    for(int i = 0; i < n; i++)
-    {
-        bool A = 0,B = 0,C = 0;
-        string s = vec[i].second;
-        int tc = vec[i].first;
-        for(int i = 0; i < s.length(); i++)
-            if(s[i] == 'A')
-                A = 1;
-            else if(s[i] == 'B')
-                B = 1;
-            else
-                C = 1;
-        if(!A)
-            tc+=ma;
-        if(!B)
-            tc+=mb;
-        if(!C)
-            tc+=mc;
-        total = min(total,tc);
-    }
-    if(mc >= MX || mb >= MX || ma >= MX)
-    {
-        cout<<-1<<NL;
-        return;
-    }
-    cout<<total<<NL;
+
+    int ans = dp[n][7];
+    cout<<(ans >= INF ? -1:ans)<<NL;
 }
 
 int32_t main()
