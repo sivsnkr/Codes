@@ -8,7 +8,7 @@ void read(vector<int> &a);
 class Combinatorics
 {
     public:
-    int ncr(int n,int r,int p)
+    vector<int> ncr(int n,int r,int p)
     {
         if(n-r < r)
             r = n-r;
@@ -19,17 +19,17 @@ class Combinatorics
             for(int j = min(r,i); j > 0; j--)
                 dp[j] = (dp[j]+dp[j-1])%p;
         }
-        return dp[r];
+        return dp;// dp[r] will be the answer
     }
 
-    int derangements(int n)
+    vector<int> derangements(int n)
     {
         vector<int> der(n+1,0);
         der[1] = 0;
         der[2] = 1;
         for (int i = 3; i <= n; ++i)
             der[i] = (i - 1) * (der[i - 1] + der[i - 2]);
-        return der[n];
+        return der; // der[n] will be the answer
     }
 };
 
