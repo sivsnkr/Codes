@@ -6,39 +6,43 @@ const char NL = '\n';
 #define int long long
 void read(vector<int> &a);
 
+vector<int> dis(int n)
+{
+    vector<int> der(n+1,0);
+    der[1] = 0;
+    der[2] = 1;
+    for (int i = 3; i <= n; ++i)
+        der[i] = (i - 1) * (der[i - 1] + der[i - 2]);
+ 
+    return der;
+}
+
+int ncr(int n,int r,int p)
+{
+    if(n-r < r)
+        r = n-r;
+    vector<int> dp(r+1,0);
+    dp[0] = 1;
+    for(int i = 1; i <= n; i++)
+    {
+        for(int j = min(r,i); j > 0; j--)
+            dp[j] = (dp[j]+dp[j-1])%p;
+    }
+    return dp[r];
+}
+
 inline void solve()
 {
     // all the code goes here
     int n;cin>>n;
-    const int INF = 1e10;
-    vector<vector<int>> dp(n+1,vector<int>(8,INF));
-    dp[0][0] = 0;
-
-    for(int i = 0; i < n; i++)
+    int k;cin>>k;
+    vector<int> der = countDer(n);
+    int sum = 0;
+    for(int i = n-k; i <= n; i++)
     {
-        int c;cin>>c;
-        string s;cin>>s;
-        int smask = 0;
-        for(int j = 0; j < 3; j++)
-        {
-            char c = 'C'-j;
-            bool have = 0;
-            for(char ci : s)
-                if(ci == c)
-                    have = 1;
-            if(have)
-                smask+=((int)1<<j);
-        }
-
-        for(int mask = 0; mask < 8; mask++)
-        {
-            dp[i+1][mask] = min(dp[i+1][mask],dp[i][mask]);
-            dp[i+1][mask|smask] = min(dp[i+1][mask|smask],dp[i][mask]+c);
-        }
+        sum+=ncr(n,i,1e17)*der[n-i];
     }
-
-    int ans = dp[n][7];
-    cout<<(ans >= INF ? -1:ans)<<NL;
+    cout<<sum+1<<NL;
 }
 
 int32_t main()
