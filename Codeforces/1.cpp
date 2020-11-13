@@ -6,47 +6,40 @@ const char NL = '\n';
 #define int long long
 void read(vector<int> &a);
 
-class Combinatorics
-{
-    public:
-    vector<int> ncr(int n,int r,int p)
-    {
-        if(n-r < r)
-            r = n-r;
-        vector<int> dp(r+1,0);
-        dp[0] = 1;
-        for(int i = 1; i <= n; i++)
-        {
-            for(int j = min(r,i); j > 0; j--)
-                dp[j] = (dp[j]+dp[j-1])%p;
-        }
-        return dp;// access dp[r]
-    }
-
-    vector<int> derangements(int n)
-    {
-        vector<int> der(n+1,0);
-        der[1] = 0;
-        der[2] = 1;
-        for (int i = 3; i <= n; ++i)
-            der[i] = (i - 1) * (der[i - 1] + der[i - 2]);
-        return der;
-    }
-};
-
 inline void solve()
 {
     // all the code goes here
-    class Combinatorics st;
     int n;cin>>n;
-    int k;cin>>k;
-    vector<int> der = st.derangements(n);
+    vector<int> a(n+1);
+    for(int i = 1; i <= n; i++)
+        cin>>a[i];
+
+    map<int,int> st;
     int sum = 0;
-    for(int i = n-k; i <= n; i++)
+    st[0] = 0;
+    int count = 0;
+    int j = 1;
+    for(int i = 1; i <= n; i++)
     {
-        sum+=st.ncr(n,i,1e17)*der[n-i];
+        sum+=a[i];
+        if(st.find(sum) != st.end())
+        {
+            int l = i-1-j;
+            if(j != 0)
+                l++;
+            count+=(l*(l+1))/2;
+            j = st[sum]+2;
+            l = i-j;
+            count-=(l*(l+1))/2;
+
+        }
+        st[sum] = i;
     }
-    cout<<sum+1<<NL;
+    int l = n-j;
+    if(j != 0)
+        l++;
+    count+=(l*(l+1))/2;
+    cout<<count<<NL;
 }
 
 int32_t main()
