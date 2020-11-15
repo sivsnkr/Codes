@@ -9,37 +9,7 @@ void read(vector<int> &a);
 inline void solve()
 {
     // all the code goes here
-    int n;cin>>n;
-    vector<int> a(n+1);
-    for(int i = 1; i <= n; i++)
-        cin>>a[i];
-
-    map<int,int> st;
-    int sum = 0;
-    st[0] = 0;
-    int count = 0;
-    int j = 1;
-    for(int i = 1; i <= n; i++)
-    {
-        sum+=a[i];
-        if(st.find(sum) != st.end())
-        {
-            int l = i-1-j;
-            if(j != 0)
-                l++;
-            count+=(l*(l+1))/2;
-            j = st[sum]+2;
-            l = i-j;
-            count-=(l*(l+1))/2;
-
-        }
-        st[sum] = i;
-    }
-    int l = n-j;
-    if(j != 0)
-        l++;
-    count+=(l*(l+1))/2;
-    cout<<count<<NL;
+    
 }
 
 int32_t main()

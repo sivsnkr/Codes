@@ -9,7 +9,6 @@ void read(vector<int> &a);
 inline void solve()
 {
     // all the code goes here
-    
 }
 
 int32_t main()
