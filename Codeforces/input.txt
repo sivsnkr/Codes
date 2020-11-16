@@ -1,6 +1,2 @@
-5
-ababa
-codedoca
-abcda
-zxzytyz
-abcdefghijklmnopqrstuvwxyza
+a
+z
