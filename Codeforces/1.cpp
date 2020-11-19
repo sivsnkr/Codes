@@ -9,32 +9,6 @@ void read(vector<int> &a);
 inline void solve()
 {
     // all the code goes here
-    test
-    {
-        int n,p,k;cin>>n>>p>>k;
-        vector<int> a(n);
-        read(a);
-        sort(all(a));
-        int pref = 0,sum = 0;
-        int ans = 0;
-        for(int i = 0; i < k; i++)
-        {
-            sum = pref;
-            if(sum > p)
-                break;
-            int count = i;
-            for(int j = i+k-1; j < n; j+=k)
-            {
-                if(sum+a[j] > p)
-                    break;
-                count+=k;
-                sum+=a[j];
-            }
-            pref += a[i];
-            ans = max(ans,count);
-        }
-        cout<<ans<<NL;
-    }
 }
 
 int32_t main()
