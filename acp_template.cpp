@@ -3,6 +3,8 @@ using namespace std;
 const char NL = '\n';
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
+#define f(i, a, b) for (int i = a; i < b; i++)
+#define fr(i, a, b) for (int i = a; i >= b; i--)
 #define int long long
 void read(vector<int> &a);
 
