@@ -8,9 +8,63 @@ const char NL = '\n';
 #define int long long
 void read(vector<int> &a);
 
+const int MX = 2e5+5;
+vector<vector<int>> g(MX);
+vector<int> cost(MX);
+vector<int> cost_sum(MX);
+int costt,sum,ans,total;
+
+void dfs(int root, int par,int depth)
+{
+    cost_sum[root] = cost[root];
+    total+=cost[root];
+    costt+=depth*cost[root];
+    for(int i : g[root])
+    {
+        if(i != par)
+        {
+            dfs(i,root,depth+1);
+            cost_sum[root]+=cost_sum[i];
+        }
+    }
+}
+
+void dfs(int root, int par)
+{
+    ans = max(ans,costt);
+
+    for(int i : g[root])
+    {
+        if(i != par)
+        {
+            int ccost = cost_sum[i];
+            int pcost = total-ccost;
+
+            costt+=(pcost-ccost);
+            dfs(i,root);
+            costt-=(pcost-ccost);
+        }
+    }
+}
+
 inline void solve()
 {
     // all the code goes here
+    int n;cin>>n;
+    f(i,1,n+1)
+        cin>>cost[i];
+    f(i,0,n-1)
+    {
+        int x,y;cin>>x>>y;
+        g[x].push_back(y);
+        g[y].push_back(x);
+    }
+
+    dfs(1,1,0);
+
+    dfs(1,1);
+
+    cout<<ans<<NL;
 }
 
 int32_t main()
