@@ -8,14 +8,9 @@ const char NL = '\n';
 #define int long long
 void read(vector<int> &a);
 
-int max(vector<int> a)
-{
-    return *max_element(all(a));
-}
 inline void solve()
 {
     // all the code goes here
-    cout<<max(vector<int>({1,2,3,4,5}))<<NL;
 }
 
 int32_t main()

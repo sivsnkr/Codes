@@ -1,2 +1,4 @@
-3
-2
+root i 1 4
+root i 4 2
+root i 4 5
+root i 4 3
