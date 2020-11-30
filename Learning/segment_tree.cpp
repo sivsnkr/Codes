@@ -22,7 +22,7 @@ class Segment_tree
     public:
     Segment_tree(vector<int> a)
     {
-        n = int(a.size());
+        n = (int)a.size();
         A = a;
         st.assign(4*n,0);
         build(1,0,n-1);

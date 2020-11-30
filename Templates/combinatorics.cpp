@@ -38,10 +38,6 @@ inline void solve()
 {
     // all the code goes here
     class Combinatorics st;
-    int nc = st.ncr(5,2,1e9);
-    int dis = st.derangements(5);
-
-    cout<<nc<<" "<<dis<<NL;
 }
 
 int32_t main()
