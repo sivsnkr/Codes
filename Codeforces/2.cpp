@@ -11,38 +11,35 @@ void read(vector<int> &a);
 inline void solve()
 {
     // all the code goes here
-    const int MX = 1e6+6;
-    vector<int> dp(MX,0);
-    f(i,2,MX)
+    int n;cin>>n;
+    vector<pair<int,int>> data(n);
+    f(i,0,n)cin>>data[i].first>>data[i].second;
+    int k;cin>>k;
+    vector<int> kval(k);
+    f(i,0,k)cin>>kval[i];
+    sort(all(kval));
+    sort(all(data));
+    vector<vector<int>> dp(n+1,vector<int>(k+1,0));
+    // int mx = 0;
+    f(i,0,n+1)
     {
-        if(i*i < MX && dp[i] == 0)
+        f(j,0,k+1)
         {
-            if(dp[i*i] == 1)
-                dp[i*i]++;
-            else
+            if(data[i-1].first <= kval[j] && i < n && j < k)
             {
-                dp[i*i]+=2;
+                dp[i+1][j+1] = dp[i][j]+data[i].second;
             }
-        }
-        for(int j = i*i; j < MX; j+=i)
-        {
-            if(dp[j] == 0)
-            {
-                dp[j]++;
-            }
+            // dp[i][j+1] = max(dp[i][j+1],dp[i][j]);
+            // mx = max(dp[i][j],mx);
         }
     }
 
-    f(i,1,MX)
-    {
-        dp[i]+=dp[i-1];
-    }
-    int q;cin>>q;
-    f(i,0,q)
-    {
-        int x;cin>>x;
-        cout<<x-dp[x]<<NL;
-    }
+
+    f(i,0,n+1)
+        f(j,0,k+1)
+            cout<<dp[i][j]<<" \n"[j==k];
+
+    cout<<dp[n][k]<<NL;
 }
 
 int32_t main()
