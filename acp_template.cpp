@@ -25,7 +25,7 @@ int32_t main()
     return 0;
 }
 template<typename T>
-void read(vector<int> &a)
+void read(vector<T> &a)
 {
     for(auto &it : a)cin>>it;
 }
