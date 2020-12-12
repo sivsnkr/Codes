@@ -11,35 +11,77 @@ void read(vector<int> &a);
 inline void solve()
 {
     // all the code goes here
-    int n;cin>>n;
-    vector<pair<int,int>> data(n);
-    f(i,0,n)cin>>data[i].first>>data[i].second;
-    int k;cin>>k;
-    vector<int> kval(k);
-    f(i,0,k)cin>>kval[i];
-    sort(all(kval));
-    sort(all(data));
-    vector<vector<int>> dp(n+1,vector<int>(k+1,0));
-    // int mx = 0;
-    f(i,0,n+1)
+    int n,d,m;cin>>n>>d>>m;
+
+    vector<int> in,de;
+
+    f(i,0,n)
     {
-        f(j,0,k+1)
+        int x;cin>>x;
+        if(x > m)
+            in.push_back(x);
+        else    
+            de.push_back(x);
+    }
+
+    sort(all(in)),sort(all(de),greater<int>());
+    int i = 0,j = 0;
+    int sum = 0;
+    while(i < in.size() && j < de.size())
+    {
+        int tsum = 0;
+        if(j+d <= de.size())
         {
-            if(data[i-1].first <= kval[j] && i < n && j < k)
+            f(k,j,j+d)
+                tsum+=de[k];
+        }
+        
+        if(j+d-1 >= de.size())
+        {
+            f(k,j,de.size())
             {
-                dp[i+1][j+1] = dp[i][j]+data[i].second;
+                tsum+=de[k];
+                // in.push_back(de[k]);
             }
-            // dp[i][j+1] = max(dp[i][j+1],dp[i][j]);
-            // mx = max(dp[i][j],mx);
+            if(in.size()-i == 1)
+            {
+                sum+=tsum;
+                j = de.size();
+                break;
+            }
+            if(tsum >= in[i])
+            {
+                sum+=tsum;
+            }
+            else
+            {
+                f(k,j,de.size())
+                {
+                    in.push_back(de[k]);
+                }
+            }
+            
+            j = de.size();
+            break;
+        }
+        sum+=max(tsum,in[i]);
+        i++,j+=d;
+    }
+    sort(in.begin()+i,in.end());
+
+    while(j < de.size())
+        sum+=de[j++];
+    if(i < in.size())
+    {
+        int st = i,en = in.size()-1;
+        while(st <= en)
+        {
+            sum+=in[en];
+            en--,st+=d;
         }
     }
 
-
-    f(i,0,n+1)
-        f(j,0,k+1)
-            cout<<dp[i][j]<<" \n"[j==k];
-
-    cout<<dp[n][k]<<NL;
+    cout<<sum<<NL;
 }
 
 int32_t main()
