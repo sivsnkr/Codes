@@ -5,23 +5,33 @@ const char NL = '\n';
 #define all(a) a.begin(), a.end()
 void read(vector<int> &a);
 
+class NCR
+{
+    // O(n) for big n and r modulo prime p
+    vector<int> fact,inv,finv;
+    public:
+    NCR(int n,int c, int p)
+    {
+        fact.resize(n+1),inv.resize(n+1),finv.resize(n+1);
+        fact[1] = inv[1] = finv[0] = fact[0] = finv[1] = inv[0] = 1;
+        for(int i = 2; i <= n; i++)
+            fact[i] = i*fact[i-1]%p;
+        for(int i = 2; i <= n; i++)
+            inv[i] = p-p/i*inv[p%i]%p;
+        for(int i = 2; i <= n; i++)
+            finv[i] = inv[i]*finv[i-1]%p;
+    }
+    int ncr(int n,int r,int p)
+    {
+        if(n < r)
+            return 0;
+        return fact[n]*finv[r]%p*finv[n-r]%p;
+    }
+};
+
 class Combinatorics
 {
     public:
-    vector<int> ncr(int n,int r,int p)
-    {
-        if(n-r < r)
-            r = n-r;
-        vector<int> dp(r+1,0);
-        dp[0] = 1;
-        for(int i = 1; i <= n; i++)
-        {
-            for(int j = min(r,i); j > 0; j--)
-                dp[j] = (dp[j]+dp[j-1])%p;
-        }
-        return dp;// dp[r] will be the answer
-    }
-
     vector<int> derangements(int n)
     {
         vector<int> der(n+1,0);

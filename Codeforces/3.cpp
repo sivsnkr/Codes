@@ -6,48 +6,61 @@ const char NL = '\n';
 #define f(i, a, b) for (int i = a; i < b; i++)
 #define fr(i, a, b) for (int i = a; i >= b; i--)
 #define int long long
-void read(vector<int> &a);
+template<typename T>
+void read(vector<T> &a);
+
+class NCR
+{
+    // O(n) for big n and r modulo prime p
+    vector<int> fact,inv,finv;
+    public:
+    NCR(int n,int c, int p)
+    {
+        fact.resize(n+1),inv.resize(n+1),finv.resize(n+1);
+        fact[1] = inv[1] = finv[0] = fact[0] = finv[1] = inv[0] = 1;
+        for(int i = 2; i <= n; i++)
+            fact[i] = i*fact[i-1]%p;
+        for(int i = 2; i <= n; i++)
+            inv[i] = p-p/i*inv[p%i]%p;
+        for(int i = 2; i <= n; i++)
+            finv[i] = inv[i]*finv[i-1]%p;
+    }
+    int ncr(int n,int r,int p)
+    {
+        if(n < r)
+            return 0;
+        return fact[n]*finv[r]%p*finv[n-r]%p;
+    }
+};
 
 inline void solve()
 {
     // all the code goes here
-    test
+    const int mod = 998244353;
+    int n,k;cin>>n>>k;
+    class NCR st(3e5+5,3e5+5,mod);
+    vector<pair<int,int>> pa;
+    f(i,0,n)
     {
-        int n,m;cin>>n>>m;
-        vector<int> a(n);
-        read(a);
-        map<int,long double> st;
-        f(i,0,m)
-        {
-            int x;cin>>x;
-            long double p;cin>>p;
-            st[x] = p;
-        }
-        if(is_sorted(all(a)))
-        {
-            cout<<"1"<<NL;
-            continue;
-        }
-        int sum = 0;
-        long double p = 1;
-        f(i,0,n)
-        {
-            int l = i+1;
-            sum+=a[i];
-            if(sum == (l*(l+1))/2)
-            {
-                if(st.find(l) != st.end())
-                {
-                    p*=(1-st[l]);
-                }
-            }
-        }
-        cout<<setprecision(20);
-        long double res = 1-p;
-        if(st.find(n) != st.end())
-            res = max(res,st[n]);
-        cout<<res<<NL;
+        int l,r;cin>>l>>r;
+        pa.emplace_back(l,1);
+        pa.emplace_back(r,-1);
     }
+    sort(all(pa),[](pair<int,int> a,pair<int,int> b)->bool{
+        if(a.first == b.first)
+            return a.second>b.second;
+        return a.first < b.first;
+    });
+    int cnt = 0,res = 0;
+    f(i,0,2*n)
+    {
+        if(pa[i].second > 0)
+        {
+            res = (res+st.ncr(cnt,k-1,mod))%mod;
+        }
+        cnt+=pa[i].second;
+    }
+    cout<<res<<NL;
 }
 
 int32_t main()
@@ -64,8 +77,8 @@ int32_t main()
     fflush(stdout);
     return 0;
 }
-
-void read(vector<int> &a)
+template<typename T>
+void read(vector<T> &a)
 {
     for(auto &it : a)cin>>it;
 }
