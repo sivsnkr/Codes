@@ -12,13 +12,6 @@ void read(vector<T> &a);
 inline void solve()
 {
     // all the code goes here
-    // int n,m;cin>>n>>m;
-    // vector<int> a(n);
-    // read(a);
-    int n;cin>>n;
-    vector<string> st(n);
-    read(st);
-    // vector<double> pr(n,1);
 }
 
 int32_t main()
@@ -36,7 +29,7 @@ int32_t main()
     return 0;
 }
 template<typename T>
-void read(vector<int> &a)
+void read(vector<T> &a)
 {
     for(auto &it : a)cin>>it;
 }
