@@ -6,7 +6,7 @@ long long bin_exp(long long a, long long b) {
     long long res = 1;
     while (b > 0) {
         if (b & 1)
-            res = res * a;
+            res *= a;
         a = a * a;
         b >>= 1;
     }
@@ -15,6 +15,6 @@ long long bin_exp(long long a, long long b) {
 
 int main()
 {
-    long long int p = bin_exp(3,2);
+    long long int p = bin_exp(2,1);
     cout<<p<<"\n";
 }

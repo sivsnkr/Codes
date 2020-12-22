@@ -9,35 +9,45 @@ const char NL = '\n';
 template<typename T>
 void read(vector<T> &a);
 
+class Isit
+{
+    public:
+    bool ispoweroftwo(int n)
+    {
+        if((n&(n-1)) == 0)
+            return true;
+        return false;
+    }
+    bool is_prime(int n)
+    {
+        if(n == 1)
+            return false;
+        for(int i = 2; i*i <= n; i++)
+            if(n%i == 0)
+                return false;
+
+        return true;
+    }
+    bool is_plaindrome(string s)
+    {
+        int st = 0,e = s.length()-1;
+        while(st < e)
+        {
+            if(s[st] != s[e])
+                return false;
+            st++,e--;
+        }
+        return true;
+    }
+};
+
+const int mod = 1e9+7;
 inline void solve()
 {
     // all the code goes here
-    test
-    {
-        int n;cin>>n;
-        vector<int> a(n);
-        read(a);
-        map<int,int> st;
-        int sum = accumulate(all(a),0);
-        vector<int> csum(n+1,0);
-        f(i,1,n+1)
-            csum[i]+=csum[i-1]+a[i-1];
-        int cnt = 0;
-        int msum = 0;
-        f(i,1,n+1)
-        {
-            f(j,i,n+1)
-            {
-                st[csum[j]-csum[i-1]]++;
-                if(st[csum[j]-csum[i-1]] > cnt && st[csum[j]-csum[i-1]]*(csum[j]-csum[i-1]) == sum)
-                {
-                    cnt = st[csum[j]-csum[i-1]];
-                    msum = csum[j]-csum[i-1];
-                }
-            }
-        }
-        cout<<n-cnt<<NL;
-    }
+
+    class Isit st;
+    cout<<st.is_prime(7367)<<endl;
 }
 
 int32_t main()

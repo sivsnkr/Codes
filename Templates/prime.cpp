@@ -53,7 +53,5 @@ class Prime
 
 int main()
 {
-    int n = 13;
     class Prime ps;
-    cout<<ps.is_prime(n)<<endl;
 }
