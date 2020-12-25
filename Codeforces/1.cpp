@@ -1,42 +1,35 @@
 #include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i <= int(b); i++)
 using namespace std;
+const char NL = '\n';
+#define test int t;cin >> t;while (t--)
+#define all(a) a.begin(), a.end()
+#define f(i, a, b) for (int i = a; i < b; i++)
+#define fr(i, a, b) for (int i = a; i >= b; i--)
+#define int long long
+template<typename T>
+void read(vector<T> &a);
 
-typedef long long ll;
-const int maxn = 1e5;
-int n, d, m, k, l;
-ll a[maxn + 5], b[maxn + 5];
-
-void solve(ll a[], int n) {
-	sort(a + 1, a + n + 1,greater<int>());
-	rep(i, 1, n) a[i] += a[i - 1];
+inline void solve()
+{
+    // all the code goes here
 }
 
-int main() {
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
     #ifndef ONLINE_JUDGE
         freopen("input.txt","r",stdin);
         freopen("output.txt","w",stdout);
     #endif
-	scanf("%d %d %d", &n, &d, &m);
-	for (int i = 0, x; i < n; i++) {
-		scanf("%d", &x);
-		if (x > m) a[++k] = x;
-		else b[++l] = x;
-	}
-	if (k == 0) {
-		ll s = 0;
-		rep(i, 1, n) s += b[i];
-		printf("%lld\n", s);
-		exit(0);
-	}
-	solve(a, k);
-	solve(b, l);
-	fill(b + l + 1, b + n + 1, b[l]);
-	ll res = 0;
-	rep(i, (k + d) / (1 + d), k) if (1ll * (i - 1) * (d + 1) + 1 <= n) {
-		cout<<"i "<<i<<endl;
-		res = max(res, a[i] + b[n - 1ll * (i - 1) * (d + 1) - 1]);
-	}
-	printf("%lld\n", res);
-	return 0;
+    solve();
+    fflush(stdin);
+    fflush(stdout);
+    return 0;
+}
+template<typename T>
+void read(vector<T> &a)
+{
+    for(auto &it : a)cin>>it;
 }
