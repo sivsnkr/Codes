@@ -12,32 +12,6 @@ void read(vector<T> &a);
 inline void solve()
 {
     // all the code goes here
-    test
-    {
-        int n;cin>>n;
-        vector<int> a(n);
-        read(a);
-        map<int,int> st;
-        int sum = accumulate(all(a),0);
-        vector<int> csum(n+1,0);
-        f(i,1,n+1)
-            csum[i]+=csum[i-1]+a[i-1];
-        int cnt = 0;
-        int msum = 0;
-        f(i,1,n+1)
-        {
-            f(j,i,n+1)
-            {
-                st[csum[j]-csum[i-1]]++;
-                if(st[csum[j]-csum[i-1]] > cnt && st[csum[j]-csum[i-1]]*(csum[j]-csum[i-1]) == sum)
-                {
-                    cnt = st[csum[j]-csum[i-1]];
-                    msum = csum[j]-csum[i-1];
-                }
-            }
-        }
-        cout<<n-cnt<<NL;
-    }
 }
 
 int32_t main()

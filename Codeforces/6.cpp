@@ -9,45 +9,9 @@ const char NL = '\n';
 template<typename T>
 void read(vector<T> &a);
 
-class Isit
-{
-    public:
-    bool ispoweroftwo(int n)
-    {
-        if((n&(n-1)) == 0)
-            return true;
-        return false;
-    }
-    bool is_prime(int n)
-    {
-        if(n == 1)
-            return false;
-        for(int i = 2; i*i <= n; i++)
-            if(n%i == 0)
-                return false;
-
-        return true;
-    }
-    bool is_plaindrome(string s)
-    {
-        int st = 0,e = s.length()-1;
-        while(st < e)
-        {
-            if(s[st] != s[e])
-                return false;
-            st++,e--;
-        }
-        return true;
-    }
-};
-
-const int mod = 1e9+7;
 inline void solve()
 {
     // all the code goes here
-
-    class Isit st;
-    cout<<st.is_prime(7367)<<endl;
 }
 
 int32_t main()
