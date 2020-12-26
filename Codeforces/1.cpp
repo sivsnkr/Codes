@@ -1,35 +1,35 @@
 #include <bits/stdc++.h>
+
 using namespace std;
-const char NL = '\n';
-#define test int t;cin >> t;while (t--)
-#define all(a) a.begin(), a.end()
-#define f(i, a, b) for (int i = a; i < b; i++)
-#define fr(i, a, b) for (int i = a; i >= b; i--)
-#define int long long
-template<typename T>
-void read(vector<T> &a);
 
-inline void solve()
-{
-    // all the code goes here
-}
-
-int32_t main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
+int main() {
     #ifndef ONLINE_JUDGE
         freopen("input.txt","r",stdin);
         freopen("output.txt","w",stdout);
     #endif
-    solve();
-    fflush(stdin);
-    fflush(stdout);
-    return 0;
-}
-template<typename T>
-void read(vector<T> &a)
-{
-    for(auto &it : a)cin>>it;
+	const string t = "RGB";
+
+	int q;
+	cin >> q;
+	for (int i = 0; i < q; ++i) {
+		int n, k;
+		string s;
+		cin >> n >> k >> s;
+		int ans = 1e9;
+		for (int offset = 0; offset < 3; ++offset) {
+			vector<int> res(n);
+			int cur = 0;
+			for (int j = 0; j < n; ++j) {
+				res[j] = (s[j] != t[(j + offset) % 3]);
+				cur += res[j];
+				if (j >= k) cur -= res[j - k];
+				if (j >= k - 1) ans = min(ans, cur);
+			}
+            for(int i = 0; i < n; i++)
+                cout<<res[i]<<" \n"[i==n-1];
+		}
+		cout << ans << endl;
+	}
+	
+	return 0;
 }
