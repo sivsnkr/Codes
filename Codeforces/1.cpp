@@ -12,41 +12,6 @@ void read(vector<T> &a);
 inline void solve()
 {
     // all the code goes here
-    int n,b,a;cin>>n>>b>>a;
-    vector<int> st(n);
-    read(st);
-    int i = 0;
-    int segs = 0;
-    int ma = a;
-    while((a > 0 || b > 0) && i < n)
-    {
-        if(st[i] == 0)
-        {
-            if(a > 0)
-                a--;
-            else if(b > 0)
-                b--;
-            else
-                break;
-        }
-        else
-        {
-            if(b > 0)
-            {
-                a = min(ma,a+1);
-                b--;
-            }
-            else if(a > 0)
-                a--;
-            else 
-                break;
-        }
-        // cout<<"a b "<<a<<" "<<b<<NL;
-        segs++;
-        i++;
-    }
-
-    cout<<segs<<NL;
 }
 
 int32_t main()
