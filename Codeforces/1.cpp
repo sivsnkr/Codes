@@ -12,6 +12,7 @@ void read(vector<T> &a);
 inline void solve()
 {
     // all the code goes here
+    cout<<"Happy New Year to everyone "<<NL;
 }
 
 int32_t main()
