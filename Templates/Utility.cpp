@@ -9,34 +9,40 @@ const char NL = '\n';
 template<typename T>
 void read(vector<T> &a);
 
+class Utility
+{
+    public:
+    int pow(int a, int b)
+    {
+        int res = 1;
+        while (b > 0)
+        {
+            if (b & 1)
+                res *= a;
+            a = a * a;
+            b >>= 1;
+        }
+        return res;
+    }
+
+    int mod(int a, int p)
+    {
+        while(a >= p)a-=p;
+        while(a < 0)a+=p;
+        return a;
+    }
+
+    int mod_inverse(int a,int m)
+    {
+        int res = pow(a,m-2);
+        res = mod(res,m);
+        return res;
+    }
+};
 inline void solve()
 {
     // all the code goes here
-    test
-    {
-        int n;cin>>n;
-        string r,b;cin>>r>>b;
-
-        int rn = 0,bn = 0;
-        f(i,0,n)
-        {
-            if(r[i] > b[i])
-                rn++;
-            else if(b[i] > r[i])
-                bn++;
-        }
-        if(rn > bn)
-        {
-            cout<<"RED";
-        }
-        else if(bn > rn)
-        {
-            cout<<"BLUE";
-        }
-        else 
-            cout<<"EQUAL";
-        cout<<NL;
-    }
+    class Utility st;
 }
 
 int32_t main()
