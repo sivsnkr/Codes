@@ -42,36 +42,40 @@ class Strings
         return res;
     }
 
-    int max_len_plain(string s)
+    pair<vector<int>,vector<int>> all_plaindromes(string s)
     {
-        string as = "";
-        for(char a : s)
+        // manacher's algorithm
+        // calculate all plaindromes in string of length L, in O(L)
+        // time
+        int n = s.length();
+        vector<int> d1(n),d2(n);
+        for(int i = 0,l = 0,r = -1; i < n; i++)
         {
-            as+=a;
-            as+='#';
+            int k = (i > r) ? 1 : min(d1[l+r-i],r-i+1);
+            while(i-k >= 0 && i + k < n && s[i-k] == s[i+k])
+                k++;
+            d1[i] = k--;
+            if(i + k > r)
+            {
+                l = i - k;
+                r = i + k;
+            }
         }
 
-        int n = as.length();
-        int maxlength = 0;
-        for(int i = 0; i < n; i++)
+        for(int i = 0,l = 0,r = -1; i < n; i++)
         {
-            int j = i-1,k = i+1;
-            int count = 0;
-            while(j>=0&&k<n)
+            int k = (i > r) ? 0 : min(d1[l+r-i+1],r-i+1);
+            while(i-k-1 >= 0 && i + k < n && s[i-k-1] == s[i+k])
+                k++;
+            d2[i] = k--;
+            if(i + k > r)
             {
-                if(as[j] == as[k] && as[j] != '#')
-                {
-                    count+=2;
-                }
-                else if(as[j] != '#')
-                    break;
-                j--,k++;
+                l = i - k - 1;
+                r = i + k;
             }
-            if(as[i] != '#')
-                count++;
-            maxlength = max(maxlength,count);
         }
-        return maxlength;
+
+        return {d1,d2};
     }
 
     int LCS_length(string s,string t)
@@ -158,8 +162,7 @@ inline void solve()
 {
     // all the code goes here
     class Strings st;
-    string s,t;cin>>s>>t;
-    cout<<st.LCS_string(s,t)<<NL;
+    auto [d1,d2] = st.all_plaindromes("abaaraa");
 }
 
 int32_t main()
