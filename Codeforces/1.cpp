@@ -15,27 +15,34 @@ inline void solve()
     test
     {
         int n;cin>>n;
-        string r,b;cin>>r>>b;
-
-        int rn = 0,bn = 0;
+        vector<pair<int,int>> a(n);
         f(i,0,n)
         {
-            if(r[i] > b[i])
-                rn++;
-            else if(b[i] > r[i])
-                bn++;
+            int t,x;cin>>t>>x;
+            a[i] = {t,x};
         }
-        if(rn > bn)
+
+        int it = a[0].first;
+        int mi = 0,mx = a[0].second;
+        int sp = 1;
+        int cnt = 0;
+        f(i,1,n)
         {
-            cout<<"RED";
+            if(a[i].first < it+mx)
+            {
+                int ri = mi+(a[i].first-it)*sp;
+                int rf = min(mi+((i+1 < n ? a[i+1].first:(int)1e9+5)-it)*sp,mx);
+                if(a[i].second >= ri && a[i].second <= rf)
+                    cnt++;
+            }
+            else 
+            {
+                cnt++;
+                it = a[i].first;
+                mi = 
+            }
         }
-        else if(bn > rn)
-        {
-            cout<<"BLUE";
-        }
-        else 
-            cout<<"EQUAL";
-        cout<<NL;
+        cout<<cnt<<NL;
     }
 }
 

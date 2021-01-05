@@ -1,3 +1,4 @@
-RED
-BLUE
-EQUAL
+Bob
+Tie
+Alice
+Alice
