@@ -12,38 +12,6 @@ void read(vector<T> &a);
 inline void solve()
 {
     // all the code goes here
-    test
-    {
-        int n;cin>>n;
-        vector<pair<int,int>> a(n);
-        f(i,0,n)
-        {
-            int t,x;cin>>t>>x;
-            a[i] = {t,x};
-        }
-
-        int it = a[0].first;
-        int mi = 0,mx = a[0].second;
-        int sp = 1;
-        int cnt = 0;
-        f(i,1,n)
-        {
-            if(a[i].first < it+mx)
-            {
-                int ri = mi+(a[i].first-it)*sp;
-                int rf = min(mi+((i+1 < n ? a[i+1].first:(int)1e9+5)-it)*sp,mx);
-                if(a[i].second >= ri && a[i].second <= rf)
-                    cnt++;
-            }
-            else 
-            {
-                cnt++;
-                it = a[i].first;
-                mi = 
-            }
-        }
-        cout<<cnt<<NL;
-    }
 }
 
 int32_t main()

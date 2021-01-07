@@ -1,4 +1,2 @@
-Bob
-Tie
-Alice
-Alice
+10
+UUUUUDDDDD
