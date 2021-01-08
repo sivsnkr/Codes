@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#pragma GCC optimize("Ofast")
 using namespace std;
 #define NL '\n'
 #define test int t;cin >> t;while (t--)

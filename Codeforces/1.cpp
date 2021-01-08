@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#pragma GCC optimize("Ofast")
 using namespace std;
 #define NL '\n'
 #define test int t;cin >> t;while (t--)
@@ -9,9 +10,14 @@ using namespace std;
 template<typename T>
 void read(vector<T> &a);
 
+const int mod = 998244353;
+
 inline void solve()
 {
     // all the code goes here
+    int n;cin>>n;
+    vector<int> dp(n+1,1);
+    dp[n] = 10;
 }
 
 int32_t main()
