@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-const char NL = '\n';
+#define NL '\n'
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
 #define f(i, a, b) for (int i = a; i < b; i++)
