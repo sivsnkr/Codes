@@ -28,24 +28,24 @@ class Sparse_table
     {
         for(int i = 0; i < n; i++)
             table[i][0] = a[i];
-        for(int j = 1; j < k; j++)
-            for(int i = 0; i+(1<<j) <= n; i++)
-                table[i][j] = func(table[i][j-1],table[i+(1<<(j-1))][j-1]);
+        for(int k = 1; k < 50; k++)
+            for(int i = 0; i+(1<<k) <= n; i++)
+                table[i][k] = func(table[i][k-1],table[i+(1<<(k-1))][k-1]);
     }
     int func(int a, int b)
     {
-        return min(a,b);
+        return a+b;
     }
 
     int access(int l,int r)
     {
-        int res = LLONG_MAX;
+        int res = 0;
         for(int i = k; i >= 0; i--)
         {
-            if((1<<i) <= r-l+1)
+            if((1<<k) <= r-l+1)
             {
-                res = func(res,table[l][i]);
-                l+=(1<<i);
+                res+=table[l][k];
+                l+=(1<<k);
             }
         }
         return res;
@@ -55,23 +55,6 @@ class Sparse_table
 inline void solve()
 {
     // all the code goes here
-    int n,k;cin>>n>>k;
-    vector<int> a(n);
-    read(a);
-    class Sparse_table st(a);
-    if(k == 1)
-        cout<<*min_element(all(a))<<NL;
-    else if(k == 2)
-    {
-        int mx = LLONG_MIN;
-        f(i,1,n)
-        {
-            mx = max({mx,st.access(0,i-1),st.access(i,n-1)});
-        }
-        cout<<mx<<NL;
-    }
-    else
-        cout<<*max_element(all(a))<<NL;
 }
 
 int32_t main()
