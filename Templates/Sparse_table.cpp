@@ -28,24 +28,24 @@ class Sparse_table
     {
         for(int i = 0; i < n; i++)
             table[i][0] = a[i];
-        for(int k = 1; k < 50; k++)
-            for(int i = 0; i+(1<<k) <= n; i++)
-                table[i][k] = func(table[i][k-1],table[i+(1<<(k-1))][k-1]);
+        for(int j = 1; j < k; j++)
+            for(int i = 0; i+(1<<j) <= n; i++)
+                table[i][j] = func(table[i][j-1],table[i+(1<<(j-1))][j-1]);
     }
     int func(int a, int b)
     {
-        return a+b;
+        return min(a,b);
     }
 
     int access(int l,int r)
     {
-        int res = 0;
+        int res = LLONG_MAX;
         for(int i = k; i >= 0; i--)
         {
-            if((1<<k) <= r-l+1)
+            if((1<<i) <= r-l+1)
             {
-                res+=table[l][k];
-                l+=(1<<k);
+                res = func(res,table[l][i]);
+                l+=(1<<i);
             }
         }
         return res;
