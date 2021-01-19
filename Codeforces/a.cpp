@@ -34,12 +34,12 @@ class Sparse_table
     }
     int func(int a, int b)
     {
-        return min(a,b);
+        return max(a,b);
     }
 
     int access(int l,int r)
     {
-        int res = LLONG_MAX;
+        int res = LLONG_MIN;
         for(int i = k; i >= 0; i--)
         {
             if((1<<i) <= r-l+1)
@@ -55,23 +55,44 @@ class Sparse_table
 inline void solve()
 {
     // all the code goes here
-    int n,k;cin>>n>>k;
-    vector<int> a(n);
-    read(a);
-    class Sparse_table st(a);
-    if(k == 1)
-        cout<<*min_element(all(a))<<NL;
-    else if(k == 2)
+    test
     {
-        int mx = LLONG_MIN;
-        f(i,1,n)
+        int n;cin>>n;
+        vector<int> a(n);
+        read(a);
+        class Sparse_table st(a);
+        int m;cin>>m;
+        vector<int> b(m);
+        vector<int> end(n+1,0);
+        f(i,0,m)
         {
-            mx = max({mx,st.access(0,i-1),st.access(i,n-1)});
+            int po,en;cin>>po>>en;
+            b[i] = po;
+            end[en] = max(end[en],po);
         }
-        cout<<mx<<NL;
+        if(*max_element(all(a)) > *max_element(all(b)))
+        {
+            cout<<-1<<NL;
+            continue;
+        }
+
+        fr(i,n-1,1)
+        {
+            end[i] = max(end[i],end[i+1]);
+        }
+
+        int i = 0;
+        int days = 0;
+        while(i < n)
+        {
+            int j = i;
+            while(j < n && st.access(i,j) <= end[j-i+1])
+                j++;
+            i = j;
+            days++;
+        }
+        cout<<days<<NL;
     }
-    else
-        cout<<*max_element(all(a))<<NL;
 }
 
 int32_t main()
