@@ -15,15 +15,6 @@ class Sparse_table
     vector<int> a;
     int n,k;
     vector<vector<int>> table;
-    public:
-    Sparse_table(vector<int> &_a)
-    {
-        a = _a;
-        n = a.size();
-        k = 25;
-        table.resize(n,vector<int>(k));
-        make();
-    }
     void make()
     {
         for(int i = 0; i < n; i++)
@@ -35,6 +26,15 @@ class Sparse_table
     int func(int a, int b)
     {
         return min(a,b);
+    }
+    public:
+    Sparse_table(vector<int> &_a)
+    {
+        a = _a;
+        n = a.size();
+        k = 25;
+        table.resize(n,vector<int>(k));
+        make();
     }
 
     int access(int l,int r)
