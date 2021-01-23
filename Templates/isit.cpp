@@ -1,8 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-typedef long l;
-const char nl = '\n';
 
 // this check to check if any number is power of 2 using bitmasking
 
@@ -45,7 +42,4 @@ int main()
     cout.tie(0);
 
     // all the code goes here
-    int t = 5;
-    class Isit st;
-    cout<<st.is_plaindrome("madam")<<endl;
 }

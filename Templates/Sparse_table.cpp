@@ -1,14 +1,6 @@
 #include <bits/stdc++.h>
 #pragma GCC optimize("Ofast")
 using namespace std;
-#define NL '\n'
-#define test int t;cin >> t;while (t--)
-#define all(a) a.begin(), a.end()
-#define f(i, a, b) for (int i = a; i < b; i++)
-#define fr(i, a, b) for (int i = a; i >= b; i--)
-#define int long long
-template<typename T>
-void read(vector<T> &a);
 
 class Sparse_table
 {
@@ -39,7 +31,7 @@ class Sparse_table
 
     int access(int l,int r)
     {
-        int res = LLONG_MAX;
+        int res = 1e9;
         for(int i = k; i >= 0; i--)
         {
             if((1<<i) <= r-l+1)
@@ -70,9 +62,4 @@ int32_t main()
     fflush(stdin);
     fflush(stdout);
     return 0;
-}
-template<typename T>
-void read(vector<T> &a)
-{
-    for(auto &it : a)cin>>it;
 }

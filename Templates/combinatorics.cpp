@@ -1,9 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-const char NL = '\n';
-#define test int t;cin >> t;while (t--)
-#define all(a) a.begin(), a.end()
-void read(vector<int> &a);
 
 class NCR
 {
@@ -59,9 +55,4 @@ int32_t main()
     fflush(stdin);
     fflush(stdout);
     return 0;
-}
-
-void read(vector<int> &a)
-{
-    for(auto &it : a)cin>>it;
 }

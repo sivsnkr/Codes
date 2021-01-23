@@ -1,10 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-const char NL = '\n';
-#define test int t;cin >> t;while (t--)
-#define all(a) a.begin(), a.end()
-#define int long long
-void read(vector<int> &a);
 
 class Strings
 {
@@ -153,7 +148,7 @@ class Strings
             res+=s;
             in = {i,j};
         }
-        reverse(all(res));
+        reverse(res.begin(),res.end());
         return res;
     }
 };
@@ -178,9 +173,4 @@ int32_t main()
     fflush(stdin);
     fflush(stdout);
     return 0;
-}
-
-void read(vector<int> &a)
-{
-    for(auto &it : a)cin>>it;
 }

@@ -5,8 +5,6 @@ using namespace std;
 #define LL long long
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
-#define f(i, a, b) for (int i = a; i < b; i++)
-#define fr(i, a, b) for (int i = a; i >= b; i--)
 #define int long long
 template<typename T>
 void read(vector<T> &a);

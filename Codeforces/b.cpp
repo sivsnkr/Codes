@@ -2,6 +2,7 @@
 #pragma GCC optimize("Ofast")
 using namespace std;
 #define NL '\n'
+#define LL long long
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
 #define f(i, a, b) for (int i = a; i < b; i++)

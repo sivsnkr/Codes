@@ -1,13 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long LL;
-typedef long L;
-const char NL = '\n';
-#define f(i,a,b) for(int i=a;i<b;i++)
-#define fr(i,a,b) for(int i=a;i>=b;i--)
-#define test int t; scanf("%d",&t); while(t--)
-#define mod 1000000007
-#define all(a) a.begin(),a.end()
 
 class Segment_tree
 {
@@ -74,18 +66,4 @@ int main()
     cin.tie(0);
     cout.tie(0);
     // all the code goes here
-    int arr[9] = {10, 2, 47, 3, 7, 9, 1, 98, 21};
-    vector<int> A(arr, arr + 9);
-    Segment_tree st(A);
-    int i = st.access(1,1);
-    int j = st.access(3,8);
-    printf("i %d\n",A[i]);
-    printf("j %d\n",A[j]);
-    st.update(6,100);
-    A[6] = 100;
-    i = st.access(1,1);
-    j = st.access(6,6);
-    printf("i %d\n",A[i]);
-    printf("j %d\n",A[j]);
-    return 0;
 }
