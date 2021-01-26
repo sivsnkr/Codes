@@ -12,42 +12,6 @@ void read(vector<T> &a);
 inline void solve()
 {
     // all the code goes here
-    vector<int> a({ 10, 3, 2, 5, 7, 8 });
-    int n = a.size();
-    vector<bool> in(n,0);
-    in[0] = 1;
-    vector<int> dp = a;
-    int mx = 0;
-    for(int i = 0; i < n; i++)
-    {
-        for(int j = i-2; j >= 0; j--)
-        {
-            if(i != n-1)
-            {
-                if(dp[j]+a[i] > dp[i])
-                {
-                    in[i] = in[j];
-                    dp[i] = dp[j]+a[i];
-                }
-            }
-            else
-            {
-                if(dp[j]+a[i] > dp[i])
-                {
-                    if(in[j])
-                        dp[i] = max(dp[i],dp[j]+a[i]-a[0]);
-                    else    
-                        dp[i] = max(dp[i],dp[j]+a[i]);
-                }
-            }
-        }
-        mx = max(mx,dp[i]);
-    }
-
-    for(int i : dp)
-        cout<<i<<" ";
-    cout<<NL;
-    cout<<mx<<NL;
 }
 
 int32_t main()
