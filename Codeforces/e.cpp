@@ -2,64 +2,65 @@
 #pragma GCC optimize("Ofast")
 using namespace std;
 #define NL '\n'
+#define LL long long
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
-#define f(i, a, b) for (int i = a; i < b; i++)
-#define fr(i, a, b) for (int i = a; i >= b; i--)
 #define int long long
 template<typename T>
 void read(vector<T> &a);
 
-struct ele
-{
-    int a,b,c;
-};
 inline void solve()
 {
     // all the code goes here
-    int n;cin>>n;
-    vector<ele> a(n);
-    f(i,0,n)
+    test
     {
-        int x,y;cin>>x>>y;
-        a[i] = {x,y,i};
-    }
-    sort(all(a),[](ele a, ele b)->bool{
-        return a.a < b.a;
-    });
-    int k;cin>>k;
-    vector<int> kval(k);
-    read(kval);
-    sort(all(kval));
-    
-    vector<vector<int>> dp(n+1,vector<int>(k+1,0));
-    vector<int> pos(k,-1);
-    f(i,0,n+1)
-    {
-        f(j,0,k+1)
+        int n,m;cin>>n>>m;
+        vector<vector<int>> a(n,vector<int>(m));
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < m; j++)
+                cin>>a[i][j];
+
+
+        vector<vector<bool>> res(n,vector<bool>(m,0));
+
+        for(int i = 0; i < n; i++)
         {
-            if(i < n && j < k && a[i].a <= kval[j])
+            for(int j = 0; j < m; j++)
             {
-                if(dp[i+1][j+1] < dp[i][j]+a[i].b)
-                    pos[j] = a[i].c+1;
-                dp[i+1][j+1] = max(dp[i+1][j+1],dp[i][j]+a[i].b);
+                bool dirty = 0;
+                int mx = 0;
+                if(i-1 >= 0)
+                {
+                    if(a[i-1][j] > a[i][j])
+                    {
+                        mx = max(mx,a[i-1][j]);
+                        dirty = 1;
+                    }
+                    if(j-1 >= 0 && a[i-1][j-1] > a[i][j])
+                    {
+                        mx = max(mx,a[i-1][j-1]);
+                        dirty = 1;
+                    }
+                    if(j+1 < n && a[i-1][j+1] > a[i][j])
+                    {
+                        mx = max(mx,a[i-1][j+1]);
+                        dirty = 1;
+                    }
+                }
+                if(!dirty)
+                    res[i][j] = 1;
+                a[i][j] = max(a[i][j],mx);
             }
-            if(j < k)
-                dp[i][j+1] = max(dp[i][j+1],dp[i][j]);
-            if(i < n)
-                dp[i+1][j] = max(dp[i+1][j],dp[i][j]);
+        }
+
+        for(int i = 0; i < n; i++)
+        {
+            for(int j = 0; j < m; j++)
+                cout<<res[i][j];
+            cout<<NL;
         }
     }
 
-    f(i,0,k)
-        cout<<pos[i]<<" \n"[i==k-1];
-    map<int,int> st;
-    f(i,0,k)
-        if(pos[i] >= 0)
-            st[pos[i]] = i;
-    cout<<st.size()<<" "<<dp[n][k]<<NL;
-    for(auto [x,y] : st)
-        cout<<x<<" "<<y+1<<NL;
 }
 
 int32_t main()
