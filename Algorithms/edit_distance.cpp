@@ -50,8 +50,8 @@ int32_t main()
     cin.tie(0);
     cout.tie(0);
     // all the code goes here
-    string s = "intention";
-    string s1 = "execution";
+    string s = "Shiv";
+    string s1 = "SHIV";
     Solution st;
     int edit_distance = st.minDistance(s,s1);
     cout<<edit_distance<<endl;

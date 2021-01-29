@@ -29,6 +29,7 @@ MinHeap<T>::MinHeap(int c)
     size = 0;
 }
 template <typename T>
+
 T MinHeap<T>::get_min()
 {
     return heap[0];
