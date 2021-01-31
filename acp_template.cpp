@@ -19,6 +19,7 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
+    cout<<setprecision(20);
     solve();
     fflush(stdin);
     fflush(stdout);
