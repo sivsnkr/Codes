@@ -12,18 +12,6 @@ void read(vector<T> &a);
 inline void solve()
 {
     // all the code goes here
-    int n;cin>>n;
-    const int mod = 1e9+7;
-    vector<vector<int>> dp(2,vector<int>(n+1,0));
-    dp[0][0] = 1,dp[0][1] = 0;
-    for(int i = 1; i <= n; i++)
-    {
-        dp[0][i] = (dp[0][i-1]*19+dp[1][i-1]*6)%mod;
-        dp[1][i] = (dp[1][i-1]*20+dp[0][i-1]*7)%mod;
-    }
-
-    int res = dp[0][n];
-    cout<<res<<NL;
 }
 
 int32_t main()
