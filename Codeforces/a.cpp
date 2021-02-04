@@ -9,49 +9,55 @@ using namespace std;
 template<typename T>
 void read(vector<T> &a);
 
-const int mod = 1e9+7;
-vector<vector<int>> mul(vector<vector<int>> a,vector<vector<int>> b)
-{
-    vector<vector<int>> res(2,vector<int>(2,0));
-    for(int i = 0; i < 2; i++)
-    {
-        for(int k = 0; k < 2; k++)
-        {
-            for(int j = 0; j < 2; j++)
-            {
-                res[i][j]+=a[i][k]*b[k][j];
-                res [i][j] %= mod;
-            }
-        }
-    }
-
-    return res;
-}
-
-vector<vector<int>> bin_expo(vector<vector<int>> a, int n)
-{
-    vector<vector<int>> res({vector<int>({1,0}),vector<int>({0,1})});
-
-    while(n > 0)
-    {
-        if(n&1)
-        {
-            res = mul(res,a);
-        }
-        a = mul(a,a);
-        n = n>>1;
-    }
-    return res;
-}
 inline void solve()
 {
     // all the code goes here
-    int n;cin>>n;
-    // int p;cin>>p;
-    vector<vector<int>> prob({vector<int>({0,1}),vector<int>({1,1})});
-
-    prob = bin_expo(prob,n);
-    cout<<prob[0][1]<<NL;
+    int n,d,m;cin>>n>>d>>m;
+    vector<int> a(n);
+    read(a);
+    sort(all(a),greater<int>());
+    int mx = a[0];
+    a.erase(a.begin());
+    int i = 0,j = n-2;
+    int sum = 0,cnt = 0;
+    // cout<<accumulate(all(a),0LL)<<NL;
+    vector<int> a1;
+    while(i <= j)
+    {
+        sum+=a[i];
+        if(a[i] > m)
+        {
+            cnt = d;
+            int sum1 = 0;
+            while(cnt-- > 0)
+            {
+                if(a[j] <= m)
+                    sum1+=a[j];
+                j--;
+            }
+            if(sum1 > a[i])
+            {
+                a1.push_back(a[i]);
+                sum-=a[i];
+                sum+=sum1;
+            }
+        }
+        i++;
+    }
+    a1.push_back(mx);
+    sort(all(a1),greater<int>());
+    i = 0,j = a1.size()-1;
+    while(i <= j)
+    {
+        sum+=a1[i];
+        cnt = d;
+        while(cnt-- > 0)
+        {
+            j--;
+        }
+        i++;
+    }
+    cout<<sum<<NL;
 }
 
 int32_t main()
@@ -63,7 +69,7 @@ int32_t main()
         freopen("input.txt","r",stdin);
         freopen("output.txt","w",stdout);
     #endif
-    cout<<setprecision(10);
+    cout<<setprecision(20);
     solve();
     fflush(stdin);
     fflush(stdout);
