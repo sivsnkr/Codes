@@ -33,6 +33,16 @@ class Isit
         }
         return true;
     }
+
+    bool is_permutation(vector<int> a)
+    {
+        set<int> st;
+        for(int i : a)
+            st.insert(i);
+        if(*st.rbegin() == a.size() && *st.begin() == 1 && st.size() == a.size())
+            return 1;
+        return 0;
+    }
 };
 
 int main()

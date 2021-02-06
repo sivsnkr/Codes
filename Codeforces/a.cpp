@@ -9,55 +9,142 @@ using namespace std;
 template<typename T>
 void read(vector<T> &a);
 
+class Isit
+{
+    public:
+    bool ispoweroftwo(int n)
+    {
+        if((n&(n-1)) == 0)
+            return true;
+        return false;
+    }
+    bool is_prime(int n)
+    {
+        if(n == 1)
+            return false;
+        for(int i = 2; i*i <= n; i++)
+            if(n%i == 0)
+                return false;
+
+        return true;
+    }
+    bool is_plaindrome(string s)
+    {
+        int st = 0,e = s.length()-1;
+        while(st < e)
+        {
+            if(s[st] != s[e])
+                return false;
+            st++,e--;
+        }
+        return true;
+    }
+
+    bool is_permutation(vector<int> a)
+    {
+        set<int> st;
+        for(int i : a)
+            st.insert(i);
+        if(*st.rbegin() == a.size() && *st.begin() == 1 && st.size() == a.size())
+            return 1;
+        return 0;
+    }
+};
+
+class Sparse_table
+{
+    vector<int> a;
+    int n,k;
+    vector<vector<int>> table;
+    void make()
+    {
+        for(int i = 0; i < n; i++)
+            table[i][0] = a[i];
+        for(int j = 1; j < k; j++)
+            for(int i = 0; i+(1<<j) <= n; i++)
+                table[i][j] = func(table[i][j-1],table[i+(1<<(j-1))][j-1]);
+    }
+    int func(int a, int b)
+    {
+        return min(a,b);
+    }
+    public:
+    Sparse_table(vector<int> &_a)
+    {
+        a = _a;
+        n = a.size();
+        k = 25;
+        table.resize(n,vector<int>(k));
+        make();
+    }
+
+    int access(int l,int r)
+    {
+        int res = 1e9;
+        for(int i = k; i >= 0; i--)
+        {
+            if((1<<i) <= r-l+1)
+            {
+                res = func(res,table[l][i]);
+                l+=(1<<i);
+            }
+        }
+        return res;
+    }
+};
+
 inline void solve()
 {
     // all the code goes here
-    int n,d,m;cin>>n>>d>>m;
-    vector<int> a(n);
-    read(a);
-    sort(all(a),greater<int>());
-    int mx = a[0];
-    a.erase(a.begin());
-    int i = 0,j = n-2;
-    int sum = 0,cnt = 0;
-    // cout<<accumulate(all(a),0LL)<<NL;
-    vector<int> a1;
-    while(i <= j)
+    class Isit isit;
+    test
     {
-        sum+=a[i];
-        if(a[i] > m)
+        int n;cin>>n;
+        vector<int> a(n);
+        read(a);
+        class Sparse_table st(a);
+
+        int l = 0,r = n-1;
+        int in = n;
+        for(int i = 0; i < n; i++)
         {
-            cnt = d;
-            int sum1 = 0;
-            while(cnt-- > 0)
+            bool found = 0,valid = 1;
+            if(a[l] == i+1)
             {
-                if(a[j] <= m)
-                    sum1+=a[j];
-                j--;
+                found = 1;
+                l++;
             }
-            if(sum1 > a[i])
+            else if(a[r] == i+1)
             {
-                a1.push_back(a[i]);
-                sum-=a[i];
-                sum+=sum1;
+                found = 1;
+                r--;
+            }
+            if(st.access(l,r) != i+2)
+                valid = 0;
+            if(!found || !valid)
+            {
+                in = i+1;
+                break;
             }
         }
-        i++;
-    }
-    a1.push_back(mx);
-    sort(all(a1),greater<int>());
-    i = 0,j = a1.size()-1;
-    while(i <= j)
-    {
-        sum+=a1[i];
-        cnt = d;
-        while(cnt-- > 0)
+        string res = "";
+        for(int i = 2; i < n-in+1; i++)
+            res+='0';
+        for(int i = max(2LL,n-in+1); i < n; i++)
+            res+='1';
+        if(isit.is_permutation(a))
+            res = '1'+res;
+        else 
+            res = '0'+res;
+        if(n > 1)
         {
-            j--;
+            if(st.access(0,n-1) == 1)
+                res+='1';
+            else 
+                res+='0';
         }
-        i++;
+        cout<<res<<NL;
     }
-    cout<<sum<<NL;
 }
 
 int32_t main()

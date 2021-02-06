@@ -9,50 +9,84 @@ using namespace std;
 template<typename T>
 void read(vector<T> &a);
 
-const int mod = 1e9+7;
-vector<vector<int>> mul(vector<vector<int>> a,vector<vector<int>> b)
+class Sparse_table
 {
-    vector<vector<int>> res(2,vector<int>(2,0));
-    for(int i = 0; i < 2; i++)
+    vector<int> a;
+    int n,k;
+    vector<vector<int>> table;
+    void make()
     {
-        for(int k = 0; k < 2; k++)
+        for(int i = 0; i < n; i++)
+            table[i][0] = a[i];
+        for(int j = 1; j < k; j++)
+            for(int i = 0; i+(1<<j) <= n; i++)
+                table[i][j] = func(table[i][j-1],table[i+(1<<(j-1))][j-1]);
+    }
+    int func(int a, int b)
+    {
+        return min(a,b);
+    }
+    public:
+    Sparse_table(vector<int> &_a)
+    {
+        a = _a;
+        n = a.size();
+        k = 25;
+        table.resize(n,vector<int>(k));
+        make();
+    }
+
+    int access(int l,int r)
+    {
+        int res = 1e9;
+        for(int i = k; i >= 0; i--)
         {
-            for(int j = 0; j < 2; j++)
+            if((1<<i) <= r-l+1)
             {
-                res[i][j]+=a[i][k]*b[k][j];
-                res [i][j] %= mod;
+                res = func(res,table[l][i]);
+                l+=(1<<i);
             }
         }
+        return res;
     }
-
-    return res;
-}
-
-vector<vector<int>> bin_expo(vector<vector<int>> a, int n)
-{
-    vector<vector<int>> res({vector<int>({1,0}),vector<int>({0,1})});
-
-    while(n > 0)
-    {
-        if(n&1)
-        {
-            res = mul(res,a);
-        }
-        a = mul(a,a);
-        n = n>>1;
-    }
-    return res;
-}
+};
 
 inline void solve()
 {
     // all the code goes here
-    int n;cin>>n;
-    // int p;cin>>p;
-    vector<vector<int>> prob({vector<int>({0,1}),vector<int>({1,1})});
+    test
+    {
+        int n;cin>>n;
+        vector<int> a(n);
+        read(a);
+        class Sparse_table st(a);
 
-    prob = bin_expo(prob,n);
-    cout<<prob[0][1]<<NL;
+        int l = 0,r = n-1;
+        int in = -1;
+        for(int i = 0; i < n; i++)
+        {
+            bool found = 0,valid = 1;
+            if(a[l] == i+1)
+            {
+                found = 1;
+                l++;
+            }
+            if(a[r] == i+1)
+            {
+                found = 1;
+                r--;
+            }
+            if(st.access(l,r) != i+2)
+                valid = 0;
+            if(!found || !valid)
+            {
+                in = i;
+            }
+        }
+
+        string res = "";
+        
+    }
 }
 
 int32_t main()
@@ -64,7 +98,7 @@ int32_t main()
         freopen("input.txt","r",stdin);
         freopen("output.txt","w",stdout);
     #endif
-    cout<<setprecision(10);
+    cout<<setprecision(20);
     solve();
     fflush(stdin);
     fflush(stdout);
