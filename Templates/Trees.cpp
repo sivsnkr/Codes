@@ -26,6 +26,21 @@ class Trees
         }
     }
 
+    int diameter_of_tree(int root, int par)
+    {
+        int len = 0;
+        for(int child : g[root])
+        {
+            if(child != par)
+            {
+                int cur = 1+diameter_of_tree(child,root);
+                dia = max(dia,cur+len);
+                len = max(len,cur);
+            }
+        }
+        return len;
+    }
+
     void bfs(int root)
     {
         queue<pair<int,int>> q;

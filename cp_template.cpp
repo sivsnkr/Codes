@@ -23,7 +23,7 @@ int32_t main()
         freopen("input.txt","r",stdin);
         freopen("output.txt","w",stdout);
     #endif
-    cout<<setprecision(20);
+    cout<<setprecision(10);
     solve();
     fflush(stdin);
     fflush(stdout);

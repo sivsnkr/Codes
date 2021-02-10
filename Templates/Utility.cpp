@@ -19,6 +19,7 @@ class Utility
 
     int mod(int a, int p)
     {
+        a%=p;
         while(a >= p)a-=p;
         while(a < 0)a+=p;
         return a;
