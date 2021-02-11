@@ -12,6 +12,13 @@ void read(vector<T> &a);
 inline void solve()
 {
     // all the code goes here
+    int cnt = 1e10;
+    int sum = 0;
+    for(int i = 0; i < cnt; i++)
+    {
+        sum+=i;
+        sum%=mod;
+    }
 }
 
 int32_t main()
