@@ -5,35 +5,12 @@ using namespace std;
 #define LL long long
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
-#define int long long
 template<typename T>
 void read(vector<T> &a);
 
 inline void solve()
 {
-    // all the code goes here
-    int n;cin>>n;
-    vector<int> a(n);
-    read(a);
-    cout<<"1 1"<<NL;
-    cout<<-a[0]<<NL;
-    if(n > 1)
-    {
-        cout<<"1 "<<n<<NL;
-        cout<<0<<" ";
-        for(int i = 1; i < n; i++)
-            cout<<-n*a[i]<<" \n"[i==n-1];
-        cout<<"2 "<<n<<NL;
-        for(int i = 1; i < n; i++)
-            cout<<(n-1)*a[i]<<" \n"[i==n-1];
-    }
-    else
-    {
-        cout<<"1 1"<<NL;
-        cout<<0<<NL;
-        cout<<"1 1"<<NL;
-        cout<<0<<NL;
-    }
+    // let's code
 }
 
 int32_t main()

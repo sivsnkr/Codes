@@ -10,7 +10,7 @@ void read(vector<T> &a);
 
 inline void solve()
 {
-    // all the code goes here
+    // let's code
 }
 
 int32_t main()
