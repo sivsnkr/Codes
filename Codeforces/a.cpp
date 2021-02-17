@@ -11,6 +11,7 @@ void read(vector<T> &a);
 inline void solve()
 {
     // let's code
+    
 }
 
 int32_t main()
