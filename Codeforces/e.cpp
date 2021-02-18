@@ -5,108 +5,79 @@ using namespace std;
 #define LL long long
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
-#define int long long
 template<typename T>
+#define int long long
 void read(vector<T> &a);
-
-const int MX = 1e5+5;
-vector<vector<int>> g(MX);
-vector<int> len(MX);
-vector<int> pop(MX),hi(MX),unhappy(MX),happy(MX);
-
-int dfs(int root, int par)
-{
-    int length = 0;
-    for(int i : g[root])
-    {
-        if(i != par)
-        {
-            length += dfs(i,root);
-        }
-    }
-    len[root] = length+pop[root];;
-    return len[root];
-}
-
-bool ok = 1;
-void dfs(int root, int par, int p_un)
-{
-    int hap = (len[root]+hi[root]);
-    if(hap%2)
-    {
-        ok = 0;
-    }
-    hap/=2;
-    // p_un = min(p_un,len[root]);
-    int un = len[root]-hap;
-    if(un > len[root] || un < 0)
-        ok = 0;
-    unhappy[root] = un;
-    happy[root] = hap;
-    for(int i : g[root])
-    {
-        if(i != par)
-        {
-            dfs(i,root,un);
-        }
-    }
-}
-
-pair<int,int> dfs_check(int root, int par)
-{
-    int un = 0;
-    int ha = 0;
-    bool en = 0;
-    for(int i : g[root])
-    {
-        if(i != par)
-        {
-            en = 1;
-            auto [unh,hap] = dfs_check(i,root);
-            un+=unh;ha+=hap;
-        }
-    }
-    cout<<"root "<<root<<NL;
-    cout<<unhappy[root]<<" "<<un<<" "<<en<<NL;
-    if((unhappy[root] > un && en) || (ha > happy[root] && en))
-        ok = 0;
-    return {unhappy[root],happy[root]};
-}
 
 inline void solve()
 {
-    // all the code goes here
+    // let's code
     test
     {
-        int n,m;cin>>n>>m;
-        ok = 1;
-        for(int i = 0; i <= n; i++)
+        int n;cin>>n;
+        vector<int> a(n);
+        read(a);
+
+        vector<multiset<int>> el(25);
+        vector<bool> vis(n,0);
+        for(int i = 24; i >= 0; i--)
         {
-            g[i].clear();
-            len[i] = 0;
-            unhappy[i] = 0;
-            happy[i] = 0;
-        }
-        for(int i = 1; i <= n; i++)
-            cin>>pop[i];
-        for(int i = 1; i <= n; i++)
-            cin>>hi[i];
-        for(int i = 0; i < n-1; i++)
-        {
-            int u,v;cin>>u>>v;
-            g[u].push_back(v);
-            g[v].push_back(u);
+            for(int j = 0; j < n; j++)
+            {
+                if(!vis[j] && ((1LL<<i)&a[j]) != 0)
+                {
+                    el[i].insert(a[j]);
+                    vis[j] = 1;
+                }
+            }
         }
 
-        dfs(1,1);
-        dfs(1,1,-1e17);
-        if(ok)
-            dfs_check(1,1);
+        int kscore = 0,koscore = 0;
+        bool turn = 1;
 
-        if(ok)
-            cout<<"YES";
+        for(int i = 0; i < n; i++)
+        {
+            int mxval = -1,score = turn?kscore:koscore;
+            for(int j = 24; j >= 0; j--)
+            {
+                if(!el[j].empty() && ((1LL<<j)&score) == 0)
+                {
+                    mxval = *el[j].begin();
+                    el[j].erase(el[j].begin());
+                    break;
+                }
+            }
+            if(mxval < 0)
+            {
+                 for(int j = 0; j < 25; j++)
+                {
+                    if(!el[j].empty() && ((1LL<<j)&score) != 0)
+                    {
+                        mxval = *el[j].begin();
+                        el[j].erase(el[j].begin());
+                        break;
+                    }
+                }
+            }
+            if(mxval > 0)
+                score = score^mxval;
+            // cout<<"mxval "<<mxval<<NL;
+            // cout<<"turn "<<turn<<NL;
+            // cout<<"score "<<score<<NL;
+            if(turn)
+                kscore = score;
+            else 
+                koscore = score;
+            turn = !turn;
+        }
+        // cout<<kscore<<" "<<koscore<<NL;
+
+        if(kscore == koscore)
+            cout<<"DRAW";
+        else if(kscore > koscore)
+            cout<<"WIN";
         else
-            cout<<"NO";
+            cout<<"LOSE";
         cout<<NL;
     }
 }
