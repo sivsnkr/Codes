@@ -5,20 +5,12 @@ using namespace std;
 #define LL long long
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
-#define int long long
 template<typename T>
 void read(vector<T> &a);
 
 inline void solve()
 {
-    // all the code goes here
-    int cnt = 1e10;
-    int sum = 0;
-    for(int i = 0; i < cnt; i++)
-    {
-        sum+=i;
-        sum%=mod;
-    }
+    // let's code
 }
 
 int32_t main()
@@ -30,7 +22,7 @@ int32_t main()
         freopen("input.txt","r",stdin);
         freopen("output.txt","w",stdout);
     #endif
-    cout<<setprecision(20);
+    cout<<setprecision(10);
     solve();
     fflush(stdin);
     fflush(stdout);

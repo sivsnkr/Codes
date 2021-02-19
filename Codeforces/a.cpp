@@ -5,8 +5,7 @@ using namespace std;
 #define LL long long
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
-template<typename T>
-void read(vector<T> &a);
+#define read(a) for(int i = 0; i < size(a); i++)cin>>a[i]
 
 inline void solve()
 {
@@ -27,9 +26,4 @@ int32_t main()
     fflush(stdin);
     fflush(stdout);
     return 0;
-}
-template<typename T>
-void read(vector<T> &a)
-{
-    for(auto &it : a)cin>>it;
 }
