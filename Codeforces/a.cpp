@@ -11,27 +11,29 @@ inline void solve()
 {
     // let's code
     int n;cin>>n;
-    int k;cin>>k;
-    vector<int> a(n);
+    // LL k;cin>>k;
+    vector<LL> a(n);
     read(a);
 
 
     int l = 0;
-    LL res = 0;
-    map<int,int> st;
+    int mx = 1e7;
+    int g = 0;
     for(int i = 0; i < n; i++)
     {
-        st[a[i]]++;
-        while(size(st) > k)
+        g = gcd(g,a[i]);
+        cout<<"val "<<g<<NL;
+        while(gcd(a[l+1],a[i]) == 1 && g == 1)
         {
-            st[a[l]]--;
-            if(st[a[l]] == 0)
-                st.erase(a[l]);
             l++;
         }
-        res += (i-l+1);
+        if(g == 1)
+            mx = min(mx,i-l+1);
     }
-    cout<<res<<NL;
+
+    if(mx == 1e7)
+            mx = -1;
+    cout<<mx<<NL;
 }
 
 int32_t main()
