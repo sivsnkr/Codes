@@ -5,7 +5,7 @@ using namespace std;
 #define LL long long
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
-#define read(a) for(int i = 0; i < size(a); i++)cin>>a[i]
+#define read(a) for(int poi = 0; poi < size(a); poi++)cin>>a[poi]
 
 inline void solve()
 {

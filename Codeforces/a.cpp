@@ -5,35 +5,52 @@ using namespace std;
 #define LL long long
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
-#define read(a) for(int i = 0; i < size(a); i++)cin>>a[i]
+#define read(a) for(int poi = 0; poi < size(a); poi++)cin>>a[poi]
+#define int long long
+const int mod = 998244353;
 
 inline void solve()
 {
     // let's code
     int n;cin>>n;
-    // LL k;cin>>k;
-    vector<LL> a(n);
+    vector<int> a(2*n);
     read(a);
-
-
-    int l = 0;
-    int mx = 1e7;
-    int g = 0;
-    for(int i = 0; i < n; i++)
+    sort(all(a));
+    int diff = 0,res = 0;
+    for(int i = n; i < 2*n; i++)
     {
-        g = gcd(g,a[i]);
-        cout<<"val "<<g<<NL;
-        while(gcd(a[l+1],a[i]) == 1 && g == 1)
+        if(i == n)
         {
-            l++;
+            diff = a[i]-a[i-1];
+            res+= n*n*diff;
         }
-        if(g == 1)
-            mx = min(mx,i-l+1);
+        else
+        {
+            int lres = (i-n)*diff + a[i]-a[2*n-i-1] + (i-n)*(a[i]-a[i-1]);
+            res += n*n*lres;
+            diff = lres;
+        }
     }
 
-    if(mx == 1e7)
-            mx = -1;
-    cout<<mx<<NL;
+    for(int i = n-1; i >= 0; i--)
+    {
+        if(i == n-1)
+        {
+            diff = a[i+1]-a[i];
+            // res += n*n*diff;
+        }
+        else
+        {
+            int lres = (n-1-i)*diff + a[n+n-i-1]-a[i] + (n-1-i)*(a[i+1]-a[i]);
+            res += n*n*lres;
+            // diff+=a[n+n-i-1]-a[i];
+            diff = lres;
+        }
+    }
+
+    if(n == 1)
+        res/=2;
+    cout<<res<<NL;
 }
 
 int32_t main()
