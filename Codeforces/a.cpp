@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#pragma GCC optimize("Ofast")
 using namespace std;
 #define NL '\n'
 #define LL long long
@@ -10,6 +9,34 @@ using namespace std;
 inline void solve()
 {
     // let's code
+    test
+    {
+        int n,k;cin>>n>>k;
+        string s;cin>>s;
+
+        if(k%n == 0)
+        {
+            cout<<n<<NL;
+            continue;
+        }
+        map<int,int> freq;
+        for(char c : s)
+            freq[c-'a']++;
+        int res = 0;
+        for(int lens = 1; lens <= n; lens++)
+        {
+            int kval = k%lens;
+            int reqf = lens/kval;
+            map<int,int> cf = freq;
+            for(int i = 0; i < kval; i++)
+            {
+                for(auto &[x,y] : freq)
+                {
+
+                }
+            }
+        }
+    }
 }
 
 int32_t main()

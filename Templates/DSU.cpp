@@ -4,7 +4,7 @@ using namespace std;
 class DSU
 {
     vector<int> p,ranks;
-    public:
+public:
     DSU(int MX)
     {
         p.resize(MX);
@@ -28,6 +28,16 @@ class DSU
                 p[pa] = pb;
         }
     }
+
+    map<int,int> get_freq()
+    {
+        map<int,int> res;
+        int MX = size(p);
+        for(int i = 0; i < MX; i++)
+            res[get(i)]++;
+        return res;
+    }
+
 };
 
 inline void solve()
