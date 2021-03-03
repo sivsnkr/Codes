@@ -10,101 +10,34 @@ inline void solve()
 {
     // let's code
     test{
-        int n,u,r,d,l;cin>>n>>u>>r>>d>>l;
-
-        bool valid = 1;
-
-        if(u > n-1)
-        {
-            if(l == 0 || r == 0)
-                valid = 0;
-            if(r > 0)
-               r--;
-            if(l > 0)
-                l--;
-            u-=2;
+        int x,y;cin>>x>>y;
+        int b = 1;
+        for(int i = y; i >= 2; i--){
+            if(i*i-1 <= x){
+                b = i;
+                break;
+            }
         }
 
-        if(r > n-1)
-        {
-            if(u == 0 || d == 0)
-                valid = 0;
-            if(u > 0)
-                u--;
-            if(d > 0)
-                d--;
-            r-=2;
-        }
-
-        if(d > n-1)
-        {
-            if(l == 0 || r == 0)
-                valid = 0;
-            if(r > 0)
-                r--;
-            if(l > 0)
-                l--;
-            d-=2;
-        }
-
-        if(l > n-1)
-        {
-            if(u == 0 || d == 0)
-                valid = 0;
-            if(u > 0)
-                u--;
-            if(d > 0)
-                d--;
-            l-=2;
-        }
-
-        if(u > n-2)
-        {
-            if(r > 0)
-                r--;
-            else if(l > 0)
-                l--;
+//        int n_terms = b-2+1;
+        cout<<"b "<<b<<NL;
+        int n_terms_a = min(x-1,y);
+//        cout<<"n_terms "<<n_terms_a<<NL;
+        LL res = (LL)b*(b-1)/2;
+        int val = n_terms_a;
+        int pval = val,cnt = 2;
+        while(val > b){
+            val = (n_terms_a-cnt)/cnt;
+            if(val < b)
+                res += abs(pval - max(val,b+1)+1) * (cnt - 1);
             else
-                valid = 0;
-            u--;
+                res += abs(pval - val) * (cnt - 1);
+//            cout<<"val cnt "<<val<<" "<<cnt<<NL;
+            pval = val;
+            cnt++;
         }
-        if(l > n-2)
-        {
-            if(u > 0)
-                u--;
-            else if(d > 0)
-                d--;
-            else
-                valid = 0;
-            l--;
-        }
-
-        if(r > n-2)
-        {
-            if(u > 0)
-                u--;
-            else if(d > 0)
-                d--;
-            else
-                valid = 0;
-            r--;
-        }
-        if(d > n-2)
-        {
-            if(l > 0)
-                l--;
-            else if(r > 0)
-                r--;
-            else
-                valid = 0;
-            d--;
-        }
-
-        if(!valid)
-            cout<<"NO";
-        else
-            cout<<"YES";
-        cout<<NL;
+//        res += abs(pval-b)*(cnt-1);
+        cout<<res<<NL;
     }
 }
 
