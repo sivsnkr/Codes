@@ -91,6 +91,7 @@ bool Max_bipartetG_match::dfs(int root) {
 inline void solve()
 {
 }
+
 int32_t main()
 {
     ios_base::sync_with_stdio(false);

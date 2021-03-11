@@ -1,92 +1,47 @@
 #include <bits/stdc++.h>
-#pragma GCC optimize("Ofast")
 using namespace std;
 #define NL '\n'
 #define LL long long
 #define test int t;cin >> t;while (t--)
 #define all(a) a.begin(), a.end()
-#define int long long
-template<typename T>
-void read(vector<T> &a);
+#define read(a) for(int poi = 0; poi < size(a); poi++)cin>>a[poi]
 
-class Sparse_table
-{
-    vector<int> a;
-    int n,k;
-    vector<vector<int>> table;
-    void make()
-    {
-        for(int i = 0; i < n; i++)
-            table[i][0] = a[i];
-        for(int j = 1; j < k; j++)
-            for(int i = 0; i+(1<<j) <= n; i++)
-                table[i][j] = func(table[i][j-1],table[i+(1<<(j-1))][j-1]);
-    }
-    int func(int a, int b)
-    {
-        return min(a,b);
-    }
-    public:
-    Sparse_table(vector<int> &_a)
-    {
-        a = _a;
-        n = a.size();
-        k = 25;
-        table.resize(n,vector<int>(k));
-        make();
-    }
-
-    int access(int l,int r)
-    {
-        int res = 1e9;
-        for(int i = k; i >= 0; i--)
-        {
-            if((1<<i) <= r-l+1)
-            {
-                res = func(res,table[l][i]);
-                l+=(1<<i);
-            }
-        }
-        return res;
-    }
+struct ele{
+    int w,u,v;
 };
 
+vector<ele> g;
+vector<vector<int>> G;
+
+bool check(int val){
+    for(int i = 1; i <= n; i++)G.clear();
+    for(int i = 0; i < size(g); i++)
+        if()
+}
 inline void solve()
 {
-    // all the code goes here
-    test
-    {
-        int n;cin>>n;
-        vector<int> a(n);
-        read(a);
-        class Sparse_table st(a);
-
-        int l = 0,r = n-1;
-        int in = -1;
-        for(int i = 0; i < n; i++)
-        {
-            bool found = 0,valid = 1;
-            if(a[l] == i+1)
-            {
-                found = 1;
-                l++;
-            }
-            if(a[r] == i+1)
-            {
-                found = 1;
-                r--;
-            }
-            if(st.access(l,r) != i+2)
-                valid = 0;
-            if(!found || !valid)
-            {
-                in = i;
-            }
-        }
-
-        string res = "";
-        
+    int n,m;cin>>n>>m;
+    g.resize(m);
+    vector<int> ws;
+    for(int i = 0; i < m; i++){
+        cin>>g[i].u>>g[i].v>>g[i].w;
+        ws.push_back(g[i].w);
     }
+
+    int st = 0,en = size(ws)-1;
+    sort(all(g));
+    int ans = -1;
+    while(st <= en){
+        int mid = (st+en)/2;
+        if(check(mid)){
+            ans = mid;
+            en = mid-1;
+        }else{
+            st = mid+1;
+        }
+    }
+
+    cout<<ans<<NL;
 }
 
 int32_t main()
@@ -94,18 +49,9 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt","r",stdin);
-        freopen("output.txt","w",stdout);
-    #endif
-    cout<<setprecision(20);
+    cout<<setprecision(10);
     solve();
     fflush(stdin);
     fflush(stdout);
     return 0;
-}
-template<typename T>
-void read(vector<T> &a)
-{
-    for(auto &it : a)cin>>it;
 }

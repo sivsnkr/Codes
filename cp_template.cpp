@@ -8,7 +8,6 @@ using namespace std;
 
 inline void solve()
 {
-    // let's code
 }
 
 int32_t main()

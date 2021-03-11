@@ -6,39 +6,41 @@ using namespace std;
 #define all(a) a.begin(), a.end()
 #define read(a) for(int poi = 0; poi < size(a); poi++)cin>>a[poi]
 
+struct ele{
+    int w,u,v;
+};
+
+vector<ele> g;
+int n,m;
+bool check(int val){
+}
+
 inline void solve()
 {
-    // let's code
-    test{
-        int x,y;cin>>x>>y;
-        int b = 1;
-        for(int i = y; i >= 2; i--){
-            if(i*i-1 <= x){
-                b = i;
-                break;
-            }
-        }
-
-//        int n_terms = b-2+1;
-        cout<<"b "<<b<<NL;
-        int n_terms_a = min(x-1,y);
-//        cout<<"n_terms "<<n_terms_a<<NL;
-        LL res = (LL)b*(b-1)/2;
-        int val = n_terms_a;
-        int pval = val,cnt = 2;
-        while(val > b){
-            val = (n_terms_a-cnt)/cnt;
-            if(val < b)
-                res += abs(pval - max(val,b+1)+1) * (cnt - 1);
-            else
-                res += abs(pval - val) * (cnt - 1);
-//            cout<<"val cnt "<<val<<" "<<cnt<<NL;
-            pval = val;
-            cnt++;
-        }
-//        res += abs(pval-b)*(cnt-1);
-        cout<<res<<NL;
+    cin>>n>>m;
+    g.resize(m);
+    vector<int> ws;
+    for(int i = 0; i < m; i++){
+        cin>>g[i].u>>g[i].v>>g[i].w;
+        ws.push_back(g[i].w);
     }
+
+    sort(all(g),[](ele a, ele b)->bool{
+        return a.w < b.w;
+    });
+    int st = 0,en = 1e9+5;
+    int ans = -1;
+    while(st <= en){
+        int mid = (st+en)/2;
+        if(check(mid)){
+            ans = mid;
+            en = mid-1;
+        }else{
+            st = mid+1;
+        }
+    }
+
+    cout<<ans<<NL;
 }
 
 int32_t main()
