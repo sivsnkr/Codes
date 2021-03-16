@@ -6,41 +6,80 @@ using namespace std;
 #define all(a) a.begin(), a.end()
 #define read(a) for(int poi = 0; poi < size(a); poi++)cin>>a[poi]
 
-struct ele{
-    int w,u,v;
+const int MX = 1e5+5;
+vector<vector<int>> g(MX),gc;
+vector<vector<int>> g1(MX),gc1;
+
+class DSU
+{
+    vector<int> p,ranks;
+public:
+    DSU(int MX)
+    {
+        p.resize(MX);
+        ranks.resize(MX);
+        iota(p.begin(),p.end(),0);
+    }
+    int get(int c)
+    {
+        return p[c] = p[c] == c ? c : get(p[c]);
+    }
+    void join(int a, int b)
+    {
+        int pa = get(a),pb = get(b);
+        if(pa != pb)
+        {
+            if(ranks[pa] == ranks[pb])
+                ranks[pa]++;
+            if(ranks[pa] > ranks[pb])
+                p[pb] = pa;
+            else
+                p[pa] = pb;
+        }
+    }
+
+    map<int,int> get_freq()
+    {
+        map<int,int> res;
+        int MX = size(p);
+        for(int i = 0; i < MX; i++)
+            res[get(i)]++;
+        return res;
+    }
+
 };
 
-vector<ele> g;
-int n,m;
-bool check(int val){
+vector<bool> vis(MX);
+int dfs(vector<vector<int>> &g, int root){
+    int len = 0;
+    for(int i : g[root]){
+        len = max(len,dfs(g,i));
+    }
+    return len+1;
 }
 
 inline void solve()
 {
-    cin>>n>>m;
-    g.resize(m);
-    vector<int> ws;
-    for(int i = 0; i < m; i++){
-        cin>>g[i].u>>g[i].v>>g[i].w;
-        ws.push_back(g[i].w);
-    }
+    int n;cin>>n;
+    vector<int> a(n);
+    read(a);
+    class DSU con(n+1),con1(n+1);
 
-    sort(all(g),[](ele a, ele b)->bool{
-        return a.w < b.w;
-    });
-    int st = 0,en = 1e9+5;
-    int ans = -1;
-    while(st <= en){
-        int mid = (st+en)/2;
-        if(check(mid)){
-            ans = mid;
-            en = mid-1;
+    for(int i = 0; i < n-1; i++){
+        if(i == 0){
+            if(a[1] > a[0])g1[0].push_back(1),g[1].push_back(0),con.join(1,0);
+            else g1[1].push_back(0),g[0].push_back(1);
         }else{
-            st = mid+1;
+            if(a[i] > a[i+1])g1[i+1].push_back(i),g[i].push_back(i+1),con.join(i,i+1);
+            else g1[i].push_back(i+1),g[i+1].push_back(i);
         }
     }
 
-    cout<<ans<<NL;
+    vector<pair<int,int>> mxe;
+    for(int i = 0; i < n; i++){
+        if(!vis[i])
+            mxe.push_back({dfs(g1,i),i});
+    }
 }
 
 int32_t main()

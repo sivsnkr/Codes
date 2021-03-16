@@ -8,6 +8,44 @@ using namespace std;
 
 inline void solve()
 {
+    int n;cin>>n;
+    vector<int> a(n);
+    read(a);
+
+    vector<int> cntl(n+1,1),cntr(n+1,1);
+    int mx = 0;
+    for(int i = 0; i < n-1; i++) {
+        if (a[i + 1] > a[i])cntl[i + 1] += cntl[i];
+        mx = max(mx,cntl[i]);
+    }
+    for(int i = n-1; i > 0; i--){
+        if(a[i-1] > a[i]) cntr[i-1] += cntr[i];
+        mx = max(mx,cntr[i]);
+    }
+
+    mx = max({mx,cntr[0],cntl[n-1]});
+
+    set<int> st;
+    for(int i = 0; i < n; i++){
+        if(cntl[i] == mx)st.insert(i);
+        if(cntr[i] == mx)st.insert(i);
+    }
+
+    if(size(st) > 1 || n == 2){
+        cout<<"0"<<NL;
+        return;
+    }
+
+    int cnt = 0;
+
+    for(int i = 1; i < n-1; i++){
+        if(a[i] > a[i-1] && a[i] > a[i+1]){
+            if(cntl[i] == mx && cntr[i] == mx && mx%2)cnt++;
+        }
+
+    }
+
+    cout<<cnt<<NL;
 }
 
 int32_t main()
