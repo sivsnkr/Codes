@@ -3,9 +3,14 @@
 using namespace std;
 #define NL '\n'
 #define LL long long
-#define test int t;cin >> t;while (t--)
+#define test  \
+    int t;    \
+    cin >> t; \
+    while (t--)
 #define all(a) a.begin(), a.end()
-#define read(a) for(int i = 0; i < size(a); i++)cin>>a[i]
+#define read(a)                       \
+    for (int i = 0; i < size(a); i++) \
+    cin >> a[i]
 
 inline void solve()
 {
@@ -17,11 +22,11 @@ int32_t main()
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt","r",stdin);
-        freopen("output.txt","w",stdout);
-    #endif
-    cout<<setprecision(10);
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+    cout << setprecision(10);
     solve();
     fflush(stdin);
     fflush(stdout);

@@ -1,100 +1,56 @@
-157
-163
-27
-162
-157
-0
-136
-180
-25
-40
-179
-204
-86
-21
-122
-7
-100
-79
-20
-21
-27
-5
-25
-3
-72
-70
-111
-20
-199
-16
-82
-20
-78
-54
-58
-85
-85
-54
-18
-101
-25
-104
-204
-72
-11
-51
-44
-36
-21
-82
-3
-56
-148
-134
-143
-83
-161
-49
-148
-8
-27
-20
-85
-68
-3
-21
-154
-111
-1
-76
-138
-57
-225
-162
-99
-90
-160
-174
-58
-7
-3
-193
-96
-160
-172
-152
-139
-14
-43
-63
-78
-117
-67
-112
-109
-48
-99
-54
-34
-182
+#include <bits/stdc++.h>
+using namespace std;
+#define NL '\n'
+#define LL long long
+#define test int t;cin >> t;while (t--)
+#define all(a) a.begin(), a.end()
+#define read(a) for(int poi = 0; poi < size(a); poi++)cin>>a[poi]
+
+inline void solve()
+{
+    test{
+        int n,q;cin>>n>>q;
+        string s,t;cin>>s>>t;
+        vector<pair<int,int>> qu(q);
+        for(int i = 0; i < q; i++)cin>>qu[i].first>>qu[i].second,qu[i].first--,qu[i].second--;
+        reverse(all(qu));
+
+        bool valid = 1;
+        for(auto [x,y] : qu){
+            int z = 0,o = 0;
+            for(int i = x; i <= y; i++){
+                if(t[i] == '0')z++;
+                else o++;
+            }
+
+            if(o == z){
+                valid = 0;
+                break;
+            }
+
+            char ch = o > z ? '1':'0';
+            for(int i = x; i <= y; i++){
+                t[i] = ch;
+            }
+//            cout<<x<<" "<<y<<NL;
+//            cout<<"t "<<t<<NL;
+        }
+
+//        cout<<"t "<<t<<NL;
+        if(!valid || s != t)cout<<"NO";
+        else cout<<"YES";
+        cout<<NL;
+    }
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    cout<<setprecision(10);
+    solve();
+    fflush(stdin);
+    fflush(stdout);
+    return 0;
+}

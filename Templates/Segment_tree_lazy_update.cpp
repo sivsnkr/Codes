@@ -9,7 +9,7 @@ using namespace std;
 class Segment_tree
 {
 private:
-    vector<int> A,st;
+    vector<int> A,st,lazy;
     int n;
     int left(int p){return p<<1;}
     int right(int p){return (p<<1)+1;}
@@ -22,6 +22,7 @@ public:
         n = (int)a.size();
         A = a;
         st.assign(4*n,0);
+        lazy.assign(4*n,-1);
         build(1,0,n-1);
     }
     int access(int i, int j){return Access(1,i,j,0,n-1);}
@@ -30,19 +31,30 @@ public:
 
 void Segment_tree::Update(int p,int l, int r, int L, int R, int value)
 {
-    if(l > R || r < L)
+    if(lazy[p] != -1){
+        st[p] = (R-L+1)*lazy[p];
+        if(L != R){
+            lazy[left(p)] = lazy[p];
+            lazy[right(p)] = lazy[p];
+        }
+        lazy[p] = -1;
+    }
+
+    if(L > r || R < l)
         return;
-    if(L>=l && R <= r){
-        if(value == 0)
-            st[p] = 0;
-        else st[p] = R-L+1;
+    if(L >= l && R <= r){
+        st[p] = (R-L+1)*value;
+        if(L != R) {
+            lazy[left(p)] = value;
+            lazy[right(p)] = value;
+        }
         return;
     }
+
     Update(left(p),l,r,L,(L+R)/2,value);
     Update(right(p),l,r,(L+R)/2+1,R,value);
-    int p1 = st[left(p)];
-    int p2 = st[right(p)];
-    st[p] = p1+p2;
+
+    st[p] = st[right(p)]+st[left(p)];
 }
 
 void Segment_tree::build(int p, int L, int R)
@@ -60,10 +72,22 @@ void Segment_tree::build(int p, int L, int R)
 
 int Segment_tree::Access(int p,int i, int j, int L, int R)
 {
-    if(i > R || j < L)
+    if(lazy[p] != -1){
+        st[p] = (R-L+1)*lazy[p];
+        if(L != R){
+            lazy[left(p)] = lazy[p];
+            lazy[right(p)] = lazy[p];
+        }
+        lazy[p] = -1;
+    }
+
+    if(L > j || R < i)
         return -1;
-    if(L>=i && R <= j)
+
+    if(L >= i && R <= j){
         return st[p];
+    }
+
     int p1 = Access(left(p),i,j,L,(L+R)/2);
     int p2 = Access(right(p),i,j,(L+R)/2+1,R);
     if(p1 == -1)return p2;
@@ -71,58 +95,9 @@ int Segment_tree::Access(int p,int i, int j, int L, int R)
     return p1+p2;
 }
 
-struct ele{
-    int l,r;
-    char c;
-};
 
 inline void solve()
 {
-    test{
-        int n,q;cin>>n>>q;
-        string s,t;cin>>s>>t;
-        vector<pair<int,int>> qu(q);
-        for(int i = 0; i < q; i++)cin>>qu[i].first>>qu[i].second,qu[i].first--,qu[i].second--;
-        reverse(all(qu));
-
-        bool valid = 1;
-        vector<int> a(n);
-        for(int i = 0; i < n; i++)a[i] = t[i]-'0';
-        class Segment_tree st(a);
-        vector<ele> ch;
-        for(auto [x,y] : qu){
-            int sum = st.access(x,y);
-            if(sum == (y-x+1)/2 && (y-x+1)%2 == 0){
-                valid = 0;
-                break;
-            }
-
-            if(sum > (y-x+1)/2)st.update(x,y,1),ch.push_back({x,y,'1'});
-            else st.update(x,y,0),ch.push_back({x,y,'0'});
-        }
-
-        reverse(all(ch));
-        int l = 0,i = 0;
-//        cout<<"t "<<t<<NL;
-        while(l < n && i < size(ch)){
-            if(l > ch[i].r){
-                i++;
-                continue;
-            }
-            l = max(l,ch[i].l);
-//            cout<<l<<" "<<ch[i].r<<NL;
-//            cout<<"val "<<ch[i].c<<NL;
-            for(int j = l; j <= ch[i].r; j++){
-                t[j] = ch[i].c;
-            }
-            l = ch[i].r;
-            i++;
-        }
-        cout<<"t "<<t<<NL;
-        if(!valid || s != t)cout<<"NO";
-        else cout<<"YES";
-        cout<<NL;
-    }
 }
 
 int32_t main()
