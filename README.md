@@ -1,3 +1,3 @@
 # Codes
 
-* My Home place for everything related compeetetive programming
+* My Home place for everything related to compeetetive programming
