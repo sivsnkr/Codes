@@ -8,6 +8,8 @@ using namespace std;
 
 inline void solve()
 {
+    int n;cin>>n;
+    cout<<n<<NL;
 }
 
 int32_t main()
