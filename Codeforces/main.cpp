@@ -17,7 +17,6 @@ int32_t main()
     cout.tie(nullptr);
     cout<<setprecision(10);
     int t = 1;
-    cin>>t;
     while(t--){
         solve();
     }
