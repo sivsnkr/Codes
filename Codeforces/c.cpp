@@ -2,52 +2,35 @@
 using namespace std;
 #define NL '\n'
 #define LL long long
-#define test int t;cin >> t;while (t--)
 #define all(a) (a).begin(), (a).end()
 #define read(a) for(int poi = 0; poi < size(a); poi++)cin>>(a)[poi]
 #define size(a) (int)(a).size()
 
+int a[200005], b[200005];
+int t, n, i,s;
+long long sum;
+
 inline void solve()
 {
-    int te = 1;
-    test{
-        int n,c;cin>>n>>c;
-        if(c < n-1 || c > n*(n+1)/2-1){
-            cout<<"Case #"<<te<<": "<<"IMPOSSIBLE"<<NL;
-            te++;
-            continue;
-        }
-
-        int cnt = c;
-        vector<int> res(n+1,0);
-        vector<bool> put(n+1,0);
-        vector<pair<int,int>> rev;
-        for(int i = 1; i <= n; i++){
-            if(put[i])
-                continue;
-            for(int j = n-i+1; j >= i; j--){
-                if(cnt - n+i+1 >= (j-i+1)){
-                    rev.emplace_back(i,j);
-                    cout<<i<<" "<<j<<NL;
-                    res[j] = i;
-                    res[i] = j;
-                    put[i] = 1,put[j] = 1;
-                    cnt -= (j-i+1);
-                    break;
-                }
-            }
-        }
-
-        for(auto [x,y] : rev){
-            reverse(res.begin()+min(x,y),res.begin()+max(x,y)+1);
-            swap(res[x],res[y]);
-        }
-
-        cout<<"Case #"<<te<<": ";
-        for(int i = 1; i <= n; i++)
-            cout<<res[i]<<" \n"[i==n];
-        te++;
+    cin>>n;
+    for (i=0;i<n;i++){
+        cin>>a[i];
+        b[i]=a[i];
     }
+    sort(b,b+n);
+    sum=0;
+    s=0;
+    for (i=0;i<n;i++) {
+        if (sum<b[i])
+            s=i;
+        sum+=b[i];
+    }
+    cout<<n-s<<NL;
+    for(i=0;i<n;i++){
+        if(a[i]>=b[s])
+            cout<<i+1<<" ";
+    }
+    cout<<NL;
 }
 
 int32_t main()
@@ -56,7 +39,11 @@ int32_t main()
     cin.tie(nullptr);
     cout.tie(nullptr);
     cout<<setprecision(10);
-    solve();
+    int t = 1;
+    cin>>t;
+    while(t--){
+        solve();
+    }
     fflush(stdin);
     fflush(stdout);
     return 0;

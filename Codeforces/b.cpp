@@ -2,30 +2,16 @@
 using namespace std;
 #define NL '\n'
 #define LL long long
-#define test int t;cin >> t;while (t--)
 #define all(a) (a).begin(), (a).end()
 #define read(a) for(int poi = 0; poi < size(a); poi++)cin>>(a)[poi]
+#define size(a) (int)(a).size()
 
 inline void solve()
 {
-    test{
-        int n;cin>>n;
-        vector<int> a(n);
-        read(a);
-
-        if(n <= 2 || *min_element(all(a)) == 0){
-            cout<<0<<NL;
-            continue;
-        }
-
-        int mx = *max_element(all(a));
-        int c = -1;
-        for(int i = 1; i < n; i++){
-            if(a[i] < mx && a[i-1] < mx && a[i] >= a[i-1]){
-                c = a[i]-a[i-1];
-                break;
-            }
-        }
+    cout<<pow(2,11)<<NL;
+    for(int i = 0; i < pow(2,11); i++){
+        string t = bitset<64>(i).to_string();
+        cout<<t<<NL;
     }
 }
 
@@ -35,7 +21,10 @@ int32_t main()
     cin.tie(nullptr);
     cout.tie(nullptr);
     cout<<setprecision(10);
-    solve();
+    int t = 1;
+    while(t--){
+        solve();
+    }
     fflush(stdin);
     fflush(stdout);
     return 0;
