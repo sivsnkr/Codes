@@ -4,13 +4,13 @@ using namespace std;
 #define LL long long
 #define all(a) (a).begin(), (a).end()
 #define read(a) for(int poi = 0; poi < size(a); poi++)cin>>(a)[poi]
-clock_t startTime;
 double time_taken();
 #define size(a) (int)(a).size()
 inline void solve()
 {
 }
 
+clock_t startTime;
 int32_t main()
 {
     startTime = clock();
