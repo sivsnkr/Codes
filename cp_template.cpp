@@ -3,16 +3,15 @@ using namespace std;
 #define NL '\n'
 #define LL long long
 #define all(a) (a).begin(), (a).end()
-#define read(a) for(int poi = 0; poi < size(a); poi++)cin>>(a)[poi]
-double time_taken();
-#define size(a) (int)(a).size()
+#define sz(a) (int)(a).sz()
+
 inline void solve()
 {
 }
 
-clock_t startTime;
 int32_t main()
 {
+    clock_t startTime;
     startTime = clock();
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
@@ -24,9 +23,9 @@ int32_t main()
     }
     fflush(stdin);
     fflush(stdout);
+    #ifdef LOCAL
+        auto excution_time = [startTime]()->double{return (double)(clock() - startTime) / CLOCKS_PER_SEC;};
+        cout<<"Excution time : "<<excution_time()*1000<<" ms"<<NL;
+    #endif
     return 0;
-}
-
-double time_taken() {
-	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
 }
