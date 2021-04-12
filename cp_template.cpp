@@ -3,7 +3,7 @@ using namespace std;
 #define NL '\n'
 #define LL long long
 #define all(a) (a).begin(), (a).end()
-#define sz(a) (int)(a).sz()
+#define sz(a) (int)(a).size()
 
 inline void solve()
 {
