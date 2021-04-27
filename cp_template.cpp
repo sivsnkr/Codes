@@ -24,8 +24,8 @@ int32_t main()
     fflush(stdin);
     fflush(stdout);
     #ifdef LOCAL
-        auto excution_time = [startTime]()->double{return (double)(clock() - startTime) / CLOCKS_PER_SEC;};
-        cout<<"Excution time : "<<excution_time()*1000<<" ms"<<NL;
+        auto execution_time = [startTime]()->double{return (double)(clock() - startTime) / CLOCKS_PER_SEC;};
+        cout<<"Execution time : "<<execution_time()*1000<<" ms"<<NL;
     #endif
     return 0;
 }
