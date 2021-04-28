@@ -8,24 +8,8 @@ double time_taken();
 #define size(a) (int)(a).size()
 inline void solve()
 {
-    cout<<50<<NL;
-    for(int i = 0; i < 50; i++){
-        int n = rand()%100+1;
-        cout<<n<<NL;
-        for(int i = 0; i < n; i++){
-            string s = "";
-            int le = rand()%9+1;
-            for(int j = 0; j < le; j++){
-                int num = rand()%10;
-                if(j == 0){
-                    num = rand()%9+1;
-                }
-                s += to_string(num);
-            }
-            cout<<s<<" ";
-        }
-        cout<<NL;
-    }
+    string s = "8646873533413554402";
+    cout<<s.length()<<NL;
 }
 
 clock_t startTime;

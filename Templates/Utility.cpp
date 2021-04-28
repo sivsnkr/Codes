@@ -4,14 +4,17 @@ using namespace std;
 class Utility
 {
     public:
-    int pow(int a, int b)
+    int pow(int a, int b,int mod)
     {
         int res = 1;
         while (b > 0)
         {
-            if (b & 1)
+            if (b & 1){
                 res *= a;
+                res %= mod;
+            }
             a = a * a;
+            a %= mod;
             b >>= 1;
         }
         return res;
@@ -26,8 +29,8 @@ class Utility
 
     int mod_inverse(int a,int m)
     {
-        int res = pow(a,m-2);
-        res = mod(res,m);
+        int res = pow(a,m-2,m);
+        mod(res,m);
         return res;
     }
 };
