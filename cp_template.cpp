@@ -21,11 +21,11 @@ int32_t main()
     while(t--){
         solve();
     }
-    fflush(stdin);
-    fflush(stdout);
     #ifdef LOCAL
         auto execution_time = [startTime]()->double{return (double)(clock() - startTime) / CLOCKS_PER_SEC;};
         cout<<"Execution time : "<<execution_time()*1000<<" ms"<<NL;
     #endif
+    fflush(stdin);
+    fflush(stdout);
     return 0;
 }

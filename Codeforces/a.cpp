@@ -7,6 +7,13 @@ using namespace std;
 
 inline void solve()
 {
+    multiset<pair<int,string>> st;
+    st.insert({1,"a"});
+    st.insert({0,"z"});
+
+    for(auto it : st){
+        cout<<it.first<<" "<<it.second<<NL;
+    }
 }
 
 int32_t main()
