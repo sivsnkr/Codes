@@ -25,7 +25,5 @@ int32_t main()
         auto execution_time = [startTime]()->double{return (double)(clock() - startTime) / CLOCKS_PER_SEC;};
         cout<<"Execution time : "<<execution_time()*1000<<" ms"<<NL;
     #endif
-    fflush(stdin);
-    fflush(stdout);
     return 0;
 }
