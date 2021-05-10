@@ -7,34 +7,6 @@ using namespace std;
 
 inline void solve()
 {
-    int n,m;cin>>n>>m;
-    vector<int> a(n);
-    for(int i = 0; i < n; i++)cin>>a[i];
-
-    auto check = [a,n,m](int mval)->bool{
-        int prev = 0;
-        for(int i = 0; i < n; i++){
-            int l = a[i],r = a[i]+mval;
-            if((prev >= l && prev <= r) || (prev+m >= l && prev+m <= r))
-                continue;
-            if(prev > r)
-                return false;
-            prev = l;
-        }
-        return true;
-    };
-
-    int l = 0,r = m,ans = m-1;
-    while(l <= r){
-        int mid = (l+r)/2;
-        if(check(mid)){
-            ans = mid;
-            r = mid-1;
-        }else{
-            l = mid+1;
-        }
-    }
-    cout<<ans<<NL;
 }
 
 int32_t main()
