@@ -28,6 +28,9 @@ class Trees
 
     int diameter_of_tree(int root, int par)
     {
+        // find the farhtest node from 1, then find the farthest node form that node, that will be the diameter of the tree
+
+        // to make this work, declare 'dia' globally
         int len = 0;
         for(int child : g[root])
         {
