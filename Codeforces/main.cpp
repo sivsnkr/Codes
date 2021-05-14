@@ -4,6 +4,7 @@ using namespace std;
 #define LL long long
 #define all(a) (a).begin(), (a).end()
 #define sz(a) (int)(a).size()
+#define read(a,f_in) for(int poi = f_in; poi < sz(a)+f_in; poi++)cin>>a[poi];
 
 inline void solve()
 {
