@@ -7,13 +7,6 @@ using namespace std;
 
 inline void solve()
 {
-    multiset<pair<int,string>> st;
-    st.insert({1,"a"});
-    st.insert({0,"z"});
-
-    for(auto it : st){
-        cout<<it.first<<" "<<it.second<<NL;
-    }
 }
 
 int32_t main()
@@ -28,8 +21,6 @@ int32_t main()
     while(t--){
         solve();
     }
-    fflush(stdin);
-    fflush(stdout);
     #ifdef LOCAL
         auto execution_time = [startTime]()->double{return (double)(clock() - startTime) / CLOCKS_PER_SEC;};
         cout<<"Execution time : "<<execution_time()*1000<<" ms"<<NL;
