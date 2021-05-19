@@ -4,45 +4,23 @@ using namespace std;
 #define LL long long
 #define all(a) (a).begin(), (a).end()
 #define sz(a) (int)(a).size()
-#define int long long
 
 inline void solve()
 {
-    int n;cin>>n;
-    vector<int> a(n+1),b(n+1);
+    LL n;cin>>n;
+    vector<int> a(3),b(3);
+    for(int i = 0; i < 3; i++)cin>>a[i];
+    for(int i = 0; i < 3; i++)cin>>b[i];
 
-    for(int i = 1; i <= n; i++)cin>>a[i];
-    for(int i = 1; i <= n; i++)cin>>b[i];
+    LL mx = min(a[2],b[0])+min(a[0],b[1])+min(a[1],b[2]);
 
-    vector<vector<int>> dp(n+1,vector<int>(n+2,0));
+    vector<int> ac = a,bc = b;
 
-    for(int i = 1; i <= n; i++){
-        int val = 0;
-        for(int j = n; j >= i; j--){
-            val += a[i+j]*b[j];
-            dp[i][j] = val;
-        }
-    }
+    ac[0] -= min(a[0],b[2]),bc[2] -= min(a[0],b[2]);
+    ac[1] -= min(a[1],b[0]),bc[0] -= min(a[1],b[0]);
+    ac[2] -= min(a[2],b[1]),bc[1] -= min(a[2],b[1]);
 
-    int res = 0;
-    vector<int> dpf(n+2,0),dpb(n+2,0);
-    for(int i = 1; i <= n; i++)
-        dpf[i] += dpf[i-1] + a[i]*b[i];
-
-    for(int i = 1; i <= n; i++)
-        dpb[i] += dpb[i-1] + a[i]*b[i];
-
-
-    for(int i = 1; i <= n; i++){
-        for(int j = i+1; j <= n; j++){
-            int val = dpf[i-1]+dpb[j+1];
-            val += dp[i][i]-dp[i][j+1];
-
-            res = max(res,val);
-        }
-    }
-
-    cout<<res<<NL;
+    
 }
 
 int32_t main()
@@ -54,6 +32,7 @@ int32_t main()
     cout.tie(nullptr);
     cout<<setprecision(10);
     int t = 1;
+    cin>>t;
     while(t--){
         solve();
     }

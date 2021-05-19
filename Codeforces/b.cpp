@@ -3,20 +3,16 @@ using namespace std;
 #define NL '\n'
 #define LL long long
 #define all(a) (a).begin(), (a).end()
-#define read(a) for(int poi = 0; poi < size(a); poi++)cin>>(a)[poi]
-#define size(a) (int)(a).size()
+#define sz(a) (int)(a).size()
 
 inline void solve()
 {
-    cout<<pow(2,11)<<NL;
-    for(int i = 0; i < pow(2,11); i++){
-        string t = bitset<64>(i).to_string();
-        cout<<t<<NL;
-    }
 }
 
 int32_t main()
 {
+    clock_t startTime;
+    startTime = clock();
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
@@ -25,7 +21,9 @@ int32_t main()
     while(t--){
         solve();
     }
-    fflush(stdin);
-    fflush(stdout);
+    #ifdef LOCAL
+        auto execution_time = [startTime]()->double{return (double)(clock() - startTime) / CLOCKS_PER_SEC;};
+        cout<<"Execution time : "<<execution_time()*1000<<" ms"<<NL;
+    #endif
     return 0;
 }

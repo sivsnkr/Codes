@@ -2,56 +2,28 @@
 using namespace std;
 #define NL '\n'
 #define LL long long
-#define test int t;cin >> t;while (t--)
-#define all(a) a.begin(), a.end()
-#define read(a) for(int poi = 0; poi < size(a); poi++)cin>>a[poi]
+#define all(a) (a).begin(), (a).end()
+#define sz(a) (int)(a).size()
 
-struct ele{
-    int w,u,v;
-};
-
-vector<ele> g;
-vector<vector<int>> G;
-
-bool check(int val){
-    for(int i = 1; i <= n; i++)G.clear();
-    for(int i = 0; i < size(g); i++)
-        if()
-}
 inline void solve()
 {
-    int n,m;cin>>n>>m;
-    g.resize(m);
-    vector<int> ws;
-    for(int i = 0; i < m; i++){
-        cin>>g[i].u>>g[i].v>>g[i].w;
-        ws.push_back(g[i].w);
-    }
-
-    int st = 0,en = size(ws)-1;
-    sort(all(g));
-    int ans = -1;
-    while(st <= en){
-        int mid = (st+en)/2;
-        if(check(mid)){
-            ans = mid;
-            en = mid-1;
-        }else{
-            st = mid+1;
-        }
-    }
-
-    cout<<ans<<NL;
 }
 
 int32_t main()
 {
+    clock_t startTime;
+    startTime = clock();
     ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
     cout<<setprecision(10);
-    solve();
-    fflush(stdin);
-    fflush(stdout);
+    int t = 1;
+    while(t--){
+        solve();
+    }
+    #ifdef LOCAL
+        auto execution_time = [startTime]()->double{return (double)(clock() - startTime) / CLOCKS_PER_SEC;};
+        cout<<"Execution time : "<<execution_time()*1000<<" ms"<<NL;
+    #endif
     return 0;
 }
