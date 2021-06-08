@@ -3,5 +3,4 @@
 a.out
 *.txt
 cmake-build-debug
-CMakeLists.txt
 .idea
