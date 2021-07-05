@@ -48,7 +48,7 @@ vector<vector<int>> pow(vector<vector<int>> arr, int p){
 	return c;
 }
 
-int main(){g
+int main(){
 	vector<vector<int>> c;
 	c.push_back({0,1});
 	c.push_back({1,1});

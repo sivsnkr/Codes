@@ -122,5 +122,5 @@ int main(){
             cout<<s[j];
         }
         cout<<endl;
-    }}
+    }
 }
