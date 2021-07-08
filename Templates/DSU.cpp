@@ -29,7 +29,7 @@ public:
         }
     }
 
-    map<int,int> get_freq()
+    map<int,int> connected_components()
     {
         map<int,int> res;
         int MX = size(p);
