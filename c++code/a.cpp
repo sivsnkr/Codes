@@ -11,6 +11,7 @@ using namespace std;
 // agr ek logic kam nhi kr rha ya implement krna muskil hai to duskra try kro
 inline void solve()
 {
+    
 }
 
 int32_t main()
