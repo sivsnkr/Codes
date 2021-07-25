@@ -7,8 +7,57 @@ using namespace std;
 
 // aaram se code kro, nhi to bhoot glti hoga
 // hm to khenge ki, step by step bdho or dhyan se kro
+
+// agr ek logic kam nhi kr rha ya implement krna muskil hai to duskra try kro
+const int N = 10;
+vector<vector<char>> a(N,vector<char>(N));
+vector<vector<bool>> vis(N,vector<bool>(N));
+int k,n;
+double cnt = 0;
+
+void dfs(int i, int j, int len){
+
+    if(len > k)
+        return;
+
+    if(i < 0 || j < 0 || i >= n || j >= n || a[i][j] == '#' || vis[i][j])
+        return;
+    
+    if(len == k)
+        cnt += 1;
+    vis[i][j] = 1;
+
+    dfs(i - 1, j, len + 1);
+    dfs(i + 1, j, len + 1);
+    dfs(i, j - 1, len + 1);
+    dfs(i, j + 1, len + 1);
+}
+
+
 inline void solve()
 {
+    cin>>n>>k;
+
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+            cin>>a[i][j];
+        }
+    }
+
+    double res = 0;
+
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+            if(a[i][j] == '.'){
+                cnt = 0;
+                vis.assign(N,vector<bool>(N,0));
+                dfs(i,j,1);
+                res += cnt;
+            }
+        }
+    }
+
+    cout<<res/2<<NL;
 }
 
 int32_t main()
