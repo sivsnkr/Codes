@@ -5,6 +5,10 @@ using namespace std;
 #define all(a) (a).begin(), (a).end()
 #define sz(a) (int)(a).size()
 
+// aaram se code kro, nhi to bhoot glti hoga
+// hm to khenge ki, step by step bdho or dhyan se kro
+
+// agr ek logic kam nhi kr rha ya implement krna muskil hai to duskra try kro
 inline void solve()
 {
 }
