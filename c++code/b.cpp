@@ -11,6 +11,9 @@ using namespace std;
 // agr ek logic kam nhi kr rha ya implement krna muskil hai to duskra try kro
 inline void solve()
 {
+    string te = "aacabdkacaa";
+    reverse(all(te));
+    cout<<te<<NL;
 }
 
 int32_t main()

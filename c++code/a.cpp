@@ -9,8 +9,55 @@ using namespace std;
 // hm to khenge ki, step by step bdho or dhyan se kro
 
 // agr ek logic kam nhi kr rha ya implement krna muskil hai to duskra try kro
+
+class Employee{
+    string Name;
+    string Company;
+    int Age;
+    public:
+        Employee(){
+            Name = "John Doe";
+            Company = "Default Company";
+            Age = 25;
+        }
+
+        Employee(string name, string company, int age){
+            Name = name, Company = company, Age = age;
+        }
+
+        void intro(){
+            cout<<"Name: "<<Name<<NL;
+            cout<<"Company: "<<Company<<NL;
+            cout<<"Age: "<<Age<<NL;
+        }
+};
+
+class Developer : public Employee{
+    string FavProgrammingLanguage;
+    public:
+        Developer(string name, string company, int age, string favProgrammingLanguage):Employee(name, company, age){
+            FavProgrammingLanguage = favProgrammingLanguage;
+        }
+
+        void setFavProgrammingLanguage(string language){
+            FavProgrammingLanguage = language;
+        }
+
+        string getFavProgrammingLanguage(){
+            return FavProgrammingLanguage;
+        }
+};
+
 inline void solve()
 {
+    class Developer st("Shiv Shankar", "KLA", 25, "C++");
+    st.intro();
+
+    Developer *e1 = &st;
+    e1->intro();
+
+    st.setFavProgrammingLanguage("python");
+    cout<<"my fav programming language: "<<st.getFavProgrammingLanguage()<<NL;
 }
 
 int32_t main()

@@ -150,6 +150,51 @@ class Strings
         reverse(res.begin(),res.end());
         return res;
     }
+
+    int longestLenPlaindrome(string s){
+        auto setmax = [](int i, int j, bool isplaindrome, int &l, int &r, int &res)->void{
+            if(isplaindrome){
+                int len = j - i + 1;
+                if(len > res){
+                    res = len;
+                    l = i, r = j;
+                }
+            }
+        };
+
+        int l = 0, r = 0;
+        int res = 0;
+        
+        int n = (int)s.length();
+        vector<vector<bool>> dp(n + 1, vector<bool>(n + 1, 0));
+        
+        for(int _i = 0; _i < n; _i++){
+            for(int _j = 0; _j <= _i; _j++){
+                
+                int j = max(_i , _j), i = min(_i , _j);
+                if(i == j){
+                    dp[i][j] = 1;
+                    continue;
+                }else if(j - 1 == i){
+                    if(s[j] == s[i])
+                        dp[i][j] = (s[i] == s[j]);
+                    setmax(i, j, dp[i][j], l , r, res);
+                    continue;
+                }
+                
+                
+                dp[i][j] = (dp[i + 1][j - 1] & (s[i] == s[j]));
+                setmax(i, j, dp[i][j], l , r, res);
+            }
+        }
+        
+        // string maxlenplaindrome = "";
+        // for(int i = l; i <= r; i++){
+        //     maxlenplaindrome += s[i];
+        // }
+        
+        return res;
+    }
 };
 
 inline void solve()
