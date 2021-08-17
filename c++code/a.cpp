@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define NL '\n'
 #define LL long long
 #define all(a) (a).begin(), (a).end()
 #define sz(a) (int)(a).size()
@@ -10,54 +9,21 @@ using namespace std;
 
 // agr ek logic kam nhi kr rha ya implement krna muskil hai to duskra try kro
 
-class Employee{
-    string Name;
-    string Company;
-    int Age;
-    public:
-        Employee(){
-            Name = "John Doe";
-            Company = "Default Company";
-            Age = 25;
-        }
+bool is_prime(int n)
+    {
+        if(n == 1)
+            return false;
+        for(int i = 2; i*i <= n; i++)
+            if(n%i == 0)
+                return false;
 
-        Employee(string name, string company, int age){
-            Name = name, Company = company, Age = age;
-        }
-
-        void intro(){
-            cout<<"Name: "<<Name<<NL;
-            cout<<"Company: "<<Company<<NL;
-            cout<<"Age: "<<Age<<NL;
-        }
-};
-
-class Developer : public Employee{
-    string FavProgrammingLanguage;
-    public:
-        Developer(string name, string company, int age, string favProgrammingLanguage):Employee(name, company, age){
-            FavProgrammingLanguage = favProgrammingLanguage;
-        }
-
-        void setFavProgrammingLanguage(string language){
-            FavProgrammingLanguage = language;
-        }
-
-        string getFavProgrammingLanguage(){
-            return FavProgrammingLanguage;
-        }
-};
+        return true;
+    }
 
 inline void solve()
 {
-    class Developer st("Shiv Shankar", "KLA", 25, "C++");
-    st.intro();
-
-    Developer *e1 = &st;
-    e1->intro();
-
-    st.setFavProgrammingLanguage("python");
-    cout<<"my fav programming language: "<<st.getFavProgrammingLanguage()<<NL;
+    int a = 1e9+9;
+    cout<<is_prime(a)<<"\n";
 }
 
 int32_t main()
@@ -74,7 +40,8 @@ int32_t main()
     }
     #ifdef LOCAL
         auto execution_time = [startTime]()->double{return (double)(clock() - startTime) / CLOCKS_PER_SEC;};
-        cout<<"Execution time : "<<execution_time()*1000<<" ms"<<NL;
+        cout<<"Execution time : "<<execution_time()*1000<<" ms"<<"\n";
     #endif
+    cout.flush();
     return 0;
 }

@@ -29,7 +29,6 @@ class Utility
     int mod_inverse(int a,int m)
     {
         int res = pow(a,m-2,m);
-        mod(res,m);
         return res;
     }
 };

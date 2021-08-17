@@ -17,6 +17,7 @@ class NCR
         for(int i = 2; i <= n; i++)
             finv[i] = inv[i]*finv[i-1]%p;
     }
+    
     int ncr(int n,int r,int p)
     {
         if(n < r)

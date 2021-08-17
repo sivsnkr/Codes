@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define NL '\n'
 #define LL long long
 #define all(a) (a).begin(), (a).end()
 #define sz(a) (int)(a).size()
@@ -11,9 +10,6 @@ using namespace std;
 // agr ek logic kam nhi kr rha ya implement krna muskil hai to duskra try kro
 inline void solve()
 {
-    string te = "aacabdkacaa";
-    reverse(all(te));
-    cout<<te<<NL;
 }
 
 int32_t main()
@@ -30,7 +26,8 @@ int32_t main()
     }
     #ifdef LOCAL
         auto execution_time = [startTime]()->double{return (double)(clock() - startTime) / CLOCKS_PER_SEC;};
-        cout<<"Execution time : "<<execution_time()*1000<<" ms"<<NL;
+        cout<<"Execution time : "<<execution_time()*1000<<" ms"<<"\n";
     #endif
+    cout.flush();
     return 0;
 }
