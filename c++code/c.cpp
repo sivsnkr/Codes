@@ -11,6 +11,9 @@ using namespace std;
 // agr ek logic kam nhi kr rha ya implement krna muskil hai to duskra try kro
 inline void solve()
 {
+    char a = char('z' + 1);
+    int b = 'a';
+    cout<<a<<" "<<b<<"\n";
 }
 
 int32_t main()

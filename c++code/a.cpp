@@ -8,22 +8,57 @@ using namespace std;
 // hm to khenge ki, step by step bdho or dhyan se kro
 
 // agr ek logic kam nhi kr rha ya implement krna muskil hai to duskra try kro
-
-bool is_prime(int n)
-    {
-        if(n == 1)
-            return false;
-        for(int i = 2; i*i <= n; i++)
-            if(n%i == 0)
-                return false;
-
-        return true;
-    }
-
 inline void solve()
 {
-    int a = 1e9+9;
-    cout<<is_prime(a)<<"\n";
+    string s;cin>>s;
+
+    int n = sz(s);
+	vector<bool> islast(n, 0);
+
+	set<char> st;
+	for(int i = 0; i < n; i++){
+		if(st.find(s[i]) == st.end()){
+			islast[i] = 1;
+		}
+		st.insert(s[i]);
+	}
+    
+    string res = "A";
+    char mx = 'A';
+    for(int i = sz(s) - 1; i >= 0; i--){
+        if(islast[i]){
+            res += s[i];
+            mx = s[i];
+            continue;
+        }
+
+        if(res[sz(res) - 1] > res[sz(res) - 2]){
+            if(s[i] < mx){
+                res += s[i];
+                mx = s[i];
+            }
+        }else{
+            if(s[i] <= mx){
+                res += s[i];
+                mx = s[i];
+            }
+        }
+    }
+
+    res = res.substr(1, sz(res) - 1);
+    reverse(all(res));
+
+    set<char> uniq;
+
+	string te = "";
+	for(char c : res){
+		uniq.insert(c);
+		te += c;
+		if(sz(uniq) == sz(st))
+			break;
+	}
+
+    cout<<te<<"\n";
 }
 
 int32_t main()
@@ -35,6 +70,7 @@ int32_t main()
     cout.tie(nullptr);
     cout<<setprecision(10);
     int t = 1;
+    cin>>t;
     while(t--){
         solve();
     }
