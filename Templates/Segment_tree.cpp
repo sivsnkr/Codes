@@ -30,8 +30,12 @@ class Segment_tree
 
 void Segment_tree::Update(int p,int i, int L, int R)
 {
-    if(L==R || (i<L || i > R))
+    if(i<L || i > R)
         return;
+    if(L == R){
+        st[p] = A[L];
+        return;
+    }
     Update(left(p),i,L,(L+R)/2);
     Update(right(p),i,(L+R)/2+1,R);
     int p1 = st[left(p)];
