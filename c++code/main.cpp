@@ -4,12 +4,28 @@ using namespace std;
 #define all(a) (a).begin(), (a).end()
 #define sz(a) (int)(a).size()
 
-// aaram se code kro, nhi to bhoot glti hoga
-// hm to khenge ki, step by step bdho or dhyan se kro
-
-// agr ek logic kam nhi kr rha ya implement krna muskil hai to duskra try kro
+const int N = 1e6 + 2;
 inline void solve()
 {
+    int n,q;
+    scanf("%d%d", &n, &q);
+    
+    vector<int> values(N, 0);
+    for(int i = 0; i < n; i++){
+        int x;
+        scanf("%d", &x);
+        values[x]++;
+    }
+
+    while(q--){
+        int x;
+        scanf("%d", &x);
+        if(x > 0){
+            values[x]++;
+        }else{
+            // values[x]--;
+        }
+    }
 }
 
 int32_t main()
