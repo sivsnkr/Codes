@@ -7,12 +7,10 @@ class Segment_tree
     private:
     vector<int> A,st;
     int n;
-    int left(int p){return p<<1;}
-    int right(int p){return (p<<1)+1;}
     void build(int p, int L, int R);
     int Access(int p,int i, int j, int L , int R);
     void Update(int p,int i,int L, int R);
-    int func(int a, int b){
+    inline int func(int a, int b){
         // implement your func for combining the seg tree here
         return gcd(a,b);
     }
@@ -36,10 +34,11 @@ void Segment_tree::Update(int p,int i, int L, int R)
         st[p] = A[L];
         return;
     }
-    Update(left(p),i,L,(L+R)/2);
-    Update(right(p),i,(L+R)/2+1,R);
-    int p1 = st[left(p)];
-    int p2 = st[right(p)];
+    int left = (p << 1), right = (p << 1) + 1;
+    Update(left,i,L,(L+R)/2);
+    Update(right,i,(L+R)/2+1,R);
+    int p1 = st[left];
+    int p2 = st[right];
     st[p] = func(p1,p2);
 }
 
@@ -50,9 +49,10 @@ void Segment_tree::build(int p, int L, int R)
         st[p] = A[L];
         return;
     }
-    build(left(p), L, (L+R)/2);
-    build(right(p), (L+R)/2+1, R);
-    int p1 = st[right(p)],p2 = st[left(p)];
+    int left = (p << 1), right = (p << 1) + 1;
+    build(left, L, (L+R)/2);
+    build(right, (L+R)/2+1, R);
+    int p1 = st[right],p2 = st[left];
     st[p] = func(p1,p2);
 }
 
@@ -64,12 +64,13 @@ int Segment_tree::Access(int p,int i, int j, int L, int R)
         return st[p];
     
     int mid = (L + R) / 2, p1 = -1, p2 = -1;
-    
+    int left = (p << 1), right = (p << 1) + 1;
+
     if(i >= L && j <= mid){
-        p1 = Access(left(p),i,j,L,mid);
+        p1 = Access(left,i,j,L,mid);
     }
     if(i >= mid + 1 && j <= R){
-        p2 = Access(right(p),i,j,mid+1,R);
+        p2 = Access(right,i,j,mid+1,R);
     }
     if(p1 == -1)return p2;
     if(p2 == -1)return p1;
