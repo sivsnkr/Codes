@@ -66,10 +66,10 @@ int Segment_tree::Access(int p,int i, int j, int L, int R)
     int mid = (L + R) / 2, p1 = -1, p2 = -1;
     int left = (p << 1), right = (p << 1) + 1;
 
-    if(i >= L && j <= mid){
+    if(!(i > mid || j < L)){
         p1 = Access(left,i,j,L,mid);
     }
-    if(i >= mid + 1 && j <= R){
+    if(!(i > R || j < mid + 1)){
         p2 = Access(right,i,j,mid+1,R);
     }
     if(p1 == -1)return p2;
