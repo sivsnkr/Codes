@@ -15,7 +15,7 @@ class Segment_tree
         return gcd(a,b);
     }
     public:
-    Segment_tree(const vector<int> &a)
+    void init(const vector<int> &a)
     {
         n = (int)a.size();
         A = a;
