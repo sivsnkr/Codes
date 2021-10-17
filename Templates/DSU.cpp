@@ -33,7 +33,7 @@ public:
     {
         map<int,int> res;
         int MX = size(p);
-        for(int i = 0; i < MX; i++)
+        for(int i = 1; i < MX; i++)
             res[get(i)]++;
         return res;
     }
