@@ -4,7 +4,7 @@ using namespace std;
 #define all(a) (a).begin(), (a).end()
 #define sz(a) (int)(a).size()
 
-inline void solve()
+void solve()
 {
 }
 
