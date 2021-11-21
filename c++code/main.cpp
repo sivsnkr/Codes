@@ -6,7 +6,6 @@ using namespace std;
 
 void solve()
 {
-    cout<<"hello\n";
 }
 
 int32_t main()
