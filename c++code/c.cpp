@@ -22,7 +22,7 @@ int32_t main()
     }
     #ifdef LOCAL
         auto execution_time = [startTime]()->double{return (double)(clock() - startTime) / CLOCKS_PER_SEC;};
-        cout<<"Execution time : "<<execution_time()*1000<<" ms"<<"\n";
+        cout<<"Execution time : "<<execution_time()*1000<<" ms";
     #endif
     cout.flush();
     return 0;

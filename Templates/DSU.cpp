@@ -5,8 +5,7 @@ class DSU
 {
     vector<int> p,ranks;
 public:
-    DSU(int MX)
-    {
+    void init(int MX){
         p.resize(MX);
         ranks.resize(MX);
         iota(p.begin(),p.end(),0);
