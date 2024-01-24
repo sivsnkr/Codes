@@ -195,6 +195,53 @@ class Strings
         
         return res;
     }
+
+    vector<int> kmp_string_matching(string s, string p){
+        vector<int> lps = kmp_preprocessing(p);
+        p = "&" + p;
+        int i = 0, j = 0;
+        int n = s.length();
+        vector<int> mat;
+
+        while(i < n){
+            if(s[i] == p[j + 1]){
+                i++;
+                if(j + 1 != p.length() - 1){
+                    j++;
+                }else {
+                    mat.push_back(i - p.length() + 1);
+                }
+            }else {
+                if(j == 0){
+                    i++;
+                }
+                j = lps[j];
+            }
+        }
+
+        return mat;
+    }
+
+    private:
+    vector<int> kmp_preprocessing(string s){
+        int n = s.length();
+        vector<int> lps(n + 1);
+        s = "&" + s;
+        lps[0] = 0, lps[1] = 0;
+        int li = 0, ci = 2;
+        while(ci <= n){
+            if(s[ci] == s[li + 1]){
+                lps[ci++] = ++li;
+            }else {
+                if(li == 0){
+                    ci++;
+                }
+                li = lps[li];
+            }
+        }
+
+        return lps;
+    }
 };
 
 inline void solve()
